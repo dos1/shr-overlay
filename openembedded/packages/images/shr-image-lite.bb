@@ -212,11 +212,11 @@ fso_rootfs_postprocess() {
 
 # perform some SHR convenience tweaks to the rootfs
 shr_rootfs_postprocess() {
-    dirs=`find ${FILESDIR} -type d -printf "%P\n" | grep -v "^.$" | grep -v ".svn"`
+    dirs=`find ${FILESDIR} -type d -printf "%P\n" | grep -v "^.$" | grep -v ".git"`
     for dir in $dirs; do
         mkdir -p ${IMAGE_ROOTFS}/$dir
     done
-    files=`find ${FILESDIR} -type f -printf "%P\n" | grep -v ".svn"`
+    files=`find ${FILESDIR} -type f -printf "%P\n" | grep -v ".git"`
     for file in $files; do
         cp -f ${FILESDIR}/$file ${IMAGE_ROOTFS}/$file
     done
