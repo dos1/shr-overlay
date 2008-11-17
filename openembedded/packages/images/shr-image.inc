@@ -111,17 +111,12 @@ GTK_INSTALL = "\
   openmoko-icon-theme-standard2 \
   openmoko-calculator2 \
   openmoko-terminal2 \
-#  gpe-scap \
   tangogps \
-#  pidgin \
-# vagalume \
   starling \
   gpe-filemanager \
-#  gpe-sketchbook \ 
 "
 
 GAMES_INSTALL = "\
-#  numptyphysics \
 "
 
 # FIXME these should rather be part of alsa-state,
@@ -152,10 +147,8 @@ SHR_INSTALL = "\
 #  gpe-terminal \
   rxvt-unicode \
   elementary-alarm \
-#  gpe-scap \
   shr-settings \
   shr-theme \
-#  midori \
 "
 # zhone should be added, but a custom package without the autostart script
 # removed libframeworkd-phonegui-gtk from SHR_INSTALL
@@ -199,6 +192,7 @@ fso_rootfs_postprocess() {
 
     echo "Exec=openmoko-terminal2 htop" >> ./usr/share/applications/htop.desktop
     echo "Icon=settings.png" >> ./usr/share/applications/exposure.desktop
+
     
 
     # minimal gtk theme foo
@@ -272,3 +266,7 @@ ROOTFS_POSTPROCESS_COMMAND += "fso_rootfs_postprocess; shr_rootfs_postprocess"
 
 ROOTFS_POSTPROCESS_COMMAND_append_om-gta02 = ";shr_rootfs_gta02_postprocess"
 ROOTFS_POSTPROCESS_COMMAND_append_om-gta01 = ";shr_rootfs_gta01_postprocess"
+
+do_testlab() {
+	:
+}

@@ -10,15 +10,16 @@ SRCREV_pn-python-pytrc = "${AUTOREV}"
 SRCREV_pn-zhone = "${AUTOREV}"
 SRCREV_pn-openmoko-terminal2 = "4604"
 #SRCREV_pn-webkit-gtk = "${AUTOREV}"
-SRCREV_pn-navit = "${AUTOREV}"
 #SRCREV_pn-shared-mime-info = "0.51"
 SRCREV_pn-shr-settings = "${AUTOREV}"
 SRCREV_pn-shr-theme = "${AUTOREV}"
+SRCREV_pn-navit = "1730"
 
 PREFERRED_VERSION_vala-native = "0.1.5"
 PREFERRED_VERSION_vala = "0.1.5"
 PREFERRED_VERSION_midori = "0.1.0"
 PREFERRED_VERSION_shared-mime-info = "0.51"
+PREFERRED_VERSION_navit = "0.1.0"
 
 
 SRCREV_pn-libframeworkd-glib ?= "${AUTOREV}"
