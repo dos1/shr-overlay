@@ -3,7 +3,7 @@ DEPENDS = "python-etk python-edbus"
 RDEPENDS = "python-etk python-re python-codecs python-edbus python-pyxdg"
 SECTION = "openmoko/pim"
 PKG_TAGS_${PN} = "group::communication"
-PV = "0.0.1+${PR}-svnr${SRCREV}"
+PV = "0.0.1+${PR}-gitr${SRCREV}"
 PR = "r0"
 
 inherit shr setuptools
