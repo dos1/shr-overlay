@@ -5,146 +5,46 @@
 IMAGE_LINGUAS = ""
 
 # getting the base system up
-BASE_INSTALL = "\
+DEPENDS = "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \
-  netbase \
-  sysfsutils \
-  modutils-initscripts \
-  module-init-tools-depmod \
-  rsync \
-  screen \
-  fbset \
-  fbset-modes \
-  fso-gpsd \
-  gsm0710muxd \
-  exquisite \
-  exquisite-themes \
-  exquisite-theme-illume \
+  task-shr-minimal-base \
+  task-shr-minimal-apps \
+  task-shr-minimal-audio \
+  task-shr-minimal-fso \
+  task-shr-minimal-gtk \
+  task-shr-minimal-tools \
+  task-shr-minimal-x \
 "
 # Some machines don't set a *runtime* provider for X, so default to Xfbdev here
 # virtual/xserver won't work, since the kdrive recipes will build multiple xserver packages
 XSERVER ?= "xserver-kdrive-fbdev"
 
-# getting an X window system up
-X_INSTALL = "\
-  glibc-utils \
-  glibc-charmap-utf-8 \
-  e-wm \
-  e-wm-config-illume \
-  e-wm-config-standard \
-  e-wm-config-minimalist \
-  e-wm-config-scaleable \
-  ${XSERVER} \
-  xserver-kdrive-splash-illume \
-  xserver-kdrive-common \
-  xserver-nodm-init \
-  xauth \
-  xhost \
-  xset \
-  xrandr \
-  fontconfig-utils \
-  ttf-dejavu-common \
-  ttf-dejavu-sans \
-  ttf-dejavu-sans-mono \
-#  ttf-dejavu-serif \
-"
-
-X_INSTALL_append_om-gta02 = "\
-  ttf-arphic-uming \
-"
-
-# useful command line tools
-TOOLS_INSTALL = "\
-#  bash \
-  dosfstools \
-  htop \
-  iptables \
-  lsof \
-  mickeydbus \
-  mickeyterm \
-  mtd-utils \
-  nano \
-  powertop \
-  s3c24xx-gpio \
-  sysstat \
-  tcpdump \
-"
-
-# audio
-AUDIO_INSTALL = "\
-  alsa-oss \
-  alsa-state \
-  alsa-utils-aplay \
-  alsa-utils-amixer \
-  gst-meta-audio \
-  gst-plugin-mad \
-  gst-plugin-modplug \
-  gst-plugin-sid \
-  fso-sounds \
-"
-
-GTK_INSTALL = "\
-  openmoko-icon-theme-standard2 \
-  openmoko-calculator2 \
-  openmoko-terminal2 \
-  tangogps \
-  starling \
-  gpe-filemanager \
-"
-
-GAMES_INSTALL = "\
-"
-
-# FIXME these should rather be part of alsa-state,
-# once Om stabilizes them...
-AUDIO_INSTALL_append_om-gta01 = "\
-  openmoko-alsa-scenarios \
-"
-AUDIO_INSTALL_append_om-gta02 = "\
-  openmoko-alsa-scenarios \
-"
-
-# python
-PYTHON_INSTALL = "\
-  task-python-efl \
-  python-codecs \
-  python-gst \
-"
-
-# SHR
-SHR_INSTALL = "\
-  frameworkd \
-  libframeworkd-glib \
-  openmoko-dialer3 \
-  openmoko-messages3 \
-  openmoko-contacts3 \
-  ophonekitd \ 
-  libframeworkd-phonegui-efl \
-#  gpe-terminal \
-  rxvt-unicode \
-  elementary-alarm \
-  shr-settings \
-  shr-theme \
-"
-# zhone should be added, but a custom package without the autostart script
-# removed libframeworkd-phonegui-gtk from SHR_INSTALL
-
 IMAGE_INSTALL = "\
-  ${BASE_INSTALL} \
-  ${X_INSTALL} \
-  ${GTK_INSTALL} \
-  ${GAMES_INSTALL} \
-  ${AUDIO_INSTALL} \
-  ${TOOLS_INSTALL} \
-  ${PYTHON_INSTALL} \
-  ${SHR_INSTALL} \
+  ${MACHINE_TASK_PROVIDER} \
+  task-base \
+  task-shr-minimal-base \
+  task-shr-minimal-apps \
+  task-shr-minimal-audio \
+  task-shr-minimal-fso \
+  task-shr-minimal-gtk \
+  task-shr-minimal-tools \
+  task-shr-minimal-x \
 "
 
 inherit image
 
-# perform some convenience tweaks to the rootfs
-fso_rootfs_postprocess() {
+# perform some SHR convenience tweaks to the rootfs
+shr_rootfs_postprocess() {
+    dirs=`find ${FILESDIR} -type d -printf "%P\n" | grep -v "^.$" | grep -v ".git"`
+    for dir in $dirs; do
+        mkdir -p ${IMAGE_ROOTFS}/$dir
+    done
+    files=`find ${FILESDIR} -type f -printf "%P\n" | grep -v ".git"`
+    for file in $files; do
+        cp -f ${FILESDIR}/$file ${IMAGE_ROOTFS}/$file
+    done
+
     curdir=$PWD
     cd ${IMAGE_ROOTFS}
     # date/time
@@ -170,31 +70,14 @@ fso_rootfs_postprocess() {
     echo "Exec=openmoko-terminal2 htop" >> ./usr/share/applications/htop.desktop
     echo "Icon=settings.png" >> ./usr/share/applications/exposure.desktop
 
-    
-
     # minimal gtk theme foo
     mkdir -p ./etc/gtk-2.0/
     echo 'gtk-font-name = "Sans 5"' >> ./etc/gtk-2.0/gtkrc
+    echo 'gtk-theme-name = "openmoko-standard-2"' >> ./etc/gtk-2.0/gtkrc
+    echo 'gtk-icon-theme-name = "openmoko-standard"' >> ./etc/gtk-2.0/gtkrc
     echo '' >> ./etc/ld.so.conf
     # fix strange iconv/gconf bug
     ln -s libc.so.6 ./lib/libc.so
-    cd $curdir
-}
-
-# perform some SHR convenience tweaks to the rootfs
-shr_rootfs_postprocess() {
-    dirs=`find ${FILESDIR} -type d -printf "%P\n" | grep -v "^.$" | grep -v ".git"`
-    for dir in $dirs; do
-        mkdir -p ${IMAGE_ROOTFS}/$dir
-    done
-    files=`find ${FILESDIR} -type f -printf "%P\n" | grep -v ".git"`
-    for file in $files; do
-        cp -f ${FILESDIR}/$file ${IMAGE_ROOTFS}/$file
-    done
-
-    curdir=$PWD
-    cd ${IMAGE_ROOTFS}
-
 
     # setup opkg config
     if [ -a ./etc/opkg/all-feed.conf ]; then rm ./etc/opkg/all-feed.conf; fi
@@ -204,11 +87,6 @@ shr_rootfs_postprocess() {
     if [ -a ./etc/opkg/neo1973-feed.conf ]; then rm ./etc/opkg/neo1973-feed.conf; fi
     if [ -a ./etc/opkg/om-gta01-feed.conf ]; then rm ./etc/opkg/om-gta01-feed.conf; fi
     if [ -a ./etc/opkg/om-gta02-feed.conf ]; then rm ./etc/opkg/om-gta02-feed.conf; fi
-
-    # set openmoko theme
-    mkdir -p ./etc/gtk-2.0/
-    echo 'gtk-theme-name = "openmoko-standard-2"' >> ./etc/gtk-2.0/gtkrc
-    echo 'gtk-icon-theme-name = "openmoko-standard"' >> ./etc/gtk-2.0/gtkrc
 
     #frameworkd fixes
     #log to /tmp
@@ -239,7 +117,7 @@ shr_rootfs_gta01_postprocess() {
     cd $curdir
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "fso_rootfs_postprocess; shr_rootfs_postprocess"
+ROOTFS_POSTPROCESS_COMMAND += " shr_rootfs_postprocess"
 
 ROOTFS_POSTPROCESS_COMMAND_append_om-gta02 = ";shr_rootfs_gta02_postprocess"
 ROOTFS_POSTPROCESS_COMMAND_append_om-gta01 = ";shr_rootfs_gta01_postprocess"
