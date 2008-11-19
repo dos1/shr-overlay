@@ -13,4 +13,5 @@ RDEPENDS_${PN} = "\
   screen \
   fbset \
   fbset-modes \
+  python-elementary \
 "
