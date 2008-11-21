@@ -37,4 +37,4 @@ RDEPENDS_${PN} = "\
   glibc-binary-localedata-sl-si \
   glibc-binary-localedata-es-ar \
   glibc-binary-localedata-sv-se \
-"
+  openssh-sftp-server"

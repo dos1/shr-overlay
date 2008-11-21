@@ -29,6 +29,6 @@ RDEPENDS_${PN} = "\
   ttf-dejavu-sans-mono \
 "
 
-RDEPENDS_${PN}_append_om-gta02 = "\
-  ttf-arphic-uming \
-"
+#RDEPENDS_${PN}_append_om-gta02 = "\
+#  ttf-arphic-uming \
+#"
