@@ -7,7 +7,7 @@ inherit task
 RDEPENDS_${PN} = "\
   openmoko-icon-theme-standard2 \
   openmoko-calculator2 \
-  openmoko-terminal2 \
+  vala-terminal \
   tangogps \
   starling \
   gpe-filemanager \
