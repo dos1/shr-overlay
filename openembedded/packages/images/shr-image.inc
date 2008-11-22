@@ -16,12 +16,6 @@ DEPENDS = "\
   task-shr-minimal-tools \
   task-shr-minimal-x \
 "
-# Some machines don't set a *runtime* provider for X, so default to Xfbdev here
-# virtual/xserver won't work, since the kdrive recipes will build multiple xserver packages
-XSERVER = ""
-XSERVER_append_om-gta02 = "xserver-kdrive-glamo"
-XSERVER += " xserver-kdrive-fbdev"
-
 IMAGE_INSTALL = "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \

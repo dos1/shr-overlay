@@ -4,6 +4,9 @@ LICENSE = "GPL"
 
 inherit task
 
+#XSERVER needs to be evaluated based on the MACHINE
+PACKAGE_ARCH="${MACHINE_ARCH}"
+
 RDEPENDS_${PN} = "\
   glibc-utils \
   glibc-charmap-utf-8 \
