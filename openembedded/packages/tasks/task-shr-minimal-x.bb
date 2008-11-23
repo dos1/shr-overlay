@@ -4,34 +4,35 @@ LICENSE = "GPL"
 
 inherit task
 
-#XSERVER needs to be evaluated based on the MACHINE
-PACKAGE_ARCH="${MACHINE_ARCH}"
-
 RDEPENDS_${PN} = "\
   glibc-utils \
   glibc-charmap-utf-8 \
-  e-wm \
-  e-wm-config-illume \
-  e-wm-config-standard \
-  e-wm-config-minimalist \
-  e-wm-config-scaleable \
-  ${XSERVER} \
+  glibc-binary-localedata-en-us \
+  glibc-binary-localedata-de-de \
+  glibc-binary-localedata-fr-fr \
+  glibc-binary-localedata-pt-br \
+  glibc-binary-localedata-ca-es \
+  glibc-binary-localedata-zh-cn \
+  glibc-binary-localedata-zh-tw \
+  glibc-binary-localedata-bg-bg \
+  glibc-binary-localedata-cs-cz \
+  glibc-binary-localedata-da-dk \
+  glibc-binary-localedata-nl-nl \
+  glibc-binary-localedata-fi-fi \
+  glibc-binary-localedata-hu-hu \
+  glibc-binary-localedata-it-it \
+  glibc-binary-localedata-ja-jp \
+  glibc-binary-localedata-ko-kr \
+  glibc-binary-localedata-nb-no \
+  glibc-binary-localedata-pl-pl \
+  glibc-binary-localedata-ru-ru \
+  glibc-binary-localedata-sk-sk \
+  glibc-binary-localedata-sl-si \
+  glibc-binary-localedata-es-ar \
+  glibc-binary-localedata-sv-se \
   xserver-kdrive-splash-illume \
-  xserver-kdrive-common \
-  xserver-nodm-init \
-  xauth \
-  xhost \
-  xset \
-  xrandr \
-  fontconfig-utils \
-  ttf-dejavu-common \
-  ttf-dejavu-sans \
   exquisite \
   exquisite-themes \
   exquisite-theme-illume \
-  ttf-dejavu-sans-mono \
 "
 
-#RDEPENDS_${PN}_append_om-gta02 = "\
-#  ttf-arphic-uming \
-#"

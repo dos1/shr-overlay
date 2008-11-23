@@ -5,7 +5,6 @@ LICENSE = "GPL"
 inherit task
 
 RDEPENDS_${PN} = "\
-  libframeworkd-glib \
   openmoko-dialer3 \
   openmoko-messages3 \
   openmoko-contacts3 \
@@ -15,5 +14,4 @@ RDEPENDS_${PN} = "\
   elementary-alarm \
   shr-settings \
   shr-theme \
-  task-python-efl \
 "

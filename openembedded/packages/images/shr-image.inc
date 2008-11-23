@@ -2,30 +2,24 @@
 # SHR Image Recipe
 #------------------------------------------------------
 
+PV = "1.0"
+PR = "r1"
+
 IMAGE_LINGUAS = ""
 
-# getting the base system up
-DEPENDS = "\
-  ${MACHINE_TASK_PROVIDER} \
-  task-base \
-  task-shr-minimal-base \
-  task-shr-minimal-apps \
-  task-shr-minimal-audio \
-  task-shr-minimal-fso \
-  task-shr-minimal-gtk \
-  task-shr-minimal-tools \
-  task-shr-minimal-x \
-"
 IMAGE_INSTALL = "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \
   task-shr-minimal-base \
   task-shr-minimal-apps \
   task-shr-minimal-audio \
-  task-shr-minimal-fso \
   task-shr-minimal-gtk \
-  task-shr-minimal-tools \
   task-shr-minimal-x \
+  task-x11-illume \
+  task-fso-compliance \
+  task-cli-tools \
+  task-cli-tools-python \
+  task-fonts-truetype-core \
 "
 
 inherit image
@@ -118,6 +112,6 @@ ROOTFS_POSTPROCESS_COMMAND += " shr_rootfs_postprocess"
 ROOTFS_POSTPROCESS_COMMAND_append_om-gta02 = ";shr_rootfs_gta02_postprocess"
 ROOTFS_POSTPROCESS_COMMAND_append_om-gta01 = ";shr_rootfs_gta01_postprocess"
 
-do_testlab() {
-	:
-}
+#do_testlab() {
+#	:
+#}

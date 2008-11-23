@@ -1,8 +1,9 @@
 DESCRIPTION = "SHR Base Applications"
 PR = "r1"
 LICENSE = "GPL"
-
 inherit task
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 RDEPENDS_${PN} = "\
   alsa-oss \
@@ -15,3 +16,14 @@ RDEPENDS_${PN} = "\
   gst-plugin-sid \
   fso-sounds \
 "
+
+
+RDEPENDS_${PN}_append_om-gta01 =  "\
+  openmoko-alsa-scenarios \
+"
+
+RDEPENDS_${PN}_append_om-gta02 =  "\
+  openmoko-alsa-scenarios \
+"
+
+
