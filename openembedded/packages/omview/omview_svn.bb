@@ -2,7 +2,7 @@ DESCRIPTION = "OMView"
 SECTION = "x11/graphics"
 PKG_TAGS_${PN} = "group::communication"
 DEPENDS += " evas ewl epsilon"
-DEPENDS += " libepsilon-thumbd"
+RDEPENDS += " libepsilon-thumbd"
 PV = "0.0.1-svnr${SRCREV}"
 PR = "r1"
 
