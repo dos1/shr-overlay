@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r1"
+PR = "r2"
 LICENSE = "GPL"
 
 inherit task
