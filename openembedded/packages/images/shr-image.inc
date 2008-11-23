@@ -79,8 +79,8 @@ shr_rootfs_postprocess() {
     if [ -a ./etc/opkg/om-gta02-feed.conf ]; then rm ./etc/opkg/om-gta02-feed.conf; fi
 
     #frameworkd fixes
-    #log to /tmp
-    sed -i "s/^log_to.*/log_to = file\nlog_destination = \/tmp\/frameworkd.log/g" ./etc/frameworkd.conf
+    #log to /var/log
+    sed -i "s/^log_to.*/log_to = file\nlog_destination = \/var\/log\/frameworkd.log/g" ./etc/frameworkd.conf
     #deep sleep for ti_calypso
     sed -i "s/^\(modem.*=.*ti_calypso.*\)$/\1\nti_calypso_deep_sleep = never/g" ./etc/frameworkd.conf
 

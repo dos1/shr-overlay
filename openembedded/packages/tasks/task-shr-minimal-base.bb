@@ -13,4 +13,6 @@ RDEPENDS_${PN} = "\
   screen \
   fbset \
   fbset-modes \
-  openssh-sftp-server"
+  openssh-sftp-server \
+  cron \
+  logrotate"
