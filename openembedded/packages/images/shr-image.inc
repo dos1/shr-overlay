@@ -7,6 +7,21 @@ PR = "r1"
 
 IMAGE_LINGUAS = ""
 
+DEPENDS = "\
+  ${MACHINE_TASK_PROVIDER} \
+  task-base \
+  task-shr-minimal-base \
+  task-shr-minimal-apps \
+  task-shr-minimal-audio \
+  task-shr-minimal-gtk \
+  task-shr-minimal-x \
+  task-x11-illume \
+  task-fso-compliance \
+  task-cli-tools \
+  task-cli-tools-python \
+  task-fonts-truetype-core \
+"
+
 IMAGE_INSTALL = "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \
@@ -57,7 +72,7 @@ shr_rootfs_postprocess() {
         echo "Categories=Office;" >>$file
     done
 
-    echo "Exec=openmoko-terminal2 htop" >> ./usr/share/applications/htop.desktop
+    echo "Exec=vala-terminal htop" >> ./usr/share/applications/htop.desktop
     echo "Icon=settings.png" >> ./usr/share/applications/exposure.desktop
 
     # minimal gtk theme foo
