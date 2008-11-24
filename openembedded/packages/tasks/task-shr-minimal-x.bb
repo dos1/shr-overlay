@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r3"
+PR = "r4"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -13,7 +13,7 @@ RDEPENDS_${PN} += "\
   exquisite-theme-illume \
 "
 
-RDEPENDS_{$PN} += "\
+RDEPENDS_${PN} += "\
   glibc-binary-localedata-en-us \
   glibc-binary-localedata-de-de \
   glibc-binary-localedata-fr-fr \

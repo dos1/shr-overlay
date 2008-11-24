@@ -35,7 +35,6 @@ IMAGE_INSTALL += "\
   task-cli-tools \
   task-cli-tools-python \
   task-fonts-truetype-core \
-  glibc-binary-localedata-en-us \
 "
 
 inherit image
