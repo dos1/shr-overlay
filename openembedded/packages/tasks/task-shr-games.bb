@@ -1,10 +1,10 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r2"
+PR = "r3"
 PV = "1.0"
 LICENSE = "GPL"
 
 inherit task
 
-RRECOMMENDS_${PN} += "\
+RDEPENDS_${PN} += "\
   numptyphysics \
 "

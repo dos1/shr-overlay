@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r2"
+PR = "r3"
 PV = "1.0"
 LICENSE = "GPL"
 inherit task
@@ -10,7 +10,7 @@ RDEPENDS_${PN} += "\
   vala-terminal \
 "
 
-RRECOMMENDS_${PN} += "\
+RDEPENDS_${PN} += "\
   openmoko-calculator2 \
   tangogps \
   starling \

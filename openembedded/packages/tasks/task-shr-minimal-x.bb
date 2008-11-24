@@ -1,5 +1,6 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r2"
+PR = "r3"
+PV = "1.0"
 LICENSE = "GPL"
 
 inherit task
@@ -12,7 +13,7 @@ RDEPENDS_${PN} += "\
   exquisite-theme-illume \
 "
 
-RRECOMMENDS_{$PN} += "\
+RDEPENDS_{$PN} += "\
   glibc-binary-localedata-en-us \
   glibc-binary-localedata-de-de \
   glibc-binary-localedata-fr-fr \
