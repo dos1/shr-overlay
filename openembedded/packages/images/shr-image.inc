@@ -3,7 +3,7 @@
 #------------------------------------------------------
 
 PV = "1.0"
-PR = "r2"
+PR = "r3"
 
 IMAGE_LINGUAS = ""
 
@@ -35,6 +35,7 @@ IMAGE_INSTALL += "\
   task-cli-tools \
   task-cli-tools-python \
   task-fonts-truetype-core \
+  glibc-binary-localedata-en-us \
 "
 
 inherit image
