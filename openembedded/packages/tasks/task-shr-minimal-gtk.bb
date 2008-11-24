@@ -1,13 +1,17 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r1"
+PR = "r2"
+PV = "1.0"
 LICENSE = "GPL"
 inherit task
 
-RDEPENDS_${PN} = "\
+RDEPENDS_${PN} += "\
   openmoko-icon-theme-standard2 \
-  openmoko-calculator2 \
+  gpe-filemanager \
   vala-terminal \
+"
+
+RRECOMMENDS_${PN} += "\
+  openmoko-calculator2 \
   tangogps \
   starling \
-  gpe-filemanager \
 "

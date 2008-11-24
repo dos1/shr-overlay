@@ -7,7 +7,7 @@ PR = "r2"
 
 IMAGE_LINGUAS = ""
 
-DEPENDS = "\
+RDEPENDS += "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \
   task-shr-minimal-base \
@@ -22,7 +22,7 @@ DEPENDS = "\
   task-fonts-truetype-core \
 "
 
-IMAGE_INSTALL = "\
+IMAGE_INSTALL += "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \
   task-shr-minimal-base \

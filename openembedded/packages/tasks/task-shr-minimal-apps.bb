@@ -4,7 +4,7 @@ LICENSE = "GPL"
 
 inherit task
 
-RDEPENDS_${PN} = "\
+RDEPENDS_${PN} += "\
   openmoko-dialer3 \
   openmoko-messages3 \
   openmoko-contacts3 \

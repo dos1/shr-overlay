@@ -4,7 +4,7 @@ LICENSE = "GPL"
 
 inherit task
 
-RDEPENDS_${PN} = "\
+RDEPENDS_${PN} += "\
   python-codecs \
   python-gst \
 "

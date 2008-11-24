@@ -5,7 +5,7 @@ inherit task
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-RDEPENDS_${PN} = "\
+RDEPENDS_${PN} += "\
   alsa-oss \
   alsa-state \
   alsa-utils-aplay \
