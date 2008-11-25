@@ -18,7 +18,7 @@ SRCREV_pn-frameworkd-shr-config = "${AUTOREV}"
 
 PREFERRED_VERSION_midori = "0.1.0"
 PREFERRED_VERSION_shared-mime-info = "0.51"
-PREFERRED_VERSION_navit = "svn"
+PREFERRED_VERSION_navit = "0.1.0+svnrev${SRCREV}"
 PREFERRED_VERSION_udev = "124"
 
 

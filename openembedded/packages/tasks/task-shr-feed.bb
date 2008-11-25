@@ -1,5 +1,5 @@
-DESCRIPTION = "SHR Base Applications"
-PR = "r3"
+DESCRIPTION = "SHR Feed"
+PR = "r4"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -12,4 +12,5 @@ RDEPENDS_${PN} += "\
 		mc \
 		mplayer \
 		x11vnc \
-		omview"
+		omview \
+		navit"
