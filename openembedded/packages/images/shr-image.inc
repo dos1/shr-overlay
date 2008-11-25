@@ -7,6 +7,8 @@ PR = "r3"
 
 IMAGE_LINGUAS = ""
 
+PREFERRED_PROVIDER_frameworkd-config = "frameworkd-shr-config"
+
 RDEPENDS += "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \
@@ -92,12 +94,6 @@ shr_rootfs_postprocess() {
     if [ -a ./etc/opkg/neo1973-feed.conf ]; then rm ./etc/opkg/neo1973-feed.conf; fi
     if [ -a ./etc/opkg/om-gta01-feed.conf ]; then rm ./etc/opkg/om-gta01-feed.conf; fi
     if [ -a ./etc/opkg/om-gta02-feed.conf ]; then rm ./etc/opkg/om-gta02-feed.conf; fi
-
-    #frameworkd fixes
-    #log to /var/log
-    sed -i "s/^log_to.*/log_to = file\nlog_destination = \/var\/log\/frameworkd.log/g" ./etc/frameworkd.conf
-    #deep sleep for ti_calypso
-    sed -i "s/^\(modem.*=.*ti_calypso.*\)$/\1\nti_calypso_deep_sleep = never/g" ./etc/frameworkd.conf
 
     #font cache optimization, persistent cache
     sed -i "s/<cachedir>.*\/var\/cache\/\(.*\)<\/cachedir>/<cachedir>\/var\/local\/\1<\/cachedir>/g" ./etc/fonts/fonts.conf
