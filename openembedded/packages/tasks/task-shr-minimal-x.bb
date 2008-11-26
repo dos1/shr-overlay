@@ -11,6 +11,7 @@ RDEPENDS_${PN} += "\
   exquisite \
   exquisite-themes \
   exquisite-theme-illume \
+  e-wm-config-illume-shr \
 "
 
 RDEPENDS_${PN} += "\
