@@ -1,5 +1,5 @@
 group "E_Config" struct {
-  value "config_version" int: 65833;
+  value "config_version" int: 65834;
   value "show_splash" int: 1;
   value "init_default_theme" string: "default.edj";
   value "desktop_default_name" string: "Desktop %i, %i";
@@ -21,7 +21,7 @@ group "E_Config" struct {
   value "edge_flip_dragging" int: 0;
   value "edge_flip_moving" int: 0;
   value "edge_flip_timeout" double: 0.2500000000000000000000000;
-  value "evas_engine_default" int: 4;
+  value "evas_engine_default" int: 1;
   value "evas_engine_container" int: 0;
   value "evas_engine_init" int: 0;
   value "evas_engine_menus" int: 0;
@@ -34,10 +34,26 @@ group "E_Config" struct {
   value "use_composite" int: 0;
   group "modules" list {
     group "E_Config_Module" struct {
+      value "name" string: "gadman";
+      value "enabled" uchar: 1;
+      value "delayed" uchar: 1;
+      value "priority" int: 100;
+    }
+  }
+  group "modules" list {
+    group "E_Config_Module" struct {
       value "name" string: "illume";
       value "enabled" uchar: 1;
       value "delayed" uchar: 0;
       value "priority" int: 1;
+    }
+  }
+  group "modules" list {
+    group "E_Config_Module" struct {
+      value "name" string: "conf_icon_theme";
+      value "enabled" uchar: 1;
+      value "delayed" uchar: 1;
+      value "priority" int: 0;
     }
   }
   group "modules" list {
@@ -131,7 +147,7 @@ group "E_Config" struct {
   group "modules" list {
     group "E_Config_Module" struct {
       value "name" string: "pager";
-      value "enabled" uchar: 1;
+      value "enabled" uchar: 0;
       value "delayed" uchar: 1;
       value "priority" int: 0;
     }
@@ -230,14 +246,6 @@ group "E_Config" struct {
       value "enabled" uchar: 1;
       value "delayed" uchar: 1;
       value "priority" int: 0;
-    }
-  }
-  group "modules" list {
-    group "E_Config_Module" struct {
-      value "name" string: "gadman";
-      value "enabled" uchar: 1;
-      value "delayed" uchar: 1;
-      value "priority" int: -100;
     }
   }
   group "font_defaults" list {
@@ -529,6 +537,7 @@ group "E_Config" struct {
           value "state_info.seq" int: 1;
           value "state_info.flags" int: 1;
           value "style" string: "plain";
+          value "orient" int: 0;
           value "autoscroll" uchar: 0;
           value "resizable" uchar: 0;
         }
@@ -547,6 +556,7 @@ group "E_Config" struct {
           value "state_info.seq" int: 4;
           value "state_info.flags" int: 1;
           value "style" string: "plain";
+          value "orient" int: 0;
           value "autoscroll" uchar: 0;
           value "resizable" uchar: 0;
         }
@@ -556,33 +566,16 @@ group "E_Config" struct {
           value "name" string: "illume-gsm";
           value "id" string: "illume-gsm";
           value "geom.pos" int: 720;
-          value "geom.size" int: 29;
-          value "geom.res" int: 142;
+          value "geom.size" int: 80;
+          value "geom.res" int: 800;
           value "geom.pos_x" double: 0.0000000000000000000000000;
           value "geom.pos_y" double: 0.0000000000000000000000000;
           value "geom.size_w" double: 0.0000000000000000000000000;
           value "geom.size_h" double: 0.0000000000000000000000000;
-          value "state_info.seq" int: 3;
-          value "state_info.flags" int: 1;
+          value "state_info.seq" int: 5;
+          value "state_info.flags" int: 0;
           value "style" string: "plain";
-          value "autoscroll" uchar: 0;
-          value "resizable" uchar: 0;
-        }
-      }
-      group "clients" list {
-        group "E_Config_Gadcon_Client" struct {
-          value "name" string: "illume-wifi";
-          value "id" string: "illume-wifi";
-          value "geom.pos" int: 720;
-          value "geom.size" int: 19;
-          value "geom.res" int: 138;
-          value "geom.pos_x" double: 0.0000000000000000000000000;
-          value "geom.pos_y" double: 0.0000000000000000000000000;
-          value "geom.size_w" double: 0.0000000000000000000000000;
-          value "geom.size_h" double: 0.0000000000000000000000000;
-          value "state_info.seq" int: 2;
-          value "state_info.flags" int: 1;
-          value "style" string: "plain";
+          value "orient" int: 0;
           value "autoscroll" uchar: 0;
           value "resizable" uchar: 0;
         }
@@ -607,6 +600,7 @@ group "E_Config" struct {
           value "state_info.seq" int: 3;
           value "state_info.flags" int: 3;
           value "style" string: "plain";
+          value "orient" int: 0;
           value "autoscroll" uchar: 0;
           value "resizable" uchar: 0;
         }
@@ -625,6 +619,7 @@ group "E_Config" struct {
           value "state_info.seq" int: 1;
           value "state_info.flags" int: 1;
           value "style" string: "plain";
+          value "orient" int: 0;
           value "autoscroll" uchar: 0;
           value "resizable" uchar: 0;
         }
@@ -643,6 +638,7 @@ group "E_Config" struct {
           value "state_info.seq" int: 4;
           value "state_info.flags" int: 0;
           value "style" string: "inset";
+          value "orient" int: 0;
           value "autoscroll" uchar: 0;
           value "resizable" uchar: 0;
         }
@@ -701,7 +697,7 @@ group "E_Config" struct {
   value "border_raise_on_mouse_action" int: 1;
   value "border_raise_on_focus" int: 1;
   value "desk_flip_wrap" int: 0;
-  value "icon_theme" string: "openmoko-standard";
+  value "icon_theme" string: "shr";
   value "desk_flip_animate_mode" int: 0;
   value "desk_flip_animate_interpolation" int: 0;
   value "desk_flip_animate_time" double: 0.2000000000000000111022302;
@@ -714,6 +710,54 @@ group "E_Config" struct {
   value "wallpaper_grad_c2_g" int: 255;
   value "wallpaper_grad_c2_b" int: 255;
   value "theme_default_border_style" string: "default";
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "image/jpeg";
+      value "icon" string: "THUMB";
+    }
+  }
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "image/png";
+      value "icon" string: "THUMB";
+    }
+  }
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "image/x-pixmap";
+      value "icon" string: "THUMB";
+    }
+  }
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "image/x-xpixmap";
+      value "icon" string: "THUMB";
+    }
+  }
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "image/svg+xml";
+      value "icon" string: "THUMB";
+    }
+  }
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "image/gif";
+      value "icon" string: "THUMB";
+    }
+  }
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "image/tiff";
+      value "icon" string: "THUMB";
+    }
+  }
+  group "mime_icons" list {
+    group "E_Config_Mime_Icon" struct {
+      value "mime" string: "application/x-desktop";
+      value "icon" string: "DESKTOP";
+    }
+  }
   group "mime_icons" list {
     group "E_Config_Mime_Icon" struct {
       value "mime" string: "image/jpeg";
@@ -778,6 +822,7 @@ group "E_Config" struct {
   value "border_keyboard.move.dy" uchar: 5;
   value "border_keyboard.resize.dx" uchar: 5;
   value "border_keyboard.resize.dy" uchar: 5;
+  value "hal_desktop" int: 0;
   value "scale.min" double: 1.0000000000000000000000000;
   value "scale.max" double: 3.0000000000000000000000000;
   value "scale.factor" double: 1.0000000000000000000000000;
@@ -786,5 +831,4 @@ group "E_Config" struct {
   value "scale.use_custom" uchar: 0;
   value "show_cursor" uchar: 0;
   value "idle_cursor" uchar: 0;
-  value "default_system_menu" string: "";
 }
