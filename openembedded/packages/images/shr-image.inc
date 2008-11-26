@@ -7,7 +7,8 @@ PR = "r3"
 
 IMAGE_LINGUAS = ""
 
-PREFERRED_PROVIDER_frameworkd-config = "frameworkd-shr-config"
+PREFERRED_PROVIDER_frameworkd-config = "frameworkd-config-shr"
+PREFERRED_PROVIDER_gpsd = "fso-gpsd"
 
 RDEPENDS += "\
   ${MACHINE_TASK_PROVIDER} \
