@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r4"
+PR = "r5"
 PV = "1.0"
 LICENSE = "GPL"
 
