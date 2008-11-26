@@ -258,7 +258,7 @@ group "E_Config" struct {
   group "themes" list {
     group "E_Config_Theme" struct {
       value "category" string: "theme";
-      value "file" string: "illume.edj";
+      value "file" string: "illume-shr.edj";
     }
   }
   group "key_bindings" list {

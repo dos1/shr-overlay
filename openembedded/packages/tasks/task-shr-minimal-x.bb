@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r5"
+PR = "r6"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -12,6 +12,7 @@ RDEPENDS_${PN} += "\
 #  exquisite-themes \
 #  exquisite-theme-illume \
   e-wm-config-illume-shr \
+  e-wm-theme-illume-shr \
 "
 
 RDEPENDS_${PN} += "\

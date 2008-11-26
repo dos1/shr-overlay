@@ -1,8 +1,8 @@
 DESCRIPTION = "illume SHR config"
 DEPENDS = "eet"
 LICENSE = "MIT BSD"
-PV = "0.16.999.043+svnr${SRCREV}"
-PR = "r19"
+PV = "1.0"
+PR = "r1"
 
 inherit e
 
@@ -26,5 +26,5 @@ EXTRA_OECONF = "\
 
 FILES_${PN} = "${datadir}/enlightenment/data/config/illume-shr"
 
-#RRECOMMENDS_${PN}-config-illume = "${PN}-theme-illume"
+RRECOMMENDS_${PN} = "e-wm-theme-illume-shr"
 
