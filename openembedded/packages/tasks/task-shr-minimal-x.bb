@@ -8,9 +8,9 @@ inherit task
 RDEPENDS_${PN} += "\
   glibc-utils \
   glibc-charmap-utf-8 \
-  exquisite \
-  exquisite-themes \
-  exquisite-theme-illume \
+#  exquisite \
+#  exquisite-themes \
+#  exquisite-theme-illume \
   e-wm-config-illume-shr \
 "
 
