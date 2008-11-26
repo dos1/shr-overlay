@@ -1,4 +1,5 @@
 SRCREV_pn-frameworkd = "${AUTOREV}"
+SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
 SRCREV_pn-fso-gpsd = "${AUTOREV}"
 SRCREV_pn-fso-sounds = "${AUTOREV}"
 SRCREV_pn-gsm0710muxd = "${AUTOREV}"
@@ -8,20 +9,9 @@ SRCREV_pn-mickeydbus = "${AUTOREV}"
 SRCREV_pn-mickeyterm = "${AUTOREV}"
 SRCREV_pn-python-pytrc = "${AUTOREV}"
 SRCREV_pn-zhone = "${AUTOREV}"
-#SRCREV_pn-shared-mime-info = "0.51"
+
 SRCREV_pn-shr-settings = "${AUTOREV}"
 SRCREV_pn-shr-theme = "${AUTOREV}"
-SRCREV_pn-navit = "${AUTOREV}"
-SRCREV_pn-python-elementary = "325"
-SRCREV_pn-omview = "${AUTOREV}"
-SRCREV_pn-frameworkd-shr-config = "${AUTOREV}"
-
-PREFERRED_VERSION_midori = "0.1.0"
-PREFERRED_VERSION_shared-mime-info = "0.51"
-PREFERRED_VERSION_navit = "0.1.0+svnrev${SRCREV}"
-PREFERRED_VERSION_udev = "124"
-
-
 SRCREV_pn-libframeworkd-glib ?= "${AUTOREV}"
 SRCREV_pn-ophonekitd ?= "${AUTOREV}"
 SRCREV_pn-openmoko-messages3 ?= "${AUTOREV}"
@@ -31,3 +21,13 @@ SRCREV_pn-libframeworkd-phonegui-efl ?= "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui ?= "${AUTOREV}"
 
 EFL_SRCREV = "37681"
+
+SRCREV_pn-navit = "${AUTOREV}"
+SRCREV_pn-python-elementary = "325"
+SRCREV_pn-omview = "${AUTOREV}"
+
+PREFERRED_VERSION_midori = "0.1.0"
+PREFERRED_VERSION_shared-mime-info = "0.51"
+PREFERRED_VERSION_navit = "0.1.0+svnrev${SRCREV}"
+PREFERRED_VERSION_udev = "124"
+
