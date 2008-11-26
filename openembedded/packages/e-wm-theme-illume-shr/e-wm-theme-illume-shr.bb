@@ -1,8 +1,9 @@
 DESCRIPTION = "illume SHR theme"
+SECTION = "e/utils"
 DEPENDS = "edje"
 LICENSE = "MIT BSD"
 PV = "1.0"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "\
   file://illume-shr.edc  \
