@@ -25,7 +25,7 @@ SRCREV_pn-openmoko-dialer3 ?= "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-efl ?= "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui ?= "${AUTOREV}"
 
-EFL_SRCREV = "37681"
+EFL_SRCREV = "37812"
 
 SRCREV_pn-navit = "1757"
 SRCREV_pn-python-elementary = "325"
