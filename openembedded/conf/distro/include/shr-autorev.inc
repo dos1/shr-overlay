@@ -30,5 +30,6 @@ EFL_SRCREV = "37681"
 SRCREV_pn-navit = "1757"
 SRCREV_pn-python-elementary = "325"
 SRCREV_pn-omview = "${AUTOREV}"
+SRCREV_pn-pythm = "${AUTOREV}"
 
 
