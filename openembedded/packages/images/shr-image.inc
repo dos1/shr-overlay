@@ -109,6 +109,8 @@ shr_rootfs_gta02_postprocess() {
     curdir=$PWD
     cd ${IMAGE_ROOTFS}
     sed -i "s/^# \(.*om-gta02.*\)/\1/g" ./etc/opkg/bearstech.conf
+    cd ${IMAGE_ROOTFS}/boot
+    ln -s uImage.bin uImage-GTA02.bin
     cd $curdir
 }
 
@@ -116,6 +118,8 @@ shr_rootfs_gta01_postprocess() {
     curdir=$PWD
     cd ${IMAGE_ROOTFS}
     sed -i "s/^# \(.*om-gta01.*\)/\1/g" ./etc/opkg/bearstech.conf
+    cd ${IMAGE_ROOTFS}/boot
+    ln -s uImage.bin uImage-GTA01.bin
     cd $curdir
 }
 
