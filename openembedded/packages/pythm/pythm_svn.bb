@@ -20,10 +20,10 @@ DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --install-data=${datadir}"
 
 do_install_append() {
-	install -d ${D}${sysconfdir}/mofi
+	install -d ${D}${sysconfdir}
 	install -d ${D}/${datadir}/applications
-	install -m 0644 ${S}/conf/pythm.conf-example ${D}${sysconfdir}/pythm.conf
-        install -m 0644 ../pythm.desktop ${D}/${datadir}/applications
+	install -m 0644 ../pythm.conf ${D}${sysconfdir}
+	install -m 0644 ../pythm.desktop ${D}/${datadir}/applications
 }
 
 
