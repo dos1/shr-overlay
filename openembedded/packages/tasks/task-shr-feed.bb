@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Feed"
-PR = "r4"
+PR = "r5"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -13,4 +13,5 @@ RDEPENDS_${PN} += "\
 		mplayer \
 		x11vnc \
 		omview \
+		openvpn \
 		navit"
