@@ -52,12 +52,10 @@ do_install () {
 
 	install -m 0755	${WORKDIR}/alignment.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/bootmisc.sh		${D}${sysconfdir}/init.d
-	install -m 0755	${WORKDIR}/campgsm		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/checkroot.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/finish.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/functions		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/hostname.sh		${D}${sysconfdir}/init.d
-	install -m 0755	${WORKDIR}/led-trigger.sh	${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/mountall.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/mountnfs.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/mountdevsubfs.sh	${D}${sysconfdir}/init.d
