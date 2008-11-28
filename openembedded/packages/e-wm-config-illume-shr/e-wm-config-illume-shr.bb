@@ -27,5 +27,5 @@ EXTRA_OECONF = "\
 
 FILES_${PN} = "${datadir}/enlightenment/data/config/illume-shr"
 
-RRECOMMENDS_${PN} = "e-wm-theme-illume-shr"
+RRECOMMENDS_${PN} = "e-wm-theme-illume-shr e-wm-sysactions-shr"
 
