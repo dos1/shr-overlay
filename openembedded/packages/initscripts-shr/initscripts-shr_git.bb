@@ -4,6 +4,7 @@ PRIORITY = "required"
 DEPENDS = ""
 RDEPENDS = ""
 LICENSE = "GPL"
+PV = "0.0.1+${PR}-gitr${SRCREV}"
 PR = "r1"
 
 RPROVIDES_${PN} = "initscripts"
