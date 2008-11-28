@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r2"
+PR = "r3"
 LICENSE = "GPL"
 
 inherit task
@@ -15,4 +15,5 @@ RDEPENDS_${PN} += "\
   fbset-modes \
   openssh-sftp-server \
   cron \
-  logrotate"
+  logrotate\
+  util-linux-fdisk"
