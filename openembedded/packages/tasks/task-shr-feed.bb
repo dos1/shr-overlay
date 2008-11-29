@@ -1,11 +1,11 @@
 DESCRIPTION = "SHR Feed"
-PR = "r5"
+PR = "r6"
 PV = "1.0"
 LICENSE = "GPL"
 
 inherit task
 
-RDEPENDS_${PN} += "\
+RRECOMMENDS_${PN} += "\
 		python-elementary \
 		navit \
 		openmoko-agpsui \
@@ -14,4 +14,7 @@ RDEPENDS_${PN} += "\
 		x11vnc \
 		omview \
 		openvpn \
-		navit"
+		navit \
+		pythm \
+		fbreader \
+		dillo \"
