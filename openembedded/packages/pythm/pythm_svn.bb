@@ -5,8 +5,10 @@ SECTION = "application/multimedia"
 LICENSE = "GPLv2"
 SRCNAME = "pythm"
 PV = "0.5.1+svnr${SRCREV}"
+PR = "r2"
 SRC_URI = "svn://svn.projects.openmoko.org/svnroot/;module=pythm \
-           file://pythm.desktop"
+           file://pythm.desktop \
+	   file://pythm.conf"
 S = "${WORKDIR}/pythm"
 
 inherit setuptools
@@ -22,8 +24,8 @@ DISTUTILS_INSTALL_ARGS = "--root=${D} \
 do_install_append() {
 	install -d ${D}${sysconfdir}
 	install -d ${D}/${datadir}/applications
-	install -m 0644 pythm.conf ${D}${sysconfdir}
-	install -m 0644 pythm.desktop ${D}/${datadir}/applications
+	install -m 0644 ../pythm.conf ${D}${sysconfdir}
+	install -m 0644 ../pythm.desktop ${D}/${datadir}/applications
 }
 
 
