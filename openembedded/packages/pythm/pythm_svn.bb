@@ -22,8 +22,8 @@ DISTUTILS_INSTALL_ARGS = "--root=${D} \
 do_install_append() {
 	install -d ${D}${sysconfdir}
 	install -d ${D}/${datadir}/applications
-	install -m 0644 ../pythm.conf ${D}${sysconfdir}
-	install -m 0644 ../pythm.desktop ${D}/${datadir}/applications
+	install -m 0644 pythm.conf ${D}${sysconfdir}
+	install -m 0644 pythm.desktop ${D}/${datadir}/applications
 }
 
 
