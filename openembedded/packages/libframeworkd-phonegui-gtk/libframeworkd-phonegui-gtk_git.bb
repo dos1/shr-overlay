@@ -1,10 +1,8 @@
 DESCRIPTION = "The Openmoko Dialer"
-SECTION = "openmoko/pim"
-PKG_TAGS_${PN} = "group::communication"
+SECTION = "x11/applications"
 DEPENDS += " libmokoui2 libmokojournal2 pulseaudio dbus-glib libnotify libjana libframeworkd-glib libhito"
-PV = "0.0.1-shr"
+PV = "0.0.1"
 PR = "r1"
-PE = "1"
 
 inherit shr pkgconfig autotools
 

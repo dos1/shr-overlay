@@ -1,8 +1,7 @@
 DESCRIPTION = "The Openmoko Dialer"
-SECTION = "openmoko/pim"
-PKG_TAGS_${PN} = "group::communication"
+SECTION = "x11/applications"
 DEPENDS += "dbus-glib libframeworkd-glib libframeworkd-phonegui"
-PV = "0.0.1+${PR}-gitr${SRCREV}"
-PR = "r7"
+SHR_PV = "0.0.1"
+PR = "r8"
 
 inherit shr pkgconfig autotools

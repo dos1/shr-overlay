@@ -1,9 +1,8 @@
 DESCRIPTION = "Ophonekitd daemon"
-SECTION = "openmoko/pim"
-PKG_TAGS_${PN} = "group::communication"
+SECTION = "x11/applications"
 DEPENDS += " dbus-glib libframeworkd-glib libframeworkd-phonegui"
-PV = "0.0.1+${PR}-gitr${SRCREV}"
-PR = "r10"
+SHR_PV = "0.0.1"
+PR = "r11"
 
 inherit shr
 

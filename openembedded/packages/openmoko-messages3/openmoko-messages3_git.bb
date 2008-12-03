@@ -1,7 +1,7 @@
 DESCRIPTION = "The Openmoko Messages"
-SECTION = "openmoko/pim"
+SECTION = "x11/applications"
 DEPENDS += "dbus-glib libframeworkd-glib libframeworkd-phonegui"
-PV = "0.0.1+${PR}-gitr${SRCREV}"
-PR = "r6"
+SHR_PV = "0.0.1"
+PR = "r7"
 
 inherit shr pkgconfig autotools
