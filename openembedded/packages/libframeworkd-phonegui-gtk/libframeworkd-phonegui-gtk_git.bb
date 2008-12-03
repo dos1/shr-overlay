@@ -1,7 +1,7 @@
 DESCRIPTION = "The Openmoko Dialer"
 SECTION = "x11/applications"
 DEPENDS += " libmokoui2 libmokojournal2 pulseaudio dbus-glib libnotify libjana libframeworkd-glib libhito"
-PV = "0.0.1"
+SHR_PV = "0.0.1"
 PR = "r1"
 
 inherit shr pkgconfig autotools

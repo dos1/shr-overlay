@@ -1,11 +1,9 @@
 DESCRIPTION = "A Contact View for GTK+"
-SECTION = "openmoko/pim"
-PKG_TAGS_${PN} = "group::dsunication"
+SECTION = "x11/libs"
 DEPENDS += " glib-2.0 gtk+ eds-dbus"
 # eds-dbus provides libebook
-PV = "0.6.0-shr"
+SHR_PV = "0.6.0"
 PR = "r1"
-PE = "1"
 
 inherit shr pkgconfig autotools
 

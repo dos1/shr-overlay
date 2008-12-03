@@ -1,7 +1,9 @@
 DESCRIPTION = "The Openmoko Dialer"
-DEPENDS += " libframeworkd-glib libnotify"
-PV = "0.0.1-shr"
+DEPENDS += "matchbox-panel-2 libmokopanelui2 libframeworkd-glib libnotify"
+SHR_PV = "0.0.1"
 PR = "r8"
-PE = "1"
 
-inherit openmoko-panel-plugin-shr
+inherit shr autotools pkgconfig
+
+FILES_${PN} = "${libdir}/matchbox-panel/lib*.so* ${datadir}"
+

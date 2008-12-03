@@ -3,10 +3,10 @@ LICENSE = "GPL"
 SECTION = "openmoko/daemons"
 DEPENDS = "gtk+ pulseaudio apmd"
 RDEPENDS = "gpe-scap xrandr alsa-utils-amixer apm dbus"
-PV = "0.2.0-shr"
+SHR_PV = "0.2.0"
 PR = "r1"
 
-inherit shr gconf
+inherit shr gconf autotools pkgconfig
 
 SRC_URI += "file://htc.patch;patch=1;maxrev=3348 \
             file://ipaq.patch;patch=1;maxrev=3348"
