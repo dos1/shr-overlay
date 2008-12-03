@@ -23,7 +23,7 @@ GITREV = "r${SRCREV}"
 SRC_URI_REMOTE = "${SHR_MIRROR}/shr.git;protocol=http;branch=master"
 SRC_URI_LOCAL = "file://${TOPDIR}/shr/${PN}"
 #Switch to LOCAL and modify SRC_URI_LOCAL to build from local sources
-LOCATION_SHR = "LOCAL"
+LOCATION_SHR = "REMOTE"
 
 PV = "${@shr_build_srcrev('${LOCATION_SHR}', d)}"
 SRC_URI = "${@shr_get_src_uri('${LOCATION_SHR}')}"
