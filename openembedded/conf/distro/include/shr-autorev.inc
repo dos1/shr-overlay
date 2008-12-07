@@ -1,6 +1,7 @@
 PREFERRED_VERSION_midori = "0.1.0"
 PREFERRED_VERSION_shared-mime-info = "0.51"
 PREFERRED_VERSION_navit = "0.1.0+svnrev${SRCREV}"
+PREFERRED_VERSION_libosip2 = "2.2.2"
 PREFERRED_VERSION_udev = "124"
 
 SRCREV_pn-frameworkd = "${AUTOREV}"
