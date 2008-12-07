@@ -4,7 +4,7 @@ DEPENDS += " dbus-glib libframeworkd-glib libframeworkd-phonegui sqlite3"
 SHR_PV = "0.0.1"
 PR = "r11"
 
-inherit shr
+inherit shr autotools
 
 SRC_URI += " file://80ophonekitd"
 
