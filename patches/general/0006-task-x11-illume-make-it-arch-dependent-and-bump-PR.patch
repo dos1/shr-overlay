@@ -1,0 +1,32 @@
+From 27b75eae8c8c4702d035892a0940f253a480bc14 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Mon, 8 Dec 2008 17:10:11 +0100
+Subject: [PATCH] task-x11-illume: make it arch dependent and bump PR
+
+---
+ packages/tasks/task-x11-illume.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/packages/tasks/task-x11-illume.bb b/packages/tasks/task-x11-illume.bb
+index 8b813b4..781db92 100644
+--- a/packages/tasks/task-x11-illume.bb
++++ b/packages/tasks/task-x11-illume.bb
+@@ -2,12 +2,14 @@ DESCRIPTION = "The Illume Windowing Environment -- install this task to get the
+ SECTION = "x11/wm"
+ LICENSE = "MIT"
+ PV = "1.0"
+-PR = "r0"
++PR = "r1"
+ 
+ # WORK IN PROGRESS
+ 
+ inherit task
+ 
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
+ # Default illume theme
+ ILLUME_THEME ?= "e-wm-theme-illume"
+ 
+-- 
+1.6.0.4
+

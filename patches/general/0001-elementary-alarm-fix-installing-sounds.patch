@@ -1,0 +1,30 @@
+From 5b01fe1c1d1414b6cadf3bdbdb4ab504bd822356 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Mon, 8 Dec 2008 17:07:17 +0100
+Subject: [PATCH] elementary-alarm: fix installing sounds
+
+---
+ packages/e17/elementary-alarm_svn.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/packages/e17/elementary-alarm_svn.bb b/packages/e17/elementary-alarm_svn.bb
+index 4294f2f..b57a450 100644
+--- a/packages/e17/elementary-alarm_svn.bb
++++ b/packages/e17/elementary-alarm_svn.bb
+@@ -8,11 +8,11 @@ PR = "r1"
+ inherit e
+ 
+ SRC_URI = "svn://svn.enlightenment.org/svn/e/trunk/TMP/st;module=elementary-alarm;proto=http"
+-S = "${WORKDIR}/elementary-alarm"
++S = "${WORKDIR}/${PN}"
+ 
+ RDEPENDS = "waker"
+ FILES_${PN} += "${bindir}/*"
+ FILES_${PN} += "${datadir}/${PN}"
+ FILES_${PN} += "${datadir}/icons/*"
+ FILES_${PN} += "${datadir}/applications/*"
+-FILES_${PN} += "${datadir}/${PN}/sounds/*"
++FILES_${PN} += "${datadir}/alarm/sounds/*"
+-- 
+1.6.0.4
+

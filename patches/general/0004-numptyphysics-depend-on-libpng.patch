@@ -1,0 +1,24 @@
+From f3da0fc5484b5e5135970f6c06921024bdd20385 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Mon, 8 Dec 2008 17:08:54 +0100
+Subject: [PATCH] numptyphysics: depend on libpng
+
+---
+ packages/numptyphysics/numptyphysics_svn.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/packages/numptyphysics/numptyphysics_svn.bb b/packages/numptyphysics/numptyphysics_svn.bb
+index 6dc4964..56187d7 100644
+--- a/packages/numptyphysics/numptyphysics_svn.bb
++++ b/packages/numptyphysics/numptyphysics_svn.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Numpty Physics is a drawing puzzle game in the spirit (and style?) \
+ of Crayon Physics using the same excellent Box2D engine."
+ DEPENDS = "virtual/libsdl libsdl-image libpng"
++RDEPENDS += "libpng"
+ LICENSE = "GPL"
+ HOMEPAGE = "http://numptyphysics.garage.maemo.org/"
+ SECTION = "x11/games"
+-- 
+1.6.0.4
+
