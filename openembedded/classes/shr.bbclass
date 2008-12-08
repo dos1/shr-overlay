@@ -8,7 +8,7 @@ def shr_get_src_uri(location):
 
 def shr_build_srcrev(location, d):
     import bb
-    return (("${SHR_PV}+${PR}-gitr") + ((bb.fetch.get_srcrev(d)) if location == "REMOTE" else ("LOCAL")))
+    return (("${SHR_PV}+gitr") + ((bb.fetch.get_srcrev(d)) if location == "REMOTE" else ("LOCAL")))
 
 HOMEPAGE = "http://projects.openmoko.org/projects/shr/"
 SHR_RELEASE ?= "shr"
