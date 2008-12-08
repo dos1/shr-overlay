@@ -16,6 +16,8 @@ SRCREV_pn-mickeyterm = "${AUTOREV}"
 SRCREV_pn-python-pytrc = "${AUTOREV}"
 SRCREV_pn-zhone = "${AUTOREV}"
 
+SRCREV_pn-libhito = "${AUTOREV}"
+SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-shr-settings = "${AUTOREV}"
 SRCREV_pn-shr-theme = "${AUTOREV}"
 SRCREV_pn-libframeworkd-glib = "${AUTOREV}"
