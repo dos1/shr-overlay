@@ -6,8 +6,9 @@ def shr_get_s(location):
 def shr_get_src_uri(location):
     return "${SRC_URI_REMOTE}" if location == "REMOTE" else "${SRC_URI_LOCAL}"
 
-def shr_build_srcrev(location):
-    return (("${SHR_PV}+${PR}-gitr") + (("${SRCREV}") if location == "REMOTE" else ("LOCAL")))
+def shr_build_srcrev(location, d):
+    import bb
+    return (("${SHR_PV}+${PR}-gitr") + ((bb.fetch.get_srcrev(d)) if location == "REMOTE" else ("LOCAL")))
 
 HOMEPAGE = "http://projects.openmoko.org/projects/shr/"
 SHR_RELEASE ?= "shr"
@@ -22,7 +23,7 @@ SRC_URI_LOCAL = "file://${TOPDIR}/shr/${PN}"
 #Switch to LOCAL and modify SRC_URI_LOCAL to build from local sources
 LOCATION_SHR = "REMOTE"
 
-PV = "${@shr_build_srcrev('${LOCATION_SHR}')}"
+PV = "${@shr_build_srcrev('${LOCATION_SHR}', d)}"
 SRC_URI = "${@shr_get_src_uri('${LOCATION_SHR}')}"
 S = "${@shr_get_s('${LOCATION_SHR}')}"
 
