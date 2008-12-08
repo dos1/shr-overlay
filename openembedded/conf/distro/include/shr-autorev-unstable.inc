@@ -9,4 +9,6 @@ SRCREV_pn-libframeworkd-phonegui-efl = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui = "${AUTOREV}"
 SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
+SRCREV_pn-openmoko-panel-gsm = "${AUTOREV}"
+SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 

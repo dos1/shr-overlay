@@ -27,6 +27,8 @@ SRCREV_pn-openmoko-contacts3 = "${AUTOREV}"
 SRCREV_pn-openmoko-dialer3 = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-efl = "953a35b8ee95183783d7896f80faa5f78d51d90a"
 SRCREV_pn-libframeworkd-phonegui = "${AUTOREV}"
+SRCREV_pn-openmoko-panel-gsm = "${AUTOREV}"
+SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
 EFL_SRCREV = "37812"
 
