@@ -1,0 +1,27 @@
+From 19e31e27fb66c08119b6210e2a502bc5283af0c9 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Fri, 28 Nov 2008 23:09:14 +0100
+Subject: [PATCH] do not run opkg-cl configure on every boot
+
+---
+ packages/opkg/opkg_svn.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/packages/opkg/opkg_svn.bb b/packages/opkg/opkg_svn.bb
+index 24547d6..59cb39e 100644
+--- a/packages/opkg/opkg_svn.bb
++++ b/packages/opkg/opkg_svn.bb
+@@ -16,7 +16,9 @@ if [ "x$D" != "x" ]; then
+ 	install -d ${IMAGE_ROOTFS}/${sysconfdir}/rcS.d
+ 	# this happens at S98 where our good 'ole packages script used to run
+ 	echo "#!/bin/sh
+-opkg-cl configure
++if ! test -f /etc/.configured; then
++	opkg-cl configure
++fi
+ rm -f /${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
+ " > ${IMAGE_ROOTFS}/${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
+ 	chmod 0755 ${IMAGE_ROOTFS}${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
+-- 
+1.6.0.4
+

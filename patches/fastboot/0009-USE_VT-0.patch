@@ -1,0 +1,24 @@
+From 3bbf0db738e4ad66d14f125cac70717e4758f7d7 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 29 Nov 2008 09:23:26 +0100
+Subject: [PATCH] USE_VT = 0
+
+---
+ conf/machine/om-gta02.conf |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/conf/machine/om-gta02.conf b/conf/machine/om-gta02.conf
+index 9876ebe..47dff30 100644
+--- a/conf/machine/om-gta02.conf
++++ b/conf/machine/om-gta02.conf
+@@ -31,6 +31,7 @@ MACHINE_EXTRA_RRECOMMENDS = "\
+ 
+ # no need to bypass this as in om-gta01, since this model is not using a multiplexed ttySAC0
+ SERIAL_CONSOLE = "115200 ttySAC2"
++USE_VT = "0"
+ 
+ # used by some images
+ ROOT_FLASH_SIZE = "256"
+-- 
+1.6.0.4
+

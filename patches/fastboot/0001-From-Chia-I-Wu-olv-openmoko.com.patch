@@ -1,0 +1,42 @@
+From 83a2c9317a739b37ef9e334a26c67635e966a116 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Fri, 28 Nov 2008 20:17:42 +0100
+Subject: [PATCH] From: Chia-I Wu <olv@openmoko.com>
+ Date: Tue, 18 Nov 2008 16:49:54 +0800
+ Subject: [PATCH] fastboot: task-boot: Make initscripts configurable.
+
+---
+ packages/tasks/task-boot.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/packages/tasks/task-boot.bb b/packages/tasks/task-boot.bb
+index 4c17eea..e9a78ab 100644
+--- a/packages/tasks/task-boot.bb
++++ b/packages/tasks/task-boot.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Basic task to get a device booting"
+-PR = "r45"
++PR = "r45.1"
+ 
+ inherit task
+ 
+@@ -16,6 +16,7 @@ DISTRO_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",  "udev",
+ # sysvinit, upstart
+ #
+ DISTRO_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
++DISTRO_INITSCRIPTS ?= "initscripts"
+ 
+ #
+ # tinylogin, getty
+@@ -39,7 +40,7 @@ RDEPENDS_task-boot = "\
+     base-files \
+     base-passwd \
+     busybox \
+-    initscripts \
++    ${DISTRO_INITSCRIPTS} \
+     ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
+     modutils-initscripts \
+     netbase \
+-- 
+1.6.0.4
+

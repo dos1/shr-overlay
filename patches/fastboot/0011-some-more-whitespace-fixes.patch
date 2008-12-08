@@ -1,0 +1,23 @@
+From 174474430ebf09f97650bb4afead4225ce34e336 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 29 Nov 2008 20:21:11 +0100
+Subject: [PATCH] some more whitespace fixes
+
+---
+ packages/base-files/base-files/om-gta01/fstab |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/packages/base-files/base-files/om-gta01/fstab b/packages/base-files/base-files/om-gta01/fstab
+index 233f95e..ed42e65 100644
+--- a/packages/base-files/base-files/om-gta01/fstab
++++ b/packages/base-files/base-files/om-gta01/fstab
+@@ -1,5 +1,5 @@
+ # Root and Pseudo
+-/dev/mtdblock4   /             jffs2    rw,noatime               1  1 
++/dev/mtdblock4   /             jffs2    rw,noatime               1  1
+ proc             /proc         proc     defaults                 0  0
+ 
+ # microSD slot
+-- 
+1.6.0.4
+

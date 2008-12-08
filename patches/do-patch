@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ "$(basename $PWD)" != "openembedded" ]; then
+	echo "do-patch must be called from inside openembedded"
+	exit 1
+fi
+
+if [ -e .patched ]; then
+	echo "openembedded is already patched"
+	exit 0
+fi
+
+if [ ! -d ../shr/patches ]; then
+	echo "nothing to patch"
+	exit 0
+fi
+
+for d in ../shr/patches/*; do
+	[ -d "$d" ] || continue
+	echo "applying $(basename $d) patches"
+	for p in $(ls "$d"/* | sort); do
+		git apply $p
+	done
+done
+
+touch .patched
+		
