@@ -15,5 +15,9 @@ do_install_append() {
         install -m 0755 ${S}/data/ophonekitd.conf ${D}${sysconfdir}/dbus-1/system.d/
 }
 
+pkg_postinst () {
+        mkdir -p -m 755 /var/db
+}
+
 FILES_${PN} += "${datadir} ${sysconfdir}"
 
