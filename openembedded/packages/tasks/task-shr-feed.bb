@@ -17,4 +17,5 @@ RRECOMMENDS_${PN} += "\
 		navit \
 		pythm \
 		fbreader \
-		dillo"
+		dillo \
+		omoney"
