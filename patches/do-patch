@@ -1,19 +1,16 @@
 #!/bin/bash
 
-if [ "$(basename $PWD)" != "openembedded" ]; then
-	echo "do-patch must be called from inside openembedded"
-	exit 1
-fi
+bail_out()
+{
+	echo "$2"
+	exit $1
+}
 
-if [ -e .patched ]; then
-	echo "openembedded is already patched"
-	exit 0
-fi
+[ "$(basename $PWD)" == "openembedded" ] || bail_out 1 "do-patch must be called from inside openembedded"
+[ -d ../shr/patches ] || bail_out 0 "nothing to patch"
 
-if [ ! -d ../shr/patches ]; then
-	echo "nothing to patch"
-	exit 0
-fi
+CURHEAD=$(git rev-parse HEAD)
+[ -e .patched -a "$CURHEAD" == "$(cat .patched)" ] && bail_out 0 "openembedded is already patched"
 
 for d in ../shr/patches/*; do
 	[ -d "$d" ] || continue
@@ -23,5 +20,5 @@ for d in ../shr/patches/*; do
 	done
 done
 
-touch .patched
+echo $CURHEAD > .patched
 		
