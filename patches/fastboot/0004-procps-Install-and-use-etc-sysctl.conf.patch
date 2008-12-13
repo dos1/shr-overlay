@@ -1,8 +1,10 @@
-From 05dbfc26c72ed286acd3136ef1488a5e0a37e92a Mon Sep 17 00:00:00 2001
+From 01779185a7cb943fc198c7a603886692efbf263b Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Fri, 28 Nov 2008 23:12:02 +0100
-Subject: [PATCH] 0010-fastboot-procps-Install-and-use-etc-sysctl.conf.patch
+Date: Sat, 13 Dec 2008 10:39:08 +0100
+Subject: [PATCH] procps: Install and use /etc/sysctl.conf.
 
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  packages/procps/procps-3.2.7/openmoko/sysctl.conf |   64 +++++++++++++++++++++
  packages/procps/procps-3.2.7/procps.init          |    6 ++
@@ -15,7 +17,7 @@ Subject: [PATCH] 0010-fastboot-procps-Install-and-use-etc-sysctl.conf.patch
 
 diff --git a/packages/procps/procps-3.2.7/openmoko/sysctl.conf b/packages/procps/procps-3.2.7/openmoko/sysctl.conf
 new file mode 100644
-index 0000000..5696366
+index 0000000..34e7488
 --- /dev/null
 +++ b/packages/procps/procps-3.2.7/openmoko/sysctl.conf
 @@ -0,0 +1,64 @@
@@ -62,7 +64,7 @@ index 0000000..5696366
 +#
 +# Ignore bogus ICMP errors
 +#net.ipv4.icmp_ignore_bogus_error_responses = 1
-+# 
++#
 +# Do not accept ICMP redirects (prevent MITM attacks)
 +#net.ipv4.conf.all.accept_redirects = 0
 +#net.ipv6.conf.all.accept_redirects = 0

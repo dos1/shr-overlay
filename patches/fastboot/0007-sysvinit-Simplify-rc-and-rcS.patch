@@ -1,11 +1,18 @@
-From 26bc94feab208489b7e9da492a3da108a703bea5 Mon Sep 17 00:00:00 2001
+From 6e4dc06adc689819011520cb984b97eb72505be1 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Fri, 28 Nov 2008 22:57:40 +0100
-Subject: [PATCH] eliminate progress updates from the rc script
+Date: Sat, 13 Dec 2008 10:47:07 +0100
+Subject: [PATCH] sysvinit: Simplify rc and rcS.
 
+Remove support for boot splash.  Source initscripts end with .sh.
+
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/sysvinit/sysvinit/openmoko/rc |   77 +------------------------------
- 1 files changed, 3 insertions(+), 74 deletions(-)
+ packages/sysvinit/sysvinit/openmoko/rc  |   77 +-----------------------------
+ packages/sysvinit/sysvinit/openmoko/rcS |    9 ++++
+ packages/sysvinit/sysvinit_2.86.bb      |    2 +-
+ 3 files changed, 13 insertions(+), 75 deletions(-)
+ create mode 100644 packages/sysvinit/sysvinit/openmoko/rcS
 
 diff --git a/packages/sysvinit/sysvinit/openmoko/rc b/packages/sysvinit/sysvinit/openmoko/rc
 index 9d28a68..57bf3a8 100644
@@ -118,6 +125,34 @@ index 9d28a68..57bf3a8 100644
 -		umount /mnt/.exquisite
 -	fi
 -  fi
+diff --git a/packages/sysvinit/sysvinit/openmoko/rcS b/packages/sysvinit/sysvinit/openmoko/rcS
+new file mode 100644
+index 0000000..08dca5d
+--- /dev/null
++++ b/packages/sysvinit/sysvinit/openmoko/rcS
+@@ -0,0 +1,9 @@
++#!/bin/sh
++#
++# rcS		Call all S??* scripts in /etc/rcS.d in
++#		numerical/alphabetical order.
++#
++# Version:	@(#)/etc/init.d/rcS  2.76  19-Apr-1999  miquels@cistron.nl
++#
++
++exec /etc/init.d/rc S
+diff --git a/packages/sysvinit/sysvinit_2.86.bb b/packages/sysvinit/sysvinit_2.86.bb
+index c399874..54bb017 100644
+--- a/packages/sysvinit/sysvinit_2.86.bb
++++ b/packages/sysvinit/sysvinit_2.86.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "System-V like init."
+ SECTION = "base"
+ LICENSE = "GPL"
+ HOMEPAGE = "http://freshmeat.net/projects/sysvinit/"
+-PR = "r44"
++PR = "r44.1"
+ 
+ # USE_VT and SERIAL_CONSOLE are generally defined by the MACHINE .conf.
+ # Set PACKAGE_ARCH appropriately.
 -- 
 1.6.0.4
 

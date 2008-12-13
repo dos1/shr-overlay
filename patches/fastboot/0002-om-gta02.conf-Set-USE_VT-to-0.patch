@@ -1,8 +1,10 @@
-From 3bbf0db738e4ad66d14f125cac70717e4758f7d7 Mon Sep 17 00:00:00 2001
+From 28598693dc4e7b71470cb573e86f9c88cf50187d Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Sat, 29 Nov 2008 09:23:26 +0100
-Subject: [PATCH] USE_VT = 0
+Date: Sat, 13 Dec 2008 10:35:48 +0100
+Subject: [PATCH] om-gta02.conf: Set USE_VT to 0
 
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  conf/machine/om-gta02.conf |    1 +
  1 files changed, 1 insertions(+), 0 deletions(-)

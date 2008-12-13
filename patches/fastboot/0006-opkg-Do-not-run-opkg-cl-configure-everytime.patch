@@ -1,8 +1,10 @@
-From 19e31e27fb66c08119b6210e2a502bc5283af0c9 Mon Sep 17 00:00:00 2001
+From dfba2db6f31d27ebed6d700bff5f20f81eab42fb Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Fri, 28 Nov 2008 23:09:14 +0100
-Subject: [PATCH] do not run opkg-cl configure on every boot
+Date: Sat, 13 Dec 2008 10:40:48 +0100
+Subject: [PATCH] opkg: Do not run opkg-cl configure everytime.
 
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  packages/opkg/opkg_svn.bb |    4 +++-
  1 files changed, 3 insertions(+), 1 deletions(-)

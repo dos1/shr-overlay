@@ -1,10 +1,13 @@
-From 83a2c9317a739b37ef9e334a26c67635e966a116 Mon Sep 17 00:00:00 2001
+From 57aaa1ebca5c2a7b2918a2c55eb415b94a23a1e3 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Fri, 28 Nov 2008 20:17:42 +0100
-Subject: [PATCH] From: Chia-I Wu <olv@openmoko.com>
- Date: Tue, 18 Nov 2008 16:49:54 +0800
- Subject: [PATCH] fastboot: task-boot: Make initscripts configurable.
+Date: Sat, 13 Dec 2008 10:31:03 +0100
+Subject: [PATCH] make initscripts configurable
 
+this makes it possible for distros to specify their
+own initscripts package by setting DISTRO_INITSCRIPTS.
+
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  packages/tasks/task-boot.bb |    5 +++--
  1 files changed, 3 insertions(+), 2 deletions(-)

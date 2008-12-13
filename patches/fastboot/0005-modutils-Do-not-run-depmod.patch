@@ -1,8 +1,10 @@
-From 357a9a255c090cd2946a90509ef537fc432c6a7b Mon Sep 17 00:00:00 2001
+From c8b9bfc9dcf9d51b811b05ac8f0ed0cb9ecedda2 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Fri, 28 Nov 2008 23:13:03 +0100
-Subject: [PATCH] 0011-fastboot-modutils-Do-not-run-depmod.patch
+Date: Sat, 13 Dec 2008 10:39:59 +0100
+Subject: [PATCH] modutils: Do not run depmod.
 
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  packages/modutils/files/openmoko/modutils.sh |   21 +++++++++++++++++++++
  packages/modutils/modutils-initscripts.bb    |    2 +-

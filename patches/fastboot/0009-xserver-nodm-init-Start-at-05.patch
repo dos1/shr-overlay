@@ -1,8 +1,10 @@
-From 1992bc7413d1fd617865395a5f5af061038c3068 Mon Sep 17 00:00:00 2001
+From 1782b2c7a6a60b446e07af87eea955173f32b25d Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Fri, 28 Nov 2008 23:18:26 +0100
-Subject: [PATCH] fastboot/0016-fastboot-xserver-nodm-init-Start-at-05.patch
+Date: Sat, 13 Dec 2008 10:48:43 +0100
+Subject: [PATCH] xserver-nodm-init: Start at 05.
 
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  .../xserver-kdrive-common/xserver-nodm-init.bb     |    5 ++++-
  .../xserver-nodm-init/xserver-nodm                 |   19 +++++++------------

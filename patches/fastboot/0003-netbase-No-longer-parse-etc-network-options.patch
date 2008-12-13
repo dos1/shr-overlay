@@ -1,8 +1,10 @@
-From c92b001e31cefd0c1a793bb2af0d4601c35ad5a8 Mon Sep 17 00:00:00 2001
+From 62db1bf1bc2676aaa5ad7e9db46d986645ba5d94 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Fri, 28 Nov 2008 23:04:29 +0100
-Subject: [PATCH] netbase: do not parse options
+Date: Sat, 13 Dec 2008 10:37:46 +0100
+Subject: [PATCH] netbase: No longer parse /etc/network/options.
 
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  packages/netbase/netbase/openmoko/init    |   46 +++++++++++++++++++++++++++++
  packages/netbase/netbase/openmoko/options |    1 +
@@ -13,7 +15,7 @@ Subject: [PATCH] netbase: do not parse options
 
 diff --git a/packages/netbase/netbase/openmoko/init b/packages/netbase/netbase/openmoko/init
 new file mode 100644
-index 0000000..e786f5b
+index 0000000..32810dc
 --- /dev/null
 +++ b/packages/netbase/netbase/openmoko/init
 @@ -0,0 +1,46 @@
@@ -34,13 +36,13 @@ index 0000000..e786f5b
 +	echo "done."
 +	;;
 +    stop)
-+        if sed -n 's/^[^ ]* \([^ ]*\) \([^ ]*\) .*$/\1 \2/p' /proc/mounts | 
++        if sed -n 's/^[^ ]* \([^ ]*\) \([^ ]*\) .*$/\1 \2/p' /proc/mounts |
 +          grep -q "^/ nfs$"; then
 +            echo "NOT deconfiguring network interfaces: / is an NFS mount"
-+        elif sed -n 's/^[^ ]* \([^ ]*\) \([^ ]*\) .*$/\1 \2/p' /proc/mounts |  
++        elif sed -n 's/^[^ ]* \([^ ]*\) \([^ ]*\) .*$/\1 \2/p' /proc/mounts |
 +          grep -q "^/ smbfs$"; then
 +            echo "NOT deconfiguring network interfaces: / is an SMB mount"
-+	elif sed -n 's/^[^ ]* \([^ ]*\) \([^ ]*\) .*$/\2/p' /proc/mounts | 
++	elif sed -n 's/^[^ ]* \([^ ]*\) \([^ ]*\) .*$/\2/p' /proc/mounts |
 +          grep -qE '^(nfs|smbfs|ncp|coda)$'; then
 +            echo "NOT deconfiguring network interfaces: network shares still mounted."
 +        else
@@ -71,15 +73,15 @@ index 0000000..1cbffcb
 @@ -0,0 +1 @@
 +# DEPRECATED by /etc/sysctl.conf
 diff --git a/packages/netbase/netbase_4.21.bb b/packages/netbase/netbase_4.21.bb
-index 2fc352f..77745f5 100644
+index a0baa81..293b593 100644
 --- a/packages/netbase/netbase_4.21.bb
 +++ b/packages/netbase/netbase_4.21.bb
 @@ -2,7 +2,7 @@ DESCRIPTION = "This package provides the necessary \
  infrastructure for basic TCP/IP based networking."
  SECTION = "base"
  LICENSE = "GPL"
--PR = "r28"
-+PR = "r28.1"
+-PR = "r29"
++PR = "r29.1"
  
  inherit update-rc.d
  
