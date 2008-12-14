@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Feed"
-PR = "r6"
+PR = "r7"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -18,4 +18,5 @@ RRECOMMENDS_${PN} += "\
 		pythm \
 		fbreader \
 		dillo \
-		omoney"
+		omoney \
+		enotes"
