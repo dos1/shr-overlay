@@ -1,9 +1,14 @@
+DISTRO_INITSCRIPTS ?= "initscripts-shr"
+PREFERRED_PROVIDER_frameworkd-config = "frameworkd-config-shr"
+PREFERRED_PROVIDER_gpsd = "fso-gpsd"
+
 PREFERRED_VERSION_midori = "0.1.0"
 PREFERRED_VERSION_shared-mime-info = "0.51"
 PREFERRED_VERSION_navit = "0.1.0+svnrev${SRCREV}"
 PREFERRED_VERSION_libosip2 = "2.2.2"
 PREFERRED_VERSION_udev = "124"
 
+#FSO stuff
 SRCREV_pn-frameworkd = "${AUTOREV}"
 SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
 SRCREV_pn-fso-gpsd = "${AUTOREV}"
@@ -16,6 +21,7 @@ SRCREV_pn-mickeyterm = "${AUTOREV}"
 SRCREV_pn-python-pytrc = "${AUTOREV}"
 SRCREV_pn-zhone = "${AUTOREV}"
 
+#SHR stuff
 SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-shr-settings = "${AUTOREV}"
@@ -30,6 +36,7 @@ SRCREV_pn-libframeworkd-phonegui = "${AUTOREV}"
 SRCREV_pn-openmoko-panel-gsm = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
+#General stuff
 EFL_SRCREV = "37812"
 
 SRCREV_pn-navit = "1757"

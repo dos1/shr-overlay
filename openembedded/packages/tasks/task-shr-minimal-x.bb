@@ -1,9 +1,48 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r6"
+PR = "r7"
 PV = "1.0"
 LICENSE = "GPL"
 
 inherit task
+
+def get_rdepends(bb, d):
+    enabled = bb.data.getVar("ENABLE_BINARY_LOCALE_GENERATION", d, 1)
+
+    # If locale is disabled, bail out
+    if not enabled:
+        return
+
+    locales = bb.data.getVar("GLIBC_GENERATE_LOCALES", d, 1)
+
+    import re
+
+    rdepends = ""
+    if not locales or locales == "all":
+        # if locales aren't specified, or user has written "all"
+        import os
+        ipkdir = bb.data.getVar('DEPLOY_DIR_IPK', d, 1)
+
+        regexp1 = re.compile("glibc-binary-localedata-.*") # search pattern
+        regexp2 = re.compile("_.*") # we want to remove all version info and file extension
+
+        for root, subFolders, files in os.walk(ipkdir):
+            for file in files:
+                if regexp1.search(file):
+                    file = regexp2.sub("", file)
+                    rdepends = "%s %s" % (rdepends, file)
+
+    else:
+        # if locales are specified
+        regexp1 = re.compile("\\..*") # We want to turn en_US.UTF-8 into en_US
+        regexp2 = re.compile("_")     # We want to turn en_US into en-US
+
+
+        for locale in locales.split(" "):
+            locale = regexp1.sub("", locale)
+            locale = regexp2.sub("-", locale)
+            locale = str.lower(locale)
+            rdepends = "%s glibc-binary-localedata-%s" % (rdepends, locale)
+    return rdepends
 
 RDEPENDS_${PN} += "\
   glibc-utils \
@@ -13,30 +52,5 @@ RDEPENDS_${PN} += "\
 #  exquisite-theme-illume \
   e-wm-config-illume-shr \
   e-wm-theme-illume-shr \
-"
-
-RDEPENDS_${PN} += "\
-  glibc-binary-localedata-en-us \
-  glibc-binary-localedata-de-de \
-  glibc-binary-localedata-fr-fr \
-  glibc-binary-localedata-pt-br \
-  glibc-binary-localedata-ca-es \
-  glibc-binary-localedata-zh-cn \
-  glibc-binary-localedata-zh-tw \
-  glibc-binary-localedata-bg-bg \
-  glibc-binary-localedata-cs-cz \
-  glibc-binary-localedata-da-dk \
-  glibc-binary-localedata-nl-nl \
-  glibc-binary-localedata-fi-fi \
-  glibc-binary-localedata-hu-hu \
-  glibc-binary-localedata-it-it \
-  glibc-binary-localedata-ja-jp \
-  glibc-binary-localedata-ko-kr \
-  glibc-binary-localedata-nb-no \
-  glibc-binary-localedata-pl-pl \
-  glibc-binary-localedata-ru-ru \
-  glibc-binary-localedata-sk-sk \
-  glibc-binary-localedata-sl-si \
-  glibc-binary-localedata-es-ar \
-  glibc-binary-localedata-sv-se \
+  ${@get_rdepends(bb, d)} \
 "
