@@ -1,0 +1,26 @@
+From 3e127c007ba402543bb795972c84b772413c7d3f Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 13 Dec 2008 16:14:30 +0100
+Subject: [PATCH] qemu: enable only necessary targets to speed up build time
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/qemu/qemu_0.9.1.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/packages/qemu/qemu_0.9.1.bb b/packages/qemu/qemu_0.9.1.bb
+index e3e7aa0..214280b 100644
+--- a/packages/qemu/qemu_0.9.1.bb
++++ b/packages/qemu/qemu_0.9.1.bb
+@@ -39,7 +39,7 @@ SRC_URI = "\
+ S = "${WORKDIR}/qemu-${PV}"
+ 
+ #EXTRA_OECONF += "--disable-sdl"
+-#EXTRA_OECONF += "--target-list=arm-linux-user,arm-softmmu"
++EXTRA_OECONF += "--target-list=arm-linux-user,arm-softmmu"
+ EXTRA_OECONF += "--disable-gfx-check"
+ 
+ inherit autotools
+-- 
+1.6.0.4
+
