@@ -44,5 +44,5 @@ SRCREV_pn-python-elementary = "325"
 SRCREV_pn-omview = "${AUTOREV}"
 SRCREV_pn-pythm = "${AUTOREV}"
 SRCREV_pn-omoney = "29"
-
+SRCREV_pn-enotes = "6"
 
