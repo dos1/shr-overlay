@@ -9,7 +9,7 @@ DEPENDS += "python python-pygtk python-setuptools"
 inherit distutils
 
 S = "${WORKDIR}/git"
-PV = "0.15.0"
+PV = "0.15.1"
 PR = "r0"
 SRC_URI = "git://shr.bearstech.com/repo/pyphonelog.git;protocol=http"
 FILES_${PN} += "${datadir}/applications/phonelog.desktop ${datadir}/phonelog/"
