@@ -1,5 +1,6 @@
 DISTRO_INITSCRIPTS ?= "initscripts-shr"
 PREFERRED_PROVIDER_frameworkd-config = "frameworkd-config-shr"
+PREFERRED_PROVIDER_frameworkd = "frameworkd"
 PREFERRED_PROVIDER_gpsd = "fso-gpsd"
 
 PREFERRED_VERSION_midori = "0.1.0"
