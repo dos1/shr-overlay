@@ -7,10 +7,6 @@ PR = "r3"
 
 IMAGE_LINGUAS = ""
 
-DISTRO_INITSCRIPTS ?= "initscripts-shr"
-PREFERRED_PROVIDER_frameworkd-config = "frameworkd-config-shr"
-PREFERRED_PROVIDER_gpsd = "fso-gpsd"
-
 RDEPENDS += "\
   ${MACHINE_TASK_PROVIDER} \
   task-base \
