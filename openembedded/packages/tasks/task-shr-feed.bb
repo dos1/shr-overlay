@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Feed"
-PR = "r7"
+PR = "r8"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -7,7 +7,6 @@ inherit task
 
 RRECOMMENDS_${PN} += "\
 		python-elementary \
-		navit \
 		openmoko-agpsui \
 		mc \
 		mplayer \
@@ -19,4 +18,6 @@ RRECOMMENDS_${PN} += "\
 		fbreader \
 		dillo \
 		omoney \
-		enotes"
+		enotes \
+		epdfview \
+		pyphonelog"
