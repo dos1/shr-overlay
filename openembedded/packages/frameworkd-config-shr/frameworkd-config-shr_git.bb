@@ -8,7 +8,8 @@ PV = "0.8.4.4+gitr${SRCREV}"
 PR = "r0"
 
 SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=stabilization/milestone4 \
-           file://frameworkd.conf"
+           file://frameworkd.conf \
+           file://rules.yaml"
 S = "${WORKDIR}/git"
 
 PROVIDES = "frameworkd-config"
@@ -31,8 +32,10 @@ do_install_append() {
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/conf/phone/silent.yaml ${D}${sysconfdir}/freesmartphone/opreferences/conf/phone/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/conf/rules/default.yaml ${D}${sysconfdir}/freesmartphone/opreferences/conf/rules/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/conf/rules/silent.yaml ${D}${sysconfdir}/freesmartphone/opreferences/conf/rules/
-	install -m 0644 ${S}/etc/freesmartphone/oevents/rules.yaml ${D}${sysconfdir}/freesmartphone/oevents/
 	install -m 0644 ${S}/etc/freesmartphone/persist/README ${D}${sysconfdir}/freesmartphone/persist/
+
+	# Use a custom rules.yaml without the suspend rule, because Illume handles suspend.
+	install -m 0644 ${WORKDIR}/rules.yaml ${D}${sysconfdir}/freesmartphone/oevents/
 }
 
 PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
