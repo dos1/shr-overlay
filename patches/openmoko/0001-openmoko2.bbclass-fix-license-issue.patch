@@ -1,0 +1,26 @@
+From 0f91d41554d701f9e4242939d1841556a91133a8 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 13 Dec 2008 23:16:23 +0100
+Subject: [PATCH] openmoko2.bbclass: fix license issue
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ classes/openmoko2.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/classes/openmoko2.bbclass b/classes/openmoko2.bbclass
+index ef734e4..ec0b9e2 100644
+--- a/classes/openmoko2.bbclass
++++ b/classes/openmoko2.bbclass
+@@ -21,7 +21,7 @@ def openmoko_two_get_subdir(d):
+     elif section == "misc": return "misc"
+     else: return section
+ 
+-LICENSE = "${@openmoko_two_get_license(d)}"
++LICENSE = "GPL"
+ SUBDIR = "${@openmoko_two_get_subdir(d)}"
+ 
+ SRC_URI := "${OPENMOKO_MIRROR}/src/target/${OPENMOKO_RELEASE}/${SUBDIR};module=${PN};proto=http"
+-- 
+1.6.0.4
+
