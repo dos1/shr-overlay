@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Base Applications"
-PR = "r3"
+PR = "r4"
 PV = "1.0"
 LICENSE = "GPL"
 inherit task
@@ -13,5 +13,6 @@ RDEPENDS_${PN} += "\
 RDEPENDS_${PN} += "\
   openmoko-calculator2 \
   tangogps \
-  starling \
+  pythm \
+  pyphonelog \
 "
