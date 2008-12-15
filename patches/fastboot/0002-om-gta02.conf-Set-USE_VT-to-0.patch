@@ -1,4 +1,4 @@
-From 28598693dc4e7b71470cb573e86f9c88cf50187d Mon Sep 17 00:00:00 2001
+From 343b2e1169292983fc27732e72ddea6a8b819647 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:35:48 +0100
 Subject: [PATCH] om-gta02.conf: Set USE_VT to 0

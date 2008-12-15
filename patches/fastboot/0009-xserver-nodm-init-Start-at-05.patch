@@ -1,4 +1,4 @@
-From 1782b2c7a6a60b446e07af87eea955173f32b25d Mon Sep 17 00:00:00 2001
+From 9e5520ee0347e13894bfb026dc7efcebdecbe2fc Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:48:43 +0100
 Subject: [PATCH] xserver-nodm-init: Start at 05.

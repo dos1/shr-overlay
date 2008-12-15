@@ -1,4 +1,4 @@
-From d43f87477f58f6a4cd83740bdf804b61dfa5264a Mon Sep 17 00:00:00 2001
+From c88534d847e340a6ca2b0a5a02f0f9a5b8376a87 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:47:44 +0100
 Subject: [PATCH] base-files: Simplify fstab.

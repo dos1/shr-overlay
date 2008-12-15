@@ -1,21 +1,21 @@
-From 6e4dc06adc689819011520cb984b97eb72505be1 Mon Sep 17 00:00:00 2001
+From 4771dfec19bf738ef134ef3ea3dd0f88630b5973 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Sat, 13 Dec 2008 10:47:07 +0100
+Date: Mon, 15 Dec 2008 20:44:41 +0100
 Subject: [PATCH] sysvinit: Simplify rc and rcS.
 
-Remove support for boot splash.  Source initscripts end with .sh.
+Remove support for boot splash.
 
 Author: Chia-I Wu <olv@openmoko.com>
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/sysvinit/sysvinit/openmoko/rc  |   77 +-----------------------------
- packages/sysvinit/sysvinit/openmoko/rcS |    9 ++++
+ packages/sysvinit/sysvinit/openmoko/rc  |   84 +------------------------------
+ packages/sysvinit/sysvinit/openmoko/rcS |    9 +++
  packages/sysvinit/sysvinit_2.86.bb      |    2 +-
- 3 files changed, 13 insertions(+), 75 deletions(-)
+ 3 files changed, 11 insertions(+), 84 deletions(-)
  create mode 100644 packages/sysvinit/sysvinit/openmoko/rcS
 
 diff --git a/packages/sysvinit/sysvinit/openmoko/rc b/packages/sysvinit/sysvinit/openmoko/rc
-index 9d28a68..57bf3a8 100644
+index 9d28a68..5bab80b 100644
 --- a/packages/sysvinit/sysvinit/openmoko/rc
 +++ b/packages/sysvinit/sysvinit/openmoko/rc
 @@ -18,22 +18,6 @@
@@ -41,29 +41,31 @@ index 9d28a68..57bf3a8 100644
  
  #
  # Start script or program.
-@@ -45,18 +29,14 @@ startup() {
-   case "$1" in
- 	*.sh)
- 		# Source shell script for speed.
+@@ -41,22 +25,7 @@ startup_progress() {
+ startup() {
+   # Handle verbosity
+   [ "$VERBOSE" = very ] && echo "INIT: Running $@..."
+-
+-  case "$1" in
+-	*.sh)
+-		# Source shell script for speed.
 -		(
 -			trap - INT QUIT TSTP
 -			scriptname=$1
 -			shift
 -			. $scriptname
 -		)
-+		scriptname=$1
-+		shift
-+		. $scriptname
- 		;;
- 	*)
- 		"$@"
- 		;;
-   esac
+-		;;
+-	*)
+-		"$@"
+-		;;
+-  esac
 -  startup_progress
++  "$@"
  }
  
    # Ignore CTRL-C only in this shell, so we can interrupt subprocesses.
-@@ -83,48 +63,6 @@ startup() {
+@@ -83,48 +52,6 @@ startup() {
    # Is there an rc directory for this new runlevel?
    if [ -d /etc/rc$runlevel.d ]
    then
@@ -112,7 +114,7 @@ index 9d28a68..57bf3a8 100644
  	# First, run the KILL scripts.
  	if [ $previous != N ]
  	then
-@@ -170,12 +108,3 @@ startup() {
+@@ -170,12 +97,3 @@ startup() {
  	done
    fi
  

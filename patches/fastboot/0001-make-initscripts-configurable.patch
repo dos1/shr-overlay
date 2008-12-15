@@ -1,4 +1,4 @@
-From 57aaa1ebca5c2a7b2918a2c55eb415b94a23a1e3 Mon Sep 17 00:00:00 2001
+From 9d80b92d273121c00d8855ce297a04f5d7516dd0 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:31:03 +0100
 Subject: [PATCH] make initscripts configurable

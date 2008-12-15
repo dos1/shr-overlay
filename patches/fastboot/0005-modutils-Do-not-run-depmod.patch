@@ -1,4 +1,4 @@
-From c8b9bfc9dcf9d51b811b05ac8f0ed0cb9ecedda2 Mon Sep 17 00:00:00 2001
+From 92480918ead5a2df3071efee81650139f4ad4d0f Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:39:59 +0100
 Subject: [PATCH] modutils: Do not run depmod.

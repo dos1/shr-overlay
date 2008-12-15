@@ -1,6 +1,6 @@
-From 01779185a7cb943fc198c7a603886692efbf263b Mon Sep 17 00:00:00 2001
+From 49368ed101d9910ff2dfa4e511a57ebcd7a51e2a Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Sat, 13 Dec 2008 10:39:08 +0100
+Date: Mon, 15 Dec 2008 20:42:13 +0100
 Subject: [PATCH] procps: Install and use /etc/sysctl.conf.
 
 Author: Chia-I Wu <olv@openmoko.com>
@@ -99,7 +99,7 @@ index 0000000..739dcf4
 +fi
 diff --git a/packages/procps/procps-3.2.7/sysctl.conf b/packages/procps/procps-3.2.7/sysctl.conf
 new file mode 100644
-index 0000000..63a931a
+index 0000000..6b4ad57
 --- /dev/null
 +++ b/packages/procps/procps-3.2.7/sysctl.conf
 @@ -0,0 +1,64 @@
@@ -146,7 +146,7 @@ index 0000000..63a931a
 +#
 +# Ignore bogus ICMP errors
 +#net.ipv4.icmp_ignore_bogus_error_responses = 1
-+# 
++#
 +# Do not accept ICMP redirects (prevent MITM attacks)
 +#net.ipv4.conf.all.accept_redirects = 0
 +#net.ipv6.conf.all.accept_redirects = 0
