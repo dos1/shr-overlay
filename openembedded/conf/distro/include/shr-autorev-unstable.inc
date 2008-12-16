@@ -1,4 +1,4 @@
-PREFERRED_PROVIDER_frameworkd = "frameworkd-devel"
+# PREFERRED_PROVIDER_frameworkd = "frameworkd-devel"
 
 SRCREV_pn-shr-settings = "${AUTOREV}"
 SRCREV_pn-shr-theme = "${AUTOREV}"
