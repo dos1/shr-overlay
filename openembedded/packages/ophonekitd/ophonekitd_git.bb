@@ -18,7 +18,7 @@ do_install_append() {
 }
 
 pkg_postinst () {
-        mkdir -p -m 755 /var/db
+        mkdir -p -m 755 ${D}/var/db
 }
 
 FILES_${PN} += "${datadir} ${sysconfdir}"
