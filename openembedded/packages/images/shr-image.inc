@@ -5,7 +5,7 @@
 PV = "1.0"
 PR = "r3"
 
-IMAGE_LINGUAS = ""
+IMAGE_LINGUAS = "en-us"
 
 RDEPENDS += "\
   ${MACHINE_TASK_PROVIDER} \
