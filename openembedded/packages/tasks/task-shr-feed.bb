@@ -20,4 +20,6 @@ RRECOMMENDS_${PN} += "\
 		omoney \
 		enotes \
 		epdfview \
-		pyphonelog"
+		pyphonelog \
+		pingus \
+		openmoocow"
