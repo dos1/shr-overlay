@@ -15,3 +15,5 @@ SRCREV_pn-openmoko-panel-gsm = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
 EFL_SRCREV = "38274"
+
+SRCREV_pn-python-elementary = "${AUTOREV}"
