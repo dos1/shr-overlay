@@ -84,15 +84,6 @@ shr_rootfs_postprocess() {
     # fix strange iconv/gconf bug
     ln -s libc.so.6 ./lib/libc.so
 
-    # setup opkg config
-    if [ -a ./etc/opkg/all-feed.conf ]; then rm ./etc/opkg/all-feed.conf; fi
-    if [ -a ./etc/opkg/armv4t-feed.conf ]; then rm ./etc/opkg/armv4t-feed.conf; fi
-    if [ -a ./etc/opkg/armv4-feed.conf ]; then rm ./etc/opkg/armv4-feed.conf; fi
-    if [ -a ./etc/opkg/fic-gta02-feed.conf ]; then rm ./etc/opkg/fic-gta02-feed.conf; fi
-    if [ -a ./etc/opkg/neo1973-feed.conf ]; then rm ./etc/opkg/neo1973-feed.conf; fi
-    if [ -a ./etc/opkg/om-gta01-feed.conf ]; then rm ./etc/opkg/om-gta01-feed.conf; fi
-    if [ -a ./etc/opkg/om-gta02-feed.conf ]; then rm ./etc/opkg/om-gta02-feed.conf; fi
-
     #font cache optimization, persistent cache
     sed -i "s/<cachedir>.*\/var\/cache\/\(.*\)<\/cachedir>/<cachedir>\/var\/local\/\1<\/cachedir>/g" ./etc/fonts/fonts.conf
 
@@ -105,7 +96,6 @@ shr_rootfs_postprocess() {
 shr_rootfs_gta02_postprocess() {
     curdir=$PWD
     cd ${IMAGE_ROOTFS}
-    sed -i "s/^# \(.*om-gta02.*\)/\1/g" ./etc/opkg/bearstech.conf
     cd ${IMAGE_ROOTFS}/boot
     ln -s uImage uImage-GTA02.bin
     cd $curdir
@@ -114,7 +104,6 @@ shr_rootfs_gta02_postprocess() {
 shr_rootfs_gta01_postprocess() {
     curdir=$PWD
     cd ${IMAGE_ROOTFS}
-    sed -i "s/^# \(.*om-gta01.*\)/\1/g" ./etc/opkg/bearstech.conf
     cd ${IMAGE_ROOTFS}/boot
     ln -s uImage uImage-GTA01.bin
     cd $curdir
