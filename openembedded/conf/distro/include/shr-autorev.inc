@@ -37,6 +37,7 @@ SRCREV_pn-libframeworkd-phonegui = "d3b1136d29f88fa7bfcbedb6a195724e071cad77"
 SRCREV_pn-openmoko-panel-gsm = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 SRCREV_pn-pyphonelog = "${AUTOREV}"
+SRCREV_pn-shr-theme-brave = "${AUTOREV}"
 
 #General stuff
 EFL_SRCREV = "37812"
