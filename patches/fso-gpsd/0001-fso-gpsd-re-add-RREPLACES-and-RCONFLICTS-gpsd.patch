@@ -1,0 +1,26 @@
+From 2be286dd14ea492081e07ce33f74c2bbf46ab6de Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 10 Jan 2009 10:38:48 +0100
+Subject: [PATCH] fso-gpsd: (re-)add RREPLACES and RCONFLICTS = gpsd
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/freesmartphone/fso-gpsd_git.bb |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/packages/freesmartphone/fso-gpsd_git.bb b/packages/freesmartphone/fso-gpsd_git.bb
+index cde1bb6..729630a 100644
+--- a/packages/freesmartphone/fso-gpsd_git.bb
++++ b/packages/freesmartphone/fso-gpsd_git.bb
+@@ -24,6 +24,5 @@ do_install_append() {
+ FILES_${PN} += "${sysconfdir}"
+ RDEPENDS_${PN} = "frameworkd"
+ RPROVIDES_${PN} = "gpsd"
+-# Disabled as we always got gpsd but not fso-gpsd in the fso-image. Needs
+-# fixing.
+-#RCONFLICTS_${PN} = "gpsd"
++RCONFLICTS_${PN} = "gpsd"
++RREPLACES_${PN} = "gpsd"
+-- 
+1.6.0.6
+
