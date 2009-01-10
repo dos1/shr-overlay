@@ -22,4 +22,5 @@ RRECOMMENDS_${PN} += "\
 		epdfview \
 		pyphonelog \
 		pingus \
-		openmoocow"
+		openmoocow \
+		vagalume"
