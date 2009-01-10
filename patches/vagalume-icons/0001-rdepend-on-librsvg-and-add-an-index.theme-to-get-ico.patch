@@ -1,21 +1,21 @@
-From 1888642db0696d7bbc2085def759098e29dc7eee Mon Sep 17 00:00:00 2001
+From 4ea0848bb98a3f9482ff1a55a55200392eeba1af Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Sat, 10 Jan 2009 10:45:18 +0100
+Date: Sat, 10 Jan 2009 11:25:03 +0100
 Subject: [PATCH] rdepend on librsvg and add an index.theme to get icons
 
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/vagalume/files/index.theme |    9 +++++++++
+ packages/vagalume/files/index.theme |    8 ++++++++
  packages/vagalume/vagalume_0.7.bb   |    7 +++++++
- 2 files changed, 16 insertions(+), 0 deletions(-)
+ 2 files changed, 15 insertions(+), 0 deletions(-)
  create mode 100644 packages/vagalume/files/index.theme
 
 diff --git a/packages/vagalume/files/index.theme b/packages/vagalume/files/index.theme
 new file mode 100644
-index 0000000..0c808df
+index 0000000..453acf0
 --- /dev/null
 +++ b/packages/vagalume/files/index.theme
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,8 @@
 +[Icon Theme]
 +Name=Vagalume
 +Comment=Vagalume icons
@@ -24,7 +24,6 @@ index 0000000..0c808df
 +[scalable/actions]
 +Size=48
 +Type=Scalable
-+~
 diff --git a/packages/vagalume/vagalume_0.7.bb b/packages/vagalume/vagalume_0.7.bb
 index 27cb763..a96a202 100644
 --- a/packages/vagalume/vagalume_0.7.bb
