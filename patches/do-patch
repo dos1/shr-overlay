@@ -9,8 +9,10 @@ bail_out()
 [ "$(basename $PWD)" == "openembedded" ] || bail_out 1 "do-patch must be called from inside openembedded"
 [ -d ../shr/patches ] || bail_out 0 "nothing to patch"
 
-CURHEAD=$(git rev-parse HEAD)
-[ -e .patched -a "$CURHEAD" == "$(cat .patched)" ] && bail_out 0 "openembedded is already patched"
+if [ -e .patched ]; then
+	CURHEAD=$(git rev-parse HEAD)
+	[ "$CURHEAD" == "$(cat .patched)" ] && bail_out 0 "openembedded is already patched"
+fi
 
 for d in ../shr/patches/*; do
 	[ -d "$d" ] || continue
