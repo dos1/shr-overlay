@@ -1,0 +1,53 @@
+From 1888642db0696d7bbc2085def759098e29dc7eee Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 10 Jan 2009 10:45:18 +0100
+Subject: [PATCH] rdepend on librsvg and add an index.theme to get icons
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/vagalume/files/index.theme |    9 +++++++++
+ packages/vagalume/vagalume_0.7.bb   |    7 +++++++
+ 2 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 packages/vagalume/files/index.theme
+
+diff --git a/packages/vagalume/files/index.theme b/packages/vagalume/files/index.theme
+new file mode 100644
+index 0000000..0c808df
+--- /dev/null
++++ b/packages/vagalume/files/index.theme
+@@ -0,0 +1,9 @@
++[Icon Theme]
++Name=Vagalume
++Comment=Vagalume icons
++Directories=scalable/actions
++
++[scalable/actions]
++Size=48
++Type=Scalable
++~
+diff --git a/packages/vagalume/vagalume_0.7.bb b/packages/vagalume/vagalume_0.7.bb
+index 27cb763..a96a202 100644
+--- a/packages/vagalume/vagalume_0.7.bb
++++ b/packages/vagalume/vagalume_0.7.bb
+@@ -3,11 +3,18 @@ AUTHOR = "agarcia@igalia.com"
+ HOMEPAGE = "http://people.igalia.com/berto/"
+ SECTION = "x11"
+ DEPENDS = "gtk+ gstreamer"
++RDEPENDS += "librsvg-gtk"
+ PR = "r0"
+ 
+ SRC_URI = "\
+   http://people.igalia.com/berto/files/vagalume/source/vagalume_${PV}.orig.tar.gz \
++  file://index.theme \
+ "
+ S = "${WORKDIR}/vagalume-${PV}.orig"
+ 
+ inherit autotools
++
++do_install_append() {
++	install -m 0644 ${WORKDIR}/index.theme ${D}${datadir}/vagalume/icons/hicolor
++}
++
+-- 
+1.6.0.6
+
