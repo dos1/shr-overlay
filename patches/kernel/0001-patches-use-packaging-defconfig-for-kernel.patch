@@ -1,0 +1,31 @@
+From 2997505531a409d9ddf5c92875025438c9004d2e Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Mon, 12 Jan 2009 16:52:34 +0100
+Subject: [PATCH] patches: use packaging-defconfig for kernel
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/linux/linux-openmoko-2.6.28_git.bb |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
+
+diff --git a/packages/linux/linux-openmoko-2.6.28_git.bb b/packages/linux/linux-openmoko-2.6.28_git.bb
+index 2389db2..c0e2c6e 100644
+--- a/packages/linux/linux-openmoko-2.6.28_git.bb
++++ b/packages/linux/linux-openmoko-2.6.28_git.bb
+@@ -13,12 +13,10 @@ PR = "r1"
+ SRC_URI = "\
+   git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
+   file://openwrt-ledtrig-netdev.patch;patch=1 \
+-  file://defconfig-oe.patch \
+ "
+ S = "${WORKDIR}/git"
+ 
+ do_configure_prepend() {
+-	install -m 644 ./arch/arm/configs/gta02-moredrivers-defconfig ${WORKDIR}/defconfig-oe
+-	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
++	install -m 644 ./arch/arm/configs/gta02-packaging-defconfig ${WORKDIR}/defconfig-oe
+ }
+ 
+-- 
+1.6.0.6
+
