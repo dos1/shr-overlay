@@ -23,6 +23,7 @@ do_install_append() {
 	install -d ${D}${sysconfdir}/freesmartphone/opreferences/conf/phone/
 	install -d ${D}${sysconfdir}/freesmartphone/opreferences/conf/rules/
 	install -d ${D}${sysconfdir}/freesmartphone/oevents/
+	install -d ${D}${sysconfdir}/freesmartphone/ogsmd/
 	install -d ${D}${sysconfdir}/freesmartphone/persist/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/schema/phone.yaml ${D}${sysconfdir}/freesmartphone/opreferences/schema/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/schema/profiles.yaml ${D}${sysconfdir}/freesmartphone/opreferences/schema/
@@ -33,6 +34,7 @@ do_install_append() {
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/conf/rules/default.yaml ${D}${sysconfdir}/freesmartphone/opreferences/conf/rules/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/conf/rules/silent.yaml ${D}${sysconfdir}/freesmartphone/opreferences/conf/rules/
 	install -m 0644 ${S}/etc/freesmartphone/persist/README ${D}${sysconfdir}/freesmartphone/persist/
+	install -m 0644 ${S}/etc/freesmartphone/ogsmd/networks.tab ${D}${sysconfdir}/freesmartphone/ogsmd/
 
 	# Use a custom rules.yaml without the suspend rule, because Illume handles suspend.
 	install -m 0644 ${WORKDIR}/rules.yaml ${D}${sysconfdir}/freesmartphone/oevents/
@@ -52,4 +54,5 @@ CONFFILES_${PN} = "\
   ${sysconfdir}/freesmartphone/opreferences/conf/rules/silent.yaml \
   ${sysconfdir}/freesmartphone/opreferences/conf/rules/default.yaml \
   ${sysconfdir}/freesmartphone/oevents/rules.yaml \
+  ${sysconfdir}/freesmartphone/ogsmd/networks.tab \
 "
