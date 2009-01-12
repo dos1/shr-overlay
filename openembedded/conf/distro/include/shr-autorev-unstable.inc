@@ -14,6 +14,6 @@ SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-openmoko-panel-gsm = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
-EFL_SRCREV = "38274"
+EFL_SRCREV = "38521"
 
 SRCREV_pn-python-elementary = "${AUTOREV}"
