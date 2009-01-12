@@ -7,7 +7,7 @@ LICENSE = "GPL"
 PV = "0.8.4.4+gitr${SRCREV}"
 PR = "r1"
 
-SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=stabilization/milestone4 \
+SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master \
            file://frameworkd.conf \
            file://rules.yaml"
 S = "${WORKDIR}/git"
