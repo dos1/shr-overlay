@@ -91,6 +91,7 @@ shr_rootfs_postprocess() {
     echo "export PS1=\"\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] \"">> ./etc/profile
 
     #load g_ether module on boot
+	 mkdir ./etc/modutils
 	 echo "g_ether" > ./etc/modutils/g_ether
 
     cd $curdir
