@@ -5,7 +5,7 @@ LICENSE = "GPL"
 
 inherit task
 
-RRECOMMENDS_${PN} += "\
+RDEPENDS_${PN} += "\
 		python-elementary \
 		openmoko-agpsui \
 		mc \
@@ -23,4 +23,5 @@ RRECOMMENDS_${PN} += "\
 		pyphonelog \
 		pingus \
 		openmoocow \
-		vagalume"
+		vagalume \
+"

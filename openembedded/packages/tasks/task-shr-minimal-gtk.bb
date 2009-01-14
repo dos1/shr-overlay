@@ -8,11 +8,9 @@ RDEPENDS_${PN} += "\
   openmoko-icon-theme-standard2 \
   gpe-filemanager \
   vala-terminal \
-"
-
-RDEPENDS_${PN} += "\
   openmoko-calculator2 \
   tangogps \
   pythm \
   pyphonelog \
 "
+

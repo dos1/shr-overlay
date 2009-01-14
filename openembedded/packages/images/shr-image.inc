@@ -3,39 +3,12 @@
 #------------------------------------------------------
 
 PV = "1.0"
-PR = "r3"
+PR = "r4"
 
 IMAGE_LINGUAS = "en-us"
 
-RDEPENDS += "\
-  ${MACHINE_TASK_PROVIDER} \
-  task-base \
-  task-shr-minimal-base \
-  task-shr-minimal-apps \
-  task-shr-minimal-audio \
-  task-shr-minimal-gtk \
-  task-shr-minimal-x \
-  task-x11-illume \
-  task-fso-compliance \
-  task-cli-tools \
-  task-cli-tools-python \
-  task-fonts-truetype-core \
-"
-
-IMAGE_INSTALL += "\
-  ${MACHINE_TASK_PROVIDER} \
-  task-base \
-  task-shr-minimal-base \
-  task-shr-minimal-apps \
-  task-shr-minimal-audio \
-  task-shr-minimal-gtk \
-  task-shr-minimal-x \
-  task-x11-illume \
-  task-fso-compliance \
-  task-cli-tools \
-  task-cli-tools-python \
-  task-fonts-truetype-core \
-"
+RDEPENDS_${PN} += "task-shr-minimal"
+IMAGE_INSTALL += "task-shr-minimal"
 
 inherit image
 
