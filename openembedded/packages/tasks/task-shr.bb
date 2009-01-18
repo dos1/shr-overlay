@@ -5,10 +5,27 @@ LICENSE = "GPL"
 
 inherit task
 
-RDEPENDS_${PN} += "\
-    task-shr-apps \
-    task-shr-games \
-    task-shr-gtk \
+PACKAGES = "\
+  ${PN}-gtk \
+  ${PN}-apps \
+  ${PN}-games \
 "
 
+RDEPENDS_${PN}-gtk = "\
+  task-shr-minimal-gtk \
+  gpe-scap \
+  pidgin \
+  vagalume \
+  gpe-sketchbook \ 
+"
+
+RDEPENDS_${PN}-apps += "\
+   task-shr-minimal-apps \
+	mofi \
+	midori \
+"
+
+RDEPENDS_${PN}-games += "\
+  numptyphysics \
+"
 

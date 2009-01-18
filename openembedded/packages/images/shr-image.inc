@@ -7,8 +7,7 @@ PR = "r4"
 
 IMAGE_LINGUAS = "en-us"
 
-RDEPENDS_${PN} += "task-shr-minimal"
-IMAGE_INSTALL += "task-shr-minimal"
+IMAGE_INSTALL = "task-shr-minimal"
 
 inherit image
 
@@ -65,6 +64,9 @@ shr_rootfs_postprocess() {
 
     #load g_ether module on boot
     echo "g_ether" > ./etc/modutils/g_ether
+
+    #remove mdev start script
+    rm ./etc/rcS.d/06mdev*
 
     cd $curdir
 }

@@ -1,6 +1,5 @@
 require shr-image.inc
 
-RDEPENDS_${PN} += "task-shr"
 IMAGE_INSTALL += "task-shr"
 
 # perform some SHR convenience tweaks to the rootfs
