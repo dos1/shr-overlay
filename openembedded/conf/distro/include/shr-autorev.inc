@@ -1,4 +1,6 @@
-DISTRO_INITSCRIPTS ?= "initscripts-shr"
+DISTRO_INITSCRIPTS = "initscripts-shr"
+DISTRO_DEV_MANAGER = "udev"
+
 PREFERRED_PROVIDER_frameworkd-config = "frameworkd-config-shr"
 PREFERRED_PROVIDER_frameworkd = "frameworkd"
 PREFERRED_PROVIDER_gpsd = "fso-gpsd"
