@@ -1,6 +1,6 @@
 DESCRIPTION = "SHR Lite Image Feed"
 PR = "r0"
-PV = "1.0"
+PV = "2.0"
 LICENSE = "GPL"
 
 inherit task
