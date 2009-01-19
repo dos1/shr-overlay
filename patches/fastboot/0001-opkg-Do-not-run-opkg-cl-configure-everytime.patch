@@ -1,4 +1,4 @@
-From c6fe81c533652e62cd67d2b9ac549266e3df734a Mon Sep 17 00:00:00 2001
+From f8c3b019c2a3d399207ed42b0916b02a51095829 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:40:48 +0100
 Subject: [PATCH] opkg: Do not run opkg-cl configure everytime.
@@ -10,20 +10,20 @@ Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
  1 files changed, 3 insertions(+), 1 deletions(-)
 
 diff --git a/packages/opkg/opkg_svn.bb b/packages/opkg/opkg_svn.bb
-index 24547d6..59cb39e 100644
+index 4cf1c5c..c37b98e 100644
 --- a/packages/opkg/opkg_svn.bb
 +++ b/packages/opkg/opkg_svn.bb
-@@ -16,7 +16,9 @@ if [ "x$D" != "x" ]; then
- 	install -d ${IMAGE_ROOTFS}/${sysconfdir}/rcS.d
+@@ -18,7 +18,9 @@ if [ "x$D" != "x" ]; then
+ 	install -d $D${sysconfdir}/rcS.d
  	# this happens at S98 where our good 'ole packages script used to run
  	echo "#!/bin/sh
 -opkg-cl configure
 +if ! test -f /etc/.configured; then
 +	opkg-cl configure
 +fi
- rm -f /${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
- " > ${IMAGE_ROOTFS}/${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
- 	chmod 0755 ${IMAGE_ROOTFS}${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
+ rm -f ${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
+ " > $D${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
+ 	chmod 0755 $D${sysconfdir}/rcS.d/S${OPKG_INIT_POSITION}configure
 -- 
-1.6.0.4
+1.6.0.6
 

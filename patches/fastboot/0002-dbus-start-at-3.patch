@@ -1,4 +1,4 @@
-From 3a928b8b042c21ae9f8156e882fca5f088602586 Mon Sep 17 00:00:00 2001
+From 42e05501fffdf67e47d62df5335352d32c5dccbe Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:49:31 +0100
 Subject: [PATCH] dbus: start at 3
@@ -9,15 +9,15 @@ Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
  1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/packages/dbus/dbus.inc b/packages/dbus/dbus.inc
-index 8b995b3..296ccbd 100644
+index 64ef21c..faca9b1 100644
 --- a/packages/dbus/dbus.inc
 +++ b/packages/dbus/dbus.inc
-@@ -87,4 +87,4 @@ chmod u+s /usr/libexec/dbus-daemon-launch-helper
+@@ -88,4 +88,4 @@ chmod u+s /usr/libexec/dbus-daemon-launch-helper
  CONFFILES_${PN} = "${sysconfdir}/dbus-1/system.conf ${sysconfdir}/dbus-1/session.conf"
  
  INITSCRIPT_NAME = "dbus-1"
 -INITSCRIPT_PARAMS = "defaults"
 +INITSCRIPT_PARAMS = "defaults 3"
 -- 
-1.6.0.4
+1.6.0.6
 

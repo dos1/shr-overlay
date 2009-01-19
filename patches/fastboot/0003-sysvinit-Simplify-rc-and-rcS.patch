@@ -1,0 +1,45 @@
+From 58baeb3c602694bd6cefeff00825fbdf0e7fa823 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Mon, 15 Dec 2008 20:44:41 +0100
+Subject: [PATCH] sysvinit: Simplify rc and rcS.
+
+Remove support for boot splash.
+
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/sysvinit/sysvinit/openmoko/rc |   14 ++------------
+ 1 files changed, 2 insertions(+), 12 deletions(-)
+
+diff --git a/packages/sysvinit/sysvinit/openmoko/rc b/packages/sysvinit/sysvinit/openmoko/rc
+index 1c2c79b..cd0d77c 100644
+--- a/packages/sysvinit/sysvinit/openmoko/rc
++++ b/packages/sysvinit/sysvinit/openmoko/rc
+@@ -24,18 +24,7 @@ export VERBOSE
+ startup() {
+   # Handle verbosity
+   [ "$VERBOSE" = very ] && echo "INIT: Running $@..."
+-
+-  case "$1" in
+-	*.sh)
+-		# Source shell script for speed.
+-		scriptname=$1
+-		shift
+-		. $scriptname
+-		;;
+-	*)
+-		"$@"
+-		;;
+-  esac
++  "$@"
+ }
+ 
+   # Ignore CTRL-C only in this shell, so we can interrupt subprocesses.
+@@ -106,3 +95,4 @@ startup() {
+ 		esac
+ 	done
+   fi
++
+-- 
+1.6.0.6
+
