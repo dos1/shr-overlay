@@ -2,12 +2,42 @@
 # SHR Image Recipe
 #------------------------------------------------------
 
-PV = "1.0"
-PR = "r4"
+PV = "2.0"
+PR = "r0"
 
 IMAGE_LINGUAS = "en-us"
 
-IMAGE_INSTALL = "task-shr-minimal"
+DEPENDS += "task-shr-minimal"
+
+RDEPENDS += "\
+  ${MACHINE_TASK_PROVIDER} \
+  task-base \
+  task-shr-minimal-base \
+  task-shr-minimal-apps \
+  task-shr-minimal-audio \
+  task-shr-minimal-gtk \
+  task-shr-minimal-x \
+  task-x11-illume \
+  task-fso-compliance \
+  task-cli-tools \
+  task-cli-tools-python \
+  task-fonts-truetype-core \
+"
+
+IMAGE_INSTALL += "\
+  ${MACHINE_TASK_PROVIDER} \
+  task-base \
+  task-shr-minimal-base \
+  task-shr-minimal-apps \
+  task-shr-minimal-audio \
+  task-shr-minimal-gtk \
+  task-shr-minimal-x \
+  task-x11-illume \
+  task-fso-compliance \
+  task-cli-tools \
+  task-cli-tools-python \
+  task-fonts-truetype-core \
+"
 
 inherit image
 

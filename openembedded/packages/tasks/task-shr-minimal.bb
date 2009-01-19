@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Lite Image Feed"
-PR = "r0"
+PR = "r1"
 PV = "2.0"
 LICENSE = "GPL"
 
@@ -62,8 +62,6 @@ PACKAGES += "\
 
 
 RDEPENDS_${PN}-base = "\
-  ${MACHINE_TASK_PROVIDER} \
-  task-base \
   netbase \
   sysfsutils \
   modutils-initscripts \
@@ -76,12 +74,9 @@ RDEPENDS_${PN}-base = "\
   cron \
   logrotate\
   util-linux-fdisk \
-  task-cli-tools \
-  task-cli-tools-python \
 "
 
 RDEPENDS_${PN}-fso = "\
-  task-fso-compliance \
   python-codecs \
   python-gst \
 "
@@ -108,8 +103,6 @@ RDEPENDS_${PN}-audio_append_om-gta02 =  "\
 "
 
 RDEPENDS_${PN}-x = "\
-  task-x11-illume \
-  task-fonts-truetype-core \
   glibc-utils \
   glibc-charmap-utf-8 \
   e-wm-config-illume-shr \

@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Fat Image Feed"
-PR = "r0"
+PR = "r1"
 PV = "2.0"
 LICENSE = "GPL"
 
@@ -12,7 +12,6 @@ PACKAGES = "\
 "
 
 RDEPENDS_${PN}-gtk = "\
-  task-shr-minimal-gtk \
   gpe-scap \
   pidgin \
   vagalume \
