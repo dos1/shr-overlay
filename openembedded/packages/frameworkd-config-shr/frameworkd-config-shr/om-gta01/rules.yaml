@@ -1,4 +1,3 @@
-
 # This file is in YAML format (http://www.yaml.org/) 
 # We define a list of rules that will be automatically loaded
 # When we start the oevents module of the framework daemon
@@ -22,9 +21,6 @@
 # - Time(hour, min)         : create a trigger activated at the given time
 # - Debug(msg)              : Action that prints a debug message (only for debuging)
 -
-    trigger: Time(12,29)
-    actions: Debug("A Test")
--
     #
     # Call -> Audio Scenario Handling
     #
@@ -36,7 +32,7 @@
     filters: Not(CallListContains("active"))
     actions: 
              - RingTone()
-             - SetDisplayBrightness("pcf50633_bl", 90)
+             - SetDisplayBrightness("gta01_bl", 90)
 -
     while: CallStatus()
     filters: Or(HasAttr(status, "outgoing"), HasAttr(status, "active"))
@@ -66,13 +62,13 @@
     filters:
              - HasAttr(switch, "HEADSET")
              - HasAttr(event, "pressed")
-    actions: Command('amixer -d sset "Amp Spk" mute')
+    actions: Command('amixer -d sset "Amp Mode" "Stereo Speakers + Headphones"')
 -
     trigger: InputEvent()
     filters:
              - HasAttr(switch, "HEADSET")
              - HasAttr(event, "released")
-    actions: Command('amixer -d sset "Amp Spk" unmute')
+    actions: Command('amixer -d sset "Amp Mode" "Headphones"')
 
     #
     # A few testing rules :
@@ -80,20 +76,6 @@
 
     # This rule will only be enabled in silent mode
     # According to the preferences rules conf files.
--
-    name: 'test-rule'
-    trigger: IdleState()
-    filters: HasAttr(status, "busy")
-    actions: Debug("Hello This is a test")
--
-    trigger: Test("test")
-    actions: Debug("trigger test")
--
-    while: Test("test2")
-    actions: RingTone()
--
-    trigger: DbusTrigger(system, 'org.freesmartphone.odeviced', 0, 'org.freesmartphone.Device.IdleNotifier', 'State')
-    actions: Debug("dbus trigger test")
 - 
 
     #
@@ -101,12 +83,12 @@
     #
     trigger: IdleState()
     filters: HasAttr(status, "busy")
-    actions: SetDisplayBrightness("pcf50633_bl", 90)
+    actions: SetDisplayBrightness("gta01_bl", 90)
 -
     trigger: IdleState()
     filters: HasAttr(status, "idle_dim")
-    actions: SetDisplayBrightness("pcf50633_bl", 20)
+    actions: SetDisplayBrightness("gta01_bl", 20)
 -
     trigger: IdleState()
     filters: HasAttr(status, "idle_prelock")
-    actions: SetDisplayBrightness("pcf50633_bl", 0)
+    actions: SetDisplayBrightness("gta01_bl", 0)
