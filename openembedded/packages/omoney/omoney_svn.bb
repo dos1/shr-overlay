@@ -17,7 +17,8 @@ RDEPENDS_${PN} = "\
   python-edje \
   python-ecore \
   python-etk \
-  python-sqlite3"
+  python-sqlite3 \
+  python-textutils"
 
 FILES_${PN} = "\
   /usr/bin/omoney \
