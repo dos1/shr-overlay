@@ -3,7 +3,7 @@ HOMEPAGE = "http://code.google.com/p/ebrainy/"
 AUTHOR = "quickdev"
 LICENSE = "GPL"
 SECTION = "e/apps"
-DEPENDS = "elementary sqlite3 python-sqlalchemy python-mysqldb"
+RDEPENDS = "elementary sqlite3 python-sqlalchemy python-mysqldb"
 
 PV = "0.0.1+svnr${SRCREV}"
 PR = "r0"
