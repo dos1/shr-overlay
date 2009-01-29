@@ -45,7 +45,7 @@ SRCREV_pn-shr-theme-brave = "${AUTOREV}"
 #General stuff
 EFL_SRCREV = "37812"
 
-SRCREV_pn-navit = "1989"
+SRCREV_pn-navit = "1981"
 SRCREV_pn-python-elementary = "38476"
 SRCREV_pn-omview = "${AUTOREV}"
 SRCREV_pn-pythm = "${AUTOREV}"
