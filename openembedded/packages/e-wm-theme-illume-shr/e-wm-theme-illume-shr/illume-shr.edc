@@ -2675,40 +2675,32 @@ collections {
    group {
       name: "e/modules/busycover/default";
       images {
-         image: "busy-1.png" COMP;
-	 image: "busy-2.png" COMP;
-	 image: "busy-3.png" COMP;
-	 image: "busy-4.png" COMP;
-	 image: "busy-5.png" COMP;
-	 image: "busy-6.png" COMP;
-	 image: "busy-7.png" COMP;
-	 image: "busy-8.png" COMP;
-	 image: "busy-9.png" COMP;
+         image: "busy-2.png" COMP;
       }
       parts {
 	 part { name: "base";
 	    type: RECT;
 	    description { state: "default" 0.0;
 	       color: 0 0 0 205;
+               align: 0.0 1.0;
+               max: 480 70;
 	    }
 	 }
 	 part { name: "busy";
 	    mouse_events: 0;
 	    description { state: "default" 0.0;
 	       image {
-		  normal: "busy-9.png";
-		  tween:  "busy-1.png";
-		  tween:  "busy-2.png";
-		  tween:  "busy-3.png";
-		  tween:  "busy-4.png";
-		  tween:  "busy-5.png";
-		  tween:  "busy-6.png";
-		  tween:  "busy-7.png";
-		  tween:  "busy-8.png";
+		  normal: "busy-2.png";
 	       }
-	       min: 32 32;
-	       max: 32 32;
-	       align: 0.5 0.5;
+	       min: 0 0;
+	       max: 0 0;
+	       align: 0.0 0.5;
+               rel1.to: "base";
+               rel1.relative: 0.0 0.5;
+               rel1.offset: 10 0;
+               rel2.to: "base";
+               rel2.relative: 0.0 0.5;
+               rel2.offset: 10 0;
 	    }
 	 }
 	 part { name: "e.text.title";
@@ -2718,12 +2710,12 @@ collections {
 	    scale: 1;
 	    description { state: "default" 0.0;
 	       align: 0.5 0.0;
-	       rel1.to: "busy";
-	       rel1.relative: 0.5 1.0;
-	       rel1.offset: 0 4;
-	       rel2.to: "busy";
-	       rel2.relative: 0.5 1.0;
-	       rel2.offset: 0 4;
+	       rel1.to: "base";
+	       rel1.relative: 0.5 0.5;
+	       rel1.offset: 0 -8;
+	       rel2.to: "base";
+	       rel2.relative: 0.5 0.5;
+	       rel2.offset: 0 -8;
 	       color: 255 255 255 255;
 	       text {
                   font: "Sans:style=Bold";
@@ -2740,9 +2732,7 @@ collections {
 	    signal: "show";
 	    source: "";
 	    action: STATE_SET "default" 0.0;
-	    transition: LINEAR 0.3333;
 	    target: "busy";
-	    after:  "go1";
 	 }
 	 program { name: "up";
 	    signal: "mouse,up,1";
