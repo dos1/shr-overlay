@@ -6,6 +6,7 @@ PR = "r2"
 
 RPROVIDES_${PN} = "e-wm-sysactions"
 RCONFLICTS_${PN} = "e-wm-sysactions"
+RREPLACES_${PN} = "e-wm-sysactions"
 
 SRC_URI = "\
   file://sysactions.conf  \
