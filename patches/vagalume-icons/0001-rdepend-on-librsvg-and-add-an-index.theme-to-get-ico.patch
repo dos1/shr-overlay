@@ -1,4 +1,4 @@
-From 90e284a3c6f671a8ff5ae615539f03ac82df69ff Mon Sep 17 00:00:00 2001
+From 6622ab41776ae5082d2d5249ff2923caef54cc37 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 10 Jan 2009 11:25:03 +0100
 Subject: [PATCH] rdepend on librsvg and add an index.theme to get icons
@@ -25,14 +25,15 @@ index 0000000..453acf0
 +Size=48
 +Type=Scalable
 diff --git a/packages/vagalume/vagalume_0.7.bb b/packages/vagalume/vagalume_0.7.bb
-index bb79853..67d0d83 100644
+index f541dcd..d38cbe0 100644
 --- a/packages/vagalume/vagalume_0.7.bb
 +++ b/packages/vagalume/vagalume_0.7.bb
-@@ -3,11 +3,18 @@ AUTHOR = "agarcia@igalia.com"
+@@ -3,12 +3,19 @@ AUTHOR = "agarcia@igalia.com"
  HOMEPAGE = "http://people.igalia.com/berto/"
  SECTION = "x11"
  DEPENDS = "gtk+ gstreamer"
 +RDEPENDS += "librsvg-gtk"
+ RRECOMMENDS = "dbus-x11"
  PR = "r0"
  
  SRC_URI = "\
