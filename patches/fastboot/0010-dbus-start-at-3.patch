@@ -1,4 +1,4 @@
-From 42e05501fffdf67e47d62df5335352d32c5dccbe Mon Sep 17 00:00:00 2001
+From c4819a26aeabeedf2b19d5065c37370a5e459545 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:49:31 +0100
 Subject: [PATCH] dbus: start at 3

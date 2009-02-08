@@ -1,0 +1,42 @@
+From 27e1b58369c9d746a818d328259d28f81de49aae Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Wed, 4 Feb 2009 22:31:43 +0100
+Subject: [PATCH] netbase: switch usb0 back to auto
+
+usb networking seems not to work with allow-hotplug
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/netbase/netbase/om-gta01/interfaces |    2 +-
+ packages/netbase/netbase/om-gta02/interfaces |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/packages/netbase/netbase/om-gta01/interfaces b/packages/netbase/netbase/om-gta01/interfaces
+index 56c485e..df85b1e 100644
+--- a/packages/netbase/netbase/om-gta01/interfaces
++++ b/packages/netbase/netbase/om-gta01/interfaces
+@@ -16,7 +16,7 @@ iface eth1 inet dhcp
+ 
+ # Ethernet/RNDIS gadget (g_ether)
+ # ... or on host side, usbnet and random hwaddr
+-allow-hotplug usb0
++auto usb0
+ iface usb0 inet static
+ 	address 192.168.0.202
+ 	netmask 255.255.255.0
+diff --git a/packages/netbase/netbase/om-gta02/interfaces b/packages/netbase/netbase/om-gta02/interfaces
+index ceedfc5..6caf915 100644
+--- a/packages/netbase/netbase/om-gta02/interfaces
++++ b/packages/netbase/netbase/om-gta02/interfaces
+@@ -16,7 +16,7 @@ iface eth1 inet dhcp
+ 
+ # Ethernet/RNDIS gadget (g_ether)
+ # ... or on host side, usbnet and random hwaddr
+-allow-hotplug usb0
++auto usb0
+ iface usb0 inet static
+ 	address 192.168.0.202
+ 	netmask 255.255.255.0
+-- 
+1.6.0.6
+
