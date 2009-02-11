@@ -9,7 +9,8 @@ PR = "r1"
 
 SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master \
            file://frameworkd.conf \
-           file://rules.yaml"
+           file://rules.yaml \
+           file://ringtone_ringnroll.ogg "
 S = "${WORKDIR}/git"
 
 PROVIDES = "frameworkd-config"
@@ -38,6 +39,11 @@ do_install_append() {
 
 	# Use a custom rules.yaml without the suspend rule, because Illume handles suspend.
 	install -m 0644 ${WORKDIR}/rules.yaml ${D}${sysconfdir}/freesmartphone/oevents/
+
+        # Patch to use a different default ringtone
+        sed -i 's/^\(ring-tone:.*\)$/# \1\nring-tone: "ringtone_ringnroll.ogg"\n/' ${D}${sysconfdir}/freesmartphone/opreferences/conf/phone/default.yaml
+        install -d ${D}{$datadir}/sounds
+        install -m 0644 {$WORKDIR}/ringtone_ringnroll.ogg
 }
 
 PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
@@ -45,6 +51,7 @@ PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
 FILES_${PN} = "\
   ${sysconfdir}/frameworkd.conf \
   ${sysconfdir}/freesmartphone \
+  ${datadir}/sounds/ringtone_ringnroll.ogg \
 "
 CONFFILES_${PN} = "\
   ${sysconfdir}/frameworkd.conf \
