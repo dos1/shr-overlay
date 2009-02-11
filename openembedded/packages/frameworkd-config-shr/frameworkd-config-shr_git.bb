@@ -42,8 +42,8 @@ do_install_append() {
 
         # Patch to use a different default ringtone
         sed -i 's/^\(ring-tone:.*\)$/# \1\nring-tone: "ringtone_ringnroll.ogg"\n/' ${D}${sysconfdir}/freesmartphone/opreferences/conf/phone/default.yaml
-        install -d ${D}{$datadir}/sounds
-        install -m 0644 ${WORKDIR}/ringtone_ringnroll.ogg ${D}{$datadir}/sounds
+        install -d ${D}${datadir}/sounds
+        install -m 0644 ${WORKDIR}/ringtone_ringnroll.ogg ${D}${datadir}/sounds/
 }
 
 PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
