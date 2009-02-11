@@ -43,7 +43,7 @@
     filters: Not(CallListContains("active"))
     actions:
              - RingTone()
-             - SetDisplayBrightness("0", 90)
+             - Command('xset -display localhost:0 s reset')
              - OccupyResource(CPU)
 
 -
