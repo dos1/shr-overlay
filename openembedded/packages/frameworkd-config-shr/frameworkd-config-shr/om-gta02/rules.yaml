@@ -1,5 +1,5 @@
 
-# This file is in YAML format (http://www.yaml.org/) 
+# This file is in YAML format (http://www.yaml.org/)
 # We define a list of rules that will be automatically loaded
 # When we start the oevents module of the framework daemon
 #
@@ -9,7 +9,7 @@
 # - actions     : action object or list of actions objects
 #
 # We define the following functions :
-# - CallStatus()            : create a trigger object activated on a call status event 
+# - CallStatus()            : create a trigger object activated on a call status event
 # - PowerStatus()           : create a trigger object activated on a power status event
 # - HasAttr(name, value)    : create a filter that accept signal with a given attribute
 # - Not(filter)             : create a neg filter
@@ -22,8 +22,15 @@
 # - Time(hour, min)         : create a trigger activated at the given time
 # - Debug(msg)              : Action that prints a debug message (only for debuging)
 -
-    trigger: Time(12,29)
-    actions: Debug("A Test")
+    #
+    # Suspend Handling
+    #
+    trigger: InputEvent()
+    filters:
+             - HasAttr(switch, "POWER")
+             - HasAttr(event, "released")
+             - HasAttr(duration, 0)
+    actions: Suspend()
 -
     #
     # Call -> Audio Scenario Handling
@@ -34,17 +41,27 @@
 -
     while: CallListContains("incoming")
     filters: Not(CallListContains("active"))
-    actions: 
+    actions:
              - RingTone()
-             - SetDisplayBrightness("pcf50633_bl", 90)
+             - Command('xset -display localhost:0 s reset')
+             - OccupyResource(CPU)
+
 -
     while: CallStatus()
     filters: Or(HasAttr(status, "outgoing"), HasAttr(status, "active"))
-    actions: SetScenario(gsmhandset)
+    actions:
+            - SetScenario(gsmhandset)
+            - OccupyResource(CPU)
 -
     while: PowerStatus()
     filters: HasAttr(status, "charging")
     actions: SetLed("gta02_power_orange", "light")
+
+#-
+#    while: PowerStatus()
+#    filters: Not(HasAttr(status, "discharging"))
+#    actions: OccupyResource(Display)
+
 -
     while: PowerStatus()
     filters: HasAttr(status, "critical")
@@ -74,39 +91,19 @@
              - HasAttr(event, "released")
     actions: Command('amixer -d sset "Amp Spk" unmute')
 
-    #
-    # A few testing rules :
-    #
-
-    # This rule will only be enabled in silent mode
-    # According to the preferences rules conf files.
--
-    name: 'test-rule'
-    trigger: IdleState()
-    filters: HasAttr(status, "busy")
-    actions: Debug("Hello This is a test")
--
-    trigger: Test("test")
-    actions: Debug("trigger test")
--
-    while: Test("test2")
-    actions: RingTone()
--
-    trigger: DbusTrigger(system, 'org.freesmartphone.odeviced', 0, 'org.freesmartphone.Device.IdleNotifier', 'State')
-    actions: Debug("dbus trigger test")
-- 
 
     #
     # Idleness Brightness Handling
-    #
+    # (activating the user's screen saver from a central daemon is quite hacky 
+    #  we really want some user's application to listen for the right signals)
     trigger: IdleState()
     filters: HasAttr(status, "busy")
-    actions: SetDisplayBrightness("pcf50633_bl", 90)
+    actions: Command('xset -display localhost:0 s reset')
 -
     trigger: IdleState()
     filters: HasAttr(status, "idle_dim")
-    actions: SetDisplayBrightness("pcf50633_bl", 20)
--
-    trigger: IdleState()
-    filters: HasAttr(status, "idle_prelock")
-    actions: SetDisplayBrightness("pcf50633_bl", 0)
+    actions: Command('xset -display localhost:0 s activate')
+#-
+#    trigger: IdleState()
+#    filters: HasAttr(status, "idle_prelock")
+#    actions: SetDisplayBrightness("0", 0)
