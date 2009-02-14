@@ -25,4 +25,5 @@ RDEPENDS_${PN} += "\
 		openmoocow \
 		vagalume \
 		python-pygame \
+		mokoko \
 "
