@@ -25,12 +25,13 @@
     #
     # Suspend Handling
     #
-    trigger: InputEvent()
-    filters:
-             - HasAttr(switch, "POWER")
-             - HasAttr(event, "released")
-             - HasAttr(duration, 0)
-    actions: Suspend()
+    #illume handles suspend through menu, so comment out:
+    #trigger: InputEvent()
+    #filters:
+    #         - HasAttr(switch, "POWER")
+    #         - HasAttr(event, "released")
+    #         - HasAttr(duration, 0)
+    #actions: Suspend()
 -
     #
     # Call -> Audio Scenario Handling
