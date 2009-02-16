@@ -1,0 +1,26 @@
+From 0bb58407cc71cc0fa38113b90421edb4c9807541 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 14 Feb 2009 20:42:20 +0100
+Subject: [PATCH] mokoko: use SRCREV instead of SRCPV to make it build
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/mokoko/mokoko_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/packages/mokoko/mokoko_svn.bb b/packages/mokoko/mokoko_svn.bb
+index f22d445..84e16e5 100644
+--- a/packages/mokoko/mokoko_svn.bb
++++ b/packages/mokoko/mokoko_svn.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL"
+ DEPENDS = "gstreamer"
+ RDEPENDS = "gstreamer"
+ 
+-PV = "0.1+svnr${SRCPV}"
++PV = "0.1+svnr${SRCREV}"
+ PR = "r1"
+ 
+ SRC_URI = "svn://om-mediaplayer.googlecode.com/svn/;module=trunk;proto=http"
+-- 
+1.6.0.6
+
