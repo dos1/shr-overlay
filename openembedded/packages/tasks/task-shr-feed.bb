@@ -26,4 +26,5 @@ RDEPENDS_${PN} += "\
 		vagalume \
 		python-pygame \
 		mokoko \
+		bluez-utils-alsa \
 "
