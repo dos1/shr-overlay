@@ -27,4 +27,6 @@ RDEPENDS_${PN} += "\
 		python-pygame \
 		mokoko \
 		bluez-utils-alsa \
+		obexpush \
+		obexftp \
 "
