@@ -15,8 +15,9 @@ do_install_append() {
 	install -m 0644 ${S}/orrery.desktop ${D}${datadir}/applications
 	install -d ${D}${datadir}/orrery
 	cp -a ${S}/data/* ${D}${datadir}/orrery
+	rm ${D}${datadir}/orrery/icons/orrery.png
 	install -d ${D}${datadir}/icons
-	install ${S}/icons/orrery.png ${D}${datadir}/icons
+	install ${S}/data/icons/orrery.png ${D}${datadir}/icons
 }
 
 FILES_${PN} += "\
