@@ -1,0 +1,25 @@
+From b359b5e896423e413775ef48a2b8539b7d438b73 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@openembedded.org>
+Date: Sun, 1 Feb 2009 09:26:07 +0100
+Subject: [PATCH] bluez4: also depend on libusb-compat
+
+---
+ packages/bluez/bluez4_4.27.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/packages/bluez/bluez4_4.27.bb b/packages/bluez/bluez4_4.27.bb
+index 89bd3b6..c9aa79e 100644
+--- a/packages/bluez/bluez4_4.27.bb
++++ b/packages/bluez/bluez4_4.27.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Linux Bluetooth Stack Userland V4"
+ SECTION = "libs"
+ PRIORITY = "optional"
+-DEPENDS = "gst-plugins-base alsa-lib libusb1 dbus-glib"
++DEPENDS = "gst-plugins-base alsa-lib libusb-compat libusb1 dbus-glib"
+ HOMEPAGE = "http://www.bluez.org"
+ LICENSE = "GPL"
+ PR = "r2"
+-- 
+1.6.0.6
+
