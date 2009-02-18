@@ -107,4 +107,4 @@
 #-
 #    trigger: IdleState()
 #    filters: HasAttr(status, "idle_prelock")
-#    actions: SetDisplayBrightness("gta01_b1", 0)
+#    actions: SetDisplayBrightness("gta01_bl", 0)
