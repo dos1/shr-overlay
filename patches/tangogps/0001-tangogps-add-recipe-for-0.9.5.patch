@@ -1,0 +1,23 @@
+From 4fcc6f13abd67f1a86c98b87e6e22c612450584f Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Wed, 18 Feb 2009 21:27:03 +0100
+Subject: [PATCH] tangogps: add recipe for 0.9.5
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/tangogps/tangogps_0.9.5.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+ create mode 100644 packages/tangogps/tangogps_0.9.5.bb
+
+diff --git a/packages/tangogps/tangogps_0.9.5.bb b/packages/tangogps/tangogps_0.9.5.bb
+new file mode 100644
+index 0000000..59020fd
+--- /dev/null
++++ b/packages/tangogps/tangogps_0.9.5.bb
+@@ -0,0 +1,3 @@
++require tangogps.inc
++PR = "r3"
++
+-- 
+1.6.0.6
+
