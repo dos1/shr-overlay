@@ -24,4 +24,9 @@ RDEPENDS_${PN} += "\
 		pingus \
 		openmoocow \
 		vagalume \
+		python-pygame \
+		mokoko \
+		bluez-utils-alsa \
+		obexpush \
+		obexftp \
 "

@@ -1,4 +1,4 @@
-From f8c3b019c2a3d399207ed42b0916b02a51095829 Mon Sep 17 00:00:00 2001
+From c8791a2a38c98997ef263f4ca090044ba7535fb4 Mon Sep 17 00:00:00 2001
 From: Klaus Kurzmann <mok@fluxnetz.de>
 Date: Sat, 13 Dec 2008 10:40:48 +0100
 Subject: [PATCH] opkg: Do not run opkg-cl configure everytime.

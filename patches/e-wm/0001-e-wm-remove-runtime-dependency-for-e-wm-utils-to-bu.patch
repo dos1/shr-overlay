@@ -1,0 +1,25 @@
+From 1c71936a6e4ce2d5386be1979e2d538abd249206 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Mon, 9 Feb 2009 12:55:17 +0100
+Subject: [PATCH] e-wm: remove runtime dependency for e-wm-utils to build with older EFL
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/e17/e-wm_svn.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
+
+diff --git a/packages/e17/e-wm_svn.bb b/packages/e17/e-wm_svn.bb
+index e82cf69..18891d4 100644
+--- a/packages/e17/e-wm_svn.bb
++++ b/packages/e17/e-wm_svn.bb
+@@ -10,7 +10,6 @@ RDEPENDS_${PN} += "\
+   shared-mime-info \
+   mime-support \
+   edje-utils \
+-  ${PN}-utils \
+ "
+ 
+ # Uclibc build don't have 'glibc-utils'
+-- 
+1.6.0.6
+

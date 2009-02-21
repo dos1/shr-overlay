@@ -1,0 +1,217 @@
+From 5377f4f60997df1989a9c33c801d1ea0455433f0 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Mon, 15 Dec 2008 20:42:13 +0100
+Subject: [PATCH] procps: Install and use /etc/sysctl.conf.
+
+Author: Chia-I Wu <olv@openmoko.com>
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/procps/procps-3.2.7/openmoko/sysctl.conf |   64 +++++++++++++++++++++
+ packages/procps/procps-3.2.7/procps.init          |    6 ++
+ packages/procps/procps-3.2.7/sysctl.conf          |   64 +++++++++++++++++++++
+ packages/procps/procps_3.2.7.bb                   |   19 ++++++-
+ 4 files changed, 151 insertions(+), 2 deletions(-)
+ create mode 100644 packages/procps/procps-3.2.7/openmoko/sysctl.conf
+ create mode 100644 packages/procps/procps-3.2.7/procps.init
+ create mode 100644 packages/procps/procps-3.2.7/sysctl.conf
+
+diff --git a/packages/procps/procps-3.2.7/openmoko/sysctl.conf b/packages/procps/procps-3.2.7/openmoko/sysctl.conf
+new file mode 100644
+index 0000000..34e7488
+--- /dev/null
++++ b/packages/procps/procps-3.2.7/openmoko/sysctl.conf
+@@ -0,0 +1,64 @@
++# This configuration file is taken from Debian.
++#
++# /etc/sysctl.conf - Configuration file for setting system variables
++# See sysctl.conf (5) for information.
++#
++
++#kernel.domainname = example.com
++
++# Uncomment the following to stop low-level messages on console
++#kernel.printk = 4 4 1 7
++
++##############################################################3
++# Functions previously found in netbase
++#
++
++# Uncomment the next two lines to enable Spoof protection (reverse-path filter)
++# Turn on Source Address Verification in all interfaces to
++# prevent some spoofing attacks
++net.ipv4.conf.default.rp_filter=1
++net.ipv4.conf.all.rp_filter=1
++
++# Uncomment the next line to enable TCP/IP SYN cookies
++#net.ipv4.tcp_syncookies=1
++
++# Uncomment the next line to enable packet forwarding for IPv4
++#net.ipv4.ip_forward=1
++
++# Uncomment the next line to enable packet forwarding for IPv6
++#net.ipv6.conf.all.forwarding=1
++
++
++###################################################################
++# Additional settings - these settings can improve the network
++# security of the host and prevent against some network attacks
++# including spoofing attacks and man in the middle attacks through
++# redirection. Some network environments, however, require that these
++# settings are disabled so review and enable them as needed.
++#
++# Ignore ICMP broadcasts
++#net.ipv4.icmp_echo_ignore_broadcasts = 1
++#
++# Ignore bogus ICMP errors
++#net.ipv4.icmp_ignore_bogus_error_responses = 1
++#
++# Do not accept ICMP redirects (prevent MITM attacks)
++#net.ipv4.conf.all.accept_redirects = 0
++#net.ipv6.conf.all.accept_redirects = 0
++# _or_
++# Accept ICMP redirects only for gateways listed in our default
++# gateway list (enabled by default)
++# net.ipv4.conf.all.secure_redirects = 1
++#
++# Do not send ICMP redirects (we are not a router)
++#net.ipv4.conf.all.send_redirects = 0
++#
++# Do not accept IP source route packets (we are not a router)
++#net.ipv4.conf.all.accept_source_route = 0
++#net.ipv6.conf.all.accept_source_route = 0
++#
++# Log Martian Packets
++#net.ipv4.conf.all.log_martians = 1
++#
++
++#kernel.shmmax = 141762560
+diff --git a/packages/procps/procps-3.2.7/procps.init b/packages/procps/procps-3.2.7/procps.init
+new file mode 100644
+index 0000000..739dcf4
+--- /dev/null
++++ b/packages/procps/procps-3.2.7/procps.init
+@@ -0,0 +1,6 @@
++#!/bin/sh
++
++SYSCTL_CONF="/etc/sysctl.conf"
++if [ -f "${SYSCTL_CONF}" ]; then
++	/sbin/sysctl -q -p "${SYSCTL_CONF}"
++fi
+diff --git a/packages/procps/procps-3.2.7/sysctl.conf b/packages/procps/procps-3.2.7/sysctl.conf
+new file mode 100644
+index 0000000..6b4ad57
+--- /dev/null
++++ b/packages/procps/procps-3.2.7/sysctl.conf
+@@ -0,0 +1,64 @@
++# This configuration file is taken from Debian.
++#
++# /etc/sysctl.conf - Configuration file for setting system variables
++# See sysctl.conf (5) for information.
++#
++
++#kernel.domainname = example.com
++
++# Uncomment the following to stop low-level messages on console
++#kernel.printk = 4 4 1 7
++
++##############################################################3
++# Functions previously found in netbase
++#
++
++# Uncomment the next two lines to enable Spoof protection (reverse-path filter)
++# Turn on Source Address Verification in all interfaces to
++# prevent some spoofing attacks
++#net.ipv4.conf.default.rp_filter=1
++#net.ipv4.conf.all.rp_filter=1
++
++# Uncomment the next line to enable TCP/IP SYN cookies
++#net.ipv4.tcp_syncookies=1
++
++# Uncomment the next line to enable packet forwarding for IPv4
++#net.ipv4.ip_forward=1
++
++# Uncomment the next line to enable packet forwarding for IPv6
++#net.ipv6.conf.all.forwarding=1
++
++
++###################################################################
++# Additional settings - these settings can improve the network
++# security of the host and prevent against some network attacks
++# including spoofing attacks and man in the middle attacks through
++# redirection. Some network environments, however, require that these
++# settings are disabled so review and enable them as needed.
++#
++# Ignore ICMP broadcasts
++#net.ipv4.icmp_echo_ignore_broadcasts = 1
++#
++# Ignore bogus ICMP errors
++#net.ipv4.icmp_ignore_bogus_error_responses = 1
++#
++# Do not accept ICMP redirects (prevent MITM attacks)
++#net.ipv4.conf.all.accept_redirects = 0
++#net.ipv6.conf.all.accept_redirects = 0
++# _or_
++# Accept ICMP redirects only for gateways listed in our default
++# gateway list (enabled by default)
++# net.ipv4.conf.all.secure_redirects = 1
++#
++# Do not send ICMP redirects (we are not a router)
++#net.ipv4.conf.all.send_redirects = 0
++#
++# Do not accept IP source route packets (we are not a router)
++#net.ipv4.conf.all.accept_source_route = 0
++#net.ipv6.conf.all.accept_source_route = 0
++#
++# Log Martian Packets
++#net.ipv4.conf.all.log_martians = 1
++#
++
++#kernel.shmmax = 141762560
+diff --git a/packages/procps/procps_3.2.7.bb b/packages/procps/procps_3.2.7.bb
+index 74a2101..51867ff 100644
+--- a/packages/procps/procps_3.2.7.bb
++++ b/packages/procps/procps_3.2.7.bb
+@@ -1,16 +1,26 @@
+ require procps.inc
+ 
+-PR = "r7"
++PR = "r7.1"
++
++inherit update-rc.d
++
++INITSCRIPT_NAME = "procps.sh"
++INITSCRIPT_PARAMS = "start 30 S ."
+ 
+ SRC_URI += "file://procmodule.patch;patch=1 \
+             file://psmodule.patch;patch=1 \
+-	    file://linux-limits.patch;patch=1"
++	    file://linux-limits.patch;patch=1 \
++	    file://sysctl.conf \
++	    file://procps.init \
++	    "
+ 
+ FILES = "${bindir}/top.${PN} ${base_bindir}/ps.${PN} ${bindir}/uptime.${PN} ${base_bindir}/kill.${PN} \
+ 	 ${bindir}/free.${PN} ${bindir}/w ${bindir}/watch ${bindir}/pgrep ${bindir}/pmap ${bindir}/pwdx \
+ 	 ${bindir}/snice ${bindir}/vmstat ${bindir}/slabtop ${bindir}/pkill ${bindir}/skill ${bindir}/tload \
+ 	 ${base_sbindir}/sysctl.${PN}"
+ 
++CONFFILES_${PN} = "${sysconfdir}/sysctl.conf"
++
+ EXTRA_OEMAKE = "CFLAGS=-I${STAGING_INCDIR} \
+ 		CPPFLAGS=-I${STAGING_INCDIR} \
+                 LDFLAGS=-L${STAGING_LIBDIR} -Wl,--rpath-link,${STAGING_LIBDIR} \
+@@ -19,6 +29,11 @@ EXTRA_OEMAKE = "CFLAGS=-I${STAGING_INCDIR} \
+                 ldconfig=echo"
+ 
+ do_install_append () {
++	install -d ${D}${sysconfdir}
++	install -m 0644 ${WORKDIR}/sysctl.conf ${D}${sysconfdir}/sysctl.conf
++	install -d ${D}${sysconfdir}/init.d
++	install -m 0755 ${WORKDIR}/procps.init ${D}${sysconfdir}/init.d/procps.sh
++
+ 	mv ${D}${bindir}/uptime ${D}${bindir}/uptime.${PN}
+ 	mv ${D}${bindir}/top ${D}${bindir}/top.${PN}
+ 	mv ${D}${base_bindir}/kill ${D}${base_bindir}/kill.${PN}
+-- 
+1.6.0.6
+
