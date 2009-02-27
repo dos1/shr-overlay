@@ -97,6 +97,7 @@
     # Idleness Brightness Handling
     # (activating the user's screen saver from a central daemon is quite hacky 
     #  we really want some user's application to listen for the right signals)
+-
     trigger: IdleState()
     filters: HasAttr(status, "busy")
     actions: Command('xset -display localhost:0 s reset')
