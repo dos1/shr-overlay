@@ -9,7 +9,7 @@ inherit shr pkgconfig autotools
 EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
 
 do_configure_prepend() {
-        autopoint
+        autopoint --force
 }
 
 do_stage () {
