@@ -12,8 +12,8 @@ PREFERRED_VERSION_udev = "124"
 PREFERRED_VERSION_midori = "0.1.2"
 
 #FSO stuff
-SRCREV_pn-frameworkd = "b652f9cc4efbccc1df941c0d93e156631879f174"
-SRCREV_pn-frameworkd-config-shr = "b652f9cc4efbccc1df941c0d93e156631879f174"
+SRCREV_pn-frameworkd = "65ebcc86e85980827925588753f47bebf6d4a96e"
+SRCREV_pn-frameworkd-config-shr = "65ebcc86e85980827925588753f47bebf6d4a96e"
 SRCREV_pn-fso-gpsd = "${AUTOREV}"
 SRCREV_pn-fso-sounds = "${AUTOREV}"
 SRCREV_pn-gsm0710muxd = "${AUTOREV}"
