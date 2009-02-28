@@ -75,7 +75,6 @@ shr_rootfs_postprocess() {
     done
 
     echo "Exec=vala-terminal htop" >> ./usr/share/applications/htop.desktop
-    echo "Icon=settings.png" >> ./usr/share/applications/exposure.desktop
 
     # minimal gtk theme foo
     mkdir -p ./etc/gtk-2.0/
@@ -94,6 +93,8 @@ shr_rootfs_postprocess() {
 
     #load g_ether module on boot
     echo "g_ether" > ./etc/modutils/g_ether
+
+    ln -s ./usr/share/elementary-alarm ./usr/share/elementary_alarm
 
     cd $curdir
 }
