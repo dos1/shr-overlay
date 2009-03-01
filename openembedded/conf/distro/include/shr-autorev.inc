@@ -27,7 +27,7 @@ SRCREV_pn-zhone = "${AUTOREV}"
 #SHR stuff
 SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
-SRCREV_pn-shr-settings = "7ba3c4c6778cf2a54a34cb044527de890557c4f8"
+SRCREV_pn-shr-settings = "4c57ad048840ca7fcffe440e98043e57eeb40a6a"
 SRCREV_pn-shr-theme = "4613a89ffa96d9a858e773719d510c612b1593a7"
 SRCREV_pn-libframeworkd-glib = "37b46d8565505c0ec92b921866cd2fd7fe927706"
 SRCREV_pn-ophonekitd = "4613a89ffa96d9a858e773719d510c612b1593a7"
