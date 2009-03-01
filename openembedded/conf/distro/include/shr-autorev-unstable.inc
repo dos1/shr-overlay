@@ -1,5 +1,10 @@
 # PREFERRED_PROVIDER_frameworkd = "frameworkd-devel"
 
+# FSO stuff
+SRCREV_pn-frameworkd = "${AUTOREV}"
+SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
+
+# SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
 SRCREV_pn-shr-theme = "${AUTOREV}"
 SRCREV_pn-libframeworkd-glib = "${AUTOREV}"
