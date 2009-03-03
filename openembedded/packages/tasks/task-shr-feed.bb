@@ -29,4 +29,7 @@ RDEPENDS_${PN} += "\
 		bluez-utils-alsa \
 		obexpush \
 		obexftp \
+		gpe-calendar \
+		fltk-chess \
+		remoko \
 "
