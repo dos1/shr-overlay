@@ -94,7 +94,7 @@ shr_rootfs_postprocess() {
     #load g_ether module on boot
     echo "g_ether" > ./etc/modutils/g_ether
 
-    ln -s ./usr/share/elementary-alarm ./usr/share/elementary_alarm
+    /bin/sh -c "cd ./usr/share; ln -s elementary-alarm elementary_alarm"
 
     cd $curdir
 }
