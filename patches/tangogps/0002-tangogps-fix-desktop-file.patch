@@ -47,8 +47,8 @@ index 59020fd..047142e 100644
 +++ b/packages/tangogps/tangogps_0.9.5.bb
 @@ -1,3 +1,3 @@
  require tangogps.inc
--PR = "r3"
-+PR = "r4"
+-PR = "r4"
++PR = "r4.1"
  
 -- 
 1.5.6.5
