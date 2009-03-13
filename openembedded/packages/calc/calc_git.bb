@@ -1,24 +1,25 @@
 DESCRIPTION = "A dead simple calculator. It's advantage is that it's elementary-themed"
-HOMEPAGE = "http://freehg.org/u/spaetz/calc"
+HOMEPAGE = "http://github.com/spaetz/calc"
 AUTHOR = "Sebastian Spaeth <Sebastian@SSpaeth.de>"
 SHR_RELEASE ?= "shr"
 LICENSE  = "MIT"
 RDEPENDS = "python-elementary python python-edbus"
 SECTION = "x11/application"
+SRCREV  = "793e7f61ec"
 PV = "0.0.1+r${SRCREV}"
 PR = "r1"
 
-#inherit setuptools
 
-SRC_URI = "hg://http://freehg.org/u/spaetz/calc"
-S = "${WORKDIR}"
+SRC_URI = "git://github.com/spaetz/calc.git;protocol=http;branch=master"
+S = "${WORKDIR}/git"
 
 do_install(){
         install -d ${D}${datadir}/applications
-        install -m 0644 ${WORKDIR}/data/elementary-calculator.desktop ${D}${datadir}/applications/
+        install -m 0644 ${S}/data/elementary-calculator.desktop ${D}${datadir}/applications/
         install -d ${D}${datadir}/pixmaps
-        install -m 0644 ${WORKDIR}/data/calculator.png ${D}${datadir}/pixmaps/
-        install -m 0744 ${WORKDIR}/calc ${D}${bindir}/
+        install -m 0644 ${S}/data/calculator.png ${D}${datadir}/pixmaps/
+        install -d ${D}${bindir}
+        install -m 0744 ${S}/calc ${D}${bindir}/
 }
 
 FILES_${PN} += "${prefix}/share/pixmaps"
