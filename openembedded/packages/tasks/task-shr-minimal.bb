@@ -120,6 +120,7 @@ RDEPENDS_${PN}-apps = "\
   elementary-alarm \
   shr-settings \
   shr-theme \
+  calc \
 "
 
 
@@ -127,7 +128,6 @@ RDEPENDS_${PN}-gtk = "\
   openmoko-icon-theme-standard2 \
   gpe-filemanager \
   vala-terminal \
-  openmoko-calculator2 \
   tangogps \
   pythm \
   pyphonelog \
