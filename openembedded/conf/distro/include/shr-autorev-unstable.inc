@@ -18,6 +18,7 @@ SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
-EFL_SRCREV = "39441"
+SRCREV_pn-calc = "${AUTOREV}"
 
+EFL_SRCREV = "39441"
 SRCREV_pn-python-elementary = "39441"
