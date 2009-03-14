@@ -5,7 +5,7 @@ SHR_RELEASE ?= "shr"
 LICENSE  = "MIT"
 RDEPENDS = "python-elementary python python-edbus"
 SECTION = "x11/application"
-SRCREV  = "793e7f61ec"
+SRCREV ?= "1c17792094eb"
 PV = "0.0.1+r${SRCREV}"
 PR = "r1"
 
