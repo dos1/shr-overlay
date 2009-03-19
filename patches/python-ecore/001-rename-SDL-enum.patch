@@ -1,4 +1,6 @@
 patch http://svn.enlightenment.org/svn/e/trunk/BINDINGS/python/python-ecore/ecore/evas/ecore.evas.c_ecore_evas.pyx as the ecore SDL name was changed between r39400-39500
+This patch can be removed once we bump efl SRCREV to rev 39580
+
 
 Index: ecore/evas/ecore.evas.c_ecore_evas.pyx
 ===================================================================

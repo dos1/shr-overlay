@@ -2,7 +2,6 @@
 
 # libeflvala needs at least 2.18.0 and upstream OE provides only 2.16.4
 PREFERRED_VERSION_glib-2.0 = "2.18.3"
-PREFERRED_VERSION_gobject-2.0 = "2.18.3"
 
 # FSO stuff
 SRCREV_pn-frameworkd = "${AUTOREV}"
