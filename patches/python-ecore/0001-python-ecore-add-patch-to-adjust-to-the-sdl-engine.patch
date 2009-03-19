@@ -3,7 +3,7 @@ new file mode 100644
 index 0000000..cfff918
 --- /dev/null
 +++ b/packages/python/python-ecore/sdl-engine-change.patch
-@@ -0,0 +1,42 @@
+@@ -0,0 +1,29 @@
 +patch http://svn.enlightenment.org/svn/e/trunk/BINDINGS/python/python-ecore/eco
 +This patch can be removed once we bump efl SRCREV to rev 39580
 +
@@ -33,17 +33,17 @@ index 0000000..cfff918
 +         ECORE_EVAS_ENGINE_DIRECTFB
 +         ECORE_EVAS_ENGINE_SOFTWARE_FB
 +         ECORE_EVAS_ENGINE_SOFTWARE_16_X11
+
+diff --git a/packages/python/python-ecore_svn.bb b/packages/python/python-ecore_svn.bb
+index 9907b27..de59207 100644
+--- a/packages/python/python-ecore_svn.bb
++++ b/packages/python/python-ecore_svn.bb
+@@ -2,5 +2,7 @@ require python-efl.inc
+ DEPENDS += "python-evas ecore"
+ RDEPENDS += "python-evas"
+ 
++SRC_URI += "file://sdl-engine-change.patch;patch=1"
 +
-+diff --git a/packages/python/python-ecore_svn.bb b/packages/python/python-ecore_svn.bb
-+index 9907b27..de59207 100644
-+--- a/packages/python/python-ecore_svn.bb
-++++ b/packages/python/python-ecore_svn.bb
-+@@ -2,6 +2,8 @@ require python-efl.inc
-+ DEPENDS += "python-evas ecore"
-+ RDEPENDS += "python-evas"
-+ 
-++SRC_URI += "file://sdl-engine-change.patch;patch=1"
-++
-+ do_stage() {
-+     distutils_stage_all
-+ }
+ do_stage() {
+     distutils_stage_all
+ }
