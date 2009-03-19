@@ -22,5 +22,5 @@ SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 SRCREV_pn-calc = "${AUTOREV}"
 
 EFL_SRCREV = "39503"
-SRCREV_pn-python-elementary = "39503"
+SRCREV_pn-python-elementary = "39575"
 
