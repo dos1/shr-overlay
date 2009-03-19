@@ -12,15 +12,3 @@ SRC_URI = "${FREESMARTPHONE_GIT}/libeflvala.git;protocol=git;branch=master"
 S = "${WORKDIR}/git"
 
 inherit autotools
-
-#do_install(){
-#        install -d ${D}${datadir}/applications
-#        install -m 0644 ${S}/data/elementary-calculator.desktop ${D}${datadir}/applications/
-#        install -d ${D}${datadir}/pixmaps
-#        install -m 0644 ${S}/data/calculator.png ${D}${datadir}/pixmaps/
-#        install -d ${D}${bindir}
-#        install -m 0744 ${S}/calc ${D}${bindir}/
-#}
-#
-#FILES_${PN} += "${prefix}/share/pixmaps"
-#FILES_${PN} += "${prefix}/share/applications"
