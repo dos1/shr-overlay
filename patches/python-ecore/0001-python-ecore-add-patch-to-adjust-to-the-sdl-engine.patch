@@ -15,9 +15,8 @@ new file mode 100644
 index 0000000..8a96c81
 --- /dev/null
 +++ b/packages/python/python-ecore/sdl-engine-change.patch
-@@ -0,0 +1,18 @@
+@@ -0,0 +1,30 @@
 +patch http://svn.enlightenment.org/svn/e/trunk/BINDINGS/python/python-ecore/eco
-+
 +This patch can be removed once we bump efl SRCREV to rev 39580
 +
 +Index: python-ecore/ecore/evas/ecore.evas.c_ecore_evas.pyx
@@ -33,6 +32,19 @@ index 0000000..8a96c81
 + engines[<int>ECORE_EVAS_ENGINE_DIRECTFB] = "directfb"
 + engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_FB] = "fb"
 +
++Index: python-ecore/include/ecore/evas/c_ecore_evas.pxd
++===================================================================
++--- python-ecore/include/ecore/evas/c_ecore_evas.pxd	(revision 39581)
+++++ python-ecore/include/ecore/evas/c_ecore_evas.pxd	(working copy)
++@@ -41,0 +41,9 @@
++         ECORE_EVAS_ENGINE_SOFTWARE_DDRAW
++         ECORE_EVAS_ENGINE_DIRECT3D
++         ECORE_EVAS_ENGINE_OPENGL_GLEW
++-        ECORE_EVAS_ENGINE_SDL
+++        ECORE_EVAS_ENGINE_SOFTWARE_SDL
++         ECORE_EVAS_ENGINE_DIRECTFB
++         ECORE_EVAS_ENGINE_SOFTWARE_FB
++         ECORE_EVAS_ENGINE_SOFTWARE_16_X11
 +
 diff --git a/packages/python/python-ecore_svn.bb b/packages/python/python-ecore_svn.bb
 index 9907b27..de59207 100644
