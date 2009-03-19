@@ -10,25 +10,29 @@ Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
  2 files changed, 16 insertions(+), 0 deletions(-)
  create mode 100644 packages/python/python-ecore/sdl-engine-change.patch
 
-diff --git a/packages/python/python-ecore/sdl-engine-change.patch b/packages/python/python-ecore/sdl-engine-change.patch
+diff --git a/packages/python/python-ecore/sdl-engine-change.patch b/packages/pyt
 new file mode 100644
-index 0000000..6a254bb
+index 0000000..8a96c81
 --- /dev/null
 +++ b/packages/python/python-ecore/sdl-engine-change.patch
-@@ -0,0 +1,14 @@
-+Index: ecore.evas.c_ecore_evas.pyx
+@@ -0,0 +1,18 @@
++patch http://svn.enlightenment.org/svn/e/trunk/BINDINGS/python/python-ecore/eco
++
++This patch can be removed once we bump efl SRCREV to rev 39580
++
++Index: python-ecore/ecore/evas/ecore.evas.c_ecore_evas.pyx
 +===================================================================
-+--- ecore.evas.c_ecore_evas.pyx	(revision 39577)
-++++ ecore.evas.c_ecore_evas.pyx	(working copy)
-+@@ -39,7 +39,7 @@
-+engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_DDRAW] = "software_ddraw"
-+engines[<int>ECORE_EVAS_ENGINE_DIRECT3D] = "direct3d"
-+engines[<int>ECORE_EVAS_ENGINE_OPENGL_GLEW] = "opengl_glew"
++--- python-ecore/ecore/evas/ecore.evas.c_ecore_evas.pyx      (revision 39579)
+++++ python-ecore/ecore/evas/ecore.evas.c_ecore_evas.pyx      (working copy
++@@ -39,6 +39,6 @@
++ engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_DDRAW] = "software_ddraw"
++ engines[<int>ECORE_EVAS_ENGINE_DIRECT3D] = "direct3d"
++ engines[<int>ECORE_EVAS_ENGINE_OPENGL_GLEW] = "opengl_glew"
 +-engines[<int>ECORE_EVAS_ENGINE_SDL] = "sdl"
 ++engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_SDL] = "sdl"
-+engines[<int>ECORE_EVAS_ENGINE_DIRECTFB] = "directfb"
-+engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_FB] = "fb"
-+engines[<int
++ engines[<int>ECORE_EVAS_ENGINE_DIRECTFB] = "directfb"
++ engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_FB] = "fb"
++
 +
 diff --git a/packages/python/python-ecore_svn.bb b/packages/python/python-ecore_svn.bb
 index 9907b27..de59207 100644
