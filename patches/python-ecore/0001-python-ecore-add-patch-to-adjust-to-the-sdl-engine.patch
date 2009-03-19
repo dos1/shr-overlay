@@ -1,0 +1,48 @@
+From f453adfafa8e6671ccfbe2ad8e8ad62e4e2b207a Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Thu, 19 Mar 2009 15:04:45 +0100
+Subject: [PATCH] python-ecore: add patch to adjust to the sdl engine change
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ .../python/python-ecore/sdl-engine-change.patch    |   14 ++++++++++++++
+ packages/python/python-ecore_svn.bb                |    2 ++
+ 2 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 packages/python/python-ecore/sdl-engine-change.patch
+
+diff --git a/packages/python/python-ecore/sdl-engine-change.patch b/packages/python/python-ecore/sdl-engine-change.patch
+new file mode 100644
+index 0000000..6a254bb
+--- /dev/null
++++ b/packages/python/python-ecore/sdl-engine-change.patch
+@@ -0,0 +1,14 @@
++Index: ecore.evas.c_ecore_evas.pyx
++===================================================================
++--- ecore.evas.c_ecore_evas.pyx	(revision 39577)
+++++ ecore.evas.c_ecore_evas.pyx	(working copy)
++@@ -39,7 +39,7 @@
++engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_DDRAW] = "software_ddraw"
++engines[<int>ECORE_EVAS_ENGINE_DIRECT3D] = "direct3d"
++engines[<int>ECORE_EVAS_ENGINE_OPENGL_GLEW] = "opengl_glew"
++-engines[<int>ECORE_EVAS_ENGINE_SDL] = "sdl"
+++engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_SDL] = "sdl"
++engines[<int>ECORE_EVAS_ENGINE_DIRECTFB] = "directfb"
++engines[<int>ECORE_EVAS_ENGINE_SOFTWARE_FB] = "fb"
++engines[<int
++
+diff --git a/packages/python/python-ecore_svn.bb b/packages/python/python-ecore_svn.bb
+index 9907b27..de59207 100644
+--- a/packages/python/python-ecore_svn.bb
++++ b/packages/python/python-ecore_svn.bb
+@@ -2,6 +2,8 @@ require python-efl.inc
+ DEPENDS += "python-evas ecore"
+ RDEPENDS += "python-evas"
+ 
++SRC_URI += "file://sdl-engine-change.patch;patch=1"
++
+ do_stage() {
+     distutils_stage_all
+ }
+-- 
+1.6.0.6
+
