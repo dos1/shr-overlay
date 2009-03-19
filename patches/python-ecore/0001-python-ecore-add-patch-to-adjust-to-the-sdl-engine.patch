@@ -1,21 +1,9 @@
-From f453adfafa8e6671ccfbe2ad8e8ad62e4e2b207a Mon Sep 17 00:00:00 2001
-From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Thu, 19 Mar 2009 15:04:45 +0100
-Subject: [PATCH] python-ecore: add patch to adjust to the sdl engine change
-
-Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
----
- .../python/python-ecore/sdl-engine-change.patch    |   14 ++++++++++++++
- packages/python/python-ecore_svn.bb                |    2 ++
- 2 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 packages/python/python-ecore/sdl-engine-change.patch
-
-diff --git a/packages/python/python-ecore/sdl-engine-change.patch b/packages/pyt
+diff --git a/packages/python/python-ecore/sdl-engine-change.patch b/packages/python/python-ecore/sdl-engine-change.patch
 new file mode 100644
-index 0000000..8a96c81
+index 0000000..cfff918
 --- /dev/null
 +++ b/packages/python/python-ecore/sdl-engine-change.patch
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,42 @@
 +patch http://svn.enlightenment.org/svn/e/trunk/BINDINGS/python/python-ecore/eco
 +This patch can be removed once we bump efl SRCREV to rev 39580
 +
@@ -36,7 +24,7 @@ index 0000000..8a96c81
 +===================================================================
 +--- python-ecore/include/ecore/evas/c_ecore_evas.pxd	(revision 39581)
 ++++ python-ecore/include/ecore/evas/c_ecore_evas.pxd	(working copy)
-+@@ -41,0 +41,9 @@
++@@ -41,7 +41,7 @@
 +         ECORE_EVAS_ENGINE_SOFTWARE_DDRAW
 +         ECORE_EVAS_ENGINE_DIRECT3D
 +         ECORE_EVAS_ENGINE_OPENGL_GLEW
@@ -46,19 +34,16 @@ index 0000000..8a96c81
 +         ECORE_EVAS_ENGINE_SOFTWARE_FB
 +         ECORE_EVAS_ENGINE_SOFTWARE_16_X11
 +
-diff --git a/packages/python/python-ecore_svn.bb b/packages/python/python-ecore_svn.bb
-index 9907b27..de59207 100644
---- a/packages/python/python-ecore_svn.bb
-+++ b/packages/python/python-ecore_svn.bb
-@@ -2,6 +2,8 @@ require python-efl.inc
- DEPENDS += "python-evas ecore"
- RDEPENDS += "python-evas"
- 
-+SRC_URI += "file://sdl-engine-change.patch;patch=1"
-+
- do_stage() {
-     distutils_stage_all
- }
--- 
-1.6.0.6
-
++diff --git a/packages/python/python-ecore_svn.bb b/packages/python/python-ecore_svn.bb
++index 9907b27..de59207 100644
++--- a/packages/python/python-ecore_svn.bb
+++++ b/packages/python/python-ecore_svn.bb
++@@ -2,6 +2,8 @@ require python-efl.inc
++ DEPENDS += "python-evas ecore"
++ RDEPENDS += "python-evas"
++ 
+++SRC_URI += "file://sdl-engine-change.patch;patch=1"
+++
++ do_stage() {
++     distutils_stage_all
++ }
