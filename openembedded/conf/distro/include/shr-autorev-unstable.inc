@@ -3,6 +3,7 @@
 # FSO stuff
 SRCREV_pn-frameworkd = "${AUTOREV}"
 SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
+SRCREV_pn-libeflvala = "${AUTOREV}"
 
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
