@@ -21,4 +21,7 @@ do_install() {
 
   install -d ${D}${datadir}/vala-settings/icons
   install -m 0644 ${S}/data/*.png ${D}${datadir}/vala-settings/icons
+
+  install -d ${D}${datadir}/applications
+  install -m 0644 ${S}/data/vala-settings.desktop ${D}${datadir}/applications/
 }
