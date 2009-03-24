@@ -18,5 +18,5 @@ inherit autotools
 
 do_configure() {
     ./autogen.sh
-    autotools_do_configure
+    oe_runconf
 }
