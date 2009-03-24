@@ -32,4 +32,5 @@ RDEPENDS_${PN} += "\
 		gpe-calendar \
 		fltk-chess \
 		remoko \
+		vala-settings \
 "
