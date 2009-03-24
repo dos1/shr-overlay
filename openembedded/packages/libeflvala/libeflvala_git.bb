@@ -15,3 +15,8 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF = "--disable-examples"
 
 inherit autotools
+
+do_configure() {
+    ./autogen.sh
+    autotools_do_configure
+}
