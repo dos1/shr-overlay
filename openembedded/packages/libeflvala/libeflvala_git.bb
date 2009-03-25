@@ -7,7 +7,7 @@ PV = "0.0.0.0+gitr${SRCREV}"
 PR = "r0"
 
 #don't need examples for building vala programs
-EXTRA_OECONF = "--disable-examples"
+EXTRA_OECONF = "--disable-examples --disable-library"
 
 SRC_URI = "${FREESMARTPHONE_GIT}/libeflvala;protocol=git;branch=master"
 S = "${WORKDIR}/git"

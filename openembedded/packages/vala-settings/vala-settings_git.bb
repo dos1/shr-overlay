@@ -7,6 +7,7 @@ SECTION = "x11/application"
 PV = "0.0.1+r${SRCREV}"
 PR = "r2"
 
+EXTRA_OECONF="--enable-vapidir=${STAGING_DATADIR}/vala/vapi"
 inherit autotools
 
 SRC_URI = "git://github.com/spaetz/vala-settings.git;protocol=git;branch=master"
