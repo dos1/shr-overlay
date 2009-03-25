@@ -28,3 +28,7 @@ SRCREV_pn-vala-settings = "${AUTOREV}"
 EFL_SRCREV = "39659"
 SRCREV_pn-python-elementary = "39659"
 
+
+PREFERRED_VERSION_fakeroot = "1.12.1"
+PREFERRED_VERSION_fakeroot-native = "1.12.1"
+
