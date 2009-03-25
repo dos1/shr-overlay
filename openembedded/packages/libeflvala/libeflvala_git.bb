@@ -1,22 +1,18 @@
-DESCRIPTION = "elementary and EFL bindings for the vala programming language"
-HOMEPAGE = "http://git.freesmartphone.org"
-AUTHOR = "Michael 'Mickey' Lauer <mickey@vanille-media.de> et al. (see AUTHORS)"
-LICENSE  = "GPL2+"
-DEPENDS = "vala elementary"
-#SECTION = "x11/application"
-PV = "0.0.1+r${SRCREV}"
-PR = "r2"
-
-
-SRC_URI = "${FREESMARTPHONE_GIT}/libeflvala.git;protocol=git;branch=master"
-S = "${WORKDIR}/git"
+DESCRIPTION = "Vala meets the Enlightenment Foundation Libraries"
+AUTHOR = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
+LICENSE = "LGPL"
+SECTION = "devel"
+DEPENDS = "vala-native glib-2.0 dbus dbus-glib eina eet evas ecore edje elementary"
+PV = "0.0.0.0+gitr${SRCREV}"
+PR = "r0"
 
 #don't need examples for building vala programs
 EXTRA_OECONF = "--disable-examples"
 
-inherit autotools
+SRC_URI = "${FREESMARTPHONE_GIT}/libeflvala;protocol=git;branch=master"
+S = "${WORKDIR}/git"
 
-do_configure() {
-    ./autogen.sh
-    oe_runconf
-}
+inherit autotools_stage pkgconfig vala
+
+PACKAGES =+ "${PN}-examples"
+FILES_${PN}-examples = "${datadir}/libeflvala ${bindir}"
