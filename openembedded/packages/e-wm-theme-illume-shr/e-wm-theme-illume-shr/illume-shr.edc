@@ -51,35 +51,9 @@ collections {
       }
    }
 
-   group { name: "e/icons/enlightenment/home";
-      images.image: "illume-home.png" COMP;
-      max: 96 96;
-      parts {
-         part { name: "icon";
-            repeat_events: 1;
-            description { state: "default" 0.0;
-               aspect: 1.0 1.0;
-               aspect_preference: BOTH;
-               image.normal: "illume-home.png";
-            }
-         }
-      }
-   }
-
-   group { name: "e/icons/enlightenment/close";
-      images.image: "illume-close.png" COMP;
-      max: 96 96;
-      parts {
-         part { name: "icon";
-            repeat_events: 1;
-            description { state: "default" 0.0;
-               aspect: 1.0 1.0;
-               aspect_preference: BOTH;
-               image.normal: "illume-close.png";
-            }
-         }
-      }
-   }
+// FIXME: should have oveeride for:
+// battery
+// clock   
 
 /////////////////////////////////////////////////////////////////////////////
    /*** ILLUME: SLIPSHELF ***/
@@ -98,6 +72,13 @@ collections {
 	       image.normal: "base_bg.png";
 	       image.border: 2 2 2 2;
 	       fill.smooth: 0;
+	    }
+	 }
+         part { name: "e.swallow.visible";
+	    type: SWALLOW;
+	    description { state: "default" 0.0;
+	       rel1.to: "s3";
+	       rel2.to: "s3";
 	    }
 	 }
 	 
@@ -225,13 +206,6 @@ collections {
 	       }
 	    }
 	 }
-         part { name: "e.swallow.visible";
-	    type: SWALLOW;
-	    description { state: "default" 0.0;
-	       rel1.to: "s3";
-	       rel2.to: "s3";
-	    }
-	 }
  	 part { name: "prev_app";
 	    mouse_events: 0;
 	    description { state: "default" 0.0;
@@ -317,7 +291,7 @@ collections {
 	       color: 0 0 0 255;
 	       text {
                   font: "Sans:style=Bold";
-		  size: 10;
+		  size: 8;
 		  min: 0 1;
 		  align: 0.0 0.5;
 	       }
@@ -400,6 +374,36 @@ collections {
 	    transition: LINEAR 0.5;
 	    target: "prev_app";
 	 }
+      }
+   }
+
+   group { name: "e/icons/enlightenment/home";
+      images.image: "illume-home.png" COMP;
+      max: 96 96;
+      parts {
+         part { name: "icon";
+            repeat_events: 1;
+            description { state: "default" 0.0;
+               aspect: 1.0 1.0;
+               aspect_preference: BOTH;
+               image.normal: "illume-home.png";
+            }
+         }
+      }
+   }
+   
+   group { name: "e/icons/enlightenment/close";
+      images.image: "illume-close.png" COMP;
+      max: 96 96;
+      parts {
+         part { name: "icon";
+            repeat_events: 1;
+            description { state: "default" 0.0;
+               aspect: 1.0 1.0;
+               aspect_preference: BOTH;
+               image.normal: "illume-close.png";
+            }
+         }
       }
    }
    
@@ -511,6 +515,7 @@ collections {
 		  normal: "bt_glow.png";
 		  border: 12 12 12 12;
 	       }
+               fill.smooth : 0;
 	    }
 	    description { state: "clicked" 0.0;
 	       inherit:  "default" 0.0;
@@ -616,6 +621,7 @@ collections {
 		  normal: "bt_glow.png";
 		  border: 12 12 12 12;
 	       }
+               fill.smooth : 0;
 	    }
 	    description { state: "clicked" 0.0;
 	       inherit:  "default" 0.0;
@@ -721,6 +727,7 @@ collections {
 		  normal: "bt_glow.png";
 		  border: 12 12 12 12;
 	       }
+               fill.smooth : 0;
 	    }
 	    description { state: "clicked" 0.0;
 	       inherit:  "default" 0.0;
@@ -1560,6 +1567,7 @@ collections {
 		  normal: "bt_glow.png";
 		  border: 12 12 12 12;
 	       }
+               fill.smooth : 0;
 	    }
 	    description { state: "clicked" 0.0;
 	       inherit:  "default" 0.0;
@@ -2675,7 +2683,7 @@ collections {
    group {
       name: "e/modules/busycover/default";
       images {
-         image: "busy-2.png" COMP;
+	 image: "busy-2.png" COMP;
       }
       parts {
 	 part { name: "base";
@@ -2683,7 +2691,7 @@ collections {
 	    description { state: "default" 0.0;
 	       color: 0 0 0 205;
                align: 0.0 1.0;
-               max: 480 70;
+               max: 640 70;
 	    }
 	 }
 	 part { name: "busy";
@@ -2692,15 +2700,16 @@ collections {
 	       image {
 		  normal: "busy-2.png";
 	       }
-	       min: 0 0;
-	       max: 0 0;
-	       align: 0.0 0.5;
-               rel1.to: "base";
-               rel1.relative: 0.0 0.5;
-               rel1.offset: 10 0;
-               rel2.to: "base";
-               rel2.relative: 0.0 0.5;
-               rel2.offset: 10 0;
+              min: 0 0;
+              max: 0 0;
+              align: 0.0 0.5;
+              rel1.to: "base";
+              rel1.relative: 0.0 0.5;
+              rel1.offset: 10 0;
+              rel2.to: "base";
+              rel2.relative: 0.0 0.5;
+              rel2.offset: 10 0;
+
 	    }
 	 }
 	 part { name: "e.text.title";
@@ -2709,14 +2718,14 @@ collections {
 	    mouse_events: 0;
 	    scale: 1;
 	    description { state: "default" 0.0;
-	       align: 0.5 0.0;
-	       rel1.to: "base";
-	       rel1.relative: 0.5 0.5;
-	       rel1.offset: 0 -8;
-	       rel2.to: "base";
-	       rel2.relative: 0.5 0.5;
-	       rel2.offset: 0 -8;
-	       color: 255 255 255 255;
+	    align: 0.5 0.0;
+            rel1.to: "base";
+            rel1.relative: 0.5 0.5;
+            rel1.offset: 0 -8;
+            rel2.to: "base";
+            rel2.relative: 0.5 0.5;
+            rel2.offset: 0 -8;
+	    color: 255 255 255 255;
 	       text {
                   font: "Sans:style=Bold";
 		  text: "LOADING";
@@ -2743,222 +2752,220 @@ collections {
    }
 
 
-
 /////////////////////////////////////////////////////////////////////////////
    /*** MOD: CLOCK ***/
-   group { name: "e/modules/clock/main";
+   group {
+      name: "e/modules/clock/main";
       script {
-	 public clock_cb(val) {
-	    new buf[11];
-	    new year, month, day, yearday, weekday, hour, minute;
-	    new Float:second;
-	    new Float:s;
-	    
-	    date(year, month, day, yearday, weekday, hour, minute, second);
-//	    timer(60.0 - second, "clock_cb", 1);
+         public clock_cb(val) {   
+            new buf[11];
+            new year, month, day, yearday, weekday, hour, minute;
+            new Float:second;
+            new Float:s;
+       
+            date(year, month, day, yearday, weekday, hour, minute, second);
+//          timer(60.0 - second, "clock_cb", 1);
 // update every 5 seconds just for changing actual time in config. no other
 // way to know unless you poll (and every 5 seconds is better than 60 for
 // responsiveness to config changes
-	    s = 60.0 - second;
+            s = 60.0 - second;
             while (s < 0.0) s = s + 5.0;
-	    timer(60.0 - second, "clock_cb", 1);
-	    if ((hour < 10) && (minute < 10)) 
-	      {snprintf(buf, 10, "0%i:0%i", hour, minute);}
-	    else if ((hour < 10) && (minute >= 10))
-	      {snprintf(buf, 10, "0%i:%i", hour, minute);}
-	    else if ((hour >= 10) && (minute < 10))
-	      {snprintf(buf, 10, "%i:0%i", hour, minute);}
-	    else if ((hour >= 10) && (minute >= 10)) 
-	      {snprintf(buf, 10, "%i:%i", hour, minute);}
-	    set_text(PART:"e.text.label", buf);
-	 }
+            timer(60.0 - second, "clock_cb", 1);
+            if ((hour < 10) && (minute < 10))
+              {snprintf(buf, 10, "0%i:0%i", hour, minute);}
+            else if ((hour < 10) && (minute >= 10))
+              {snprintf(buf, 10, "0%i:%i", hour, minute);}
+            else if ((hour >= 10) && (minute < 10))
+              {snprintf(buf, 10, "%i:0%i", hour, minute);}
+            else if ((hour >= 10) && (minute >= 10))
+              {snprintf(buf, 10, "%i:%i", hour, minute);}
+            set_text(PART:"e.text.label", buf);
+         }
       }
       parts {
-	 part { name: "e.text.label";
-	    type: TEXT;
-	    mouse_events: 0;
-	    description { state: "default" 0.0;
-	       fixed: 1 1;
-	       align: 0.5 1.0;
-	       color: 46 46 46 255;
-	       text {
-		  text: "00:00";
+         part { name: "e.text.label";
+            type: TEXT;
+            mouse_events: 0;
+            description { state: "default" 0.0;
+               fixed: 1 1;
+               align: 0.5 1.0;
+               color: 46 46 46 255;
+               text {
+                  text: "00:00";
                   font: "Liberation-Bold";
-		  size: 20;
+                  size: 20;
                   align: 0.5 1.0;
-		  min: 1 1;
-	       }
-	    }
-	 }
-	 part { name: "events";
-	    type: RECT;
-	    description { state: "default" 0.0;
-	       color: 0 0 0 0;
-	    }
-	 }
+                  min: 1 1;
+               }
+            }
+         }
+         part { name: "events";
+            type: RECT;
+            description { state: "default" 0.0;
+               color: 0 0 0 0;
+            }
+         }
       }
       programs {
          program { name: "init";
-	    signal: "load";
-	    source: "";
-	    script {
-	       clock_cb(0);
-	    }
-	 }
+            signal: "load";
+            source: "";
+            script {
+               clock_cb(0);
+            }
+         }
       }
    }
-
-
 
 /////////////////////////////////////////////////////////////////////////////
    /*** MOD: BATTERY ***/
    group { name: "e/modules/battery/main";
       images {
-	 image: "bt_pwr.png" COMP;
-	 image: "bt_base.png" COMP;
-	 image: "bt_0.png" COMP;
-	 image: "bt_1.png" COMP;
-	 image: "bt_2.png" COMP;
-	 image: "bt_3.png" COMP;
-	 image: "bt_4.png" COMP;
+         image: "bt_pwr.png" COMP;
+         image: "bt_base.png" COMP;
+         image: "bt_0.png" COMP;
+         image: "bt_1.png" COMP;
+         image: "bt_2.png" COMP;
+         image: "bt_3.png" COMP;
+         image: "bt_4.png" COMP;
       }
       min: 29 23;
       max: 29 42;
       script {
        public message(Msg_Type:type, id, ...) {
-	  if ((type == MSG_FLOAT) && (id == 1)) {
-	     new Float:val;
-	     val = getfarg(2);
-	     set_state(PART:"battery", "default", val);
-	     if (val <= 0.1)
-	       set_state(PART:"battery_base", "empty", val);
-	     else
-	       set_state(PART:"battery_base", "default", val);
-	  }
+          if ((type == MSG_FLOAT) && (id == 1)) {
+             new Float:val;
+             val = getfarg(2);
+             set_state(PART:"battery", "default", val);
+             if (val <= 0.1)
+               set_state(PART:"battery_base", "empty", val);
+             else
+               set_state(PART:"battery_base", "default", val);
+          }
        }
       }
       parts {
-	 part { name: "base";
-	    type: RECT;
-	    description { state: "default" 0.0;
-	       color: 0 0 0 0;
-	       rel1.offset: 2 4;
-	       rel2.offset: -3 -5;
-	    }
-	 }
-	 part { name: "battery_clip";
-	    type: RECT;
-	    description { state: "default" 0.0;
-	       visible: 1;
-	    }
-	    description { state: "invisible" 0.0;
-	       visible: 0;
-	    }
-	 }
-	 part { name: "battery_base";
-	    mouse_events: 0;
-	    clip_to: "battery_clip";
-	    description { state: "default" 0.0;
-	       min: 7 5;
-	       max: 25 15;
-	       aspect: 1.6666666 1.6666666;
-	       aspect_preference: BOTH;
-	       align: 0.5 1.0;
-	       color: 255 255 255 176;
-	       image.normal: "bt_base.png";
-	       image.border: 5 3 3 3;
-	       rel1.to: "base";
-	       rel2.to: "base";
-	    }
-	    description { state: "empty" 0.0;
-	       inherit: "default" 0.0;
-	       color: 255 0 0 176;
-	    }
-	 }
-	 part { name: "battery";
-	    mouse_events: 0;
-	    clip_to: "battery_clip";
-	    description { state: "default" 0.0;
-	       color: 255 0 0 176;
-	       image.normal: "bt_0.png";
-	       rel1.to: "battery_base";
-	       rel1.offset: 4 2;
-	       rel2.to: "battery_base";
-	       rel2.offset: -3 -3;
-	    }
-	    description { state: "default" 0.25;
-	       inherit: "default" 0.0;
-	       image.normal: "bt_1.png";
-	       color: 255 0 0 176;
-	    }
-	    description { state: "default" 0.5;
-	       inherit: "default" 0.0;
-	       image.normal: "bt_2.png";
-	       color: 255 255 255 176;
-	    }
-	    description { state: "default" 0.75;
-	       inherit: "default" 0.0;
-	       image.normal: "bt_3.png";
-	       color: 255 255 255 176;
-	    }
-	    description { state: "default" 1.0;
-	       inherit: "default" 0.0;
-	       image.normal: "bt_4.png";
-	       color: 255 255 255 176;
-	    }
-	 }
-	 part { name: "power";
-	    mouse_events: 0;
-	    description { state: "default" 0.0;
-	       visible: 0;
-	       aspect: 1.6666666 1.6666666;
-	       aspect_preference: BOTH;
-	       align: 0.5 1.0;
-	       color: 255 255 255 176;
-	       image.normal: "bt_pwr.png";
-	       rel1.to: "battery";
-	       rel2.to: "battery";
-	    }
-	    description { state: "invisible" 0.0;
-	       inherit: "default" 0.0;
-	       visible: 1;
-	    }
-	 }
+         part { name: "base";
+            type: RECT;
+            description { state: "default" 0.0;
+               color: 0 0 0 0;
+               rel1.offset: 2 4;
+               rel2.offset: -3 -5;
+            }
+         }
+         part { name: "battery_clip";
+            type: RECT;
+            description { state: "default" 0.0;
+               visible: 1;
+            }
+            description { state: "invisible" 0.0;
+               visible: 0;
+            }
+         }
+         part { name: "battery_base";
+            mouse_events: 0;
+            clip_to: "battery_clip";
+            description { state: "default" 0.0;
+               min: 7 5;
+               max: 25 15;
+               aspect: 1.6666666 1.6666666;
+               aspect_preference: BOTH;
+               align: 0.5 1.0;
+               color: 255 255 255 176;
+               image.normal: "bt_base.png";
+               image.border: 5 3 3 3;
+               rel1.to: "base";
+               rel2.to: "base";
+            }
+            description { state: "empty" 0.0;
+               inherit: "default" 0.0;
+               color: 255 0 0 176;
+            }
+         }
+         part { name: "battery";
+            mouse_events: 0;
+            clip_to: "battery_clip";
+            description { state: "default" 0.0;
+               color: 255 0 0 176;
+               image.normal: "bt_0.png";
+               rel1.to: "battery_base";
+               rel1.offset: 4 2;
+               rel2.to: "battery_base";
+               rel2.offset: -3 -3;
+            }
+            description { state: "default" 0.25;
+               inherit: "default" 0.0;
+               image.normal: "bt_1.png";
+               color: 255 0 0 176;
+            }
+            description { state: "default" 0.5;
+               inherit: "default" 0.0;
+               image.normal: "bt_2.png";
+               color: 255 255 255 176;
+            }
+            description { state: "default" 0.75;
+               inherit: "default" 0.0;
+               image.normal: "bt_3.png";
+               color: 255 255 255 176;
+            }
+            description { state: "default" 1.0;
+               inherit: "default" 0.0;
+               image.normal: "bt_4.png";
+               color: 255 255 255 176;
+            }
+         }
+         part { name: "power";
+            mouse_events: 0;
+            description { state: "default" 0.0;
+               visible: 0;
+               aspect: 1.6666666 1.6666666;
+               aspect_preference: BOTH;
+               align: 0.5 1.0;
+               color: 255 255 255 176;
+               image.normal: "bt_pwr.png";
+               rel1.to: "battery";
+               rel2.to: "battery";
+            }
+            description { state: "invisible" 0.0;
+               inherit: "default" 0.0;
+               visible: 1;
+            }
+         }
       }
       programs {
          program {
-	    name: "charge";
-	    signal: "e,state,charging";
-	    source: "e";
-	    action: STATE_SET "invisible" 0.0;
-	    target: "battery_clip";
-	    target: "power";
-	 }
+            name: "charge";
+            signal: "e,state,charging";
+            source: "e";
+            action: STATE_SET "invisible" 0.0;
+            target: "battery_clip";
+            target: "power";
+         }
          program {
-	    name: "discharge";
-	    signal: "e,state,discharging";
-	    source: "e";
-	    action: STATE_SET "default" 0.0;
-	    target: "battery_clip";
-	    target: "power";
-	 }
+            name: "discharge";
+            signal: "e,state,discharging";
+            source: "e";
+            action: STATE_SET "default" 0.0;
+            target: "battery_clip";
+            target: "power";
+         }
          program {
-	    name: "unknown";
-	    signal: "e,state,unknown";
-	    source: "e";
-	    action: STATE_SET "invisible" 0.0;
-	    target: "battery_clip";
-	 }
+            name: "unknown";
+            signal: "e,state,unknown";
+            source: "e";
+            action: STATE_SET "invisible" 0.0;
+            target: "battery_clip";
+         }
          program {
-	    name: "unknow2";
-	    signal: "e,state,unknown";
-	    source: "e";
-	    action: STATE_SET "default" 0.0;
-	    target: "power";
-	 }
+            name: "unknow2";
+            signal: "e,state,unknown";
+            source: "e";
+            action: STATE_SET "default" 0.0;
+            target: "power";
+         }
       }
    }
 
-
 }
+
 
