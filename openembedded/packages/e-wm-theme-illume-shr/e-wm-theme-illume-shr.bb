@@ -3,7 +3,7 @@ SECTION = "e/utils"
 DEPENDS = "edje"
 LICENSE = "MIT BSD"
 PV = "1.0"
-PR = "r4"
+PR = "r5"
 
 SRC_URI = "\
   file://illume-shr.edc  \
