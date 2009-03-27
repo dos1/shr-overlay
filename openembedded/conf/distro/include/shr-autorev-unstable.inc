@@ -6,8 +6,7 @@ PREFERRED_VERSION_glib-2.0 = "2.18.3"
 # FSO stuff
 SRCREV_pn-frameworkd = "${AUTOREV}"
 SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
-#fix to a rev as it is currently broken
-SRCREV_pn-libeflvala = "58bac7553837362"
+SRCREV_pn-libeflvala = "${AUTOREV}"
 
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
