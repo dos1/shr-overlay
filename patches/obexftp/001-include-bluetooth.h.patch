@@ -1,0 +1,60 @@
+commit 6db0170697e0310a8a7857f9df1408e7dfca3748
+Author: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Date:   Mon Mar 30 08:54:53 2009 +0200
+
+    patch obexftp to include bluetooth.h if necessary
+
+diff --git a/packages/obexftp/files/include-bluetooth.h.patch b/packages/obexftp/files/include-bluetooth.h.patch
+new file mode 100644
+index 0000000..4dbd3fe
+--- /dev/null
++++ b/packages/obexftp/files/include-bluetooth.h.patch
+@@ -0,0 +1,12 @@
++--- o/apps/obexftpd.c	2008-06-15 22:18:58.000000000 +0300
+++++ n/apps/obexftpd.c	2008-12-09 00:01:20.000000000 +0200
++@@ -58,6 +58,9 @@
++ #include <netinet/in.h>
++ #include <arpa/inet.h>
++ #include <netdb.h>
+++#ifdef HAVE_BLUETOOTH
+++#include <bluetooth/bluetooth.h>
+++#endif
++ #endif
++ 
++ /* just until there is a server layer in obexftp */
+diff --git a/packages/obexftp/obexftp_0.20.bb b/packages/obexftp/obexftp_0.20.bb
+index 2a0b310..adc111e 100644
+--- a/packages/obexftp/obexftp_0.20.bb
++++ b/packages/obexftp/obexftp_0.20.bb
+@@ -3,12 +3,13 @@ SECTION = "console/network"
+ HOMEPAGE = "http://openobex.triq.net"
+ LICENSE = "GPL"
+ DEPENDS = "openobex libgsm"
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/openobex/obexftp-${PV}.tar.gz \
+ 	   file://iconv.patch;patch=1 \
+ 	   file://i-hate-libtool.patch;patch=1 \
+-	   file://m4.patch;patch=1"
++	   file://m4.patch;patch=1 \
++	   file://include-bluetooth.h.patch;patch=1"
+ 
+ inherit autotools gettext
+ 
+diff --git a/packages/obexftp/obexftp_0.22.bb b/packages/obexftp/obexftp_0.22.bb
+index 89e10a7..7b1f9ff 100644
+--- a/packages/obexftp/obexftp_0.22.bb
++++ b/packages/obexftp/obexftp_0.22.bb
+@@ -3,9 +3,9 @@ SECTION = "console/network"
+ HOMEPAGE = "http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp"
+ LICENSE = "GPL"
+ DEPENDS = "openobex bluez-libs libusb virtual/libiconv"
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/openobex/obexftp-${PV}.tar.bz2 \
+-	  "
++	   file://include-bluetooth.h.patch;patch=1"
+ 
+ inherit autotools pkgconfig
