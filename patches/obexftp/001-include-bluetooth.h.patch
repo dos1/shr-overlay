@@ -22,26 +22,6 @@ index 0000000..4dbd3fe
 + #endif
 + 
 + /* just until there is a server layer in obexftp */
-diff --git a/packages/obexftp/obexftp_0.20.bb b/packages/obexftp/obexftp_0.20.bb
-index 2a0b310..adc111e 100644
---- a/packages/obexftp/obexftp_0.20.bb
-+++ b/packages/obexftp/obexftp_0.20.bb
-@@ -3,12 +3,13 @@ SECTION = "console/network"
- HOMEPAGE = "http://openobex.triq.net"
- LICENSE = "GPL"
- DEPENDS = "openobex libgsm"
--PR = "r4"
-+PR = "r5"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/openobex/obexftp-${PV}.tar.gz \
- 	   file://iconv.patch;patch=1 \
- 	   file://i-hate-libtool.patch;patch=1 \
--	   file://m4.patch;patch=1"
-+	   file://m4.patch;patch=1 \
-+	   file://include-bluetooth.h.patch;patch=1"
- 
- inherit autotools gettext
- 
 diff --git a/packages/obexftp/obexftp_0.22.bb b/packages/obexftp/obexftp_0.22.bb
 index 89e10a7..7b1f9ff 100644
 --- a/packages/obexftp/obexftp_0.22.bb
@@ -51,7 +31,7 @@ index 89e10a7..7b1f9ff 100644
  LICENSE = "GPL"
  DEPENDS = "openobex bluez-libs libusb virtual/libiconv"
 -PR = "r0"
-+PR = "r1"
++PR = "r0.1"
  
  SRC_URI = "${SOURCEFORGE_MIRROR}/openobex/obexftp-${PV}.tar.bz2 \
 -	  "

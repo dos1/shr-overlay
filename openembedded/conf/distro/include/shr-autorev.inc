@@ -10,6 +10,7 @@ PREFERRED_VERSION_navit = "0.1.0+svnrev${SRCREV}"
 PREFERRED_VERSION_libosip2 = "2.2.2"
 PREFERRED_VERSION_udev = "124"
 PREFERRED_VERSION_midori = "0.1.2"
+PREFERRED_VERSION_obexftp = "0.22"
 
 #FSO stuff
 SRCREV_pn-frameworkd = "65ebcc86e85980827925588753f47bebf6d4a96e"
