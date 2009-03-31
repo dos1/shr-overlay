@@ -3,7 +3,7 @@ SECTION = "e/utils"
 DEPENDS = "eet"
 LICENSE = "MIT BSD"
 PV = "1.0-${EFL_SRCREV}"
-PR = "r4"
+PR = "r5"
 
 inherit e
 
