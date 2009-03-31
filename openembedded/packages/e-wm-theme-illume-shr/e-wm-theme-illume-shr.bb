@@ -3,10 +3,12 @@ SECTION = "e/utils"
 DEPENDS = "edje"
 LICENSE = "MIT BSD"
 PV = "1.0"
-PR = "r5"
+PR = "r6"
 
 SRC_URI = "\
   file://illume-shr.edc  \
+  file://battery.edc \
+  file://clock.edc \
   file://images"
 
 S = "${WORKDIR}/"
