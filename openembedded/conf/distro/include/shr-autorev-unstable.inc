@@ -29,8 +29,8 @@ EFL_SRCREV = "39659"
 SRCREV_pn-python-elementary = "39659"
 
 
-PREFERRED_VERSION_vala-native = "0.5.7"
-SRC_URI_pn-vala-native = "git://git.freesmartphone.org/vala;protocol=git;branch=test"
+PREFERRED_VERSION_vala-native = "0.6.0"
+
 #PREFERRED_VERSION_fakeroot = "1.12.1"
 #PREFERRED_VERSION_fakeroot-native = "1.12.1"
 
