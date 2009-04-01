@@ -28,6 +28,8 @@ SRCREV_pn-vala-settings = "${AUTOREV}"
 EFL_SRCREV = "39827"
 SRCREV_pn-python-elementary = "39827"
 
+# KERNEL
+SRCREV_pn-linux-openmoko-2.6.28 = "${AUTOREV}"
 
 PREFERRED_VERSION_vala-native = "0.6.0"
 
