@@ -129,7 +129,6 @@ RDEPENDS_${PN}-gtk = "\
   gpe-filemanager \
   vala-terminal \
   tangogps \
-  pythm \
   pyphonelog \
 "
 
