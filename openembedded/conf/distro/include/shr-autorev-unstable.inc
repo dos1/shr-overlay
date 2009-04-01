@@ -25,8 +25,8 @@ SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 SRCREV_pn-calc = "${AUTOREV}"
 SRCREV_pn-vala-settings = "${AUTOREV}"
 
-EFL_SRCREV = "39659"
-SRCREV_pn-python-elementary = "39659"
+EFL_SRCREV = "39827"
+SRCREV_pn-python-elementary = "39827"
 
 
 PREFERRED_VERSION_vala-native = "0.6.0"
