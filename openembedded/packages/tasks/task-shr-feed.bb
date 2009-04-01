@@ -33,4 +33,5 @@ RDEPENDS_${PN} += "\
 		fltk-chess \
 		remoko \
 		vala-settings \
+		openbmap-logger \
 "
