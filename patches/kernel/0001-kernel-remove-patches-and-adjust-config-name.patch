@@ -1,0 +1,45 @@
+From 43a9bd2a7a4448d13cbb8ab88453a6c0a1090462 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Wed, 1 Apr 2009 17:49:41 +0200
+Subject: [PATCH] kernel: remove patches and adjust config name (- --> _)
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ packages/linux/linux-openmoko-2.6.28_git.bb |   15 ++-------------
+ 1 files changed, 2 insertions(+), 13 deletions(-)
+
+diff --git a/packages/linux/linux-openmoko-2.6.28_git.bb b/packages/linux/linux-openmoko-2.6.28_git.bb
+index 8774721..c954066 100644
+--- a/packages/linux/linux-openmoko-2.6.28_git.bb
++++ b/packages/linux/linux-openmoko-2.6.28_git.bb
+@@ -8,25 +8,14 @@ KERNEL_VERSION = "${KERNEL_RELEASE}"
+ 
+ OEV = "oe1"
+ PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCREV}"
+-PR = "r3"
++PR = "r3.1"
+ 
+ SRC_URI = "\
+   git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
+-  file://openwrt-ledtrig-netdev.patch;patch=1 \
+-  file://0001-MERGE-via-pending-tracking-hist-subject-usb-gadget-r.patch;patch=1 \
+-  file://0002-MERGE-via-pending-tracking-hist-subject-usb-gadget-f.patch;patch=1 \
+-  file://0003-consider-alrm-enable-in-pcf50633_rtc_set_alarm.patch;patch=1 \
+-  file://0004-manage-RTC-alarm-pending-flag-of-PCF50633.patch;patch=1 \
+-  file://0005-debug-glamo-allow-slower-memory-bus.patch.patch;patch=1 \
+-  file://0006-Subject-fix_glamo_xrandr_bug.patch.patch;patch=1 \
+-  file://0007-Subject-glamo_fix_improper_xrandr_geometry_setting.patch;patch=1 \
+-  file://0008-Send-pen-up-events-faster-side-effect-improve-illu.patch;patch=1 \
+-  file://defconfig-oe.patch \
+ "
+ S = "${WORKDIR}/git"
+ 
+ do_configure_prepend() {
+-	install -m 644 ./arch/arm/configs/gta02-packaging-defconfig ${WORKDIR}/defconfig-oe
+-	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
++	install -m 644 ./arch/arm/configs/gta02_packaging_defconfig ${WORKDIR}/defconfig-oe
+ }
+ 
+-- 
+1.6.0.6
+
