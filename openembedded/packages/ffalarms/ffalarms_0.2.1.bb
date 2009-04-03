@@ -1,8 +1,8 @@
 DESCRIPTION = "Finger friendly alarms"
 HOMEPAGE = "http://ffalarms.projects.openmoko.org/"
 LICENSE = "GPLv3"
-AUTHOR = "Łukasz Pankowski <lukpank@o2.pl>"
-MAINTAINER = "Łukasz Pankowski <lukpank@o2.pl>"
+AUTHOR = "Lukasz Pankowski <lukpank@o2.pl>"
+MAINTAINER = "Lukasz Pankowski <lukpank@o2.pl>"
 SECTION = "x11/applications"
 PRIORITY = "optional"
 DEPENDS = "edje-native python-native"
@@ -19,7 +19,7 @@ inherit distutils
 FILES_${PN} += "${datadir}/${PN} ${datadir}/applications/ffalarms.desktop ${datadir}/pixmaps"
 
 RDEPENDS += "python-re python-datetime python-edje python-ecore \
-             atd alsa-utils-amixer alsa-utils-alsactl openmoko-alsa-scenarios \
+             atd-over-fso alsa-utils-amixer alsa-utils-alsactl openmoko-alsa-scenarios \
              ttf-dejavu-sans"
 
 RSUGGESTS += "mplayer alsa-utils-aplay"
