@@ -34,4 +34,5 @@ RDEPENDS_${PN} += "\
 		remoko \
 		vala-settings \
 		openbmap-logger \
+		ffalarms \
 "
