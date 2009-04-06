@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Lite Image Feed"
-PR = "r1"
+PR = "r2"
 PV = "2.0"
 LICENSE = "GPL"
 
@@ -108,6 +108,8 @@ RDEPENDS_${PN}-x = "\
   e-wm-config-illume-shr \
   e-wm-theme-illume-shr \
   ${@get_rdepends(bb, d)} \
+  libx11-locale \
+  localedef \
 "
 
 RDEPENDS_${PN}-apps = "\
