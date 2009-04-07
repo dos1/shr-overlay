@@ -1,4 +1,4 @@
-require vala_0.7.0.bb
+require vala_0.6.0.bb
 # vala from git always needs the latest released version to compile itself
 DEPENDS = "vala-native"
 
