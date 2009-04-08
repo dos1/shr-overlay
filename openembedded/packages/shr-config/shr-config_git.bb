@@ -10,5 +10,5 @@ PR = "r2"
 EXTRA_OECONF="--enable-vapidir=${STAGING_DATADIR}/vala/vapi"
 inherit autotools
 
-SRC_URI = "git://github.com/spaetz/vala-settings.git;protocol=git;branch=master"
+SRC_URI = "git://github.com/spaetz/shr-config.git;protocol=git;branch=master"
 S = "${WORKDIR}/git"
