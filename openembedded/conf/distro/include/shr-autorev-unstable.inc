@@ -24,7 +24,7 @@ SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
 SRCREV_pn-calc = "${AUTOREV}"
-SRCREV_pn-vala-settings = "${AUTOREV}"
+SRCREV_pn-shr-config = "${AUTOREV}"
 
 EFL_SRCREV = "39827"
 SRCREV_pn-python-elementary = "39834"
