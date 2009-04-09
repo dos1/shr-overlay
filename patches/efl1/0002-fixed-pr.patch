@@ -14,7 +14,7 @@ index 02d4cf4..d22a2d1 100644
 @@ -1,5 +1,5 @@
  require evas.inc
 -PR = "r1"
-+PR = "r1.1"
++PR = "r1.2"
  
  EXTRA_OECONF = "\
  		--x-includes=${STAGING_INCDIR}/X11  \

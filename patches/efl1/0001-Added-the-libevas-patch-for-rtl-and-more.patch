@@ -26,7 +26,7 @@ index ff7a184..43eb592 100644
  
  inherit efl
  
-+SRC_URI+="file://add_rtl_compositing_arabic.patch;patch=0"
++SRC_URI_append = " file://add_rtl_compositing_arabic.patch;patch=0 "
 +
  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/evas"
  EXTRA_OECONF = "<override me>"
