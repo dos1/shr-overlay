@@ -1,0 +1,23 @@
+From 94f6eb7a327e8bc3998504a2e866540610d33c0f Mon Sep 17 00:00:00 2001
+From: Tom Hacohen <tom@nospam>
+Date: Thu, 9 Apr 2009 17:28:31 +0300
+Subject: [PATCH 2/2] fixed pr
+
+---
+ packages/efl1/evas_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/packages/efl1/evas_svn.bb b/packages/efl1/evas_svn.bb
+index 02d4cf4..d22a2d1 100644
+--- a/packages/efl1/evas_svn.bb
++++ b/packages/efl1/evas_svn.bb
+@@ -1,5 +1,5 @@
+ require evas.inc
+-PR = "r1"
++PR = "r1.1"
+ 
+ EXTRA_OECONF = "\
+ 		--x-includes=${STAGING_INCDIR}/X11  \
+-- 
+1.6.2.2
+
