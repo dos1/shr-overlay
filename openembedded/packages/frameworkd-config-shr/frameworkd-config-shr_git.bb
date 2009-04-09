@@ -10,7 +10,7 @@ PR = "r3"
 SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master \
            file://frameworkd.conf \
            file://rules.yaml \
-           file://profiles
+           file://profiles \
            file://ringtone_ringnroll.wav "
 S = "${WORKDIR}/git"
 
