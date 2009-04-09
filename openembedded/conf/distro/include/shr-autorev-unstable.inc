@@ -39,3 +39,4 @@ SRCREV_pn-openmoocow = "${AUTOREV}"
 #PREFERRED_VERSION_fakeroot = "1.12.1"
 #PREFERRED_VERSION_fakeroot-native = "1.12.1"
 
+SRCREV_pn-boost-signals2 = "52299"
