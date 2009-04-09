@@ -40,3 +40,5 @@ SRCREV_pn-openmoocow = "${AUTOREV}"
 #PREFERRED_VERSION_fakeroot-native = "1.12.1"
 
 SRCREV_pn-boost-signals2 = "52299"
+SRCREV_pn-dbus-c++-native = "${AUTOREV}"
+SRCREV_pn-dbus-c++ = "${AUTOREV}"

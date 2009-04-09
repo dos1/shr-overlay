@@ -2,6 +2,7 @@
 DESCRIPTION = "Boost.Signals2 - Thread-safe implementation of signals and slots."
 LICENSE = "Boost Software License"
 DEPENDS = "boost-1.38.0"
+PV = "0.0.0+svnr${SRCREV}"
 #PR = "r0" # 0 is default
 
 # This provides a ${PN}-dev only. Override default ${PN}-dev dependency on ${PN}
