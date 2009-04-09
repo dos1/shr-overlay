@@ -34,7 +34,6 @@ SRCREV_pn-linux-openmoko-2.6.28 = "${AUTOREV}"
 
 # other stuff
 SRCREV_pn-openmoocow = "${AUTOREV}"
-PREFERRED_VERSION_vala-native = "0.6.0"
 
 #PREFERRED_VERSION_fakeroot = "1.12.1"
 #PREFERRED_VERSION_fakeroot-native = "1.12.1"
