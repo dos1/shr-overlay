@@ -5,12 +5,12 @@ SECTION = "console/network"
 DEPENDS = "python-cython-native python-pyrex-native"
 LICENSE = "GPL"
 PV = "0.8.5.1+gitr${SRCREV}"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master \
            file://frameworkd.conf \
            file://rules.yaml \
-           file://ringtone_ringnroll.ogg "
+           file://ringtone_ringnroll.wav "
 S = "${WORKDIR}/git"
 
 PROVIDES = "frameworkd-config"
@@ -41,9 +41,9 @@ do_install_append() {
 	install -m 0644 ${WORKDIR}/rules.yaml ${D}${sysconfdir}/freesmartphone/oevents/
 
         # Patch to use a different default ringtone
-        sed -i 's/^\(ring-tone:.*\)$/# \1\nring-tone: "ringtone_ringnroll.ogg"\n/' ${D}${sysconfdir}/freesmartphone/opreferences/conf/phone/default.yaml
+        sed -i 's/^\(ring-tone:.*\)$/# \1\nring-tone: "ringtone_ringnroll.wav"\n/' ${D}${sysconfdir}/freesmartphone/opreferences/conf/phone/default.yaml
         install -d ${D}${datadir}/sounds
-        install -m 0644 ${WORKDIR}/ringtone_ringnroll.ogg ${D}${datadir}/sounds/
+        install -m 0644 ${WORKDIR}/ringtone_ringnroll.wav ${D}${datadir}/sounds/
 }
 
 PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
@@ -51,7 +51,7 @@ PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
 FILES_${PN} = "\
   ${sysconfdir}/frameworkd.conf \
   ${sysconfdir}/freesmartphone \
-  ${datadir}/sounds/ringtone_ringnroll.ogg \
+  ${datadir}/sounds/ringtone_ringnroll.wav \
 "
 CONFFILES_${PN} = "\
   ${sysconfdir}/frameworkd.conf \
