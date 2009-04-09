@@ -4,15 +4,15 @@ Date: Thu, 9 Apr 2009 15:11:21 +0300
 Subject: [PATCH] Added the libevas patch for rtl and more
 
 ---
- recipes/efl1/evas.inc                              |    4 +-
- recipes/efl1/evas/add_rtl_compositing_arabic.patch |  682 ++++++++++++++++++++
+ packages/efl1/evas.inc                              |    4 +-
+ packages/efl1/evas/add_rtl_compositing_arabic.patch |  682 ++++++++++++++++++++
  2 files changed, 685 insertions(+), 1 deletions(-)
- create mode 100644 recipes/efl1/evas/add_rtl_compositing_arabic.patch
+ create mode 100644 packages/efl1/evas/add_rtl_compositing_arabic.patch
 
-diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
+diff --git a/packages/efl1/evas.inc b/packages/efl1/evas.inc
 index ff7a184..43eb592 100644
---- a/recipes/efl1/evas.inc
-+++ b/recipes/efl1/evas.inc
+--- a/packages/efl1/evas.inc
++++ b/packages/efl1/evas.inc
 @@ -1,7 +1,7 @@
  DESCRIPTION = "Evas is the Enlightenment canvas API"
  LICENSE = "MIT BSD"
@@ -31,11 +31,11 @@ index ff7a184..43eb592 100644
  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/evas"
  EXTRA_OECONF = "<override me>"
  
-diff --git a/recipes/efl1/evas/add_rtl_compositing_arabic.patch b/recipes/efl1/evas/add_rtl_compositing_arabic.patch
+diff --git a/packages/efl1/evas/add_rtl_compositing_arabic.patch b/packages/efl1/evas/add_rtl_compositing_arabic.patch
 new file mode 100644
 index 0000000..7e1eb32
 --- /dev/null
-+++ b/recipes/efl1/evas/add_rtl_compositing_arabic.patch
++++ b/packages/efl1/evas/add_rtl_compositing_arabic.patch
 @@ -0,0 +1,682 @@
 +Index: src/lib/engines/common/evas_font_draw.c
 +===================================================================
