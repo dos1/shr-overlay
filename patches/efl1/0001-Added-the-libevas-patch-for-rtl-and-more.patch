@@ -1,0 +1,724 @@
+From a610e95876d0e57f7ace5e9add46afc69a4961da Mon Sep 17 00:00:00 2001
+From: Tom Hacohen <tom@nospam>
+Date: Thu, 9 Apr 2009 15:11:21 +0300
+Subject: [PATCH] Added the libevas patch for rtl and more
+
+---
+ recipes/efl1/evas.inc                              |    4 +-
+ recipes/efl1/evas/add_rtl_compositing_arabic.patch |  682 ++++++++++++++++++++
+ 2 files changed, 685 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/efl1/evas/add_rtl_compositing_arabic.patch
+
+diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
+index ff7a184..43eb592 100644
+--- a/recipes/efl1/evas.inc
++++ b/recipes/efl1/evas.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Evas is the Enlightenment canvas API"
+ LICENSE = "MIT BSD"
+ # can also depend on valgrind, libsdl-x11, directfb
+-DEPENDS = "eina eet freetype jpeg libpng virtual/libx11 libxext libxrender fontconfig"
++DEPENDS = "fribidi eina eet freetype jpeg libpng virtual/libx11 libxext libxrender fontconfig"
+ PV = "0.9.9.050+svnr${SRCREV}"
+ 
+ 
+@@ -10,6 +10,8 @@ ARM_INSTRUCTION_SET = "arm"
+ 
+ inherit efl
+ 
++SRC_URI+="file://add_rtl_compositing_arabic.patch;patch=0"
++
+ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/evas"
+ EXTRA_OECONF = "<override me>"
+ 
+diff --git a/recipes/efl1/evas/add_rtl_compositing_arabic.patch b/recipes/efl1/evas/add_rtl_compositing_arabic.patch
+new file mode 100644
+index 0000000..7e1eb32
+--- /dev/null
++++ b/recipes/efl1/evas/add_rtl_compositing_arabic.patch
+@@ -0,0 +1,682 @@
++Index: src/lib/engines/common/evas_font_draw.c
++===================================================================
++--- evas/src/lib/engines/common/evas_font_draw.c	(revision 39827)
+++++ evas/src/lib/engines/common/evas_font_draw.c	(working copy)
++@@ -2,9 +2,19 @@
++  * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
++  */
++ 
+++/* Character compositing, and internationalization (RTL and Arabic contexting)
+++ * were added by Tom Hacohen (tom@stosb.com)
+++ */
+++
+++
++ #include "evas_common.h"
++ #include "evas_blend_private.h"
++ 
+++#include "evas_text_compositing.h"
+++
+++#include "evas_intl_utils.h" /*defines INTERNATIONAL_SUPPORT if possible */
+++
+++
++ EAPI RGBA_Font_Glyph *
++ evas_common_font_int_cache_glyph_get(RGBA_Font_Int *fi, FT_UInt index)
++ {
++@@ -166,6 +176,8 @@
++    return 0;
++ }
++ 
+++
+++
++ static void
++ evas_common_font_draw_internal(RGBA_Image *dst, RGBA_Draw_Context *dc, RGBA_Font *fn, int x, int y, const char *text,
++                                RGBA_Gfx_Func func, int ext_x, int ext_y, int ext_w, int ext_h, RGBA_Font_Int *fi,
++@@ -174,33 +186,91 @@
++ {
++    int pen_x, pen_y;
++    int chr;
+++   int last_chr = 0; /* the last non compositing char */
+++   int current_char = 0; /* the index of the current char */
+++   
++    FT_Face pface = NULL;
++    FT_UInt prev_index;
++    DATA32 *im;
++    int c;
++ 
+++
+++#ifdef INTERNATIONAL_SUPPORT
+++   int bidi_err = 0;
+++   /*FIXME: should get the direction by parmater */
+++   FriBidiCharType direction = FRIBIDI_TYPE_ON;
+++   FriBidiLevel *level_list;
+++
+++   /* change the text to visual ordering and update the level list */
+++   {
+++      char *tmp = evas_intl_utf8_to_visual(text, &bidi_err, &direction, &level_list);
+++      text = (tmp) ? tmp : text;
+++   }
+++#endif
+++
++    pen_x = x;
++    pen_y = y;
++    prev_index = 0;
++    im = dst->image.data;
++-   for (c = 0, chr = 0; text[chr];)
+++
+++   for (current_char = 0, c = 0, chr = 0; text[chr]; current_char++)
++      {
++ 	FT_UInt index;
++ 	RGBA_Font_Glyph *fg;
++ 	int chr_x, chr_y;
++ 	int gl, kern;
++-
+++	/*FIXME: this function returns a unicode value, I may
+++	 * just as well use the unicode out instead of switching to utf8
+++	 * again. */
+++	last_chr = chr;
++ 	gl = evas_common_font_utf8_get_next((unsigned char *)text, &chr);
++ 	if (gl == 0) break;
+++		
++ 	index = evas_common_font_glyph_search(fn, &fi, gl);
++-	/* hmmm kerning means i can't sanely do my own cached metric tables! */
++-	/* grrr - this means font face sharing is kinda... not an option if */
++-	/* you want performance */
++-        if ((use_kerning) && (prev_index) && (index) &&
++-	    (pface == fi->src->ft.face))
++-	  if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
++-	    pen_x += kern;
++ 
+++	/* we only need kerning and moving visually if there's already
+++	 * an index before and we are not handling a composited char */
+++	if (prev_index && !evas_intl_is_composite(chr)) {
+++	  /* adding the previous characters spacing */
+++	  pen_x += fg->glyph->advance.x >> 16;
+++
+++	  /* hmmm kerning means i can't sanely do my own cached metric tables! */
+++	  /* grrr - this means font face sharing is kinda... not an option if */
+++	  /* you want performance */
+++	  if ((use_kerning) && (prev_index) && (index) &&
+++	     (pface == fi->src->ft.face)) {
+++		  
+++#ifdef INTERNATIONAL_SUPPORT
+++	    /* if it's rtl, the kerning matching should be reversed, i.e prev
+++	    * index is now the index and the other way around. */
+++	    if (evas_intl_is_rtl_char(level_list, current_char)) {
+++	      if (evas_common_font_query_kerning(fi, index, prev_index, &kern)) 
+++  	       pen_x += kern;
+++  	    }
+++	    else
+++#endif
+++
+++	    {
+++
+++	      if (evas_common_font_query_kerning(fi, prev_index, index, &kern)) 
+++	        pen_x += kern;  
+++	    }
+++	  }
+++
+++          /* not a compositing char, so mark it as the last non compositing used */
+++	  last_chr = chr;
+++	}
+++/* don't allow invalid compisition, is there even such a thing? */
+++#if 0
+++	else if (evas_intl_is_composite(chr)) {
+++	  /* if this char can't be composited with the previous, skip */
+++	  if (! evas_intl_is_composite_pair(last_chr, chr))
+++	    continue ;
+++	}
+++#endif
+++	
+++
+++	
++ 	pface = fi->src->ft.face;
++ 	fg = evas_common_font_int_cache_glyph_get(fi, index);
++ 	if (!fg) continue;
++@@ -339,14 +409,20 @@
++ 			      }
++ 			 }
++ 		       c++;
+++		       
++ 		    }
++ 	       }
++ 	  }
++ 	else
++ 	  break;
++-	pen_x += fg->glyph->advance.x >> 16;
++ 	prev_index = index;
++      }
+++#ifdef INTERNATIONAL_SUPPORT
+++   if (bidi_err < 0) {
+++   	free(level_list);
+++   	free(text);
+++   }
+++#endif
++ }
++ 
++ EAPI void
++Index: src/lib/engines/common/evas_intl/evas_intl_arabic.c
++===================================================================
++--- evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c	(revision 0)
+++++ evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c	(revision 0)
++@@ -0,0 +1,270 @@
+++/* Authors:
+++ * 	Tom Hacohen (tom@stsob.com)
+++ */
+++
+++#include "../evas_intl_utils.h"
+++
+++#ifdef ARABIC_SUPPORT
+++/* arabic compositing */
+++/*FIXME: fix arabic diactricts and more */
+++#define ARABIC_ETNAHTA 		0x0591 /* first diacritic in arabic */
+++#define ARABIC_MARK_UPPER_DOT	0x05C4 /* last diacritic in arabic */
+++/* arabic input forms */
+++#define ARABIC_ALEPH		0x0627
+++#define ARABIC_BET		0x0628
+++#define ARABIC_TAW		0x062A
+++#define ARABIC_TA		0x062B
+++#define ARABIC_GIMEL		0x062C
+++#define ARABIC_HETH		0x062D
+++#define ARABIC_HA		0x062E
+++#define	ARABIC_DALET		0x062F
+++#define ARABIC_DAL		0x0630
+++#define ARABIC_RESH		0x0631
+++#define ARABIC_ZAYIN		0x0632
+++#define ARABIC_SHIN		0x0633
+++#define ARABIC_SH		0x0634
+++#define ARABIC_TSADE		0x0635
+++#define ARABIC_DAD		0x0636
+++#define ARABIC_TETH		0x0637
+++#define ARABIC_ZA		0x0638
+++#define ARABIC_AYIN		0x0639
+++#define ARABIC_GHAIN		0x063A
+++#define ARABIC_PE		0x0641
+++#define ARABIC_QOPH		0x0642
+++#define ARABIC_KAPH		0x0643
+++#define ARABIC_LAMED		0x0644
+++#define ARABIC_MEM		0x0645
+++#define ARABIC_NUN		0x0646
+++#define ARABIC_HE		0x0647
+++#define ARABIC_WAW		0x0648
+++#define ARABIC_YODH		0x064A
+++/* arabic contextual forms */
+++#define ARABIC_ISOLATED_ALEPH	0xFE8D
+++#define ARABIC_ISOLATED_BET	0xFE8F
+++#define ARABIC_ISOLATED_TAW	0xFE95
+++#define ARABIC_ISOLATED_TA	0xFE99
+++#define ARABIC_ISOLATED_GIMEL	0xFE9D
+++#define ARABIC_ISOLATED_HETH	0xFEA1
+++#define ARABIC_ISOLATED_HA	0xFEA5
+++#define	ARABIC_ISOLATED_DALET	0xFEA9
+++#define ARABIC_ISOLATED_DAL	0xFEAB
+++#define ARABIC_ISOLATED_RESH	0xFEAD
+++#define ARABIC_ISOLATED_ZAYIN	0xFEAF
+++#define ARABIC_ISOLATED_SHIN	0xFEB1
+++#define ARABIC_ISOLATED_SH	0xFEB5
+++#define ARABIC_ISOLATED_TSADE	0xFEB9
+++#define ARABIC_ISOLATED_DAD	0xFEBD
+++#define ARABIC_ISOLATED_TETH	0xFEC1
+++#define ARABIC_ISOLATED_ZA	0xFEC5
+++#define ARABIC_ISOLATED_AYIN	0xFEC9
+++#define ARABIC_ISOLATED_GHAIN	0xFECD
+++#define ARABIC_ISOLATED_PE	0xFED1
+++#define ARABIC_ISOLATED_QOPH	0xFED5
+++#define ARABIC_ISOLATED_KAPH	0xFED9
+++#define ARABIC_ISOLATED_LAMED	0xFEDD
+++#define ARABIC_ISOLATED_MEM	0xFEE1
+++#define ARABIC_ISOLATED_NUN	0xFEE5
+++#define ARABIC_ISOLATED_HE	0xFEE9
+++#define ARABIC_ISOLATED_WAW	0xFEED
+++#define ARABIC_ISOLATED_YODH	0xFEF1
+++
+++#define ARABIC_IS_SPECIAL_LETTER(c)	((c) == ARABIC_ISOLATED_ALEPH ||	 \
+++					  (c) == ARABIC_ISOLATED_DALET || \
+++					  (c) == ARABIC_ISOLATED_DAL ||   \
+++					  (c) == ARABIC_ISOLATED_RESH ||	 \
+++					  (c) == ARABIC_ISOLATED_ZAYIN || \
+++					  (c) == ARABIC_ISOLATED_YODH)
+++#define ARABIC_IS_CONTEXT(c)	((c) >= ARABIC_ISOLATED_ALEPH && (c) <= ARABIC_ISOLATED_YODH)
+++#define ARABIC_IS_LETTER(c)	ARABIC_IS_CONTEXT(c)
+++/* used for arabic context logic */
+++/* each value is the offset from the regular char in unicode */
+++enum _ArabicContext {
+++		ARABIC_CONTEXT_ISOLATED = 0,
+++		ARABIC_CONTEXT_FINAL = 1,
+++		ARABIC_CONTEXT_INITIAL = 2,
+++		ARABIC_CONTEXT_MEDIAL = 3
+++};
+++typedef enum _ArabicContext ArabicContext;
+++
+++static FriBidiChar
+++_evas_intl_arabic_isolated_to_context(FriBidiChar chr, ArabicContext context);
+++
+++static int
+++_evas_intl_arabic_text_to_isolated(FriBidiChar *text);
+++
+++static FriBidiChar
+++_evas_intl_arabic_char_to_isolated(FriBidiChar chr);
+++
+++int
+++evas_intl_arabic_to_context(FriBidiChar *text)
+++{
+++	int i;
+++	int len;
+++	int start_of_context = 1; /* assume the first is special/non arabic */
+++	int last_is_isolated = 0;
+++	
+++	/* check for empty string */
+++	if (!*text)
+++		return;
+++
+++	len = _evas_intl_arabic_text_to_isolated(text);
+++
+++	for (i = 0 ; i < len ; i++)  {
+++		if (! ARABIC_IS_LETTER(text[i])) {
+++			/* mark so it won't be touched,
+++			 * though start formating */
+++			last_is_isolated = 0;
+++			start_of_context = 1;
+++			continue;
+++		}
+++		
+++		if (ARABIC_IS_SPECIAL_LETTER(text[i])) {
+++			if (!start_of_context)
+++				text[i] = _evas_intl_arabic_isolated_to_context(text[i], ARABIC_CONTEXT_FINAL);
+++			start_of_context = 1;
+++			last_is_isolated = 0;
+++			continue;
+++		}
+++
+++		if (start_of_context) {
+++			text[i] = _evas_intl_arabic_isolated_to_context(text[i], ARABIC_CONTEXT_ISOLATED);
+++			last_is_isolated = 1;
+++		}
+++		else {
+++			if (last_is_isolated) {
+++				text[i-1] = _evas_intl_arabic_isolated_to_context(text[i-1], ARABIC_CONTEXT_INITIAL);
+++			}
+++			text[i] = _evas_intl_arabic_isolated_to_context(text[i], ARABIC_CONTEXT_MEDIAL);
+++			last_is_isolated = 0;
+++		}
+++		/* spceial chars don't get here. */
+++		start_of_context = 0;
+++		
+++	}
+++	/* if it's arabic and not isolated, the last is always final */
+++	i--;
+++	if (ARABIC_IS_LETTER(text[i]) && !start_of_context && !last_is_isolated)
+++		text[i] = _evas_intl_arabic_isolated_to_context(
+++				_evas_intl_arabic_char_to_isolated(text[i]),
+++				ARABIC_CONTEXT_FINAL);
+++
+++	return len;
+++}
+++
+++static FriBidiChar
+++_evas_intl_arabic_char_to_isolated(FriBidiChar chr)
+++{
+++	switch (chr) {
+++		case ARABIC_ALEPH:
+++			return ARABIC_ISOLATED_ALEPH;
+++
+++		case ARABIC_BET:
+++			return ARABIC_ISOLATED_BET;
+++		
+++		case ARABIC_TAW:
+++			return ARABIC_ISOLATED_TAW;
+++
+++		case ARABIC_TA:
+++			return ARABIC_ISOLATED_TA;
+++		
+++		case ARABIC_GIMEL:
+++			return ARABIC_ISOLATED_GIMEL;
+++		
+++		case ARABIC_HETH:
+++			return ARABIC_ISOLATED_HETH;
+++		
+++		case ARABIC_HA:
+++			return ARABIC_ISOLATED_HA;
+++		
+++		case ARABIC_DALET:
+++			return ARABIC_ISOLATED_DALET;
+++		
+++		case ARABIC_DAL:
+++			return ARABIC_ISOLATED_DAL;
+++		
+++		case ARABIC_RESH:
+++			return ARABIC_ISOLATED_RESH;
+++		
+++		case ARABIC_ZAYIN:
+++			return ARABIC_ISOLATED_ZAYIN;
+++		
+++		case ARABIC_SHIN:
+++			return ARABIC_ISOLATED_SHIN;
+++		
+++		case ARABIC_SH:
+++			return ARABIC_ISOLATED_SH;
+++		
+++		case ARABIC_TSADE:
+++			return ARABIC_ISOLATED_TSADE;
+++		
+++		case ARABIC_DAD:
+++			return ARABIC_ISOLATED_DAD;
+++		
+++		case ARABIC_TETH:
+++			return ARABIC_ISOLATED_TETH;
+++		
+++		case ARABIC_ZA:
+++			return ARABIC_ISOLATED_ZA;
+++		
+++		case ARABIC_AYIN:
+++			return ARABIC_ISOLATED_AYIN;
+++		
+++		case ARABIC_GHAIN:
+++			return ARABIC_ISOLATED_GHAIN;
+++		
+++		case ARABIC_PE:
+++			return ARABIC_ISOLATED_PE;
+++		
+++		case ARABIC_QOPH:
+++			return ARABIC_ISOLATED_QOPH;
+++		
+++		case ARABIC_KAPH:
+++			return ARABIC_ISOLATED_KAPH;
+++		
+++		case ARABIC_LAMED:
+++			return ARABIC_ISOLATED_LAMED;
+++
+++		case ARABIC_MEM:
+++			return ARABIC_ISOLATED_MEM;
+++		
+++		case ARABIC_NUN:
+++			return ARABIC_ISOLATED_NUN;
+++		
+++		case ARABIC_HE:
+++			return ARABIC_ISOLATED_HE;
+++		
+++		case ARABIC_WAW:
+++			return ARABIC_ISOLATED_WAW;
+++		
+++		case ARABIC_YODH:
+++			return ARABIC_ISOLATED_YODH;
+++		default:
+++			return chr;
+++	}
+++}
+++
+++static FriBidiChar
+++_evas_intl_arabic_isolated_to_context(FriBidiChar chr, ArabicContext context)
+++{
+++	if (ARABIC_IS_SPECIAL_LETTER(chr)) {
+++		if (context == ARABIC_CONTEXT_INITIAL)
+++			return chr;
+++		else
+++			return chr + ARABIC_CONTEXT_FINAL;
+++	}
+++	return chr + context;
+++}
+++
+++static int
+++_evas_intl_arabic_text_to_isolated(FriBidiChar *text)
+++{
+++	int i=0;
+++	while (*text) {
+++		/* if it's not arabic it's just returned the same */
+++		*text = _evas_intl_arabic_char_to_isolated(*text);
+++		text++;
+++		i++;
+++	}
+++	return i;
+++}
+++#endif
++\ No newline at end of file
++Index: src/lib/engines/common/evas_intl/evas_intl_arabic.h
++===================================================================
++--- evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h	(revision 0)
+++++ evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h	(revision 0)
++@@ -0,0 +1,7 @@
+++#ifndef _EVAS_INTL_ARABIC
+++#define _EVAS_INTL_ARABIC
+++
+++int
+++evas_intl_arabic_to_context(FriBidiChar *text);
+++
+++#endif
++Index: src/lib/engines/common/evas_intl_utils.c
++===================================================================
++--- evas/src/lib/engines/common/evas_intl_utils.c	(revision 0)
+++++ evas/src/lib/engines/common/evas_intl_utils.c	(revision 0)
++@@ -0,0 +1,104 @@
+++/* Authors:
+++ * 	Tom Hacohen (tom@stsob.com)
+++ */
+++
+++#include <string.h>
+++#include <stdlib.h>
+++
+++#include "evas_intl_utils.h"
+++
+++#ifdef USE_FRIBIDI
+++#include <fribidi/fribidi.h>
+++
+++#define UTF8_BYTES_PER_CHAR 4
+++
+++/* FIXME: fribidi_utf8_to_unicode should use char len and not byte len!*/
+++char *
+++evas_intl_utf8_to_visual(const char *text, int *ret_len, FriBidiCharType *direction,
+++			FriBidiLevel **embedding_level_list)
+++{
+++	FriBidiChar *unicode_in, *unicode_out;
+++	char *text_out;
+++	size_t len;
+++	size_t byte_len;
+++
+++	if (!text)
+++		return NULL;
+++
+++	len = evas_string_char_len_get(text);
+++
+++	/* if there's nothing to do, return text
+++	 * one char draws are quite common */
+++	if (len <= 1)
+++		return text;
+++	
+++	byte_len = strlen(text); /* we need the actual number of bytes, not number of chars */
+++	
+++	unicode_in=(FriBidiChar *)malloc(sizeof(FriBidiChar)*(len+1));
+++	if (!unicode_in) {
+++		len = -1;
+++		goto error1;
+++		
+++	}
+++		
+++	len = fribidi_utf8_to_unicode(text, byte_len, unicode_in);
+++	
+++	unicode_out=(FriBidiChar *)malloc(sizeof(FriBidiChar)*(len+1));
+++	if (!unicode_out) {
+++		len = -2;
+++		goto error2;
+++		
+++	}
+++
+++	*embedding_level_list=(FriBidiLevel *)malloc(sizeof(FriBidiLevel)*len);
+++	if (!*embedding_level_list) {
+++		len = -3;
+++		goto error3;
+++		
+++	}
+++
+++#ifdef ARABIC_SUPPORT
+++	/* fix arabic context */
+++	evas_intl_arabic_to_context(unicode_in);
+++#endif	
+++	if (! fribidi_log2vis(unicode_in, len, direction,
+++			unicode_out, NULL, NULL, *embedding_level_list)) {
+++		len = -4;
+++		goto error3;
+++				
+++	}
+++
+++	text_out = malloc(UTF8_BYTES_PER_CHAR * len + 1);
+++	if (!text_out) {
+++		len = -5;
+++		goto error4;
+++	}
+++
+++	fribidi_unicode_to_utf8(unicode_out, len, text_out);
+++	
+++	free(unicode_in);
+++	free(unicode_out);
+++
+++	*ret_len = len;
+++	return text_out;
+++
+++	/* ERROR HANDLING */
+++error4:
+++	free(unicode_out);
+++error3:
+++	free(*embedding_level_list);
+++error2:
+++	free(unicode_in);
+++error1:
+++
+++	*ret_len = len;	
+++	return NULL;
+++}
+++
+++
+++int
+++evas_intl_is_rtl_char(FriBidiLevel *embedded_level_list, FriBidiStrIndex i)
+++{
+++	return fribidi_is_char_rtl(embedded_level_list, 0, i);
+++}
+++#endif
++Index: src/lib/engines/common/evas_intl_utils.h
++===================================================================
++--- evas/src/lib/engines/common/evas_intl_utils.h	(revision 0)
+++++ evas/src/lib/engines/common/evas_intl_utils.h	(revision 0)
++@@ -0,0 +1,29 @@
+++#ifndef _EVAS_INTL_UTILS
+++#define _EVAS_INTL_UTILS
+++
+++#include "config.h"
+++
+++#ifdef HAVE_FRIBIDI_FRIBIDI_H
+++#define USE_FRIBIDI 1
+++#define INTERNATIONAL_SUPPORT
+++#endif
+++
+++#ifdef USE_FRIBIDI
+++#include <fribidi/fribidi.h>
+++
+++/* whether should fix arabic specifix issues */
+++#define ARABIC_SUPPORT 1
+++
+++#ifdef ARABIC_SUPPORT
+++#include "evas_intl/evas_intl_arabic.h"
+++#endif
+++
+++int
+++evas_intl_is_rtl_char(FriBidiLevel *embedded_level_list, FriBidiStrIndex i);
+++
+++char *
+++evas_intl_utf8_to_visual(const char *text, int *ret_len, FriBidiCharType *direction,
+++			FriBidiLevel **embedding_level_list);
+++#endif
+++
+++#endif
++Index: src/lib/engines/common/evas_text_compositing.c
++===================================================================
++--- evas/src/lib/engines/common/evas_text_compositing.c	(revision 0)
+++++ evas/src/lib/engines/common/evas_text_compositing.c	(revision 0)
++@@ -0,0 +1,25 @@
+++/* Authors:
+++ * 	Tom Hacohen (tom@stsob.com)
+++ */
+++
+++/* hebrew compositing */
+++#define HEBREW_ETNAHTA 		0x0591 /* first diacritic in hebrew */
+++#define HEBREW_MARK_UPPER_DOT	0x05C4 /* last diacritic in hebrew */
+++#define HEBREW_ALEPH		0x05D0 /* first hebrew letter */
+++#define HEBREW_TAF		0x05EA /* last hebrew letter */
+++
+++#define HEBREW_IS_COMPOSITE(c)	((c) >= HEBREW_ETNAHTA && (c) <= HEBREW_MARK_UPPER_DOT)
+++#define HEBREW_IS_NON_COMPOSITE(c)  ((c) >= HEBREW_ALEPH && (c) <= HEBREW_TAF)
+++
+++int
+++evas_intl_is_composite(unsigned int chr)
+++{
+++	return HEBREW_IS_COMPOSITE(chr);
+++}
+++
+++int
+++evas_intl_is_composite_pair(unsigned int base, unsigned int diacritic)
+++{
+++	return (!base || HEBREW_IS_NON_COMPOSITE(base))
+++		&& HEBREW_IS_COMPOSITE(diacritic);
+++}
++Index: src/lib/engines/common/evas_text_compositing.h
++===================================================================
++--- evas/src/lib/engines/common/evas_text_compositing.h	(revision 0)
+++++ evas/src/lib/engines/common/evas_text_compositing.h	(revision 0)
++@@ -0,0 +1,9 @@
+++#ifndef _EVAS_TEXT_COMPOSITING
+++#define _EVAS_TEXT_COMPOSITING
+++
+++int
+++evas_intl_is_composite(unsigned int chr);
+++
+++int
+++evas_intl_is_composite_pair(unsigned int base, unsigned int diacritic);
+++#endif
++\ No newline at end of file
++Index: src/lib/engines/common/Makefile.am
++===================================================================
++--- evas/src/lib/engines/common/Makefile.am	(revision 39827)
+++++ evas/src/lib/engines/common/Makefile.am	(working copy)
++@@ -13,6 +13,9 @@
++ 		       @EET_CFLAGS@ @pthread_cflags@ \
++ 		       @WIN32_CFLAGS@ @EINA_CFLAGS@
++ 
+++libevas_engine_common_la_CFLAGS  = @FRIBIDI_CFLAGS@ 
+++libevas_engine_common_la_LDFLAGS  = @FRIBIDI_LIBS@
+++
++ noinst_LTLIBRARIES      = libevas_engine_common.la
++ libevas_engine_common_la_SOURCES  = \
++ evas_op_copy_main_.c \
++@@ -63,7 +66,10 @@
++ evas_scale_span.c \
++ evas_tiler.c \
++ evas_regionbuf.c \
++-evas_pipe.c
+++evas_pipe.c \
+++evas_text_compositing.c \
+++evas_intl_utils.c \
+++evas_intl/evas_intl_arabic.c
++ 
++ EXTRA_DIST = \
++ evas_blend.h \
++@@ -98,7 +104,7 @@
++ evas_scale_smooth_scaler_noscale.c \
++ evas_scale_smooth_scaler_up.c \
++ evas_scale_span.h \
++-evas_pipe.h
+++evas_pipe.h 
++ 
++ libevas_engine_common_la_DEPENDENCIES = \
++ $(top_builddir)/config.h
++Index: configure.ac
++===================================================================
++--- evas/configure.ac	(revision 39827)
+++++ evas/configure.ac	(working copy)
++@@ -137,6 +137,10 @@
++   [use_strict="no"]
++ )
++ 
+++##################################################################
+++#fribidi support - OPTIONAL!
+++PKG_CHECK_MODULES([FRIBIDI], [fribidi], ,HAS_BIDI=0)
+++AC_CHECK_HEADERS(fribidi/fribidi.h)
++ #####################################################################
++ # Check evas strong dependencie
++ 
+-- 
+1.6.2.2
+
