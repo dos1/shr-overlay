@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Feed"
-PR = "r10"
+PR = "r11"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -42,4 +42,5 @@ RDEPENDS_${PN} += "\
 		sms-sentry \
 		cellhunter \
 		dillo2 \
+		usbmode \
 "
