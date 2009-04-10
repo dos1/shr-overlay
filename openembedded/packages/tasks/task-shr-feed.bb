@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Feed"
-PR = "r13"
+PR = "r14"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -47,4 +47,5 @@ RDEPENDS_${PN} += "\
 		pyefl-sudoku \
 		tasks \
 		dates \
+		omnewrotate \
 "
