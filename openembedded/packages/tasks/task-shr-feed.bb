@@ -37,4 +37,9 @@ RDEPENDS_${PN} += "\
 		ffalarms \
 		libnotify \
 		accelges \
+		gpe-todo \
+		ebrainy \
+		sms-sentry \
+		cellhunter \
+		dillo2 \
 "
