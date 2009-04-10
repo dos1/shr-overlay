@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Feed"
-PR = "r12"
+PR = "r13"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -45,4 +45,6 @@ RDEPENDS_${PN} += "\
 		usbmode \
 		zenity \
 		pyefl-sudoku \
+		tasks \
+		dates \
 "
