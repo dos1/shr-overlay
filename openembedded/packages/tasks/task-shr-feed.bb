@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Feed"
-PR = "r11"
+PR = "r12"
 PV = "1.0"
 LICENSE = "GPL"
 
@@ -43,4 +43,6 @@ RDEPENDS_${PN} += "\
 		cellhunter \
 		dillo2 \
 		usbmode \
+		zenity \
+		pyefl-sudoku \
 "
