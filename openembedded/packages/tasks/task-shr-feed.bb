@@ -36,4 +36,5 @@ RDEPENDS_${PN} += "\
 		openbmap-logger \
 		ffalarms \
 		libnotify \
+		accelges \
 "
