@@ -35,4 +35,5 @@ RDEPENDS_${PN} += "\
 		shr-config \
 		openbmap-logger \
 		ffalarms \
+		libnotify \
 "
