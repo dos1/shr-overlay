@@ -3,7 +3,6 @@
 # work well with the C++ Standard Library. The libraries are
 # intended to be widely useful, and are in regular use by
 # thousands of programmers across a broad spectrum of applications.
-
 DESCRIPTION = "Free peer-reviewed portable C++ source libraries"
 HOMEPAGE = "http://www.boost.org/"
 SECTION = "libs"
@@ -11,30 +10,26 @@ DEPENDS = "boost-jam-native-3.1.17 zlib"
 PRIORITY = "optional"
 LICENSE = "Boost Software License"
 
-ARM_INSTRUCTION_SET = "arm"
+#ARM_INSTRUCTION_SET = "arm" # we can now (cross)compile it with thumb support thanks to one of the patches
 BOOST_VER = "${@"_".join(bb.data.getVar("PV",d,1).split("."))}"
 BOOST_MAJ = "${@"_".join(bb.data.getVar("PV",d,1).split(".")[0:2])}"
 BOOST_P = "boost_${BOOST_VER}"
 
-# You cen get a list of all the libs by (including quite some false positives):
-# find $BOOST_ROOT/libs -iname jamfile\* -exec grep '^lib boost_' {} \; | awk '{gsub("boost_","",$2);print $2;}'
-# I didn't find any other way (like investigating the Jamroot file) to list them. Pity.
-# False positives include: math_* is just math, there are no regex_extra,
-# wserialization, prg_exec_monitor, test_exec_monitor, unit_test_framework
-# MPI seems to have some extra treatment.
-# math seems to break in SHR (openmoko)
+S = "${WORKDIR}/${BOOST_P}"
+
 BOOST_LIBS ?= "\
 	date_time \
 	filesystem \
 	graph \
 	iostreams \
-#	math \
+	math \
 	program_options \
 	regex \
 	serialization \
 	signals \
 	system \
 	thread \
+	test \
 	wave \
 	"
 
@@ -46,13 +41,11 @@ BOOST_LIBS ?= "\
 #PYTHON_VERSION = "2.5"
 #BJAM_PYTHON += "-sPYTHON_VERSION=${PYTHON_VERSION} --with-python-root=${PYTHON_ROOT}"
 
-S = "${WORKDIR}/${BOOST_P}"
-
 # Make a package for each library, plus -dev
 PACKAGES = "${PN}-dbg ${BOOST_PACKAGES}"
 python __anonymous () {
     import bb
-
+    
     packages = []
     extras = [] 
     for lib in bb.data.getVar('BOOST_LIBS', d, 1).split( ):
@@ -80,34 +73,14 @@ PACKAGES += "${PN}"
 RRECOMMENDS_${PN} += "${BOOST_PACKAGES}"
 
 # to avoid GNU_HASH QA errors added LDFLAGS to ARCH; a little bit dirty but at least it works
-TARGET_CC_ARCH += " ${LDFLAGS}" 
+#TARGET_CC_ARCH += " ${LDFLAGS}" 
 
-# Quotation marks, there might be an easier way to do this, but I can't find
-# it.  The problem is that the user.hpp configuration file must receive a
-# pre-processor macro defined as the appropriate string - complete with "'s
-# around it.  (<> is a possibility here but the danger to that is that the
-# failure case interprets the < and > as shell redirections, creating
-# random files in the source tree.)
-#
-#bjam: '-DBOOST_PLATFORM_CONFIG=\"config\"'
-#do_compile: '-sGCC=... '"'-DBOOST_PLATFORM_CONFIG=\"config\"'"
-SQD = '"'
-EQD = '\"'
-#boost.bb:   "...  '-sGCC=... '${SQD}'-DBOOST_PLATFORM_CONFIG=${EQD}config${EQD}'${SQD} ..."
-BJAM_CONF = "${SQD}'-DBOOST_PLATFORM_CONFIG=${EQD}boost/config/platform/${TARGET_OS}.hpp${EQD}'${SQD}"
-
-# bzip2 and zip are disabled because... they're broken - the compilation simply
-# isn't working with bjam.  I guess they will fix it, but who needs it?  This
-# only affects the (new in 33) iostream library.
-BJAM_TOOLS   = "-sTOOLS=gcc \
-		'-sGCC=${CC} '${BJAM_CONF} \
-		'-sGXX=${CXX} '${BJAM_CONF} \
-		'-sGCC_INCLUDE_DIRECTORY=${STAGING_INCDIR}' \
-		'-sGCC_STDLIB_DIRECTORY=${STAGING_LIBDIR}' \
-		'-sNO_BZIP2=1' \
-		'-sNO_ZLIB=1' \
-		'-sBUILD=release <optimization>space <inlining>on <debug-symbols>off' \
-		'--layout=system' \
+BJAM_TOOLS   = "toolset=gcc \
+		--prefix=${prefix} \
+		--exec-prefix=${exec-prefix} \
+		-sNO_BZIP2=1 \
+		release optimization=space \
+		--layout=system \
 		"
 
 BJAM_OPTS    = '${BJAM_TOOLS} ${BJAM_PYTHON} \
@@ -118,12 +91,12 @@ do_configure_prepend() {
 	cp -f boost/config/platform/linux.hpp boost/config/platform/linux-gnueabi.hpp
 
 	echo 'using gcc : 4.3.1 : ${CXX} : compileflags -DBOOST_SP_USE_PTHREADS -I${includedir} linkflags -L${libdir} ;' >> ${S}/tools/build/v2/user-config.jam
+#       echo '#define BOOST_SP_USE_PTHREADS' >> ${S}/boost/config/user.hpp #this trick should have fixed the __sync_add_and_fetch_4  on arm <v6(has ldrex+strex) but it didn't
 }
 
 do_compile() {
 	set -ex
-	bjam ${BJAM_OPTS} --prefix=${prefix} \
-		--exec-prefix=${exec_prefix} \
+	bjam ${BJAM_OPTS} \
 		--libdir=${libdir} \
 		--includedir=${includedir}
 }
