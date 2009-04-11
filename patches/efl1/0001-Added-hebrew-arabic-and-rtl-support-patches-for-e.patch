@@ -1,13 +1,13 @@
-From 0608ea0e46572717579f73857e821bc2c50d5491 Mon Sep 17 00:00:00 2001
+From 8fc29c3d86562a1fed6a79d11fede5d142168626 Mon Sep 17 00:00:00 2001
 From: Tom Hacohen <tom@nospam>
-Date: Fri, 10 Apr 2009 22:28:02 +0300
-Subject: [PATCH] Added hebrew, arabic and rtl support patches for e
+Date: Sat, 11 Apr 2009 16:30:55 +0300
+Subject: [PATCH] Fixed hebrew, arabic and rtl support
 
 ---
  packages/efl1/evas.inc                             |    4 +-
  .../efl1/evas/add_rtl_compositing_arabic.patch     |  626 ++++++++++++++++++++
- packages/efl1/evas_svn.bb                          |    7 +-
- 3 files changed, 635 insertions(+), 2 deletions(-)
+ packages/efl1/evas_svn.bb                          |    2 +-
+ 3 files changed, 630 insertions(+), 2 deletions(-)
  create mode 100644 packages/efl1/evas/add_rtl_compositing_arabic.patch
 
 diff --git a/packages/efl1/evas.inc b/packages/efl1/evas.inc
@@ -665,14 +665,13 @@ index 0000000..fd1364f
 + # Check evas strong dependencie
 + 
 diff --git a/packages/efl1/evas_svn.bb b/packages/efl1/evas_svn.bb
-index 02d4cf4..57120fa 100644
+index 02d4cf4..7c6605e 100644
 --- a/packages/efl1/evas_svn.bb
 +++ b/packages/efl1/evas_svn.bb
-@@ -1,5 +1,10 @@
+@@ -1,5 +1,5 @@
  require evas.inc
 -PR = "r1"
 +PR = "r1.3"
-+
  
  EXTRA_OECONF = "\
  		--x-includes=${STAGING_INCDIR}/X11  \
