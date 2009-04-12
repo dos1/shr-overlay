@@ -104,7 +104,9 @@
 -
     trigger: IdleState()
     filters: HasAttr(status, "idle_dim")
-    actions: Command('xset -display localhost:0 s activate')
+    actions:
+             - Command('xset -display localhost:0 s blank')
+             - Command('xset -display localhost:0 s activate')
 #-
 #    trigger: IdleState()
 #    filters: HasAttr(status, "idle_prelock")
