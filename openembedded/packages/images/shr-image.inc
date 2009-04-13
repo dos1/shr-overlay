@@ -96,6 +96,15 @@ shr_rootfs_postprocess() {
     echo "ppp_generic" > ./etc/modutils/ppp_generic
     echo "snd_pcm_oss" > ./etc/modutils/snd_pcm_oss
 
+    #set up some variables to improve default settings
+    echo "export DISPLAY=localhost:0" >> ./etc/profile
+    echo "export HISTFILESIZE=1000" >> ./etc/profile
+    echo "export HISTSIZE=1000" >> ./etc/profile
+    echo "alias rm='rm -i'; alias cp='cp -i'; alias mv='mv -i'" >> ./etc/profile
+    echo "alias la='ls $LS_OPTIONS -ltrA'; alias lh='ls $LS_OPTIONS -ltrh'; alias lr='ls $LS_OPTIONS -ltr';" >> ./etc/profile
+    echo "alias lR='ls $LS_OPTIONS -ltrR'" >> ./etc/profile
+
+    #fix sound in elementary-alarm
     /bin/sh -c "cd ./usr/share; ln -s elementary-alarm elementary_alarm"
 
     cd $curdir
