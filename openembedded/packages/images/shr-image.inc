@@ -43,7 +43,7 @@ inherit image
 
 # perform some SHR convenience tweaks to the rootfs
 shr_rootfs_postprocess() {
-    dirs=`find ${FILESDIR} -type d -printf "%P\n" | grep -v "^.$" | grep -v ".git"`
+    dirs=`find ${FILESDIR} -type d -printf "%P\n" | grep -v "^.$" | grep -v ".git" | grep -v "^./patches$"`
     for dir in $dirs; do
         mkdir -p ${IMAGE_ROOTFS}/$dir
     done
@@ -106,6 +106,11 @@ shr_rootfs_postprocess() {
 
     #fix sound in elementary-alarm
     /bin/sh -c "cd ./usr/share; ln -s elementary-alarm elementary_alarm"
+
+    patches=`find ./patches`
+    for file in $patches; do
+        patch < $file
+    done
 
     cd $curdir
 }
