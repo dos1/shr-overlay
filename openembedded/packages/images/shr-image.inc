@@ -88,11 +88,13 @@ shr_rootfs_postprocess() {
     #font cache optimization, persistent cache
     sed -i "s/<cachedir>.*\/var\/cache\/\(.*\)<\/cachedir>/<cachedir>\/var\/local\/\1<\/cachedir>/g" ./etc/fonts/fonts.conf
 
-    #piss of debian users with a nice gentoo-like PS1
+    #set up a nice gentoo-like PS1
     echo "export PS1=\"\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] \"">> ./etc/profile
 
-    #load g_ether module on boot
+    #load modules on boot
     echo "g_ether" > ./etc/modutils/g_ether
+    echo "ppp_generic" > ./etc/modutils/ppp_generic
+    echo "snd_pcm_oss" > ./etc/modutils/snd_pcm_oss
 
     /bin/sh -c "cd ./usr/share; ln -s elementary-alarm elementary_alarm"
 
