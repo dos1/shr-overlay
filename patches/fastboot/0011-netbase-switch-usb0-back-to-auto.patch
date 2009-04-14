@@ -7,14 +7,14 @@ usb networking seems not to work with allow-hotplug
 
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/netbase/netbase/om-gta01/interfaces |    2 +-
- packages/netbase/netbase/om-gta02/interfaces |    2 +-
+ recipes/netbase/netbase/om-gta01/interfaces |    2 +-
+ recipes/netbase/netbase/om-gta02/interfaces |    2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/packages/netbase/netbase/om-gta01/interfaces b/packages/netbase/netbase/om-gta01/interfaces
+diff --git a/recipes/netbase/netbase/om-gta01/interfaces b/recipes/netbase/netbase/om-gta01/interfaces
 index 56c485e..df85b1e 100644
---- a/packages/netbase/netbase/om-gta01/interfaces
-+++ b/packages/netbase/netbase/om-gta01/interfaces
+--- a/recipes/netbase/netbase/om-gta01/interfaces
++++ b/recipes/netbase/netbase/om-gta01/interfaces
 @@ -16,7 +16,7 @@ iface eth1 inet dhcp
  
  # Ethernet/RNDIS gadget (g_ether)
@@ -24,10 +24,10 @@ index 56c485e..df85b1e 100644
  iface usb0 inet static
  	address 192.168.0.202
  	netmask 255.255.255.0
-diff --git a/packages/netbase/netbase/om-gta02/interfaces b/packages/netbase/netbase/om-gta02/interfaces
+diff --git a/recipes/netbase/netbase/om-gta02/interfaces b/recipes/netbase/netbase/om-gta02/interfaces
 index ceedfc5..6caf915 100644
---- a/packages/netbase/netbase/om-gta02/interfaces
-+++ b/packages/netbase/netbase/om-gta02/interfaces
+--- a/recipes/netbase/netbase/om-gta02/interfaces
++++ b/recipes/netbase/netbase/om-gta02/interfaces
 @@ -16,7 +16,7 @@ iface eth1 inet dhcp
  
  # Ethernet/RNDIS gadget (g_ether)

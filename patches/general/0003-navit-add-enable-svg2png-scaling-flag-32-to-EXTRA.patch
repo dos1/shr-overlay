@@ -4,13 +4,13 @@ Date: Mon, 8 Dec 2008 17:08:38 +0100
 Subject: [PATCH] navit: add --enable-svg2png-scaling-flag=32 to EXTRA_OECONF
 
 ---
- packages/navit/navit.inc |    2 +-
+ recipes/navit/navit.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/packages/navit/navit.inc b/packages/navit/navit.inc
+diff --git a/recipes/navit/navit.inc b/recipes/navit/navit.inc
 index 8db0595..e76aba7 100644
---- a/packages/navit/navit.inc
-+++ b/packages/navit/navit.inc
+--- a/recipes/navit/navit.inc
++++ b/recipes/navit/navit.inc
 @@ -6,7 +6,7 @@ RRECOMMENDS = "gpsd speechd flite"
  
  inherit autotools

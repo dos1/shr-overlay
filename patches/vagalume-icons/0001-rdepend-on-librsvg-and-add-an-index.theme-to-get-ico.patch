@@ -5,16 +5,16 @@ Subject: [PATCH] rdepend on librsvg and add an index.theme to get icons
 
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/vagalume/files/index.theme |    8 ++++++++
- packages/vagalume/vagalume_0.7.bb   |    7 +++++++
+ recipes/vagalume/files/index.theme |    8 ++++++++
+ recipes/vagalume/vagalume_0.7.bb   |    7 +++++++
  2 files changed, 15 insertions(+), 0 deletions(-)
- create mode 100644 packages/vagalume/files/index.theme
+ create mode 100644 recipes/vagalume/files/index.theme
 
-diff --git a/packages/vagalume/files/index.theme b/packages/vagalume/files/index.theme
+diff --git a/recipes/vagalume/files/index.theme b/recipes/vagalume/files/index.theme
 new file mode 100644
 index 0000000..453acf0
 --- /dev/null
-+++ b/packages/vagalume/files/index.theme
++++ b/recipes/vagalume/files/index.theme
 @@ -0,0 +1,8 @@
 +[Icon Theme]
 +Name=Vagalume
@@ -24,10 +24,10 @@ index 0000000..453acf0
 +[scalable/actions]
 +Size=48
 +Type=Scalable
-diff --git a/packages/vagalume/vagalume_0.7.bb b/packages/vagalume/vagalume_0.7.bb
+diff --git a/recipes/vagalume/vagalume_0.7.bb b/recipes/vagalume/vagalume_0.7.bb
 index f541dcd..d38cbe0 100644
---- a/packages/vagalume/vagalume_0.7.bb
-+++ b/packages/vagalume/vagalume_0.7.bb
+--- a/recipes/vagalume/vagalume_0.7.bb
++++ b/recipes/vagalume/vagalume_0.7.bb
 @@ -3,12 +3,19 @@ AUTHOR = "agarcia@igalia.com"
  HOMEPAGE = "http://people.igalia.com/berto/"
  SECTION = "x11"

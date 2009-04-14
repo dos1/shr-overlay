@@ -6,16 +6,16 @@ Subject: [PATCH] opkg: Do not run opkg-cl configure everytime.
 Author: Chia-I Wu <olv@openmoko.com>
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/opkg/opkg_svn.bb |    4 +++-
+ recipes/opkg/opkg_svn.bb |    4 +++-
  1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/packages/opkg/opkg_svn.bb b/packages/opkg/opkg_svn.bb
+diff --git a/recipes/opkg/opkg_svn.bb b/recipes/opkg/opkg_svn.bb
 index 4cf1c5c..c37b98e 100644
---- a/packages/opkg/opkg_svn.bb
-+++ b/packages/opkg/opkg_svn.bb
+--- a/recipes/opkg/opkg_svn.bb
++++ b/recipes/opkg/opkg_svn.bb
 @@ -18,7 +18,9 @@ if [ "x$D" != "x" ]; then
  	install -d $D${sysconfdir}/rcS.d
- 	# this happens at S98 where our good 'ole packages script used to run
+ 	# this happens at S98 where our good 'ole recipes script used to run
  	echo "#!/bin/sh
 -opkg-cl configure
 +if ! test -f /etc/.configured; then

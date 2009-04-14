@@ -4,11 +4,11 @@ Date:   Mon Mar 30 08:54:53 2009 +0200
 
     patch obexftp to include bluetooth.h if necessary
 
-diff --git a/packages/obexftp/files/include-bluetooth.h.patch b/packages/obexftp/files/include-bluetooth.h.patch
+diff --git a/recipes/obexftp/files/include-bluetooth.h.patch b/recipes/obexftp/files/include-bluetooth.h.patch
 new file mode 100644
 index 0000000..4dbd3fe
 --- /dev/null
-+++ b/packages/obexftp/files/include-bluetooth.h.patch
++++ b/recipes/obexftp/files/include-bluetooth.h.patch
 @@ -0,0 +1,12 @@
 +--- o/apps/obexftpd.c	2008-06-15 22:18:58.000000000 +0300
 ++++ n/apps/obexftpd.c	2008-12-09 00:01:20.000000000 +0200
@@ -22,10 +22,10 @@ index 0000000..4dbd3fe
 + #endif
 + 
 + /* just until there is a server layer in obexftp */
-diff --git a/packages/obexftp/obexftp_0.22.bb b/packages/obexftp/obexftp_0.22.bb
+diff --git a/recipes/obexftp/obexftp_0.22.bb b/recipes/obexftp/obexftp_0.22.bb
 index 89e10a7..7b1f9ff 100644
---- a/packages/obexftp/obexftp_0.22.bb
-+++ b/packages/obexftp/obexftp_0.22.bb
+--- a/recipes/obexftp/obexftp_0.22.bb
++++ b/recipes/obexftp/obexftp_0.22.bb
 @@ -3,9 +3,9 @@ SECTION = "console/network"
  HOMEPAGE = "http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp"
  LICENSE = "GPL"

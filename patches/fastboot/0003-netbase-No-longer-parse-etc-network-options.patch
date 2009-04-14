@@ -6,18 +6,18 @@ Subject: [PATCH] netbase: No longer parse /etc/network/options.
 Author: Chia-I Wu <olv@openmoko.com>
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/netbase/netbase/openmoko/init    |   46 +++++++++++++++++++++++++++++
- packages/netbase/netbase/openmoko/options |    1 +
- packages/netbase/netbase_4.21.bb          |    2 +-
+ recipes/netbase/netbase/openmoko/init    |   46 +++++++++++++++++++++++++++++
+ recipes/netbase/netbase/openmoko/options |    1 +
+ recipes/netbase/netbase_4.21.bb          |    2 +-
  3 files changed, 48 insertions(+), 1 deletions(-)
- create mode 100644 packages/netbase/netbase/openmoko/init
- create mode 100644 packages/netbase/netbase/openmoko/options
+ create mode 100644 recipes/netbase/netbase/openmoko/init
+ create mode 100644 recipes/netbase/netbase/openmoko/options
 
-diff --git a/packages/netbase/netbase/openmoko/init b/packages/netbase/netbase/openmoko/init
+diff --git a/recipes/netbase/netbase/openmoko/init b/recipes/netbase/netbase/openmoko/init
 new file mode 100644
 index 0000000..32810dc
 --- /dev/null
-+++ b/packages/netbase/netbase/openmoko/init
++++ b/recipes/netbase/netbase/openmoko/init
 @@ -0,0 +1,46 @@
 +#!/bin/sh
 +#
@@ -65,17 +65,17 @@ index 0000000..32810dc
 +
 +exit 0
 +
-diff --git a/packages/netbase/netbase/openmoko/options b/packages/netbase/netbase/openmoko/options
+diff --git a/recipes/netbase/netbase/openmoko/options b/recipes/netbase/netbase/openmoko/options
 new file mode 100644
 index 0000000..1cbffcb
 --- /dev/null
-+++ b/packages/netbase/netbase/openmoko/options
++++ b/recipes/netbase/netbase/openmoko/options
 @@ -0,0 +1 @@
 +# DEPRECATED by /etc/sysctl.conf
-diff --git a/packages/netbase/netbase_4.21.bb b/packages/netbase/netbase_4.21.bb
+diff --git a/recipes/netbase/netbase_4.21.bb b/recipes/netbase/netbase_4.21.bb
 index 6a8b843..f9b0cb3 100644
---- a/packages/netbase/netbase_4.21.bb
-+++ b/packages/netbase/netbase_4.21.bb
+--- a/recipes/netbase/netbase_4.21.bb
++++ b/recipes/netbase/netbase_4.21.bb
 @@ -2,7 +2,7 @@ DESCRIPTION = "This package provides the necessary \
  infrastructure for basic TCP/IP based networking."
  SECTION = "base"

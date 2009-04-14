@@ -5,13 +5,13 @@ Subject: [PATCH] dbus: start at 3
 
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/dbus/dbus.inc |    2 +-
+ recipes/dbus/dbus.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/packages/dbus/dbus.inc b/packages/dbus/dbus.inc
+diff --git a/recipes/dbus/dbus.inc b/recipes/dbus/dbus.inc
 index 64ef21c..faca9b1 100644
---- a/packages/dbus/dbus.inc
-+++ b/packages/dbus/dbus.inc
+--- a/recipes/dbus/dbus.inc
++++ b/recipes/dbus/dbus.inc
 @@ -88,4 +88,4 @@ chmod u+s /usr/libexec/dbus-daemon-launch-helper
  CONFFILES_${PN} = "${sysconfdir}/dbus-1/system.conf ${sysconfdir}/dbus-1/session.conf"
  
