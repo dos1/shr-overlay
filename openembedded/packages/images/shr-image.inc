@@ -113,11 +113,6 @@ shr_rootfs_postprocess() {
     #fix sound in elementary-alarm
     /bin/sh -c "cd ./usr/share; ln -s elementary-alarm elementary_alarm"
 
-    patches=`find ./patches -type f | grep -v ".git"`
-    for file in $patches; do
-        patch < $file
-    done
-
     cd $curdir
 }
 
