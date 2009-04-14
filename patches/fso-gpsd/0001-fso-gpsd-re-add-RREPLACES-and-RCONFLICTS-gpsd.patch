@@ -5,13 +5,13 @@ Subject: [PATCH] fso-gpsd: (re-)add RREPLACES and RCONFLICTS = gpsd
 
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/freesmartphone/fso-gpsd_git.bb |    5 ++---
+ recipes/freesmartphone/fso-gpsd_git.bb |    5 ++---
  1 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/packages/freesmartphone/fso-gpsd_git.bb b/packages/freesmartphone/fso-gpsd_git.bb
+diff --git a/recipes/freesmartphone/fso-gpsd_git.bb b/recipes/freesmartphone/fso-gpsd_git.bb
 index cde1bb6..729630a 100644
---- a/packages/freesmartphone/fso-gpsd_git.bb
-+++ b/packages/freesmartphone/fso-gpsd_git.bb
+--- a/recipes/freesmartphone/fso-gpsd_git.bb
++++ b/recipes/freesmartphone/fso-gpsd_git.bb
 @@ -24,6 +24,5 @@ do_install_append() {
  FILES_${PN} += "${sysconfdir}"
  RDEPENDS_${PN} = "frameworkd"

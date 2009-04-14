@@ -7,10 +7,10 @@ Subject: [PATCH] speech-dispatcher: configure without pulseaudio
  .../speech-dispatcher/speech-dispatcher_0.6.6.bb   |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/packages/speech-dispatcher/speech-dispatcher_0.6.6.bb b/packages/speech-dispatcher/speech-dispatcher_0.6.6.bb
+diff --git a/recipes/speech-dispatcher/speech-dispatcher_0.6.6.bb b/recipes/speech-dispatcher/speech-dispatcher_0.6.6.bb
 index 105c323..145f075 100644
---- a/packages/speech-dispatcher/speech-dispatcher_0.6.6.bb
-+++ b/packages/speech-dispatcher/speech-dispatcher_0.6.6.bb
+--- a/recipes/speech-dispatcher/speech-dispatcher_0.6.6.bb
++++ b/recipes/speech-dispatcher/speech-dispatcher_0.6.6.bb
 @@ -16,7 +16,7 @@ SRC_URI = "http://www.freebsoft.org/pub/projects/speechd/${PN}-${PV}.tar.gz \
  	   file://configSpeechd.conf.in_00.patch;patch=1"
  

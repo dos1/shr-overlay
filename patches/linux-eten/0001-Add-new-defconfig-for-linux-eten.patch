@@ -4,13 +4,13 @@ Date: Wed, 8 Apr 2009 13:38:40 +0200
 Subject: [PATCH] Add new defconfig for linux-eten
 
 ---
- packages/linux/linux-eten/defconfig |   45 ++++++++++++++++++-----------------
+ recipes/linux/linux-eten/defconfig |   45 ++++++++++++++++++-----------------
  1 files changed, 23 insertions(+), 22 deletions(-)
 
-diff --git a/packages/linux/linux-eten/defconfig b/packages/linux/linux-eten/defconfig
+diff --git a/recipes/linux/linux-eten/defconfig b/recipes/linux/linux-eten/defconfig
 index 0daa6c6..a1c87c1 100644
---- a/packages/linux/linux-eten/defconfig
-+++ b/packages/linux/linux-eten/defconfig
+--- a/recipes/linux/linux-eten/defconfig
++++ b/recipes/linux/linux-eten/defconfig
 @@ -1,7 +1,7 @@
  #
  # Automatically generated make config: don't edit

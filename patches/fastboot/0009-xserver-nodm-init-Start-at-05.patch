@@ -10,10 +10,10 @@ Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
  .../xserver-nodm-init/xserver-nodm                 |   19 +++++++------------
  2 files changed, 11 insertions(+), 13 deletions(-)
 
-diff --git a/packages/xserver-kdrive-common/xserver-nodm-init.bb b/packages/xserver-kdrive-common/xserver-nodm-init.bb
+diff --git a/recipes/xserver-kdrive-common/xserver-nodm-init.bb b/recipes/xserver-kdrive-common/xserver-nodm-init.bb
 index eee2b8a..cb5a9fa 100644
---- a/packages/xserver-kdrive-common/xserver-nodm-init.bb
-+++ b/packages/xserver-kdrive-common/xserver-nodm-init.bb
+--- a/recipes/xserver-kdrive-common/xserver-nodm-init.bb
++++ b/recipes/xserver-kdrive-common/xserver-nodm-init.bb
 @@ -2,7 +2,7 @@ DESCRIPTION = "Simple Xserver Init Script (no dm)"
  LICENSE = "GPL"
  SECTION = "x11"
@@ -30,10 +30,10 @@ index eee2b8a..cb5a9fa 100644
 +
 +# start earlier under the assumption that xserver takes seconds to start
 +INITSCRIPT_PARAMS_openmoko = "start 5 5 2 . stop 20 0 1 6 ."
-diff --git a/packages/xserver-kdrive-common/xserver-nodm-init/xserver-nodm b/packages/xserver-kdrive-common/xserver-nodm-init/xserver-nodm
+diff --git a/recipes/xserver-kdrive-common/xserver-nodm-init/xserver-nodm b/recipes/xserver-kdrive-common/xserver-nodm-init/xserver-nodm
 index 2251c6a..28ba65c 100755
---- a/packages/xserver-kdrive-common/xserver-nodm-init/xserver-nodm
-+++ b/packages/xserver-kdrive-common/xserver-nodm-init/xserver-nodm
+--- a/recipes/xserver-kdrive-common/xserver-nodm-init/xserver-nodm
++++ b/recipes/xserver-kdrive-common/xserver-nodm-init/xserver-nodm
 @@ -19,18 +19,13 @@ done
  
  case "$1" in

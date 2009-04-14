@@ -2,11 +2,11 @@ Copy Steve Sakoman's patch to fix the install failure on build.
 
 Signed-off-by: Mike Westerhof <mwester@dls.net>
 
-diff --git a/packages/linux/linux-openmoko-2.6.28/fix-install.patch b/packages/linux/linux-openmoko-2.6.28/fix-install.patch
+diff --git a/recipes/linux/linux-openmoko-2.6.28/fix-install.patch b/recipes/linux/linux-openmoko-2.6.28/fix-install.patch
 new file mode 100644
 index 0000000..1234567
 --- /dev/null
-+++ b/packages/linux/linux-openmoko-2.6.28/fix-install.patch
++++ b/recipes/linux/linux-openmoko-2.6.28/fix-install.patch
 @@ -0,0 +1,23 @@
 +From: Steve Sakoman <steve@sakoman.com>
 +Date: Mon, 18 Aug 2008 16:07:31 +0000 (-0700)

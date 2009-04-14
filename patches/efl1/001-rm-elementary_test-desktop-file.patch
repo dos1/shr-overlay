@@ -1,7 +1,7 @@
-diff --git a/packages/efl1/elementary_svn.bb b/packages/efl1/elementary_svn.bb
+diff --git a/recipes/efl1/elementary_svn.bb b/recipes/efl1/elementary_svn.bb
 index 82a099f..69e78b0 100644
---- a/packages/efl1/elementary_svn.bb
-+++ b/packages/efl1/elementary_svn.bb
+--- a/recipes/efl1/elementary_svn.bb
++++ b/recipes/efl1/elementary_svn.bb
 @@ -20,6 +20,12 @@ do_compile_append() {
                    elementary.pc
  }

@@ -4,16 +4,16 @@ Date: Sat, 11 Apr 2009 16:30:55 +0300
 Subject: [PATCH] Fixed hebrew, arabic and rtl support
 
 ---
- packages/efl1/evas.inc                             |    4 +-
+ recipes/efl1/evas.inc                             |    4 +-
  .../efl1/evas/add_rtl_compositing_arabic.patch     |  626 ++++++++++++++++++++
- packages/efl1/evas_svn.bb                          |    2 +-
+ recipes/efl1/evas_svn.bb                          |    2 +-
  3 files changed, 630 insertions(+), 2 deletions(-)
- create mode 100644 packages/efl1/evas/add_rtl_compositing_arabic.patch
+ create mode 100644 recipes/efl1/evas/add_rtl_compositing_arabic.patch
 
-diff --git a/packages/efl1/evas.inc b/packages/efl1/evas.inc
+diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
 index ff7a184..7c16863 100644
---- a/packages/efl1/evas.inc
-+++ b/packages/efl1/evas.inc
+--- a/recipes/efl1/evas.inc
++++ b/recipes/efl1/evas.inc
 @@ -1,7 +1,7 @@
  DESCRIPTION = "Evas is the Enlightenment canvas API"
  LICENSE = "MIT BSD"
@@ -32,11 +32,11 @@ index ff7a184..7c16863 100644
  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/evas"
  EXTRA_OECONF = "<override me>"
  
-diff --git a/packages/efl1/evas/add_rtl_compositing_arabic.patch b/packages/efl1/evas/add_rtl_compositing_arabic.patch
+diff --git a/recipes/efl1/evas/add_rtl_compositing_arabic.patch b/recipes/efl1/evas/add_rtl_compositing_arabic.patch
 new file mode 100644
 index 0000000..fd1364f
 --- /dev/null
-+++ b/packages/efl1/evas/add_rtl_compositing_arabic.patch
++++ b/recipes/efl1/evas/add_rtl_compositing_arabic.patch
 @@ -0,0 +1,626 @@
 +Index: evas/src/lib/engines/common/evas_font_draw.c
 +===================================================================
@@ -664,10 +664,10 @@ index 0000000..fd1364f
 + #####################################################################
 + # Check evas strong dependencie
 + 
-diff --git a/packages/efl1/evas_svn.bb b/packages/efl1/evas_svn.bb
+diff --git a/recipes/efl1/evas_svn.bb b/recipes/efl1/evas_svn.bb
 index 02d4cf4..7c6605e 100644
---- a/packages/efl1/evas_svn.bb
-+++ b/packages/efl1/evas_svn.bb
+--- a/recipes/efl1/evas_svn.bb
++++ b/recipes/efl1/evas_svn.bb
 @@ -1,5 +1,5 @@
  require evas.inc
 -PR = "r1"

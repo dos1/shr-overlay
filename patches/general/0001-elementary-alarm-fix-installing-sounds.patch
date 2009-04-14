@@ -4,13 +4,13 @@ Date: Mon, 8 Dec 2008 17:07:17 +0100
 Subject: [PATCH] elementary-alarm: fix installing sounds
 
 ---
- packages/e17/elementary-alarm_svn.bb |    4 ++--
+ recipes/e17/elementary-alarm_svn.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/packages/e17/elementary-alarm_svn.bb b/packages/e17/elementary-alarm_svn.bb
+diff --git a/recipes/e17/elementary-alarm_svn.bb b/recipes/e17/elementary-alarm_svn.bb
 index 4294f2f..b57a450 100644
---- a/packages/e17/elementary-alarm_svn.bb
-+++ b/packages/e17/elementary-alarm_svn.bb
+--- a/recipes/e17/elementary-alarm_svn.bb
++++ b/recipes/e17/elementary-alarm_svn.bb
 @@ -8,11 +8,11 @@ PR = "r1"
  inherit e
  

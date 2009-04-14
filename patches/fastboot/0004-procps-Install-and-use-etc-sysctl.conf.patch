@@ -6,20 +6,20 @@ Subject: [PATCH] procps: Install and use /etc/sysctl.conf.
 Author: Chia-I Wu <olv@openmoko.com>
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/procps/procps-3.2.7/openmoko/sysctl.conf |   64 +++++++++++++++++++++
- packages/procps/procps-3.2.7/procps.init          |    6 ++
- packages/procps/procps-3.2.7/sysctl.conf          |   64 +++++++++++++++++++++
- packages/procps/procps_3.2.7.bb                   |   19 ++++++-
+ recipes/procps/procps-3.2.7/openmoko/sysctl.conf |   64 +++++++++++++++++++++
+ recipes/procps/procps-3.2.7/procps.init          |    6 ++
+ recipes/procps/procps-3.2.7/sysctl.conf          |   64 +++++++++++++++++++++
+ recipes/procps/procps_3.2.7.bb                   |   19 ++++++-
  4 files changed, 151 insertions(+), 2 deletions(-)
- create mode 100644 packages/procps/procps-3.2.7/openmoko/sysctl.conf
- create mode 100644 packages/procps/procps-3.2.7/procps.init
- create mode 100644 packages/procps/procps-3.2.7/sysctl.conf
+ create mode 100644 recipes/procps/procps-3.2.7/openmoko/sysctl.conf
+ create mode 100644 recipes/procps/procps-3.2.7/procps.init
+ create mode 100644 recipes/procps/procps-3.2.7/sysctl.conf
 
-diff --git a/packages/procps/procps-3.2.7/openmoko/sysctl.conf b/packages/procps/procps-3.2.7/openmoko/sysctl.conf
+diff --git a/recipes/procps/procps-3.2.7/openmoko/sysctl.conf b/recipes/procps/procps-3.2.7/openmoko/sysctl.conf
 new file mode 100644
 index 0000000..34e7488
 --- /dev/null
-+++ b/packages/procps/procps-3.2.7/openmoko/sysctl.conf
++++ b/recipes/procps/procps-3.2.7/openmoko/sysctl.conf
 @@ -0,0 +1,64 @@
 +# This configuration file is taken from Debian.
 +#
@@ -85,11 +85,11 @@ index 0000000..34e7488
 +#
 +
 +#kernel.shmmax = 141762560
-diff --git a/packages/procps/procps-3.2.7/procps.init b/packages/procps/procps-3.2.7/procps.init
+diff --git a/recipes/procps/procps-3.2.7/procps.init b/recipes/procps/procps-3.2.7/procps.init
 new file mode 100644
 index 0000000..739dcf4
 --- /dev/null
-+++ b/packages/procps/procps-3.2.7/procps.init
++++ b/recipes/procps/procps-3.2.7/procps.init
 @@ -0,0 +1,6 @@
 +#!/bin/sh
 +
@@ -97,11 +97,11 @@ index 0000000..739dcf4
 +if [ -f "${SYSCTL_CONF}" ]; then
 +	/sbin/sysctl -q -p "${SYSCTL_CONF}"
 +fi
-diff --git a/packages/procps/procps-3.2.7/sysctl.conf b/packages/procps/procps-3.2.7/sysctl.conf
+diff --git a/recipes/procps/procps-3.2.7/sysctl.conf b/recipes/procps/procps-3.2.7/sysctl.conf
 new file mode 100644
 index 0000000..6b4ad57
 --- /dev/null
-+++ b/packages/procps/procps-3.2.7/sysctl.conf
++++ b/recipes/procps/procps-3.2.7/sysctl.conf
 @@ -0,0 +1,64 @@
 +# This configuration file is taken from Debian.
 +#
@@ -167,10 +167,10 @@ index 0000000..6b4ad57
 +#
 +
 +#kernel.shmmax = 141762560
-diff --git a/packages/procps/procps_3.2.7.bb b/packages/procps/procps_3.2.7.bb
+diff --git a/recipes/procps/procps_3.2.7.bb b/recipes/procps/procps_3.2.7.bb
 index 74a2101..51867ff 100644
---- a/packages/procps/procps_3.2.7.bb
-+++ b/packages/procps/procps_3.2.7.bb
+--- a/recipes/procps/procps_3.2.7.bb
++++ b/recipes/procps/procps_3.2.7.bb
 @@ -1,16 +1,26 @@
  require procps.inc
  
