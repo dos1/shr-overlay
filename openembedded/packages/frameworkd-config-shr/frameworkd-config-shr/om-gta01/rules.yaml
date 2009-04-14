@@ -23,17 +23,6 @@
 # - Debug(msg)              : Action that prints a debug message (only for debuging)
 -
     #
-    # Suspend Handling
-    #
-    #illume handles suspend through menu, so comment out:
-    #trigger: InputEvent()
-    #filters:
-    #         - HasAttr(switch, "POWER")
-    #         - HasAttr(event, "released")
-    #         - HasAttr(duration, 0)
-    #actions: Suspend()
--
-    #
     # Call -> Audio Scenario Handling
     #
     trigger: IncomingMessage()
@@ -51,17 +40,31 @@
     while: CallStatus()
     filters: Or(HasAttr(status, "outgoing"), HasAttr(status, "active"))
     actions:
-            - SetScenario(gsmhandset)
             - OccupyResource(CPU)
+-
+    while: CallStatus()
+    filters:
+            - Or(HasAttr(status, "outgoing"), HasAttr(status, "active"))
+            - Not(BTHeadsetIsConnected())
+    actions:
+            - SetScenario(gsmhandset)
+-
+    while: CallStatus()
+    filters:
+            - Or(HasAttr(status, "outgoing"), HasAttr(status, "active"))
+            - BTHeadsetIsConnected()
+    actions:
+            - SetScenario(gsmbluetooth)
+            - BTHeadsetPlaying()   
 -
     while: PowerStatus()
     filters: HasAttr(status, "charging")
     actions: SetLed("gta02_power_orange", "light")
 
-#-
-#    while: PowerStatus()
-#    filters: Not(HasAttr(status, "discharging"))
-#    actions: OccupyResource(Display)
+-
+    while: PowerStatus()
+    filters: Not(HasAttr(status, "discharging"))
+    actions: OccupyResource(CPU)
 
 -
     while: PowerStatus()
@@ -77,7 +80,7 @@
     actions: Command('poweroff')
 
     #
-    # Headset Audio Scenario Support
+    # Headset Audio Scenario Support. There is still work to be done. 
     #
 -
     trigger: InputEvent()
@@ -107,7 +110,3 @@
     actions:
              - Command('xset -display localhost:0 s blank')
              - Command('xset -display localhost:0 s activate')
-#-
-#    trigger: IdleState()
-#    filters: HasAttr(status, "idle_prelock")
-#    actions: SetDisplayBrightness("gta01_bl", 0)
