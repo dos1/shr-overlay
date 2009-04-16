@@ -6,16 +6,16 @@ Subject: [PATCH] modutils: Do not run depmod.
 Author: Chia-I Wu <olv@openmoko.com>
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/modutils/files/openmoko/modutils.sh |   21 +++++++++++++++++++++
- packages/modutils/modutils-initscripts.bb    |    2 +-
+ recipes/modutils/files/openmoko/modutils.sh |   21 +++++++++++++++++++++
+ recipes/modutils/modutils-initscripts.bb    |    2 +-
  2 files changed, 22 insertions(+), 1 deletions(-)
- create mode 100644 packages/modutils/files/openmoko/modutils.sh
+ create mode 100644 recipes/modutils/files/openmoko/modutils.sh
 
-diff --git a/packages/modutils/files/openmoko/modutils.sh b/packages/modutils/files/openmoko/modutils.sh
+diff --git a/recipes/modutils/files/openmoko/modutils.sh b/recipes/modutils/files/openmoko/modutils.sh
 new file mode 100644
 index 0000000..06601ce
 --- /dev/null
-+++ b/packages/modutils/files/openmoko/modutils.sh
++++ b/recipes/modutils/files/openmoko/modutils.sh
 @@ -0,0 +1,21 @@
 +#!/bin/sh
 +
@@ -38,10 +38,10 @@ index 0000000..06601ce
 +fi
 +
 +: exit 0
-diff --git a/packages/modutils/modutils-initscripts.bb b/packages/modutils/modutils-initscripts.bb
+diff --git a/recipes/modutils/modutils-initscripts.bb b/recipes/modutils/modutils-initscripts.bb
 index b8fc6c2..b5d0653 100644
---- a/packages/modutils/modutils-initscripts.bb
-+++ b/packages/modutils/modutils-initscripts.bb
+--- a/recipes/modutils/modutils-initscripts.bb
++++ b/recipes/modutils/modutils-initscripts.bb
 @@ -2,7 +2,7 @@ SECTION = "base"
  DESCRIPTION = "modutils configuration files"
  LICENSE = "PD"

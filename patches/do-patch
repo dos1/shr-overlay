@@ -18,7 +18,7 @@ for d in ../shr/patches/*; do
 	[ -d "$d" ] || continue
 	echo "applying $(basename $d) patches"
 	for p in $(ls "$d"/* | sort); do
-		git apply $p
+		git apply --whitespace=nowarn $p
 	done
 done
 

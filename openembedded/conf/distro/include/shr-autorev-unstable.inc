@@ -1,8 +1,13 @@
 # PREFERRED_PROVIDER_frameworkd = "frameworkd-devel"
 
+# libeflvala needs at least 2.18.0 and upstream OE provides only 2.16.4
+PREFERRED_VERSION_glib-2.0 = "2.18.3"
+PREFERRED_PROVIDER_e-wm-menu = "e-wm-menu"
+
 # FSO stuff
 SRCREV_pn-frameworkd = "${AUTOREV}"
 SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
+SRCREV_pn-libeflvala = "${AUTOREV}"
 
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
@@ -16,9 +21,25 @@ SRCREV_pn-libframeworkd-phonegui-efl = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui = "${AUTOREV}"
 SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
-SRCREV_pn-openmoko-panel-gsm = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
-EFL_SRCREV = "38274"
+SRCREV_pn-calc = "${AUTOREV}"
+SRCREV_pn-shr-config = "${AUTOREV}"
 
-#SRCREV_pn-python-elementary = "${AUTOREV}"
+EFL_SRCREV = "39827"
+SRCREV_pn-python-elementary = "39834"
+
+# KERNEL
+SRCREV_pn-linux-openmoko-2.6.28 = "${AUTOREV}"
+SRCREV_pn-linux-eten = "df9715883efa3e6a88866813168fabb1c16b0b7a"
+
+# other stuff
+SRCREV_pn-openmoocow = "${AUTOREV}"
+SRCREV_pn-libmokoui2 = "4695"
+
+#PREFERRED_VERSION_fakeroot = "1.12.1"
+#PREFERRED_VERSION_fakeroot-native = "1.12.1"
+
+SRCREV_pn-boost-signals2 = "52299"
+SRCREV_pn-dbus-c++-native = "${AUTOREV}"
+SRCREV_pn-dbus-c++ = "${AUTOREV}"

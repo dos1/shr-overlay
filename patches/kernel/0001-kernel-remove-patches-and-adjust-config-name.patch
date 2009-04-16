@@ -1,0 +1,58 @@
+Updated original patch (details below) to fix the depmod problem, and to
+ensure that it builds correctly (this change triggered by the switch to
+the newer kernel from the andy-tracking branch; the new kernel is actually
+2.6.29-rc3).  This is a temporary "hack" of a fix, the real solution is for
+the upstream FSO branch to create the correct 2.6.29-rc3 kernel recipe.
+This will do for now, however, and even though this solution still has the
+package name not being truthful about the kernel version contained there-in,
+this does ensure that the upgrades via opkg will occur properly when the
+upstream is fixed.
+
+Signed-off-by: Mike Westerhof <mwester@dls.net>
+
+Original patch info:
+From 43a9bd2a7a4448d13cbb8ab88453a6c0a1090462 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Wed, 1 Apr 2009 17:49:41 +0200
+Subject: [PATCH] kernel: remove patches and adjust config name (- --> _)
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+diff --git a/recipes/linux/linux-openmoko-2.6.28_git.bb b/recipes/linux/linux-openmoko-2.6.28_git.bb
+index 8774721..836bede 100644
+--- a/recipes/linux/linux-openmoko-2.6.28_git.bb
++++ b/recipes/linux/linux-openmoko-2.6.28_git.bb
+@@ -4,29 +4,19 @@ require linux-openmoko.inc
+ DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
+ 
+ KERNEL_RELEASE = "2.6.28"
+-KERNEL_VERSION = "${KERNEL_RELEASE}"
++KERNEL_VERSION = "2.6.29-rc3"
+ 
+ OEV = "oe1"
+ PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCREV}"
+-PR = "r3"
++PR = "r3.2"
+ 
+ SRC_URI = "\
+   git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
+-  file://openwrt-ledtrig-netdev.patch;patch=1 \
+-  file://0001-MERGE-via-pending-tracking-hist-subject-usb-gadget-r.patch;patch=1 \
+-  file://0002-MERGE-via-pending-tracking-hist-subject-usb-gadget-f.patch;patch=1 \
+-  file://0003-consider-alrm-enable-in-pcf50633_rtc_set_alarm.patch;patch=1 \
+-  file://0004-manage-RTC-alarm-pending-flag-of-PCF50633.patch;patch=1 \
+-  file://0005-debug-glamo-allow-slower-memory-bus.patch.patch;patch=1 \
+-  file://0006-Subject-fix_glamo_xrandr_bug.patch.patch;patch=1 \
+-  file://0007-Subject-glamo_fix_improper_xrandr_geometry_setting.patch;patch=1 \
+-  file://0008-Send-pen-up-events-faster-side-effect-improve-illu.patch;patch=1 \
+-  file://defconfig-oe.patch \
++  file://fix-install.patch;patch=1 \
+ "
+ S = "${WORKDIR}/git"
+ 
+ do_configure_prepend() {
+-	install -m 644 ./arch/arm/configs/gta02-packaging-defconfig ${WORKDIR}/defconfig-oe
+-	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
++	install -m 644 ./arch/arm/configs/gta02_packaging_defconfig ${WORKDIR}/defconfig-oe
+ }
+ 

@@ -9,13 +9,13 @@ own initscripts package by setting DISTRO_INITSCRIPTS.
 Author: Chia-I Wu <olv@openmoko.com>
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/tasks/task-boot.bb |    5 +++--
+ recipes/tasks/task-boot.bb |    5 +++--
  1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/packages/tasks/task-boot.bb b/packages/tasks/task-boot.bb
+diff --git a/recipes/tasks/task-boot.bb b/recipes/tasks/task-boot.bb
 index 3f31185..57315c9 100644
---- a/packages/tasks/task-boot.bb
-+++ b/packages/tasks/task-boot.bb
+--- a/recipes/tasks/task-boot.bb
++++ b/recipes/tasks/task-boot.bb
 @@ -1,5 +1,5 @@
  DESCRIPTION = "Basic task to get a device booting"
 -PR = "r48"

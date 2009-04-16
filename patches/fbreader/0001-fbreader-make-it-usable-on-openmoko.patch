@@ -6,15 +6,15 @@ Subject: [PATCH] fbreader: make it usable on openmoko
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
  .../fbreader-0.8.2a/fbreader-openmoko.patch        |  163 ++++++++++++++++++++
- packages/fbreader/fbreader_0.8.2a.bb               |    3 +
+ recipes/fbreader/fbreader_0.8.2a.bb               |    3 +
  2 files changed, 166 insertions(+), 0 deletions(-)
- create mode 100644 packages/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch
+ create mode 100644 recipes/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch
 
-diff --git a/packages/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch b/packages/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch
+diff --git a/recipes/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch b/recipes/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch
 new file mode 100644
 index 0000000..fa38392
 --- /dev/null
-+++ b/packages/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch
++++ b/recipes/fbreader/fbreader-0.8.2a/fbreader-openmoko.patch
 @@ -0,0 +1,163 @@
 +diff -Nurd fbreader-0.8.2a.orig/fbreader/data/default/styles.gpe240x320.xml fbreader-0.8.2a/fbreader/data/default/styles.gpe240x320.xml
 +--- fbreader-0.8.2a.orig/fbreader/data/default/styles.gpe240x320.xml	2008-10-12 16:35:25.000000000 +0100
@@ -179,10 +179,10 @@ index 0000000..fa38392
 + 	}
 + 
 + 	gtk_widget_queue_resize(GTK_WIDGET(myMainWindow));
-diff --git a/packages/fbreader/fbreader_0.8.2a.bb b/packages/fbreader/fbreader_0.8.2a.bb
+diff --git a/recipes/fbreader/fbreader_0.8.2a.bb b/recipes/fbreader/fbreader_0.8.2a.bb
 index 7d6a2b0..e53d6b2 100644
---- a/packages/fbreader/fbreader_0.8.2a.bb
-+++ b/packages/fbreader/fbreader_0.8.2a.bb
+--- a/recipes/fbreader/fbreader_0.8.2a.bb
++++ b/recipes/fbreader/fbreader_0.8.2a.bb
 @@ -13,6 +13,9 @@ PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
  SRC_URI = "http://www.fbreader.org/obsolete/fbreader-sources-${PV}.tgz \
  	   file://fbreader-0.8.2a_buildsys_oe.patch;patch=1 \

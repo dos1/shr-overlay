@@ -1,0 +1,49 @@
+diff --git a/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb b/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb
+index 614848f..9486ec4 100644
+--- a/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb
++++ b/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb
+@@ -11,14 +11,15 @@ PROVIDES = "virtual/xserver"
+
+ PE = "1"
+ PV = "1.3.0.0+gitr${SRCREV}"
+-PR = "r3"
++PR = "r3.1"
+
+ COMPATIBLE_HOST = "arm.*-linux"
+ COMPATIBLE_MACHINE = 'om-gta02'
+
+ FILESPATH = "${FILE_DIRNAME}/xserver-kdrive-1.3.0.0:${FILE_DIRNAME}/xserver-kdrive:${FILE_DIRNAME}/files"
+
+-SRC_URI = "git://git.openmoko.org/git/xglamo.git;protocol=git"
++SRC_URI = "git://git.openmoko.org/git/xglamo.git;protocol=git \
++           file://fix-crashes-with-composite.patch;patch=1"
+ S = "${WORKDIR}/git"
+
+ inherit autotools pkgconfig
+diff --git /dev/null b/recipes/xorg-xserver/xserver-kdrive-1.3.0.0/fix-crashes-with-composite.patch
+new file mode 100644
+--- /dev/null
++++ b/recipes/xorg-xserver/xserver-kdrive-1.3.0.0/fix-crashes-with-composite.patch
+@@ -0,0 +1,21 @@
++diff -ur xserver-kdrive-glamo-1.3.0.0.orig/hw/kdrive/src/koffscreen.c xserver-kdrive-glamo-1.3.0.0/hw/kdrive/src/koffscreen.c
++--- xserver-kdrive-glamo-1.3.0.0.orig/hw/kdrive/src/koffscreen.c 2009-02-19 19:04:49.000000000 +0100
+++++ xserver-kdrive-glamo-1.3.0.0/hw/kdrive/src/koffscreen.c      2009-02-28 20:25:58.000000000 +0100
++@@ -142,7 +142,7 @@
++ 	    {
++ 		if (scan->state == KdOffscreenLocked) {
++ 		    /* Can't make room here, start after this locked area. */
++-		    begin = scan->next;
+++		    begin = scan;
++ 		    break;
++ 		}
++ 		/* Score should only be non-zero for KdOffscreenRemovable */
++@@ -168,7 +168,7 @@
++ 
++ 	/* adjust size to match alignment requirement */
++ 	real_size = size;
++-	tmp = begin->offset % align;
+++	tmp = area->offset % align;
++ 	if (tmp)
++ 	    real_size += (align - tmp);
++ 
+

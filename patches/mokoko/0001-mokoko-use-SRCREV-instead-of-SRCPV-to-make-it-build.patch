@@ -5,13 +5,13 @@ Subject: [PATCH] mokoko: use SRCREV instead of SRCPV to make it build
 
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/mokoko/mokoko_svn.bb |    2 +-
+ recipes/mokoko/mokoko_svn.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/packages/mokoko/mokoko_svn.bb b/packages/mokoko/mokoko_svn.bb
+diff --git a/recipes/mokoko/mokoko_svn.bb b/recipes/mokoko/mokoko_svn.bb
 index f22d445..84e16e5 100644
---- a/packages/mokoko/mokoko_svn.bb
-+++ b/packages/mokoko/mokoko_svn.bb
+--- a/recipes/mokoko/mokoko_svn.bb
++++ b/recipes/mokoko/mokoko_svn.bb
 @@ -5,7 +5,7 @@ LICENSE = "GPL"
  DEPENDS = "gstreamer"
  RDEPENDS = "gstreamer"

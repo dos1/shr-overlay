@@ -5,13 +5,13 @@ Subject: [PATCH] qemu: enable only necessary targets to speed up build time
 
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/qemu/qemu_0.9.1.bb |    2 +-
+ recipes/qemu/qemu_0.9.1.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/packages/qemu/qemu_0.9.1.bb b/packages/qemu/qemu_0.9.1.bb
+diff --git a/recipes/qemu/qemu_0.9.1.bb b/recipes/qemu/qemu_0.9.1.bb
 index e3e7aa0..214280b 100644
---- a/packages/qemu/qemu_0.9.1.bb
-+++ b/packages/qemu/qemu_0.9.1.bb
+--- a/recipes/qemu/qemu_0.9.1.bb
++++ b/recipes/qemu/qemu_0.9.1.bb
 @@ -39,7 +39,7 @@ SRC_URI = "\
  S = "${WORKDIR}/qemu-${PV}"
  

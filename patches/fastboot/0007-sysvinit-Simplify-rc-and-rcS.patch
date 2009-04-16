@@ -8,16 +8,16 @@ Remove support for boot splash.
 Author: Chia-I Wu <olv@openmoko.com>
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
- packages/sysvinit/sysvinit/openmoko/rc  |   84 +------------------------------
- packages/sysvinit/sysvinit/openmoko/rcS |    9 +++
- packages/sysvinit/sysvinit_2.86.bb      |    2 +-
+ recipes/sysvinit/sysvinit/openmoko/rc  |   84 +------------------------------
+ recipes/sysvinit/sysvinit/openmoko/rcS |    9 +++
+ recipes/sysvinit/sysvinit_2.86.bb      |    2 +-
  3 files changed, 11 insertions(+), 84 deletions(-)
- create mode 100644 packages/sysvinit/sysvinit/openmoko/rcS
+ create mode 100644 recipes/sysvinit/sysvinit/openmoko/rcS
 
-diff --git a/packages/sysvinit/sysvinit/openmoko/rc b/packages/sysvinit/sysvinit/openmoko/rc
+diff --git a/recipes/sysvinit/sysvinit/openmoko/rc b/recipes/sysvinit/sysvinit/openmoko/rc
 index 9d28a68..5bab80b 100644
---- a/packages/sysvinit/sysvinit/openmoko/rc
-+++ b/packages/sysvinit/sysvinit/openmoko/rc
+--- a/recipes/sysvinit/sysvinit/openmoko/rc
++++ b/recipes/sysvinit/sysvinit/openmoko/rc
 @@ -18,22 +18,6 @@
  . /etc/default/rcS
  export VERBOSE
@@ -127,11 +127,11 @@ index 9d28a68..5bab80b 100644
 -		umount /mnt/.exquisite
 -	fi
 -  fi
-diff --git a/packages/sysvinit/sysvinit/openmoko/rcS b/packages/sysvinit/sysvinit/openmoko/rcS
+diff --git a/recipes/sysvinit/sysvinit/openmoko/rcS b/recipes/sysvinit/sysvinit/openmoko/rcS
 new file mode 100644
 index 0000000..08dca5d
 --- /dev/null
-+++ b/packages/sysvinit/sysvinit/openmoko/rcS
++++ b/recipes/sysvinit/sysvinit/openmoko/rcS
 @@ -0,0 +1,9 @@
 +#!/bin/sh
 +#
@@ -142,10 +142,10 @@ index 0000000..08dca5d
 +#
 +
 +exec /etc/init.d/rc S
-diff --git a/packages/sysvinit/sysvinit_2.86.bb b/packages/sysvinit/sysvinit_2.86.bb
+diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvinit_2.86.bb
 index f313d13..37a99ec 100644
---- a/packages/sysvinit/sysvinit_2.86.bb
-+++ b/packages/sysvinit/sysvinit_2.86.bb
+--- a/recipes/sysvinit/sysvinit_2.86.bb
++++ b/recipes/sysvinit/sysvinit_2.86.bb
 @@ -2,7 +2,7 @@ DESCRIPTION = "System-V like init."
  SECTION = "base"
  LICENSE = "GPL"
