@@ -48,6 +48,9 @@ SRCREV_pn-shr-theme-brave = "${AUTOREV}"
 
 #General stuff
 EFL_SRCREV = "39827"
+SRCREV_pn-e-wm-config-illume-shr = "${AUTOREV}"
+SRCREV_pn-e-wm-sysactions-shr = "${AUTOREV}"
+SRCREV_pn-e-wm-theme-illume-shr = "${AUTOREV}"
 
 SRCREV_pn-navit = "2198"
 SRCREV_pn-python-elementary = "39834"
