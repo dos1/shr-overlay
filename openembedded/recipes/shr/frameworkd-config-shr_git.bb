@@ -31,7 +31,7 @@ do_install_append() {
 	install -m 0644 ${S}/etc/freesmartphone/persist/README ${D}${sysconfdir}/freesmartphone/persist/
 	install -m 0644 ${S}/etc/freesmartphone/ogsmd/networks.tab ${D}${sysconfdir}/freesmartphone/ogsmd/
 
-	#Check for machine specific conf
+	#Check for machine specific conf.
         CONF_PATH_MACHINE="${CONF_PATH}"
         if [ -d "${CONF_PATH}/${MACHINE}" ] ; then
                 CONF_PATH_MACHINE="${CONF_PATH}/${MACHINE}"
