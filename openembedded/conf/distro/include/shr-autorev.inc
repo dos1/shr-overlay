@@ -19,7 +19,9 @@ PREFERRED_PROVIDER_e-wm-menu = "e-wm-menu"
 
 #FSO stuff
 SRCREV_pn-frameworkd = "516f48762ab7afa4e4702a0ba01bc0a004ae4c60"
-SRCREV_pn-frameworkd-config-shr = "af17066e4277efb190585c6d41a471b607371bd1"
+SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
+SRCREV_pn-frameworkd-config-shr_FSO_REV = "516f48762ab7afa4e4702a0ba01bc0a004ae4c60"
+SRCREV_pn-frameworkd-config-shr_SHR_REV = "fddd6e828e791f4ea69f89f15a8cdd7b1d5b540e"
 SRCREV_pn-fso-gpsd = "${AUTOREV}"
 SRCREV_pn-fso-sounds = "${AUTOREV}"
 SRCREV_pn-gsm0710muxd = "${AUTOREV}"

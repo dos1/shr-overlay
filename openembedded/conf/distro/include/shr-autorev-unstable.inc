@@ -8,6 +8,9 @@ PREFERRED_PROVIDER_e-wm-menu = "e-wm-menu"
 SRCREV_pn-frameworkd = "${AUTOREV}"
 SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
 SRCREV_pn-libeflvala = "${AUTOREV}"
+SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
+SRCREV_pn-frameworkd-config-shr_FSO_REV = "${AUTOREV}"
+SRCREV_pn-frameworkd-config-shr_SHR_REV = "${AUTOREV}"
 
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
