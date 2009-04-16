@@ -31,7 +31,7 @@ do_install_append() {
 	install -m 0644 ${S}/etc/freesmartphone/persist/README ${D}${sysconfdir}/freesmartphone/persist/
 	install -m 0644 ${S}/etc/freesmartphone/ogsmd/networks.tab ${D}${sysconfdir}/freesmartphone/ogsmd/
 
-        if [ -f "${CONFPATH}/${MACHINE}" ] ; then
+        if [ -z "${CONFPATH}/${MACHINE}" ] ; then
                 CONF_PATH = "${S}/${MACHINE}"
         fi
         # Install SHR custom files
