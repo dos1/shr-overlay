@@ -10,7 +10,7 @@ RREPLACES_${PN} = "e-wm-sysactions"
 
 SRC_URI = "git://shr.bearstech.com/repo/shr-themes.git;protocol=http;branch=master"
 
-S = "${WORKDIR}/e-wm/${PN}"
+S = "${WORKDIR}/git/e-wm/${PN}"
 
 FILES_${PN} = "${sysconfdir}/enlightenment"
 

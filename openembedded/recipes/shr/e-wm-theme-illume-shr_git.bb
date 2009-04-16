@@ -7,7 +7,7 @@ PR = "r6"
 
 SRC_URI = "git://shr.bearstech.com/repo/shr-themes.git;protocol=http;branch=master"
 
-S = "${WORKDIR}/e-wm/${PN}"
+S = "${WORKDIR}/git/e-wm/${PN}"
 
 do_compile() {
 	edje_cc -id ${S}/images/. -fd ${S}/fonts/. ${S}/illume-shr.edc -o ${S}/illume-shr.edj

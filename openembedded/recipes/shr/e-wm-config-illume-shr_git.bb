@@ -9,7 +9,7 @@ inherit e
 
 SRC_URI = "git://shr.bearstech.com/repo/shr-themes.git;protocol=http;branch=master"
 
-S = "${WORKDIR}/e-wm/${PN}"
+S = "${WORKDIR}/git/e-wm/${PN}"
 
 EXTRA_OECONF = "\
   --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
