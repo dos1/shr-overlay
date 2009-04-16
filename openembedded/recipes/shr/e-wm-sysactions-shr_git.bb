@@ -8,16 +8,14 @@ RPROVIDES_${PN} = "e-wm-sysactions"
 RCONFLICTS_${PN} = "e-wm-sysactions"
 RREPLACES_${PN} = "e-wm-sysactions"
 
-SRC_URI = "\
-  file://sysactions.conf  \
-  file://suspend.sh"
+SRC_URI = "git://shr.bearstech.com/repo/shr-themes.git;protocol=http;branch=master"
 
-S = "${WORKDIR}/"
+S = "${WORKDIR}/e-wm/${PN}"
 
 FILES_${PN} = "${sysconfdir}/enlightenment"
 
 do_install() {
     install -d ${D}${sysconfdir}/enlightenment/
-    install -m 0755 ${WORKDIR}/sysactions.conf ${D}${sysconfdir}/enlightenment/sysactions.conf
-    install -m 0755 ${WORKDIR}/suspend.sh ${D}${sysconfdir}/enlightenment/suspend.sh
+    install -m 0755 ${S}/sysactions.conf ${D}${sysconfdir}/enlightenment/sysactions.conf
+    install -m 0755 ${S}/suspend.sh ${D}${sysconfdir}/enlightenment/suspend.sh
 }
