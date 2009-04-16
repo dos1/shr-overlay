@@ -5,7 +5,7 @@ DEPENDS = ""
 RDEPENDS = ""
 LICENSE = "GPL"
 PV = "0.0.1+${PR}-gitr${SRCREV}"
-PR = "r2"
+PR = "r3"
 
 RPROVIDES_${PN} = "initscripts"
 RCONFLICTS_${PN} = "initscripts"
@@ -16,6 +16,7 @@ SRC_URI = "file://alignment.sh \
 	   file://checkroot.sh \
 	   file://finish.sh \
 	   file://functions \
+	   file://g_ether.sh \
 	   file://hostname.sh \
 	   file://mountall.sh \
 	   file://mountdevsubfs.sh \
@@ -56,6 +57,7 @@ do_install () {
 	install -m 0755	${WORKDIR}/checkroot.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/finish.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/functions		${D}${sysconfdir}/init.d
+	install -m 0755	${WORKDIR}/g_ether.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/hostname.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/mountall.sh		${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/mountnfs.sh		${D}${sysconfdir}/init.d
@@ -78,6 +80,7 @@ do_install () {
 # Create runlevel links
 #
 	ln -sf		../init.d/mountkernfs.sh	${D}${sysconfdir}/rcS.d/S01mountkernfs.sh
+	ln -sf		../init.d/g_ether.sh		${D}${sysconfdir}/rcS.d/S02g_ether.sh
 	ln -sf		../init.d/hostname.sh		${D}${sysconfdir}/rcS.d/S02hostname.sh
 	ln -sf		../init.d/checkroot.sh		${D}${sysconfdir}/rcS.d/S02checkroot.sh
 	ln -sf		../init.d/mountdevsubfs.sh	${D}${sysconfdir}/rcS.d/S04mountdevsubfs.sh

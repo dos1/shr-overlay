@@ -1,5 +1,5 @@
 DESCRIPTION = "SHR Lite Image Feed"
-PR = "r2"
+PR = "r3"
 PV = "2.0"
 LICENSE = "GPL"
 
@@ -113,9 +113,9 @@ RDEPENDS_${PN}-x = "\
 "
 
 RDEPENDS_${PN}-apps = "\
-  openmoko-dialer3 \
-  openmoko-messages3 \
-  openmoko-contacts3 \
+  shr-dialer \
+  shr-messages \
+  shr-contacts \
   ophonekitd \ 
   libframeworkd-phonegui-efl \
   rxvt-unicode \
