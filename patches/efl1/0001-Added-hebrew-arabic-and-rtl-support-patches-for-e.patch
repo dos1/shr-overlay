@@ -14,15 +14,6 @@ diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
 index ff7a184..7c16863 100644
 --- a/recipes/efl1/evas.inc
 +++ b/recipes/efl1/evas.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Evas is the Enlightenment canvas API"
- LICENSE = "MIT BSD"
- # can also depend on valgrind, libsdl-x11, directfb
--DEPENDS = "eina eet freetype jpeg libpng virtual/libx11 libxext libxrender fontconfig"
-+DEPENDS = "fribidi eina eet freetype jpeg libpng virtual/libx11 libxext libxrender fontconfig"
- PV = "0.9.9.050+svnr${SRCREV}"
- 
- 
 @@ -10,6 +10,8 @@ ARM_INSTRUCTION_SET = "arm"
  
  inherit efl
