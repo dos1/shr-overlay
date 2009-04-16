@@ -5,7 +5,7 @@ SECTION = "console/network"
 DEPENDS = "python-cython-native python-pyrex-native"
 LICENSE = "GPL"
 SRCREV_FORMAT = "gitrFSO_REV-SHR_REV"
-PV = "0.8.5.1+gitr${SRCREV}"
+PV = "0.8.5.1+${SRCREV}"
 PR = "r4"
 
 SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master;name=FSO_REV \
