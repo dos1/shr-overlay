@@ -1,4 +1,4 @@
-DESCRIPTION = "SHR Configuration for frameworkd."
+DESCRIPTION = "SHR Configuration for frameworkd"
 HOMEPAGE = "http://www.freesmartphone.org"
 AUTHOR = "Michael 'Mickey' Lauer <mlauer@vanille-media.de> et. al."
 SECTION = "console/network"
