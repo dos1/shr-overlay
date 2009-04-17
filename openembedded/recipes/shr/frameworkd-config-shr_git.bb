@@ -6,7 +6,7 @@ DEPENDS = "python-cython-native python-pyrex-native"
 LICENSE = "GPL"
 SRCREV_FORMAT = "gitrFSO_REV-SHR_REV"
 PV = "0.8.5.1+${SRCREV}"
-PR = "r4"
+PR = "r5"
 
 SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master;name=FSO_REV \
            git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master;name=SHR_REV"
@@ -31,12 +31,13 @@ do_install_append() {
 	install -m 0644 ${S}/etc/freesmartphone/persist/README ${D}${sysconfdir}/freesmartphone/persist/
 	install -m 0644 ${S}/etc/freesmartphone/ogsmd/networks.tab ${D}${sysconfdir}/freesmartphone/ogsmd/
 
-        if [ -f "${CONFPATH}/${MACHINE}" ] ; then
-                CONF_PATH = "${S}/${MACHINE}"
+        CONF_PATH_MACHINE="${CONF_PATH}"
+        if [ -d "${CONF_PATH}/${MACHINE}" ] ; then
+                CONF_PATH_MACHINE="${CONF_PATH}/${MACHINE}"
         fi
         # Install SHR custom files
-        install -m 0644 ${CONF_PATH}/frameworkd.conf ${D}${sysconfdir}
-        install -m 0644 ${CONF_PATH}/rules.yaml ${D}${sysconfdir}/freesmartphone/oevents/
+        install -m 0644 ${CONF_PATH_MACHINE}/frameworkd.conf ${D}${sysconfdir}
+        install -m 0644 ${CONF_PATH_MACHINE}/rules.yaml ${D}${sysconfdir}/freesmartphone/oevents/
         install -m 0644 ${CONF_PATH}/profiles/profiles/default.yaml ${D}${sysconfdir}/freesmartphone/opreferences/conf/profiles/
 
         install -m 0644 ${CONF_PATH}/profiles/phone/default.yaml ${D}${sysconfdir}/freesmartphone/opreferences/conf/phone/
