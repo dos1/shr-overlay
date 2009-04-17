@@ -1,8 +1,22 @@
+# SHR conf file
+
+## This file, contrary to its name, is really the equivalent of the
+## distro conf file for SHR.
+
+# Since we're not a distro yet, we have to manually add "shr" as an
+# override -- this line should be removed when SHR becomes a distro.
+OVERRIDES .= ":shr"
+
 DISTRO_INITSCRIPTS = "initscripts-shr"
 DISTRO_DEV_MANAGER = "udev"
 
+# Nail down some SRCREV's for the kernels.  There is a real potential problem
+# here, in that git hashes are hashes, not incrementing version numbers.  Thus
+# we need to have something else in the kernel version string that gets bumped
+# with each change.  So if you change one of these, go to the kernel recipe
+# and bump the OEV value up as well.
 SRCREV_pn-linux-eten = "df9715883efa3e6a88866813168fabb1c16b0b7a"
-SRCREV_pn-linux-openmoko-2.6.28 = "${AUTOREV}"
+SRCREV_pn-linux-openmoko-2.6.28 = "81c61a7d1abb03aecd13f5395aba355e996a1641"
 
 PREFERRED_PROVIDER_frameworkd-config = "frameworkd-config-shr"
 PREFERRED_PROVIDER_frameworkd = "frameworkd"
