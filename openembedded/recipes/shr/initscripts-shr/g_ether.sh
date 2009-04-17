@@ -24,4 +24,4 @@ done
 
 echo "modprobe: g_ether $p"
 
-modprobe g_ether $p || true
+modprobe g_ether $p 2>/dev/null || true
