@@ -5,7 +5,7 @@ DEPENDS = ""
 RDEPENDS = ""
 LICENSE = "GPL"
 PV = "0.0.1+${PR}-gitr${SRCREV}"
-PR = "r4"
+PR = "r5"
 
 RPROVIDES_${PN} = "initscripts"
 RCONFLICTS_${PN} = "initscripts"
