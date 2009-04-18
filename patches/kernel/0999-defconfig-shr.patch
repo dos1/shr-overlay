@@ -1,0 +1,33 @@
+Introduce some modification to the standard defconfig used by OE.
+
+This changes ext4 from built-in to a kernel module; the reason is
+that the kernel attempts to mount an ext2 filesystem on the SD card
+as ext4, and fails to boot as a result.
+
+Signed-off-by: Mike Westerhof <mwester@dls.net>
+
+--- a/dev/null	2009-04-03 23:39:32.282001359 -0500
++++ b/recipes/linux/linux-openmoko-2.6.28/defconfig-shr.patch	2009-04-18 16:57:56.000000000 -0500
+@@ -0,0 +1,22 @@
++--- gta02-packaging-defconfig	2009-04-18 16:51:36.000000000 -0500
+++++ defconfig-oe	2009-04-18 16:52:22.000000000 -0500
++@@ -1801,16 +1801,16 @@
++ # CONFIG_EXT2_FS_XIP is not set
++ CONFIG_EXT3_FS=y
++ # CONFIG_EXT3_FS_XATTR is not set
++-CONFIG_EXT4_FS=y
+++CONFIG_EXT4_FS=m
++ CONFIG_EXT4DEV_COMPAT=y
++ CONFIG_EXT4_FS_XATTR=y
++ # CONFIG_EXT4_FS_POSIX_ACL is not set
++ CONFIG_EXT4_FS_SECURITY=y
++ CONFIG_JBD=y
++ # CONFIG_JBD_DEBUG is not set
++-CONFIG_JBD2=y
+++CONFIG_JBD2=m
++ # CONFIG_JBD2_DEBUG is not set
++-CONFIG_FS_MBCACHE=y
+++CONFIG_FS_MBCACHE=m
++ # CONFIG_REISERFS_FS is not set
++ # CONFIG_JFS_FS is not set
++ CONFIG_FS_POSIX_ACL=y
