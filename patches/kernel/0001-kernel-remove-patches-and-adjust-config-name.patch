@@ -1,3 +1,7 @@
+Updated again to bump the PR, introduce a couple of patches to revert an
+earlier kernel commit that re-introduced the WSOD, and added a defconfig
+change that moves ext4 support to a kernel module.
+
 Updated original patch (details below) to fix the depmod problem, and to
 ensure that it builds correctly (this change triggered by the switch to
 the newer kernel from the andy-tracking branch; the new kernel is actually
@@ -19,10 +23,10 @@ Subject: [PATCH] kernel: remove patches and adjust config name (- --> _)
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
 diff --git a/recipes/linux/linux-openmoko-2.6.28_git.bb b/recipes/linux/linux-openmoko-2.6.28_git.bb
-index 8774721..6b69562 100644
+index 8774721..4cf3c7c 100644
 --- a/recipes/linux/linux-openmoko-2.6.28_git.bb
 +++ b/recipes/linux/linux-openmoko-2.6.28_git.bb
-@@ -1,32 +1,22 @@
+@@ -1,32 +1,26 @@
  require linux.inc
  require linux-openmoko.inc
  
@@ -38,7 +42,7 @@ index 8774721..6b69562 100644
 +OEV = "oe10"
  PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCREV}"
 -PR = "r3"
-+PR = "r3.3"
++PR = "r3.4"
  
  SRC_URI = "\
    git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
@@ -52,7 +56,10 @@ index 8774721..6b69562 100644
 -  file://0007-Subject-glamo_fix_improper_xrandr_geometry_setting.patch;patch=1 \
 -  file://0008-Send-pen-up-events-faster-side-effect-improve-illu.patch;patch=1 \
 -  file://defconfig-oe.patch \
++  file://defconfig-shr.patch \
 +  file://fix-install.patch;patch=1 \
++  file://un-clean-debug.patch;patch=1 \
++  file://un-LCD-driver-state.patch;patch=1 \
  "
  S = "${WORKDIR}/git"
  
@@ -60,5 +67,6 @@ index 8774721..6b69562 100644
 -	install -m 644 ./arch/arm/configs/gta02-packaging-defconfig ${WORKDIR}/defconfig-oe
 -	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
 +	install -m 644 ./arch/arm/configs/gta02_packaging_defconfig ${WORKDIR}/defconfig-oe
++	cat ${WORKDIR}/defconfig-shr.patch | patch -p0 -d ${WORKDIR}
  }
  

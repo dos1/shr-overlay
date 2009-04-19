@@ -19,8 +19,10 @@ test "$SULOGIN" = yes && sulogin -t 30 $CONSOLE
 #	and finally write the new mtab.
 #	This part is only needed if the rootfs was mounted ro.
 #
+#	Also attempt to remount if the noatime option is not present.
+#
 ROOTFSDEV="/dev/root"
-if grep -q "^$ROOTFSDEV .* rw" /proc/mounts; then
+if grep -q "^$ROOTFSDEV .* rw,.*noatime" /proc/mounts; then
 	echo "Root filesystem already read-write, not remounting"
 else
 	rootmode=rw
