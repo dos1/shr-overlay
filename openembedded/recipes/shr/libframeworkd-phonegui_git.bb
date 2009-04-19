@@ -1,6 +1,6 @@
 DESCRIPTION = "Frameworkd phonegui library"
 SECTION = "libs"
-SHR_PV = "0.0.1"
+PV = "0.0.1"
 PR = "r7"
 
 inherit shr pkgconfig autotools
