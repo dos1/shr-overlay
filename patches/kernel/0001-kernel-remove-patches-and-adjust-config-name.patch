@@ -1,3 +1,6 @@
+Updated to remove the patches and defconfig as they are no longer necessary
+(upstream changes).
+
 Updated again to bump the PR, introduce a couple of patches to revert an
 earlier kernel commit that re-introduced the WSOD, and added a defconfig
 change that moves ext4 support to a kernel module.
@@ -23,10 +26,10 @@ Subject: [PATCH] kernel: remove patches and adjust config name (- --> _)
 Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
 ---
 diff --git a/recipes/linux/linux-openmoko-2.6.28_git.bb b/recipes/linux/linux-openmoko-2.6.28_git.bb
-index 8774721..4cf3c7c 100644
+index 8774721..2232f25 100644
 --- a/recipes/linux/linux-openmoko-2.6.28_git.bb
 +++ b/recipes/linux/linux-openmoko-2.6.28_git.bb
-@@ -1,32 +1,26 @@
+@@ -1,32 +1,22 @@
  require linux.inc
  require linux-openmoko.inc
  
@@ -56,10 +59,7 @@ index 8774721..4cf3c7c 100644
 -  file://0007-Subject-glamo_fix_improper_xrandr_geometry_setting.patch;patch=1 \
 -  file://0008-Send-pen-up-events-faster-side-effect-improve-illu.patch;patch=1 \
 -  file://defconfig-oe.patch \
-+  file://defconfig-shr.patch \
 +  file://fix-install.patch;patch=1 \
-+  file://un-clean-debug.patch;patch=1 \
-+  file://un-LCD-driver-state.patch;patch=1 \
  "
  S = "${WORKDIR}/git"
  
@@ -67,6 +67,5 @@ index 8774721..4cf3c7c 100644
 -	install -m 644 ./arch/arm/configs/gta02-packaging-defconfig ${WORKDIR}/defconfig-oe
 -	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
 +	install -m 644 ./arch/arm/configs/gta02_packaging_defconfig ${WORKDIR}/defconfig-oe
-+	cat ${WORKDIR}/defconfig-shr.patch | patch -p0 -d ${WORKDIR}
  }
  
