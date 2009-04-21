@@ -14,7 +14,7 @@ def get_rdepends(bb, d):
 
     locales = bb.data.getVar("GLIBC_GENERATE_LOCALES", d, 1)
     if not locales or locales == "all":
-        locales = bb.data.getVar("IMAGE_LINGUAS ", d, 1);
+        locales = bb.data.getVar("IMAGE_LINGUAS", d, 1);
 
 
     import re
