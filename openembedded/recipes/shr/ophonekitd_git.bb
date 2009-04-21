@@ -1,7 +1,7 @@
 DESCRIPTION = "Ophonekitd daemon"
 SECTION = "x11/applications"
 DEPENDS += " dbus-glib libframeworkd-glib libframeworkd-phonegui sqlite3"
-PV = "0.0.1"
+PV = "0.0.1+gitr${SRCREV}"
 PR = "r15"
 
 inherit shr autotools
