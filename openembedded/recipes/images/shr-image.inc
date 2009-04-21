@@ -3,7 +3,7 @@
 #------------------------------------------------------
 
 PV = "2.0"
-PR = "r0"
+PR = "r1"
 
 IMAGE_LINGUAS = "en-us"
 
@@ -74,7 +74,7 @@ shr_rootfs_postprocess() {
     #    echo "Categories=Office;" >>$file
     #done
 
-    echo "Exec=vala-terminal htop" >> ./usr/share/applications/htop.desktop
+    echo "Exec=vala-terminal -e htop" >> ./usr/share/applications/htop.desktop
 
     # minimal gtk theme foo
     mkdir -p ./etc/gtk-2.0/
@@ -112,6 +112,16 @@ shr_rootfs_postprocess() {
 
     #fix sound in elementary-alarm
     /bin/sh -c "cd ./usr/share; ln -s elementary-alarm elementary_alarm"
+
+    # Add some missing entries to the passwd and group file; but do so carefully
+    # since this will be fixed upstream at some point.
+    grep -q '^tss:' ./etc/passwd || echo 'tss:x:93:93:Linux TSS User:/bin:/bin/sh' >>./etc/passwd
+    grep -q '^scanner:' ./etc/group || echo 'scanner:*:91:' >>./etc/group
+    grep -q '^nvram:'   ./etc/group || echo 'nvram:*:92:'   >>./etc/group
+    grep -q '^tss:'     ./etc/group || echo 'tss:*:93:'     >>./etc/group
+    grep -q '^fuse:'    ./etc/group || echo 'fuse:*:94:'    >>./etc/group
+    grep -q '^kvm:'     ./etc/group || echo 'kvm:*:95:'     >>./etc/group
+    grep -q '^rdma:'    ./etc/group || echo 'rdma:*:96:'    >>./etc/group
 
     cd $curdir
 }

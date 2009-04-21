@@ -1,12 +1,12 @@
 DESCRIPTION = "illume SHR sysactions config"
 SECTION = "e/utils"
 LICENSE = "MIT BSD"
-PV = "1.0-${EFL_SRCREV}"
+PV = "1.0-${EFL_SRCREV}-gitr${SRCREV}"
 PR = "r3"
 
 RPROVIDES_${PN} = "e-wm-sysactions"
 RCONFLICTS_${PN} = "e-wm-sysactions"
-RREPLACES_${PN} = "e-wm-sysactions"
+#RREPLACES_${PN} = "e-wm-sysactions"
 
 SRC_URI = "git://shr.bearstech.com/repo/shr-themes.git;protocol=http;branch=master"
 

@@ -1,7 +1,7 @@
-DESCRIPTION = "The Openmoko Messages"
+DESCRIPTION = "The SHR Messages"
 SECTION = "x11/applications"
 DEPENDS += "dbus-glib libframeworkd-glib libframeworkd-phonegui"
-SHR_PV = "0.0.1"
+PV = "0.0.1+gitr${SRCREV}"
 PR = "r7"
 
 inherit shr pkgconfig autotools

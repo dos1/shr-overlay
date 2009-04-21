@@ -1,8 +1,22 @@
+# SHR conf file
+
+## This file, contrary to its name, is really the equivalent of the
+## distro conf file for SHR.
+
+# Since we're not a distro yet, we have to manually add "shr" as an
+# override -- this line should be removed when SHR becomes a distro.
+OVERRIDES .= ":shr"
+
 DISTRO_INITSCRIPTS = "initscripts-shr"
 DISTRO_DEV_MANAGER = "udev"
 
+# Nail down some SRCREV's for the kernels.  There is a real potential problem
+# here, in that git hashes are hashes, not incrementing version numbers.  Thus
+# we need to have something else in the kernel version string that gets bumped
+# with each change.  So if you change one of these, go to the kernel recipe
+# and bump the OEV value up as well.
 SRCREV_pn-linux-eten = "df9715883efa3e6a88866813168fabb1c16b0b7a"
-SRCREV_pn-linux-openmoko-2.6.28 = "${AUTOREV}"
+SRCREV_pn-linux-openmoko-2.6.28 = "81c61a7d1abb03aecd13f5395aba355e996a1641"
 
 PREFERRED_PROVIDER_frameworkd-config = "frameworkd-config-shr"
 PREFERRED_PROVIDER_frameworkd = "frameworkd"
@@ -36,15 +50,15 @@ SRCREV_pn-zhone = "${AUTOREV}"
 SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-shr-settings = "a3e5e3430cf3803e21107e8e83aefdbcab27f56a"
-SRCREV_pn-shr-theme = "ef0b5f4ffd2da738ea2265b5635cc5f51ff95779"
-SRCREV_pn-libframeworkd-glib = "9765f6989d09d8f9b8676e1ef7e2501fe67fbdbc"
-SRCREV_pn-ophonekitd = "ef0b5f4ffd2da738ea2265b5635cc5f51ff95779"
-SRCREV_pn-shr-messages = "ef0b5f4ffd2da738ea2265b5635cc5f51ff95779"
-SRCREV_pn-shr-contacts = "ef0b5f4ffd2da738ea2265b5635cc5f51ff95779"
-SRCREV_pn-shr-dialer = "ef0b5f4ffd2da738ea2265b5635cc5f51ff95779"
-SRCREV_pn-libframeworkd-phonegui-efl = "ef0b5f4ffd2da738ea2265b5635cc5f51ff95779"
-SRCREV_pn-libframeworkd-phonegui = "ef0b5f4ffd2da738ea2265b5635cc5f51ff95779"
+SRCREV_pn-shr-theme                  = "9855b6b1a9cbe0c2b8765d21b4d11d807c2b3e46"
+SRCREV_pn-ophonekitd                 = "9855b6b1a9cbe0c2b8765d21b4d11d807c2b3e46"
+SRCREV_pn-shr-messages               = "9855b6b1a9cbe0c2b8765d21b4d11d807c2b3e46"
+SRCREV_pn-shr-contacts               = "9855b6b1a9cbe0c2b8765d21b4d11d807c2b3e46"
+SRCREV_pn-shr-dialer                 = "9855b6b1a9cbe0c2b8765d21b4d11d807c2b3e46"
+SRCREV_pn-libframeworkd-phonegui     = "9855b6b1a9cbe0c2b8765d21b4d11d807c2b3e46"
+SRCREV_pn-libframeworkd-phonegui-efl = "9855b6b1a9cbe0c2b8765d21b4d11d807c2b3e46"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
+SRCREV_pn-libframeworkd-glib = "9765f6989d09d8f9b8676e1ef7e2501fe67fbdbc"
 SRCREV_pn-pyphonelog = "${AUTOREV}"
 SRCREV_pn-shr-theme-brave = "${AUTOREV}"
 

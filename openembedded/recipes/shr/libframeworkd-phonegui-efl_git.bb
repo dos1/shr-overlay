@@ -1,7 +1,7 @@
 DESCRIPTION = "frameworkd EFL phonegui"
 SECTION = "e/apps"
 DEPENDS += " dbus-glib libframeworkd-glib libframeworkd-phonegui etk evas ecore edje edje-native elementary"
-SHR_PV = "0.0.1"
+PV = "0.0.1+gitr${SRCREV}"
 PR = "r28"
 
 inherit shr pkgconfig autotools
