@@ -84,6 +84,7 @@ fi
 
 # Write the module options file out even if we have no addresses to write,
 # so that we do not need to run again at next boot.
+[ -d /etc/modprobe.d ] || mkdir /etc/modprobe.d
 echo "options g_ether $daddr $haddr" >/etc/modprobe.d/g_ether.conf
 
 # And now, since this is first boot, we need to probe the module
