@@ -5,7 +5,7 @@ LICENSE = "MIT BSD"
 PV = "1.0-${EFL_SRCREV}-gitr${SRCREV}"
 PR = "r6"
 
-SRC_URI = "git://shr.bearstech.com/repo/shr-themes.git;protocol=http;branch=master"
+SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
 
 S = "${WORKDIR}/git/e-wm/${PN}"
 

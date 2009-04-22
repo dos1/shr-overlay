@@ -19,7 +19,7 @@ RRECOMMENDS_${PN} = "\
 
 PACKAGE_ARCH_${PN}-addons-illume = "all"
 
-SRC_URI = "git://shr.bearstech.com/repo/shr-settings.git;protocol=http;branch=master"
+SRC_URI = "git://git.shr-project.org/repo/shr-settings.git;protocol=http;branch=master"
 S = "${WORKDIR}/git"
 FILES_${PN} += "${prefix}/share/pixmaps"
 FILES_${PN} += "${prefix}/share/applications"
