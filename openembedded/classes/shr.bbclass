@@ -2,7 +2,7 @@
 
 HOMEPAGE = "http://projects.openmoko.org/projects/shr/"
 SHR_RELEASE ?= "shr"
-SHR_MIRROR ?= "git://shr.bearstech.com/repo"
+SHR_MIRROR ?= "git://git.shr-project.org/repo"
 
 LICENSE ?= "GPL"
 CVS_TARBALL_STASH =""
