@@ -5,7 +5,7 @@ DEPENDS = ""
 RDEPENDS = ""
 LICENSE = "GPL"
 PV = "0.0.1+${PR}-gitr${SRCREV}"
-PR = "r9"
+PR = "r10"
 
 RPROVIDES_${PN} = "initscripts"
 RCONFLICTS_${PN} = "initscripts"
@@ -23,7 +23,6 @@ SRC_URI = "file://alignment.sh \
 	   file://mountkernfs.sh \
 	   file://mountnfs.sh \
 	   file://populate-volatile.sh \
-           file://shr-splash.sh \
 	   file://devpts \
 	   file://volatiles \
 	   file://halt \
@@ -66,8 +65,6 @@ do_install () {
 	install -m 0755	${WORKDIR}/mountkernfs.sh	${D}${sysconfdir}/init.d
 	install -m 0755	${WORKDIR}/populate-volatile.sh	${D}${sysconfdir}/init.d
 
-        install -m 0755 ${WORKDIR}/shr-splash.sh	${D}${sysconfdir}/init.d
-
 	install -m 0644	${WORKDIR}/devpts		${D}${sysconfdir}/default/devpts
 	install -m 0644	${WORKDIR}/volatiles		${D}${sysconfdir}/default/volatiles/00_core
 
@@ -83,7 +80,6 @@ do_install () {
 # Create runlevel links
 #
 	ln -sf		../init.d/mountkernfs.sh	${D}${sysconfdir}/rcS.d/S01mountkernfs.sh
-	ln -sf		../init.d/shr-splash.sh		${D}${sysconfdir}/rcS.d/S01shr-splash.sh
 	ln -sf		../init.d/g_ether.sh		${D}${sysconfdir}/rcS.d/S02g_ether.sh
 	ln -sf		../init.d/hostname.sh		${D}${sysconfdir}/rcS.d/S02hostname.sh
 	ln -sf		../init.d/checkroot.sh		${D}${sysconfdir}/rcS.d/S02checkroot.sh
@@ -97,14 +93,12 @@ do_install () {
 
 	ln -sf		../init.d/rmnologin		${D}${sysconfdir}/rc5.d/S99rmnologin
 
-	ln -sf		../init.d/shr-splash.sh		${D}${sysconfdir}/rc0.d/S20shr-splash.sh
 	ln -sf		../init.d/sendsigs		${D}${sysconfdir}/rc0.d/S20sendsigs
 	ln -sf		../init.d/save-rtc.sh		${D}${sysconfdir}/rc0.d/S25save-rtc.sh
 	ln -sf		../init.d/umountnfs.sh		${D}${sysconfdir}/rc6.d/S31umountnfs.sh
 	ln -sf		../init.d/umountfs		${D}${sysconfdir}/rc0.d/S40umountfs
 	ln -sf		../init.d/halt			${D}${sysconfdir}/rc0.d/S90halt
 
-	ln -sf		../init.d/shr-splash.sh		${D}${sysconfdir}/rc6.d/S20shr-splash.sh
 	ln -sf		../init.d/sendsigs		${D}${sysconfdir}/rc6.d/S20sendsigs
 	ln -sf		../init.d/save-rtc.sh		${D}${sysconfdir}/rc6.d/S25save-rtc.sh
 	ln -sf		../init.d/umountnfs.sh		${D}${sysconfdir}/rc6.d/S31umountnfs.sh
