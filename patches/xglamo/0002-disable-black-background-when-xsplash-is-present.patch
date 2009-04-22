@@ -1,0 +1,17 @@
+--- a/recipes/xserver-kdrive-common/xserver-kdrive-common/openmoko/Xserver.orig	2009-04-22 18:42:37.000000000 +0200
++++ b/recipes/xserver-kdrive-common/xserver-kdrive-common/openmoko/Xserver	2009-04-22 18:46:15.000000000 +0200
+@@ -41,7 +41,13 @@
+ 
+ SCREEN_SIZE=`fallback_screen_arg`
+ 
+-ARGS=" -br -pn"
++# use black background if splashes are not present
++if [ -f "/usr/share/pixmaps/xsplash-qvga-square.ppm" ] || [ -f "/usr/share/pixmaps/xsplash-qvga.ppm" ] || [ -f "/usr/share/pixmaps/xsplash-vga.ppm" ]; then
++  ARGS=" -pn"
++fi
++else
++  ARGS=" -br -pn"
++fi
+ 
+ # use ucb 1x00 touchscreen if present
+ if [ -z "$TSLIB_TSDEVICE" ] && [ -e /dev/touchscreen/ucb1x00 ]; then
