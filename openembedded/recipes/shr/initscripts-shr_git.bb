@@ -5,7 +5,7 @@ DEPENDS = ""
 RDEPENDS = ""
 LICENSE = "GPL"
 PV = "0.0.1+${PR}-gitr${SRCREV}"
-PR = "r8"
+PR = "r9"
 
 RPROVIDES_${PN} = "initscripts"
 RCONFLICTS_${PN} = "initscripts"
@@ -97,12 +97,14 @@ do_install () {
 
 	ln -sf		../init.d/rmnologin		${D}${sysconfdir}/rc5.d/S99rmnologin
 
+	ln -sf		../init.d/shr-splash.sh		${D}${sysconfdir}/rc0.d/S20shr-splash.sh
 	ln -sf		../init.d/sendsigs		${D}${sysconfdir}/rc0.d/S20sendsigs
 	ln -sf		../init.d/save-rtc.sh		${D}${sysconfdir}/rc0.d/S25save-rtc.sh
 	ln -sf		../init.d/umountnfs.sh		${D}${sysconfdir}/rc6.d/S31umountnfs.sh
 	ln -sf		../init.d/umountfs		${D}${sysconfdir}/rc0.d/S40umountfs
 	ln -sf		../init.d/halt			${D}${sysconfdir}/rc0.d/S90halt
 
+	ln -sf		../init.d/shr-splash.sh		${D}${sysconfdir}/rc6.d/S20shr-splash.sh
 	ln -sf		../init.d/sendsigs		${D}${sysconfdir}/rc6.d/S20sendsigs
 	ln -sf		../init.d/save-rtc.sh		${D}${sysconfdir}/rc6.d/S25save-rtc.sh
 	ln -sf		../init.d/umountnfs.sh		${D}${sysconfdir}/rc6.d/S31umountnfs.sh
