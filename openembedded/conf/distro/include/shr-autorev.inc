@@ -29,7 +29,7 @@ PREFERRED_VERSION_udev = "124"
 PREFERRED_VERSION_midori = "0.1.2"
 PREFERRED_VERSION_obexftp = "0.22"
 PREFERRED_VERSION_glib-2.0 = "2.18.3"
-PREFERRED_PROVIDER_e-wm-menu = "e-wm-menu"
+PREFERRED_PROVIDER_e-wm-menu = "e-wm-menu-shr"
 
 #FSO stuff
 SRCREV_pn-frameworkd = "516f48762ab7afa4e4702a0ba01bc0a004ae4c60"
@@ -67,6 +67,7 @@ EFL_SRCREV = "39827"
 SRCREV_pn-e-wm-config-illume-shr = "${AUTOREV}"
 SRCREV_pn-e-wm-sysactions-shr = "${AUTOREV}"
 SRCREV_pn-e-wm-theme-illume-shr = "${AUTOREV}"
+SRCREV_pn-e-wm-menu-shr = "${AUTOREV}"
 
 SRCREV_pn-navit = "2198"
 SRCREV_pn-python-elementary = "39834"
