@@ -3,7 +3,7 @@ SECTION = "e/utils"
 DEPENDS = "eet"
 LICENSE = "MIT BSD"
 PV = "1.0-${EFL_SRCREV}-gitr${SRCREV}"
-PR = "r5"
+PR = "r6"
 
 inherit e
 
@@ -17,5 +17,5 @@ EXTRA_OECONF = "\
 
 FILES_${PN} = "${datadir}/enlightenment/data/config/illume-shr"
 
-RRECOMMENDS_${PN} = "e-wm-theme-illume-shr e-wm-sysactions-shr"
+RRECOMMENDS_${PN} = "e-wm-theme-illume-shr e-wm-sysactions-shr e-wm-menu-shr"
 
