@@ -1,0 +1,11 @@
+--- xserver-kdrive-common_0.1.bb.orig	2009-04-22 19:03:32.000000000 +0200
++++ xserver-kdrive-common_0.1.bb	2009-04-22 19:03:42.000000000 +0200
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Common X11 scripts"
+ LICENSE = "GPL"
+ SECTION = "x11"
+-PR = "r37"
++PR = "r37.1"
+ 
+ SRC_URI = "\
+   file://Xdefaults \
