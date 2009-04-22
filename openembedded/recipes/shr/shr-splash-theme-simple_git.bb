@@ -18,6 +18,11 @@ FILES_${PN} = "${datadir}/shr-splash \
 
 do_install() {
     install -d ${D}${datadir}/shr-splash
+    install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/rcS.d
+    install -d ${D}${sysconfdir}/rc0.d
+    install -d ${D}${sysconfdir}/rc6.d
+
     install -m 0755 ${S}/boot.fb ${D}${datadir}/shr-splash/boot.fb
     install -m 0755 ${S}/shutdown.fb ${D}${datadir}/shr-splash/shutdown.fb
     install -m 0755 ${S}/shr-splash.sh        ${D}${sysconfdir}/init.d
