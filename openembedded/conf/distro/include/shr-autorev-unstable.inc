@@ -2,7 +2,6 @@
 
 # libeflvala needs at least 2.18.0 and upstream OE provides only 2.16.4
 PREFERRED_VERSION_glib-2.0 = "2.18.3"
-PREFERRED_PROVIDER_e-wm-menu = "e-wm-menu"
 
 # FSO stuff
 SRCREV_pn-frameworkd = "${AUTOREV}"
@@ -46,3 +45,6 @@ SRCREV_pn-libmokoui2 = "4695"
 SRCREV_pn-boost-signals2 = "52299"
 SRCREV_pn-dbus-c++-native = "${AUTOREV}"
 SRCREV_pn-dbus-c++ = "${AUTOREV}"
+
+SRCREV_pn-ewww = "${AUTOREV}"
+SRCREV_pn-webkit-efl = "${AUTOREV}"
