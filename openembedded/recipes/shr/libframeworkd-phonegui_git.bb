@@ -1,12 +1,6 @@
 DESCRIPTION = "Frameworkd phonegui library"
 SECTION = "libs"
 PV = "0.0.1+gitr${SRCREV}"
-PR = "r7"
+PR = "r8"
 
-inherit shr pkgconfig autotools
-
-do_stage () {
-        oe_libinstall -so libframeworkd-phonegui ${STAGING_LIBDIR}
-
-        autotools_stage_includes
-}
+inherit shr pkgconfig autotools autotools_stage
