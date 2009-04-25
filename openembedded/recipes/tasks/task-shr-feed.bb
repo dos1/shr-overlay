@@ -48,4 +48,5 @@ RDEPENDS_${PN} += "\
 		tasks \
 		dates \
 		omnewrotate \
+		xchat \
 "
