@@ -3,7 +3,7 @@ SECTION = "e/apps"
 DEPENDS += " dbus-glib libframeworkd-glib libframeworkd-phonegui etk evas ecore edje edje-native elementary"
 PV = "0.0.1+gitr${SRCREV}"
 
-SRC_URI = "http://shr.bearstech.com/repo/libframeworkd-phonegui-efl2.git;protocol=http;branch=master"
+SRC_URI = "git://shr.bearstech.com/repo/libframeworkd-phonegui-efl2.git;protocol=http;branch=master"
 S = "${WORKDIR}/git"
 
 inherit pkgconfig autotools autotools_stage
