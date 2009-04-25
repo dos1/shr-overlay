@@ -98,6 +98,7 @@ shr_rootfs_postprocess() {
     echo "export PS1=\"\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] \"">> ./etc/profile
 
     #load modules on boot
+    [ -d ./etc/modutils ] || mkdir ./etc/modutils
     echo "g_ether" > ./etc/modutils/g_ether
     echo "ppp_generic" > ./etc/modutils/ppp_generic
     echo "snd_pcm_oss" > ./etc/modutils/snd_pcm_oss
