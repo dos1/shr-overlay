@@ -661,11 +661,9 @@ index 02d4cf4..7c6605e 100644
 +++ b/recipes/efl1/evas_svn.bb
 @@ -1,5 +1,5 @@
  require evas.inc
--PR = "r1"
-+PR = "r1.3"
+-PR = "r2"
++PR = "r2.3"
  
  EXTRA_OECONF = "\
  		--x-includes=${STAGING_INCDIR}/X11  \
--- 
-1.6.2.2
 
