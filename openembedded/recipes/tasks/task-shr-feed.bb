@@ -49,4 +49,5 @@ RDEPENDS_${PN} += "\
 		dates \
 		omnewrotate \
 		xchat \
+		python-pyid3lib \
 "
