@@ -50,4 +50,5 @@ RDEPENDS_${PN} += "\
 		omnewrotate \
 		xchat \
 		python-pyid3lib \
+		gpe-scap \
 "
