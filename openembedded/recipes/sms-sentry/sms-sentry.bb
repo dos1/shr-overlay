@@ -4,6 +4,8 @@ PRIORITY = "optional"
 LICENSE = "GPL"
 DEPENDS = "python"
 
+PR = "r1"
+
 #SRC_URI = "file://sms-sentry.tgz"
 #SRC_URI = "http://handheldshell.com/sms-sentry.tgz"
 SRC_URI = "http://www.handheldshell.com/software/fso/sms-sentry_1.01.tgz"
