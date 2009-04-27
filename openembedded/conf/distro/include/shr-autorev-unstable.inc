@@ -27,7 +27,8 @@ SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 
 SRCREV_pn-calc = "${AUTOREV}"
-SRCREV_pn-shr-config = "${AUTOREV}"
+#pin shr-config due to gnome bug 579803 (requires vala > 0.7.1)
+SRCREV_pn-shr-config = "b29d2607443e154c11f16925c1b54b6ede121583"
 
 EFL_SRCREV = "39827"
 SRCREV_pn-python-elementary = "39834"
