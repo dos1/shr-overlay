@@ -15,7 +15,7 @@ inherit autotools update-rc.d
 INITSCRIPT_NAME = "sms-sentry.sh"
 INITSCRIPT_PARAMS = "defaults 35"
 
-S = ${WORKDIR}/sms-sentry_1.0-r1
+S = ${WORKDIR}/sms-sentry_1.01
 
 do_install() {
         install -d ${D}/${sysconfdir}/init.d
