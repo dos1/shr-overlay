@@ -47,6 +47,3 @@ SRCREV_pn-libmokoui2 = "4695"
 SRCREV_pn-boost-signals2 = "52299"
 SRCREV_pn-dbus-c++-native = "${AUTOREV}"
 SRCREV_pn-dbus-c++ = "${AUTOREV}"
-
-SRCREV_pn-ewww = "${AUTOREV}"
-SRCREV_pn-webkit-efl = "${AUTOREV}"
