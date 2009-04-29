@@ -7,6 +7,10 @@
 # override -- this line should be removed when SHR becomes a distro.
 OVERRIDES .= ":shr"
 
+# We need to override some machine stuff as well; include the machine-
+# specific file here (if it exists).
+include conf/distro/include/shr-${MACHINE}.conf
+
 DISTRO_INITSCRIPTS = "initscripts-shr"
 DISTRO_DEV_MANAGER = "udev"
 
