@@ -22,6 +22,7 @@ RDEPENDS_${PN} += "\
 		epdfview \
 		pyphonelog \
 		pingus \
+		mokomaze \
 		openmoocow \
 		vagalume \
 		python-pygame \
