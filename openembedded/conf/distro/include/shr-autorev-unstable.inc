@@ -11,6 +11,7 @@ SRCREV_pn-frameworkd-config-shr = "${AUTOREV}"
 SRCREV_pn-frameworkd-config-shr_FSO_REV = "${AUTOREV}"
 SRCREV_pn-frameworkd-config-shr_SHR_REV = "${AUTOREV}"
 SRCREV_pn-vala-terminal = "2f849c5690d8"
+SRCREV_vala-dbus-binding-tool = "ddd235f360c52142a4934074f610798c2acd073c"
 
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
