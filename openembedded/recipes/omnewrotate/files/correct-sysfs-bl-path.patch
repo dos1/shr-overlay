@@ -1,6 +1,6 @@
 diff -uri omnewrotate.org/src/omnewrotate.c omnewrotate/src/omnewrotate.c
 --- omnewrotate.org/src/omnewrotate.c	2009-05-03 20:23:56.000000000 +0200
-+++ omnewrotate/src/omnewrotate.c	2009-05-03 20:27:09.000000000 +0200
++++ omnewrotate/src/omnewrotate.c	2009-05-03 21:12:51.000000000 +0200
 @@ -95,8 +95,8 @@
  #define LONG_TIME 0
  
@@ -12,3 +12,14 @@ diff -uri omnewrotate.org/src/omnewrotate.c omnewrotate/src/omnewrotate.c
  
  #define NUM_THREADS 1
  
+@@ -197,8 +197,8 @@
+ #endif
+ 
+ 	if (change_brightness && !use_dbus) {
+-		set_brightness_file = open(SET_BRIGHTNESS_PATH, O_RDWR);
+-		get_brightness_file = open(GET_BRIGHTNESS_PATH, O_RDWR);
++		set_brightness_file = open(SET_BRIGHTNESS_PATH, O_WRONLY);
++		get_brightness_file = open(GET_BRIGHTNESS_PATH, O_RDONLY);
+ 
+ 		if (set_brightness_file < 0 || get_brightness_file < 0)
+ 		{
