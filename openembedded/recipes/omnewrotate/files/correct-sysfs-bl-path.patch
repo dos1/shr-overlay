@@ -1,0 +1,14 @@
+diff -uri omnewrotate.org/src/omnewrotate.c omnewrotate/src/omnewrotate.c
+--- omnewrotate.org/src/omnewrotate.c	2009-05-03 20:23:56.000000000 +0200
++++ omnewrotate/src/omnewrotate.c	2009-05-03 20:27:09.000000000 +0200
+@@ -95,8 +95,8 @@
+ #define LONG_TIME 0
+ 
+ #define EVENT_PATH "/dev/input/event3"
+-#define GET_BRIGHTNESS_PATH "/sys/class/backlight/pcf50633-bl/actual_brightness"
+-#define SET_BRIGHTNESS_PATH "/sys/class/backlight/pcf50633-bl/brightness"
++#define GET_BRIGHTNESS_PATH "/sys/class/backlight/gta02-bl/actual_brightness"
++#define SET_BRIGHTNESS_PATH "/sys/class/backlight/gta02-bl/brightness"
+ 
+ #define NUM_THREADS 1
+ 
