@@ -1,0 +1,70 @@
+From 063785a15a674362222440a4aaaa730f600b822d Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sun, 3 May 2009 21:33:17 +0200
+Subject: [PATCH] update vala to 0.7.1
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ recipes/vala/vala-bootstrap-native_0.6.0.bb |   11 -----------
+ recipes/vala/vala-bootstrap-native_0.7.1.bb |   11 +++++++++++
+ recipes/vala/vala_0.6.0.bb                  |    2 --
+ recipes/vala/vala_0.7.1.bb                  |    2 ++
+ 4 files changed, 13 insertions(+), 13 deletions(-)
+ delete mode 100644 recipes/vala/vala-bootstrap-native_0.6.0.bb
+ create mode 100644 recipes/vala/vala-bootstrap-native_0.7.1.bb
+ delete mode 100644 recipes/vala/vala_0.6.0.bb
+ create mode 100644 recipes/vala/vala_0.7.1.bb
+
+diff --git a/recipes/vala/vala-bootstrap-native_0.6.0.bb b/recipes/vala/vala-bootstrap-native_0.6.0.bb
+deleted file mode 100644
+index 4b653d5..0000000
+--- a/recipes/vala/vala-bootstrap-native_0.6.0.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require vala_${PV}.bb
+-
+-inherit native
+-DEPENDS = "glib-2.0-native"
+-
+-# work around timestamp problem in tarball
+-do_compile_prepend() {
+- touch gobject/gobject.vala.stamp
+-}
+-
+-
+diff --git a/recipes/vala/vala-bootstrap-native_0.7.1.bb b/recipes/vala/vala-bootstrap-native_0.7.1.bb
+new file mode 100644
+index 0000000..4b653d5
+--- /dev/null
++++ b/recipes/vala/vala-bootstrap-native_0.7.1.bb
+@@ -0,0 +1,11 @@
++require vala_${PV}.bb
++
++inherit native
++DEPENDS = "glib-2.0-native"
++
++# work around timestamp problem in tarball
++do_compile_prepend() {
++ touch gobject/gobject.vala.stamp
++}
++
++
+diff --git a/recipes/vala/vala_0.6.0.bb b/recipes/vala/vala_0.6.0.bb
+deleted file mode 100644
+index 7b2b4e2..0000000
+--- a/recipes/vala/vala_0.6.0.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-require vala.inc
+-PR = "r2"
+diff --git a/recipes/vala/vala_0.7.1.bb b/recipes/vala/vala_0.7.1.bb
+new file mode 100644
+index 0000000..7b2b4e2
+--- /dev/null
++++ b/recipes/vala/vala_0.7.1.bb
+@@ -0,0 +1,2 @@
++require vala.inc
++PR = "r2"
+-- 
+1.6.0.6
+
