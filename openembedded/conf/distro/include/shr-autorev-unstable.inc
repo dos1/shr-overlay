@@ -13,6 +13,9 @@ SRCREV_pn-frameworkd-config-shr_SHR_REV = "${AUTOREV}"
 SRCREV_pn-vala-terminal = "2f849c5690d8"
 SRCREV_pn-vala-dbus-binding-tool = "${AUTOREV}"
 SRCREV_pn-libfso-glib = "${AUTOREV}"
+SRC_URI_pn-vala-native = "${FREESMARTPHONE_GIT}/vala-lang;protocol=git;branch=pending-upstream-move"
+SRCREV_pn-vala-native = "${AUTOREV}"
+PV_pn-vala-native = "0.7.1-fso1-gitr${SRCREV}"
 
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
