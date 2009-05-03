@@ -8,7 +8,7 @@ RDEPENDS="ttf-liberation-mono"
 
 
 PR="r3"
-SRC_URI="http://projects.openmoko.org/frs/download.php/764/${P}.tar.gz"
+SRC_URI="http://projects.openmoko.org/frs/download.php/781/${P}.tar.gz"
 
 inherit autotools
 
