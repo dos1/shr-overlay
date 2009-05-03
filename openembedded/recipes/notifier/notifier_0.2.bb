@@ -4,7 +4,6 @@ AUTHOR = "Pietro Montorfano"
 LICENSE = "GPLv3"
 RDEPENDS = "python-elementary python python-edbus"
 SECTION = "x11/application"
-PV = "0.1"
 
 SRC_URI = "http://http://monto.homelinux.org/notifier \
 http://monto.homelinux.org/89notifier"
