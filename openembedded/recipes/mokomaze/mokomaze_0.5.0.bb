@@ -3,7 +3,7 @@ HOMEPAGE="http://mokomaze.projects.openmoko.org/"
 SECTION="x11/games"
 PRIORITY="optional"
 LICENSE="GPLv3"
-DEPENDS="libsdl-ttf libsdl-image"
+DEPENDS="libsdl-ttf libsdl-image ode"
 RDEPENDS="ttf-liberation-mono"
 
 
