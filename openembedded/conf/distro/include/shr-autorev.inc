@@ -33,6 +33,7 @@ PREFERRED_VERSION_udev = "124"
 PREFERRED_VERSION_midori = "0.1.2"
 PREFERRED_VERSION_obexftp = "0.22"
 PREFERRED_VERSION_glib-2.0 = "2.18.3"
+PREFERRED_VERSION_mokomaze = "0.2.3"
 PREFERRED_PROVIDER_e-wm-menu = "e-wm-menu-shr"
 
 #FSO stuff

@@ -10,7 +10,8 @@ RDEPENDS="ttf-liberation-mono"
 PR="r4"
 SRC_URI="http://projects.openmoko.org/frs/download.php/764/${P}.tar.gz \
          file://adapt_ttf_fontdir.patch;patch=1 \
-         file://fix_desktop_file.patch;patch=1"
+         file://fix_desktop_file.patch;patch=1 \
+         file://avoid_dim_suspend.patch;patch=1"
 
 inherit autotools
 
