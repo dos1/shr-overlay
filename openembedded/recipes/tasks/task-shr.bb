@@ -26,5 +26,6 @@ RDEPENDS_${PN}-apps += "\
 
 RDEPENDS_${PN}-games += "\
   numptyphysics \
+  mokomaze \
 "
 
