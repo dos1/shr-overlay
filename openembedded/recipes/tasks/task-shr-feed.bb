@@ -44,11 +44,12 @@ RDEPENDS_${PN} += "\
 		cellhunter \
 		dillo2 \
 		usbmode \
-		zenity \
 		pyefl-sudoku \
 		tasks \
 		dates \
 		omnewrotate \
 		xchat \
 		python-pyid3lib \
+		libframeworkd-phonegui-efl2 \
+		intone \
 "
