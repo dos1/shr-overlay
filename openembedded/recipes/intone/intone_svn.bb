@@ -4,7 +4,7 @@ AUTHORE = "cchandel"
 LICENSE = "GPLv2"
 SECTION = "e/apps"
 DEPENDS = "elementary eina sqlite3 edbus"
-RDEPENDS = "mplayer"
+RDEPENDS = "mplayer lame libxv libsdl-x11"
 
 PV = "0.0.1+svnr${SRCREV}"
 SRC_URI = "svn://intone.googlecode.com/svn/trunk;module=.;proto=http"
