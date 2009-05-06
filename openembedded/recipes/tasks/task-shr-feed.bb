@@ -52,4 +52,6 @@ RDEPENDS_${PN} += "\
 		python-pyid3lib \
 		libframeworkd-phonegui-efl2 \
 		intone \
+		vim \
+		emacs \
 "
