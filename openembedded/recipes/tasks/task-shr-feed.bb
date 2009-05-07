@@ -34,6 +34,7 @@ RDEPENDS_${PN} += "\
 		fltk-chess \
 		remoko \
 		shr-config \
+		shr-splash-theme-simple \
 		openbmap-logger \
 		ffalarms \
 		libnotify \
