@@ -54,4 +54,5 @@ RDEPENDS_${PN} += "\
 		intone \
 		vim \
 		emacs \
+		mcabber \
 "
