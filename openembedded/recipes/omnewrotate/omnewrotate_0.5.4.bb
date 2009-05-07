@@ -8,7 +8,9 @@ PV = "0.5.4"
 PR = "r2"
 
 SRC_URI = "svn://omnewrotate.googlecode.com/svn/trunk;module=.;proto=http;rev=HEAD \
-file://correct-sysfs-bl-path.patch;patch=1"
+file://correct-sysfs-bl-path.patch;patch=1 \
+file://correct-luminosity-for-new-kernel.patch;patch=1 \
+"
 S = "${WORKDIR}"
 
 inherit autotools
