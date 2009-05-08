@@ -1,0 +1,117 @@
+From f3e890f9d997e14abaa5b31fbecd329beda772ec Mon Sep 17 00:00:00 2001
+From: Tom Hacohen <tom@nospam>
+Date: Fri, 8 May 2009 19:44:30 +0300
+Subject: [PATCH] Added illume kbd direction configuration
+
+---
+ recipes/e17/e-wm/illume-flow.patch |   76 ++++++++++++++++++++++++++++++++++++
+ recipes/e17/e-wm_svn.bb            |    3 +-
+ 2 files changed, 78 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/e17/e-wm/illume-flow.patch
+
+diff --git a/recipes/e17/e-wm/illume-flow.patch b/recipes/e17/e-wm/illume-flow.patch
+new file mode 100644
+index 0000000..df719cc
+--- /dev/null
++++ b/recipes/e17/e-wm/illume-flow.patch
+@@ -0,0 +1,76 @@
++Index: e/src/modules/illume/e_kbd_int.c
++===================================================================
++--- e/src/modules/illume/e_kbd_int.c	(revision 1)
+++++ e/src/modules/illume/e_kbd_int.c	(working copy)
++@@ -440,6 +440,16 @@
++ static void
++ _e_kbd_int_stroke_handle(E_Kbd_Int *ki, int dir)
++ {
+++   /* If the keyboard direction is RTL switch dir 3 and 1
+++    * i.e, make forward backwards and the other way around */
+++   if (ki->layout.direction == E_KBD_INT_DIRECTION_RTL)
+++     {
+++        if (dir == 3)
+++		dir = 1;
+++	else if (dir == 1)
+++		dir = 3;
+++     }
+++     
++    if (dir == 4) // up
++      {
++ 	_e_kbd_int_layout_next(ki);
++@@ -897,6 +907,10 @@
++    if (!f) return;
++    ki->layout.directory = ecore_file_dir_get(layout);
++    ki->layout.file = eina_stringshare_add(layout);
+++
+++   /* Make the default direction LTR */
+++   ki->layout.direction = E_KBD_INT_DIRECTION_LTR;
+++   
++    while (fgets(buf, sizeof(buf), f))
++      {
++ 	int len;
++@@ -924,6 +938,17 @@
++ 	     sscanf(buf, "%*s %i\n", &(ki->layout.fuzz));
++ 	     continue;
++ 	  }
+++	if (!strcmp(str, "direction"))
+++	  {
+++	     char direction[4];
+++	     sscanf(buf, "%*s %3s\n", direction);
+++	     /* If rtl mark as rtl, otherwise make it ltr */
+++	     if (!strcmp(direction, "rtl"))
+++	     	ki->layout.direction = E_KBD_INT_DIRECTION_RTL;
+++	     else
+++	     	ki->layout.direction = E_KBD_INT_DIRECTION_LTR;
+++	     continue;
+++	  }
++ 	if (!strcmp(str, "key"))
++ 	  {
++ 	     ky = calloc(1, sizeof(E_Kbd_Int_Key));
++Index: e/src/modules/illume/e_kbd_int.h
++===================================================================
++--- e/src/modules/illume/e_kbd_int.h	(revision 1)
+++++ e/src/modules/illume/e_kbd_int.h	(working copy)
++@@ -15,6 +15,13 @@
++    E_KBD_INT_TYPE_PASSWORD = (1 << 6)
++ } E_Kbd_Int_Type;
++ 
+++/* The natural text direction of the keyboard */
+++typedef enum _E_kbd_Int_Direction
+++{
+++	E_KBD_INT_DIRECTION_LTR = (1 << 0),
+++	E_KBD_INT_DIRECTION_RTL = (1 << 1)
+++} E_Kbd_Int_Direction;
+++
++ typedef struct _E_Kbd_Int           E_Kbd_Int;
++ typedef struct _E_Kbd_Int_Key       E_Kbd_Int_Key;
++ typedef struct _E_Kbd_Int_Key_State E_Kbd_Int_Key_State;
++@@ -34,6 +41,7 @@
++       const char       *file;
++       int               w, h;
++       int               fuzz;
+++      int		direction;
++       E_Kbd_Int_Type    type;
++       Eina_List        *keys;
++       E_Kbd_Int_Key    *pressed;
+diff --git a/recipes/e17/e-wm_svn.bb b/recipes/e17/e-wm_svn.bb
+index 1e57aa7..b29122c 100644
+--- a/recipes/e17/e-wm_svn.bb
++++ b/recipes/e17/e-wm_svn.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "The Enlightenment Window Manager Version 17"
+ DEPENDS = "eet evas ecore edje efreet edbus"
+ LICENSE = "MIT BSD"
+ PV = "0.16.999.050+svnr${SRCREV}"
+-PR = "r5"
++PR = "r6"
+ 
+ inherit e update-alternatives
+ 
+@@ -72,6 +72,7 @@ SRC_URI = "\
+   file://enlightenment_start.oe \
+   file://applications.menu \
+   file://gsm-segfault-fix.patch;patch=1;maxrev=37617 \
++  file://illume-flow.patch;patch=0 \
+ "
+ 
+ SRC_URI_append_openmoko = " file://illume-disable-screensaver.patch;patch=1 "
+-- 
+1.6.2.4
+
