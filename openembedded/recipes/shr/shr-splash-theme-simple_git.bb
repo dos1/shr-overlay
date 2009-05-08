@@ -1,7 +1,7 @@
 DESCRIPTION = "SHR splash screen"
 SECTION = "x11/data"
 LICENSE = "MIT BSD"
-PV = "1.0-gitr${SRCREV}"
+PV = "1.1-gitr${SRCPV}"
 PR = "r3"
 DEPENDS += "initscripts"
 

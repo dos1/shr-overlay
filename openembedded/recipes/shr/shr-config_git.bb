@@ -4,7 +4,7 @@ AUTHOR = "Sebastian Spaeth (see AUTHORS)"
 LICENSE  = "GPLv2"
 DEPENDS = "vala-native elementary libeflvala"
 SECTION = "x11/application"
-PV = "0.0.1+r${SRCREV}"
+PV = "0.0.2+r${SRCPV}"
 PR = "r3"
 
 EXTRA_OECONF="--enable-vapidir=${STAGING_DATADIR}/vala/vapi"
