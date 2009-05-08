@@ -35,6 +35,7 @@ RDEPENDS_${PN} += "\
 		remoko \
 		shr-config \
 		shr-splash-theme-simple \
+                shr-splash-theme-dontpanic \
 		openbmap-logger \
 		ffalarms \
 		libnotify \
