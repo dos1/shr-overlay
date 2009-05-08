@@ -100,7 +100,7 @@ index 1e57aa7..b29122c 100644
  LICENSE = "MIT BSD"
  PV = "0.16.999.050+svnr${SRCREV}"
 -PR = "r5"
-+PR = "r6"
++PR = "r5.1"
  
  inherit e update-alternatives
  
