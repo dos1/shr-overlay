@@ -57,4 +57,5 @@ RDEPENDS_${PN} += "\
 		vpnc \
 		emacs \
 		mcabber \
+		gdb \
 "
