@@ -54,6 +54,7 @@ RDEPENDS_${PN} += "\
 		libframeworkd-phonegui-efl2 \
 		intone \
 		vim \
+		vpnc \
 		emacs \
 		mcabber \
 "
