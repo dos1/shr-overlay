@@ -3,10 +3,6 @@ RDEPENDS += "shr-splash"
 
 inherit update-alternatives
 
-SRC_URI ?= "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-
-S ?= "${WORKDIR}/git/shr-splash/${PN}"
-
 FILES_${PN} = "${datadir}/shr-splash/themes/${PN}"
 
 ALTERNATIVE_NAME = "shr-splash-theme"
