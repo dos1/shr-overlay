@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen"
 SECTION = "x11/data"
 LICENSE = "MIT BSD"
 PV = "1.2-gitr${SRCPV}"
-PR = "r0"
+PR = "r1"
 RDEPENDS += "virtual/shr-splash-theme"
 
 inherit update-rc.d
