@@ -67,6 +67,7 @@ SRCREV_pn-libframeworkd-glib = "9765f6989d09d8f9b8676e1ef7e2501fe67fbdbc"
 SRCREV_pn-pyphonelog = "${AUTOREV}"
 SRCREV_pn-shr-theme-brave = "${AUTOREV}"
 SRCREV_pn-shr-splash-theme-simple = "${AUTOREV}"
+SRCREV_pn-shr-splash-theme-dontpanic = "${AUTOREV}"
 
 #General stuff
 EFL_SRCREV = "39827"
