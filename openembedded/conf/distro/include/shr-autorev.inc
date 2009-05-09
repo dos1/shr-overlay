@@ -52,6 +52,7 @@ SRCREV_pn-python-pytrc = "${AUTOREV}"
 SRCREV_pn-zhone = "${AUTOREV}"
 
 #SHR stuff
+PREFERRED_PROVIDER_virtual/shr-splash-theme = "shr-splash-theme-simple"
 SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-shr-settings = "a3e5e3430cf3803e21107e8e83aefdbcab27f56a"
@@ -66,6 +67,7 @@ SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
 SRCREV_pn-libframeworkd-glib = "9765f6989d09d8f9b8676e1ef7e2501fe67fbdbc"
 SRCREV_pn-pyphonelog = "${AUTOREV}"
 SRCREV_pn-shr-theme-brave = "${AUTOREV}"
+SRCREV_pn-shr-splash = "${AUTOREV}"
 SRCREV_pn-shr-splash-theme-simple = "${AUTOREV}"
 SRCREV_pn-shr-splash-theme-dontpanic = "${AUTOREV}"
 

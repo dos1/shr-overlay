@@ -34,6 +34,7 @@ RDEPENDS_${PN} += "\
 		fltk-chess \
 		remoko \
 		shr-config \
+                shr-splash \
 		shr-splash-theme-simple \
                 shr-splash-theme-dontpanic \
 		openbmap-logger \
