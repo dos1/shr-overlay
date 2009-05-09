@@ -1,4 +1,4 @@
-PROVIDES += "virtual/shr-splash-theme"
+RPROVIDES += "virtual/shr-splash-theme"
 RDEPENDS += "shr-splash"
 
 inherit update-alternatives
