@@ -4,4 +4,4 @@ LICENSE = "MIT BSD"
 PV = "1.2-gitr${SRCPV}"
 PR = "r0"
 
-inherit "shr-splash-theme.inc"
+require "shr-splash-theme.inc"
