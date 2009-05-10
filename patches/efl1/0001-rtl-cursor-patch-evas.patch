@@ -1,0 +1,779 @@
+From 153f0ac457d99ed26dc28e01af8a5b760566759b Mon Sep 17 00:00:00 2001
+From: Tom Hacohen <tom@nospam>
+Date: Mon, 11 May 2009 02:25:38 +0300
+Subject: [PATCH] rtl cursor patch evas
+
+---
+ recipes/efl1/evas/rtl_cursor.patch |  746 ++++++++++++++++++++++++++++++++++++
+ recipes/efl1/evas_svn.bb           |    4 +-
+ 2 files changed, 749 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/efl1/evas/rtl_cursor.patch
+
+diff --git a/recipes/efl1/evas/rtl_cursor.patch b/recipes/efl1/evas/rtl_cursor.patch
+new file mode 100644
+index 0000000..c47543b
+--- /dev/null
++++ b/recipes/efl1/evas/rtl_cursor.patch
+@@ -0,0 +1,746 @@
++Index: evas/src/lib/engines/common/evas_font_draw.c
++===================================================================
++--- evas/src/lib/engines/common/evas_font_draw.c	(revision 40583)
+++++ evas/src/lib/engines/common/evas_font_draw.c	(working copy)
++@@ -2,11 +2,6 @@
++  * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
++  */
++ 
++-/* Internationalization (RTL and Arabic contextualizing)
++- * was added by Tom Hacohen (tom@stosb.com)
++- */
++-
++-
++ #include "evas_common.h"
++ #include "evas_blend_private.h"
++ 
++@@ -177,13 +172,14 @@
++ 
++ 
++ static void
++-evas_common_font_draw_internal(RGBA_Image *dst, RGBA_Draw_Context *dc, RGBA_Font *fn, int x, int y, const char *text,
+++evas_common_font_draw_internal(RGBA_Image *dst, RGBA_Draw_Context *dc, RGBA_Font *fn, int x, int y, const char *in_text,
++                                RGBA_Gfx_Func func, int ext_x, int ext_y, int ext_w, int ext_h, RGBA_Font_Int *fi,
++                                int im_w, int im_h __UNUSED__, int use_kerning
++                                )
++ {
++    int pen_x, pen_y;
++    int chr;
+++   const char *text = in_text;
++    FT_Face pface = NULL;
++    FT_UInt prev_index;
++    DATA32 *im;
++@@ -191,18 +187,17 @@
++    int char_index = 0; /* the index of the current char */
++ 
++ #ifdef INTERNATIONAL_SUPPORT
++-   int bidi_err = 0;
+++   int len = 0;
++    /*FIXME: should get the direction by parmater */
++-   FriBidiCharType direction = FRIBIDI_TYPE_ON;
++-   FriBidiLevel *level_list;
+++   EvasIntlParType direction = FRIBIDI_TYPE_ON;
+++   EvasIntlLevel *level_list;
++ 
++    /* change the text to visual ordering and update the level list
++     * for as minimum impact on the code as possible just use text as an
++     * holder, will change in the future.*/
++-   {
++-      char *tmp = evas_intl_utf8_to_visual(text, &bidi_err, &direction, &level_list);
++-      text = (tmp) ? tmp : text;
++-   }
+++   char *visual_text = evas_intl_utf8_to_visual(in_text, &len, &direction, NULL, NULL, &level_list);
+++   text = (visual_text) ? visual_text : in_text;
+++   
++ #endif
++ 
++    pen_x = x;
++@@ -217,6 +212,7 @@
++ 	int gl, kern;
++ 
++ 	gl = evas_common_font_utf8_get_next((unsigned char *)text, &chr);
+++
++ 	if (gl == 0) break;
++ 	index = evas_common_font_glyph_search(fn, &fi, gl);
++ 	/* hmmm kerning means i can't sanely do my own cached metric tables! */
++@@ -390,11 +386,8 @@
++ 	  prev_index = index;
++      }
++ #ifdef INTERNATIONAL_SUPPORT
++-   if (bidi_err >= 0)
++-     {
++-	free(level_list);
++-	free(text);
++-     }
+++   if (level_list) free(level_list);
+++   if (visual_text) free(visual_text);
++ #endif
++ }
++ 
++Index: evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c
++===================================================================
++--- evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c	(revision 40583)
+++++ evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c	(working copy)
++@@ -1,7 +1,3 @@
++-/* Authors:
++- *	Tom Hacohen (tom@stsob.com)
++- */
++-
++ #include "../evas_intl_utils.h"
++ 
++ #ifdef ARABIC_SUPPORT
++@@ -118,7 +114,7 @@
++ 
++    /* check for empty string */
++    if (!*text)
++-     return;
+++     return 0;
++ 
++    len = _evas_intl_arabic_text_to_isolated(text);
++    /*FIXME: make it skip vowels */
++Index: evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h
++===================================================================
++--- evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h	(revision 40583)
+++++ evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h	(working copy)
++@@ -1,7 +1,9 @@
++ #ifndef _EVAS_INTL_ARABIC
++ #define _EVAS_INTL_ARABIC
++ 
+++#include "evas_intl_utils.h"
+++
++ int
++-evas_intl_arabic_to_context(FriBidiChar *text);
+++evas_intl_arabic_to_context(EvasIntlChar *text);
++ 
++ #endif
++Index: evas/src/lib/engines/common/evas_intl_utils.c
++===================================================================
++--- evas/src/lib/engines/common/evas_intl_utils.c	(revision 40583)
+++++ evas/src/lib/engines/common/evas_intl_utils.c	(working copy)
++@@ -1,23 +1,27 @@
++-/* Authors:
++- *	Tom Hacohen (tom@stsob.com)
++- */
++-
++ #include <string.h>
++ #include <stdlib.h>
++ 
++ #include "evas_common.h"
++ #include "evas_intl_utils.h"
++ 
++-#ifdef USE_FRIBIDI
+++#ifdef INTERNATIONAL_SUPPORT
++ #include <fribidi/fribidi.h>
++ 
++ #define UTF8_BYTES_PER_CHAR 4
++ 
++ /* FIXME: fribidi_utf8_to_unicode should use char len and not byte len!*/
++ char *
++-evas_intl_utf8_to_visual(const char *text, int *ret_len, FriBidiCharType *direction, FriBidiLevel **embedding_level_list)
+++evas_intl_utf8_to_visual(const char *text,
+++			int *ret_len,
+++			EvasIntlParType *direction,
+++			EvasIntlStrIndex **position_L_to_V_list,
+++			EvasIntlStrIndex **position_V_to_L_list,
+++			EvasIntlLevel **embedding_level_list)
++ {
++    FriBidiChar *unicode_in, *unicode_out;
+++   EvasIntlStrIndex *tmp_L_to_V_list = NULL;
+++   EvasIntlStrIndex *tmp_V_to_L_list = NULL;
+++   EvasIntlLevel *tmp_level_list = NULL;
++    char *text_out;
++    size_t len;
++    size_t byte_len;
++@@ -27,15 +31,6 @@
++ 
++    len = evas_string_char_len_get(text);
++ 
++-   /* if there's nothing to do, return text
++-    * one char draws are quite common */
++-   if (len <= 1)
++-     {
++-	*ret_len = len;
++-	*embedding_level_list = NULL;
++-	return strdup(text);
++-     }
++-
++    byte_len = strlen(text); /* we need the actual number of bytes, not number of chars */
++ 
++    unicode_in = (FriBidiChar *)malloc(sizeof(FriBidiChar) * (len + 1));
++@@ -50,33 +45,59 @@
++    unicode_out = (FriBidiChar *)malloc(sizeof(FriBidiChar) * (len + 1));
++    if (!unicode_out)
++      {
++-	len = -2;
+++	len = -1;
++ 	goto error2;
++      }
++ 
++-   *embedding_level_list = (FriBidiLevel *)malloc(sizeof(FriBidiLevel) * len);
++-   if (!*embedding_level_list)
++-     {
++-	len = -3;
++-	goto error3;
++-     }
+++   if (embedding_level_list)
+++      {
+++         *embedding_level_list = (EvasIntlLevel *)malloc(sizeof(EvasIntlLevel) * len);
+++         if (!*embedding_level_list)
+++           {
+++	      len = -1;
+++	      goto error3;
+++           }
+++	 tmp_level_list = *embedding_level_list;
+++      }
++ 
+++    if (position_L_to_V_list)
+++      {
+++         *position_L_to_V_list = (EvasIntlStrIndex *)malloc(sizeof(EvasIntlStrIndex) * len);
+++         if (!*position_L_to_V_list)
+++           {
+++	      len = -1;
+++	      goto error4;
+++           }
+++	 tmp_L_to_V_list = *position_L_to_V_list;
+++      }
+++
+++    if (position_V_to_L_list)
+++      {
+++         *position_V_to_L_list = (EvasIntlStrIndex *)malloc(sizeof(EvasIntlStrIndex) * len);
+++         if (!*position_V_to_L_list)
+++           {
+++	      len = -1;
+++	      goto error5;
+++           }
+++	 tmp_V_to_L_list = *position_V_to_L_list;
+++      }
+++      
++ #ifdef ARABIC_SUPPORT
++    /* fix arabic context */
++    evas_intl_arabic_to_context(unicode_in);
++ #endif
++    if (!fribidi_log2vis(unicode_in, len, direction,
++-	    unicode_out, NULL, NULL, *embedding_level_list))
+++	    unicode_out, tmp_L_to_V_list, tmp_V_to_L_list, tmp_level_list))
++      {
++-	len = -4;
++-	goto error3;
+++	len = -2;
+++	goto error5;
++      }
++ 
++    text_out = malloc(UTF8_BYTES_PER_CHAR * len + 1);
++    if (!text_out)
++      {
++-	len = -5;
++-	goto error4;
+++	len = -1;
+++	goto error6;
++      }
++ 
++    fribidi_unicode_to_utf8(unicode_out, len, text_out);
++@@ -88,10 +109,17 @@
++    return text_out;
++ 
++    /* ERROR HANDLING */
+++error6:
+++   free(unicode_out);
+++error5:
+++   free(*position_V_to_L_list);
+++   *position_V_to_L_list = NULL;
++ error4:
++-   free(unicode_out);
+++   free(*position_L_to_V_list);
+++   *position_L_to_V_list = NULL;
++ error3:
++    free(*embedding_level_list);
+++   *embedding_level_list = NULL;
++ error2:
++    free(unicode_in);
++ error1:
++@@ -101,7 +129,7 @@
++ }
++ 
++ int
++-evas_intl_is_rtl_char(FriBidiLevel *embedded_level_list, FriBidiStrIndex i)
+++evas_intl_is_rtl_char(EvasIntlLevel *embedded_level_list, EvasIntlStrIndex i)
++ {
++    if(embedded_level_list || i < 0)
++      return 0;
++Index: evas/src/lib/engines/common/evas_intl_utils.h
++===================================================================
++--- evas/src/lib/engines/common/evas_intl_utils.h	(revision 40583)
+++++ evas/src/lib/engines/common/evas_intl_utils.h	(working copy)
++@@ -4,25 +4,44 @@
++ #include "config.h"
++ 
++ #ifdef HAVE_FRIBIDI_FRIBIDI_H
++-#define USE_FRIBIDI 1
+++#define USE_FRIBIDI
++ #define INTERNATIONAL_SUPPORT
++ #endif
++ 
++ #ifdef USE_FRIBIDI
++ #include <fribidi/fribidi.h>
++ 
+++/* abstract fribidi */
+++typedef FriBidiChar	EvasIntlChar;
+++typedef FriBidiCharType	EvasIntlParType;
+++typedef FriBidiStrIndex EvasIntlStrIndex;
+++typedef FriBidiLevel	EvasIntlLevel;
+++
+++
++ /* whether should fix arabic specifix issues */
++-#define ARABIC_SUPPORT 1
+++#define ARABIC_SUPPORT
++ 
++ #ifdef ARABIC_SUPPORT
++ #include "evas_intl/evas_intl_arabic.h"
++ #endif
++ 
+++#define evas_intl_position_logical_to_visual(list, position) \
+++		(list) ? list[position] : position;
+++
+++#define evas_intl_position_visual_to_logical(list, position) \
+++		(list) ? list[position] : position;
+++				
+++
++ int
++-evas_intl_is_rtl_char(FriBidiLevel *embedded_level_list, FriBidiStrIndex i);
+++evas_intl_is_rtl_char(EvasIntlLevel *embedded_level_list, EvasIntlStrIndex i);
++ 
++ char *
++-evas_intl_utf8_to_visual(const char *text, int *ret_len, FriBidiCharType *direction, FriBidiLevel **embedding_level_list);
+++evas_intl_utf8_to_visual(const char *text,
+++			int *ret_len,
+++			EvasIntlParType *direction,
+++			EvasIntlStrIndex **position_L_to_V_list,
+++			EvasIntlStrIndex **position_V_to_L_list,
+++			EvasIntlLevel **embedding_level_list);
++ #endif
++ 
++ #endif
++Index: evas/src/lib/engines/common/evas_font_query.c
++===================================================================
++--- evas/src/lib/engines/common/evas_font_query.c	(revision 40583)
+++++ evas/src/lib/engines/common/evas_font_query.c	(working copy)
++@@ -1,5 +1,7 @@
++ #include "evas_common.h"
++ 
+++#include "evas_intl_utils.h" /*defines INTERNATIONAL_SUPPORT if possible */
+++
++ EAPI int
++ evas_common_font_query_kerning(RGBA_Font_Int* fi,
++ 			       FT_UInt prev, FT_UInt index,
++@@ -59,16 +61,27 @@
++ 
++ /* string extents */
++ EAPI void
++-evas_common_font_query_size(RGBA_Font *fn, const char *text, int *w, int *h)
+++evas_common_font_query_size(RGBA_Font *fn, const char *in_text, int *w, int *h)
++ {
++    int use_kerning;
++    int pen_x, pen_y;
++    int start_x, end_x;
++    int chr;
+++   int char_index = 0; /* the index of the current char */
+++   const char *text = in_text;
++    FT_UInt prev_index;
++    RGBA_Font_Int *fi;
++    FT_Face pface = NULL;
++ 
+++#ifdef INTERNATIONAL_SUPPORT
+++   int len = 0;
+++   EvasIntlParType direction = FRIBIDI_TYPE_ON;
+++   EvasIntlLevel *level_list;
+++
+++   char *visual_text = evas_intl_utf8_to_visual(in_text, &len, &direction, NULL, NULL, &level_list);
+++   text = (visual_text) ? visual_text : in_text;
+++#endif
+++
++    fi = fn->fonts->data;
++ 
++    start_x = 0;
++@@ -79,7 +92,7 @@
++    evas_common_font_size_use(fn);
++    use_kerning = FT_HAS_KERNING(fi->src->ft.face);
++    prev_index = 0;
++-   for (chr = 0; text[chr];)
+++   for (char_index = 0, chr = 0; text[chr]; char_index++)
++      {
++ 	FT_UInt index;
++ 	RGBA_Font_Glyph *fg;
++@@ -94,10 +107,25 @@
++ 	/* you want performance */
++ 	kern = 0;
++ 	if ((use_kerning) && (prev_index) && (index) &&
++-	    (pface == fi->src->ft.face))
++-	  if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
++-	    pen_x += kern;
+++	     (pface == fi->src->ft.face))
+++	   {
+++#ifdef INTERNATIONAL_SUPPORT
+++	      /* if it's rtl, the kerning matching should be reversed, i.e prev
+++	       * index is now the index and the other way around. */
+++	      if (evas_intl_is_rtl_char(level_list, char_index))
+++		{
+++		   if (evas_common_font_query_kerning(fi, index, prev_index, &kern))
+++		      pen_x += kern;
+++		}
+++	      else
+++#endif
+++              {
++ 
+++	         if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
+++	            pen_x += kern;
+++	      }
+++           }
+++
++ 	pface = fi->src->ft.face;
++ 	fg = evas_common_font_int_cache_glyph_get(fi, index);
++ 	if (!fg) continue;
++@@ -124,6 +152,11 @@
++      }
++    if (w) *w = end_x - start_x;
++    if (h) *h = evas_common_font_max_ascent_get(fn) + evas_common_font_max_descent_get(fn);
+++
+++#ifdef INTERNATIONAL_SUPPORT
+++   if (level_list) free(level_list);
+++   if (visual_text) free(visual_text);
+++#endif 
++ }
++ 
++ /* text x inset */
++@@ -165,16 +198,27 @@
++ 
++ /* h & v advance */
++ EAPI void
++-evas_common_font_query_advance(RGBA_Font *fn, const char *text, int *h_adv, int *v_adv)
+++evas_common_font_query_advance(RGBA_Font *fn, const char *in_text, int *h_adv, int *v_adv)
++ {
++    int use_kerning;
++    int pen_x, pen_y;
++    int start_x;
++    int chr;
+++   int char_index = 0; /* the index of the current char */
+++   const char *text = in_text;
++    FT_UInt prev_index;
++    RGBA_Font_Int *fi;
++    FT_Face pface = NULL;
++ 
+++#ifdef INTERNATIONAL_SUPPORT
+++   int len = 0;
+++   EvasIntlParType direction = FRIBIDI_TYPE_ON;
+++   EvasIntlLevel *level_list;
+++
+++   char *visual_text = evas_intl_utf8_to_visual(in_text, &len, &direction, NULL, NULL, &level_list);
+++   text = (visual_text) ? visual_text : in_text;
+++#endif
+++
++    fi = fn->fonts->data;
++ 
++    start_x = 0;
++@@ -183,24 +227,39 @@
++    evas_common_font_size_use(fn);
++    use_kerning = FT_HAS_KERNING(fi->src->ft.face);
++    prev_index = 0;
++-   for (chr = 0; text[chr];)
+++   for (char_index = 0, chr = 0; text[chr]; char_index++)
++      {
++ 	FT_UInt index;
++ 	RGBA_Font_Glyph *fg;
++ 	int chr_x, chr_y, chr_w;
++         int gl, kern;
++ 
++-	gl = evas_common_font_utf8_get_next((unsigned char *)text, &chr);
+++        gl = evas_common_font_utf8_get_next((unsigned char *)text, &chr);
+++
++ 	if (gl == 0) break;
++ 	index = evas_common_font_glyph_search(fn, &fi, gl);
++         /* hmmm kerning means i can't sanely do my own cached metric tables! */
++ 	/* grrr - this means font face sharing is kinda... not an option if */
++ 	/* you want performance */
++ 	if ((use_kerning) && (prev_index) && (index) &&
++-	    (pface == fi->src->ft.face))
++-	  if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
++-	    pen_x += kern;
+++	     (pface == fi->src->ft.face))
+++	   {
+++#ifdef INTERNATIONAL_SUPPORT
+++	      /* if it's rtl, the kerning matching should be reversed, i.e prev
+++	       * index is now the index and the other way around. */
+++	      if (evas_intl_is_rtl_char(level_list, char_index))
+++		{
+++		   if (evas_common_font_query_kerning(fi, index, prev_index, &kern))
+++		      pen_x += kern;
+++		}
+++	      else
+++#endif
+++              {
++ 
+++	         if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
+++	            pen_x += kern;
+++	      }
+++           }
++ 	pface = fi->src->ft.face;
++ 	fg = evas_common_font_int_cache_glyph_get(fi, index);
++ 	if (!fg) continue;
++@@ -214,21 +273,40 @@
++      }
++    if (v_adv) *v_adv = evas_common_font_get_line_advance(fn);
++    if (h_adv) *h_adv = pen_x - start_x;
+++   
+++#ifdef INTERNATIONAL_SUPPORT
+++   if (level_list) free(level_list);
+++   if (visual_text) free(visual_text);
+++#endif 
++ }
++ 
++ /* x y w h for char at char pos */
++ EAPI int
++-evas_common_font_query_char_coords(RGBA_Font *fn, const char *text, int pos, int *cx, int *cy, int *cw, int *ch)
+++evas_common_font_query_char_coords(RGBA_Font *fn, const char *in_text, int pos, int *cx, int *cy, int *cw, int *ch)
++ {
++    int use_kerning;
++    int pen_x, pen_y;
++    int prev_chr_end;
++    int chr;
++    int asc, desc;
+++   int char_index = 0; /* the index of the current char */
+++   int position;
+++   const char *text = in_text;
+++   int ret_val = 0;
++    FT_UInt prev_index;
++    RGBA_Font_Int *fi;
++    FT_Face pface = NULL;
++ 
+++#ifdef INTERNATIONAL_SUPPORT
+++   int len = 0;
+++   EvasIntlParType direction = FRIBIDI_TYPE_ON;
+++   EvasIntlLevel *level_list;
+++   EvasIntlStrIndex *logical_to_visual;
+++
+++   char *visual_text = evas_intl_utf8_to_visual(in_text, &len, &direction, &logical_to_visual, NULL, &level_list);
+++   text = (visual_text) ? visual_text : in_text;
+++#endif
+++
++    fi = fn->fonts->data;
++ 
++    pen_x = 0;
++@@ -239,7 +317,27 @@
++    prev_chr_end = 0;
++    asc = evas_common_font_max_ascent_get(fn);
++    desc = evas_common_font_max_descent_get(fn);
++-   for (chr = 0; text[chr];)
+++
+++   /* find the actual index, not the byte position */
+++   position = 0;
+++   chr = 0;
+++   while (in_text[chr] && chr < pos) {
+++      evas_common_font_utf8_get_next((unsigned char *)in_text, &chr);
+++      position++;
+++   }
+++   /* if it's a bad position, break */
+++   if (chr != pos) goto end;
+++   /* if it's the end, the correct position is one after */
+++   if (!in_text[chr]) position++;
+++   
+++#ifdef INTERNATIONAL_SUPPORT 
+++   /* if it's an in string position (not end), get logical position */
+++   if (position < len)
+++      position = evas_intl_position_logical_to_visual(logical_to_visual, position);
+++#endif
+++
+++
+++   for (char_index = 0, chr = 0; text[chr]; char_index++)
++      {
++ 	int pchr;
++ 	FT_UInt index;
++@@ -249,17 +347,34 @@
++ 
++ 	pchr = chr;
++ 	gl = evas_common_font_utf8_get_next((unsigned char *)text, &chr);
+++	
++ 	if (gl == 0) break;
+++
++ 	index = evas_common_font_glyph_search(fn, &fi, gl);
++ 	kern = 0;
++         /* hmmm kerning means i can't sanely do my own cached metric tables! */
++ 	/* grrr - this means font face sharing is kinda... not an option if */
++ 	/* you want performance */
++ 	if ((use_kerning) && (prev_index) && (index) &&
++-	    (pface == fi->src->ft.face))
++-	  if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
++-	    pen_x += kern;
+++	     (pface == fi->src->ft.face))
+++	   {
+++#ifdef INTERNATIONAL_SUPPORT
+++	      /* if it's rtl, the kerning matching should be reversed, i.e prev
+++	       * index is now the index and the other way around. */
+++	      if (evas_intl_is_rtl_char(level_list, char_index))
+++		{
+++		   if (evas_common_font_query_kerning(fi, index, prev_index, &kern))
+++		      pen_x += kern;
+++		}
+++	      else
+++#endif
+++              {
++ 
+++	         if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
+++	            pen_x += kern;
+++	      }
+++           }
+++
++ 	pface = fi->src->ft.face;
++ 	fg = evas_common_font_int_cache_glyph_get(fi, index);
++ 	if (!fg) continue;
++@@ -280,34 +395,57 @@
++ 	     chr_w += (chr_x - prev_chr_end);
++ 	     chr_x = prev_chr_end;
++ 	  }
++-	if (pchr == pos)
+++	/* we need to see if the char at the visual position is the char wanted */
+++	if (char_index == position)
++ 	  {
++ 	     if (cx) *cx = chr_x;
++ 	     if (cy) *cy = -asc;
++ 	     if (cw) *cw = chr_w;
++ 	     if (ch) *ch = asc + desc;
++-	     return 1;
+++	     ret_val = 1;
+++	     goto end;
++ 	  }
++ 	prev_chr_end = chr_x + chr_w;
++ 	pen_x += fg->glyph->advance.x >> 16;
++ 	prev_index = index;
++      }
++-   return 0;
+++end:
+++
+++#ifdef INTERNATIONAL_SUPPORT
+++   if (level_list) free(level_list);
+++   if (logical_to_visual) free(logical_to_visual);
+++   if (visual_text) free(visual_text);
+++#endif
+++
+++   return ret_val;
++ }
++ 
++ /* char pos of text at xy pos */
++ EAPI int
++-evas_common_font_query_text_at_pos(RGBA_Font *fn, const char *text, int x, int y, int *cx, int *cy, int *cw, int *ch)
+++evas_common_font_query_text_at_pos(RGBA_Font *fn, const char *in_text, int x, int y, int *cx, int *cy, int *cw, int *ch)
++ {
++    int use_kerning;
++    int pen_x, pen_y;
++    int prev_chr_end;
++    int chr;
++    int asc, desc;
+++   int char_index = 0; /* the index of the current char */
+++   const char *text = in_text;
+++   int ret_val = -1;
++    FT_UInt prev_index;
++    RGBA_Font_Int *fi;
++    FT_Face pface = NULL;
+++   
+++#ifdef INTERNATIONAL_SUPPORT
+++   int len = 0;
+++   EvasIntlParType direction = FRIBIDI_TYPE_ON;
+++   EvasIntlLevel *level_list;
+++   EvasIntlStrIndex *visual_to_logical;
++ 
+++   char *visual_text = evas_intl_utf8_to_visual(in_text, &len, &direction, NULL, &visual_to_logical, &level_list);
+++   text = (visual_text) ? visual_text : in_text;
+++#endif
+++
++    fi = fn->fonts->data;
++ 
++    pen_x = 0;
++@@ -318,7 +456,8 @@
++    prev_chr_end = 0;
++    asc = evas_common_font_max_ascent_get(fn);
++    desc = evas_common_font_max_descent_get(fn);
++-   for (chr = 0; text[chr];)
+++
+++   for (char_index = 0, chr = 0; text[chr]; char_index++)
++      {
++ 	int pchr;
++ 	FT_UInt index;
++@@ -326,7 +465,8 @@
++ 	int chr_x, chr_y, chr_w;
++         int gl, kern;
++ 
++-	pchr = chr;
+++	
+++
++ 	gl = evas_common_font_utf8_get_next((unsigned char *)text, &chr);
++ 	if (gl == 0) break;
++ 	index = evas_common_font_glyph_search(fn, &fi, gl);
++@@ -335,10 +475,25 @@
++ 	/* grrr - this means font face sharing is kinda... not an option if */
++ 	/* you want performance */
++ 	if ((use_kerning) && (prev_index) && (index) &&
++-	    (pface == fi->src->ft.face))
++-	  if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
++-	    pen_x += kern;
+++	     (pface == fi->src->ft.face))
+++	   {
+++#ifdef INTERNATIONAL_SUPPORT
+++	      /* if it's rtl, the kerning matching should be reversed, i.e prev
+++	       * index is now the index and the other way around. */
+++	      if (evas_intl_is_rtl_char(level_list, char_index))
+++		{
+++		   if (evas_common_font_query_kerning(fi, index, prev_index, &kern))
+++		      pen_x += kern;
+++		}
+++	      else
+++#endif
+++              {
++ 
+++	         if (evas_common_font_query_kerning(fi, prev_index, index, &kern))
+++	            pen_x += kern;
+++	      }
+++           }
+++
++ 	pface = fi->src->ft.face;
++ 	fg = evas_common_font_int_cache_glyph_get(fi, index);
++ 	if (!fg) continue;
++@@ -366,11 +521,36 @@
++ 	     if (cy) *cy = -asc;
++ 	     if (cw) *cw = chr_w;
++ 	     if (ch) *ch = asc + desc;
++-	     return pchr;
+++#ifdef INTERNATIONAL_SUPPORT
+++             {
+++		int i;
+++		int logical_chr;
+++		int position = evas_intl_position_visual_to_logical(visual_to_logical, char_index);
+++
+++		 
+++		/* ensure even if the list won't run */
+++		pchr = 0;					
+++		for (logical_chr = 0, i = 0; i <= position; i++) {
+++             	   pchr = logical_chr;
+++             	   evas_common_font_utf8_get_next((unsigned char *)in_text, &logical_chr);
+++                }
+++             }
+++#endif
+++	     ret_val = pchr;
+++	     goto end;
++ 	  }
++ 	prev_chr_end = chr_x + chr_w;
++ 	pen_x += fg->glyph->advance.x >> 16;
++ 	prev_index = index;
++      }
++-   return -1;
+++
+++end:
+++   
+++#ifdef INTERNATIONAL_SUPPORT
+++   if (level_list) free(level_list);
+++   if (visual_to_logical) free(visual_to_logical);
+++   if (visual_text) free(visual_text);
+++#endif
+++
+++   return ret_val;
++ }
+diff --git a/recipes/efl1/evas_svn.bb b/recipes/efl1/evas_svn.bb
+index 582e279..727664f 100644
+--- a/recipes/efl1/evas_svn.bb
++++ b/recipes/efl1/evas_svn.bb
+@@ -1,5 +1,7 @@
+ require evas.inc
+-PR = "r2"
++PR = "r2.1"
++
++SRC_URI_append = " file://rtl_cursor.patch;patch=0 "
+ 
+ EXTRA_OECONF = "\
+ 		--x-includes=${STAGING_INCDIR}/X11  \
+-- 
+1.6.2.4
+
