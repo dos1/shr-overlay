@@ -32,6 +32,7 @@ SRCREV_pn-libframeworkd-phonegui = "${AUTOREV}"
 SRCREV_pn-libhito = "${AUTOREV}"
 SRCREV_pn-neod = "${AUTOREV}"
 SRCREV_pn-libframeworkd-phonegui-gtk = "${AUTOREV}"
+SRCREV_pn-libframeworkd-phonegui-gtk2 = "${AUTOREV}"
 PREFERRED_VERSION_calc = "0.0.1"
 #pin shr-config due to gnome bug 579803 (requires vala > 0.7.1)
 SRCREV_pn-shr-config = "9b59390d265805b68ea10136fa03fa67713f1275"
