@@ -1,17 +1,31 @@
-From 6bd0956aae898bf79d5c078559b8bcb4d15dde29 Mon Sep 17 00:00:00 2001
+From 3f5cc349fbbc3883813d238b2688c80732205f2f Mon Sep 17 00:00:00 2001
 From: Tom Hacohen <tom@nospam>
-Date: Wed, 13 May 2009 19:45:13 +0300
-Subject: [PATCH] rtl patch
+Date: Thu, 14 May 2009 17:35:20 +0300
+Subject: [PATCH] rtl support evas+edje
 
 ---
+ recipes/efl1/edje-native_svn.bb       |    2 +-
  recipes/efl1/edje/rtl_entry_fix.patch |   24 +
  recipes/efl1/edje_svn.bb              |    4 +-
+ recipes/efl1/evas-native_svn.bb       |    4 +-
  recipes/efl1/evas/rtl_cursor.patch    |  960 +++++++++++++++++++++++++++++++++
  recipes/efl1/evas_svn.bb              |    4 +-
- 4 files changed, 990 insertions(+), 2 deletions(-)
+ 6 files changed, 994 insertions(+), 4 deletions(-)
  create mode 100644 recipes/efl1/edje/rtl_entry_fix.patch
  create mode 100644 recipes/efl1/evas/rtl_cursor.patch
 
+diff --git a/recipes/efl1/edje-native_svn.bb b/recipes/efl1/edje-native_svn.bb
+index d71d38d..d9cff9f 100644
+--- a/recipes/efl1/edje-native_svn.bb
++++ b/recipes/efl1/edje-native_svn.bb
+@@ -1,6 +1,6 @@
+ require edje_${PV}.bb
+ inherit native
+-PR = "r2"
++PR = "r2.1"
+ 
+ DEPENDS = "evas-native ecore-native eet-native embryo-native"
+ 
 diff --git a/recipes/efl1/edje/rtl_entry_fix.patch b/recipes/efl1/edje/rtl_entry_fix.patch
 new file mode 100644
 index 0000000..abfa01a
@@ -64,6 +78,21 @@ index 834c1fd..bbfbbb3 100644
  PACKAGES =+ "${PN}-utils"
  RDEPENDS_${PN}-utils = "cpp cpp-symlinks embryo-tests"
  
+diff --git a/recipes/efl1/evas-native_svn.bb b/recipes/efl1/evas-native_svn.bb
+index 95356ec..e23c9a1 100644
+--- a/recipes/efl1/evas-native_svn.bb
++++ b/recipes/efl1/evas-native_svn.bb
+@@ -1,7 +1,9 @@
+ require evas.inc
+ inherit native
+ DEPENDS = "freetype-native libpng-native jpeg-native eet-native eina-native libfribidi-native"
+-PR = "r2"
++PR = "r2.1"
++
++SRC_URI_append = " file://rtl_cursor.patch;patch=0 "
+ 
+ EXTRA_OECONF = "\
+ 		--x-includes=${STAGING_INCDIR}/X11  \
 diff --git a/recipes/efl1/evas/rtl_cursor.patch b/recipes/efl1/evas/rtl_cursor.patch
 new file mode 100644
 index 0000000..a35a264
