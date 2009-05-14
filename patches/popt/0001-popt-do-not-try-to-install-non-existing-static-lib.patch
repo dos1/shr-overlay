@@ -1,0 +1,38 @@
+From 8a426c65f19ef85106b758eeae4971d21c5ef7e0 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Thu, 14 May 2009 19:56:26 +0200
+Subject: [PATCH] popt: do not try to install non existing static lib
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ recipes/popt/popt-native_1.7.bb |    2 +-
+ recipes/popt/popt_1.7.bb        |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/popt/popt-native_1.7.bb b/recipes/popt/popt-native_1.7.bb
+index a83d384..fdf7d82 100644
+--- a/recipes/popt/popt-native_1.7.bb
++++ b/recipes/popt/popt-native_1.7.bb
+@@ -15,6 +15,6 @@ S = "${WORKDIR}/popt-${PV}"
+ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/popt-${PV}"
+ 
+ do_install() {
+-	oe_libinstall -a -so libpopt ${STAGING_LIBDIR_NATIVE}
++	oe_libinstall -so libpopt ${STAGING_LIBDIR_NATIVE}
+ 	install -m 0644 popt.h ${STAGING_INCDIR_NATIVE}
+ }
+diff --git a/recipes/popt/popt_1.7.bb b/recipes/popt/popt_1.7.bb
+index 7992db5..5b67aac 100644
+--- a/recipes/popt/popt_1.7.bb
++++ b/recipes/popt/popt_1.7.bb
+@@ -11,6 +11,6 @@ SRC_URI = "ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.1.x/popt-${PV}.tar.gz \
+ 	   file://intl.patch;patch=1"
+ 
+ do_stage() {
+-	oe_libinstall -a -so libpopt ${STAGING_LIBDIR}
++	oe_libinstall -so libpopt ${STAGING_LIBDIR}
+ 	install -m 0644 popt.h ${STAGING_INCDIR}
+ }
+-- 
+1.6.0.6
+
