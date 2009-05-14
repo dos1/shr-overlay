@@ -1,0 +1,26 @@
+From 2fecce6de0d4473e4f6f496facd6eb624981ca31 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Thu, 14 May 2009 19:57:59 +0200
+Subject: [PATCH] glib-native: stage glibconfig.h in libdir too
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ recipes/glib-2.0/glib-2.0-native_2.18.0.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/glib-2.0/glib-2.0-native_2.18.0.bb b/recipes/glib-2.0/glib-2.0-native_2.18.0.bb
+index 27852ff..9314390 100644
+--- a/recipes/glib-2.0/glib-2.0-native_2.18.0.bb
++++ b/recipes/glib-2.0/glib-2.0-native_2.18.0.bb
+@@ -28,6 +28,8 @@ do_stage () {
+ 	autotools_stage_includes
+ 	install -d ${STAGING_INCDIR}/glib-2.0/glib
+ 	install -m 0755 ${S}/glibconfig.h ${STAGING_INCDIR}/glib-2.0/glibconfig.h
++	install -d ${STAGING_LIBDIR}/glib-2.0/include
++	install -m 0755 ${S}/glibconfig.h ${STAGING_LIBDIR}/glib-2.0/include/glibconfig.h
+ 	install -d ${STAGING_DATADIR}/aclocal
+ 	install -m 0644 ${S}/m4macros/glib-2.0.m4 ${STAGING_DATADIR}/aclocal/glib-2.0.m4
+ 	install -m 0644 ${S}/m4macros/glib-gettext.m4 ${STAGING_DATADIR}/aclocal/glib-gettext.m4
+-- 
+1.6.0.6
+
