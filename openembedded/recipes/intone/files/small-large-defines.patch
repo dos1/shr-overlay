@@ -1,0 +1,14 @@
+Index: src/gui.h
+===================================================================
+--- src/gui.h	(Revision 4)
++++ src/gui.h	(Arbeitskopie)
+@@ -19,6 +19,9 @@
+ #define ALBUM 0
+ #define PLAYLIST 1
+ 
++#define SMALL 0
++#define LARGE 1
++
+ void clean_up(void);
+ void create_gui(Evas_Object *win);
+ void create_add_page(Evas_Object *add_page);
