@@ -79,7 +79,7 @@ shr_rootfs_postprocess() {
     # minimal gtk theme foo
     mkdir -p ./etc/gtk-2.0/
     echo 'gtk-font-name = "Sans 5"' >> ./etc/gtk-2.0/gtkrc
-    echo 'gtk-theme-name = "openmoko-standard-2"' >> ./etc/gtk-2.0/gtkrc
+    echo 'gtk-theme-name = "shr-theme-gtk-e17lookalike"' >> ./etc/gtk-2.0/gtkrc
     echo 'gtk-icon-theme-name = "openmoko-standard"' >> ./etc/gtk-2.0/gtkrc
     echo 'style "treeview"' >> ./etc/gtk-2.0/gtkrc
     echo '{   ' >> ./etc/gtk-2.0/gtkrc
