@@ -22,6 +22,7 @@ PV_pn-vala-native = "0.7.1-fso1-gitr${SRCREV}"
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
 SRCREV_pn-shr-theme = "${AUTOREV}"
+SRCREV_pn-shr-theme-gtk-e17lookalike = "${AUTOREV}"
 SRCREV_pn-libframeworkd-glib = "${AUTOREV}"
 SRCREV_pn-ophonekitd = "${AUTOREV}"
 SRCREV_pn-shr-messages = "${AUTOREV}"
