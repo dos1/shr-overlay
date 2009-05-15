@@ -3,8 +3,8 @@ RPROVIDES += "virtual/shr-theme-gtk"
 #inherit update-alternatives
 
 do_install() {
-	install -d "${D}${datadir}/themes/${PN}"
-	cp -r ./ "${D}${datadir}/themes/${PN}"
+	install -d "${D}${datadir}/themes/${PN}/gtk-2.0"
+	cp -r ./ "${D}${datadir}/themes/${PN}/gtk-2.0"
 }
 
 
