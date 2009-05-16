@@ -1,0 +1,12 @@
+diff --git a/recipes/freesmartphone/frameworkd_git.bb b/recipes/freesmartphone/frameworkd_git.bb
+index 72a34e6..a767606 100644
+--- a/recipes/freesmartphone/frameworkd_git.bb
++++ b/recipes/freesmartphone/frameworkd_git.bb
+@@ -15,7 +15,6 @@ INITSCRIPT_PARAMS = "defaults 29"
+ SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master \
+            file://frameworkd \
+            file://frameworkd.conf \
+-	   file://dbuscache.diff;patch=0 \
+ 	   "
+ S = "${WORKDIR}/git"
+ 
