@@ -1,104 +1,20 @@
-From 3f5cc349fbbc3883813d238b2688c80732205f2f Mon Sep 17 00:00:00 2001
+From fd0568e18e47e29d6d0cc1bb7f63a3cc693d9ff3 Mon Sep 17 00:00:00 2001
 From: Tom Hacohen <tom@nospam>
-Date: Thu, 14 May 2009 17:35:20 +0300
-Subject: [PATCH] rtl support evas+edje
+Date: Sun, 17 May 2009 03:55:33 +0300
+Subject: [PATCH] added fix for bad text wrapping and broken utf-8_get_prev
 
 ---
- recipes/efl1/edje-native_svn.bb       |    2 +-
- recipes/efl1/edje/rtl_entry_fix.patch |   24 +
- recipes/efl1/edje_svn.bb              |    4 +-
- recipes/efl1/evas-native_svn.bb       |    4 +-
- recipes/efl1/evas/rtl_cursor.patch    |  960 +++++++++++++++++++++++++++++++++
- recipes/efl1/evas_svn.bb              |    4 +-
- 6 files changed, 994 insertions(+), 4 deletions(-)
- create mode 100644 recipes/efl1/edje/rtl_entry_fix.patch
+ recipes/efl1/evas/rtl_cursor.patch | 1038 ++++++++++++++++++++++++++++++++++++
+ recipes/efl1/evas_svn.bb           |    4 +-
+ 2 files changed, 1041 insertions(+), 1 deletions(-)
  create mode 100644 recipes/efl1/evas/rtl_cursor.patch
 
-diff --git a/recipes/efl1/edje-native_svn.bb b/recipes/efl1/edje-native_svn.bb
-index d71d38d..d9cff9f 100644
---- a/recipes/efl1/edje-native_svn.bb
-+++ b/recipes/efl1/edje-native_svn.bb
-@@ -1,6 +1,6 @@
- require edje_${PV}.bb
- inherit native
--PR = "r2"
-+PR = "r2.1"
- 
- DEPENDS = "evas-native ecore-native eet-native embryo-native"
- 
-diff --git a/recipes/efl1/edje/rtl_entry_fix.patch b/recipes/efl1/edje/rtl_entry_fix.patch
-new file mode 100644
-index 0000000..abfa01a
---- /dev/null
-+++ b/recipes/efl1/edje/rtl_entry_fix.patch
-@@ -0,0 +1,24 @@
-+Index: edje/src/lib/edje_text.c
-+===================================================================
-+--- edje/src/lib/edje_text.c	(revision 40602)
-++++ edje/src/lib/edje_text.c	(working copy)
-+@@ -168,13 +168,13 @@
-+    if (tw > sw)
-+      {
-+ 	if (params->text.elipsis != 0.0)
-+-	  c1 = evas_object_text_char_coords_get(ep->object,
-+-		-p + l, th / 2,
-+-		NULL, NULL, NULL, NULL);
-++	/* should be the last in text! not the rightmost */
-++	  c1 = evas_object_text_last_up_to_pos(ep->object,
-++		-p + l, th / 2);
-+ 	if (params->text.elipsis != 1.0)
-+-	  c2 = evas_object_text_char_coords_get(ep->object,
-+-		-p + sw - r, th / 2,
-+-		NULL, NULL, NULL, NULL);
-++	/* should be the last in text! not the rightmost */
-++	  c2 = evas_object_text_last_up_to_pos(ep->object,
-++		-p + sw - r, th / 2);
-+ 	if ((c1 < 0) && (c2 < 0))
-+ 	  {
-+ 	     c1 = 0;
-diff --git a/recipes/efl1/edje_svn.bb b/recipes/efl1/edje_svn.bb
-index 834c1fd..bbfbbb3 100644
---- a/recipes/efl1/edje_svn.bb
-+++ b/recipes/efl1/edje_svn.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
- DEPENDS = "eet evas ecore embryo edje-native"
- LICENSE = "MIT BSD"
- PV = "0.5.0.050+svnr${SRCREV}"
--PR = "r2"
-+PR = "r2.1"
- 
- inherit efl
- 
-@@ -10,6 +10,8 @@ inherit efl
- # and a possible source of bugs
- #EXTRA_OECONF = "--enable-edje-program-cache"
- 
-+SRC_URI_append = " file://rtl_entry_fix.patch;patch=0 "
-+
- PACKAGES =+ "${PN}-utils"
- RDEPENDS_${PN}-utils = "cpp cpp-symlinks embryo-tests"
- 
-diff --git a/recipes/efl1/evas-native_svn.bb b/recipes/efl1/evas-native_svn.bb
-index 95356ec..e23c9a1 100644
---- a/recipes/efl1/evas-native_svn.bb
-+++ b/recipes/efl1/evas-native_svn.bb
-@@ -1,7 +1,9 @@
- require evas.inc
- inherit native
- DEPENDS = "freetype-native libpng-native jpeg-native eet-native eina-native libfribidi-native"
--PR = "r2"
-+PR = "r2.1"
-+
-+SRC_URI_append = " file://rtl_cursor.patch;patch=0 "
- 
- EXTRA_OECONF = "\
- 		--x-includes=${STAGING_INCDIR}/X11  \
 diff --git a/recipes/efl1/evas/rtl_cursor.patch b/recipes/efl1/evas/rtl_cursor.patch
 new file mode 100644
-index 0000000..a35a264
+index 0000000..9fe2505
 --- /dev/null
 +++ b/recipes/efl1/evas/rtl_cursor.patch
-@@ -0,0 +1,960 @@
+@@ -0,0 +1,1038 @@
 +Index: evas/src/lib/include/evas_private.h
 +===================================================================
 +--- evas/src/lib/include/evas_private.h	(revision 40583)
@@ -935,6 +851,84 @@ index 0000000..a35a264
 ++
 ++#endif
 +\ No newline at end of file
++Index: evas/src/lib/engines/common/evas_font_main.c
++===================================================================
++--- evas/src/lib/engines/common/evas_font_main.c	(revision 40583)
+++++ evas/src/lib/engines/common/evas_font_main.c	(working copy)
++@@ -196,12 +196,13 @@
++ 
++    if (index <= 0)
++      return 0;
++-   d = buf[index--];
+++   index--;
++ 
++    while ((index > 0) && ((buf[index] & 0xc0) == 0x80))
++      index--;
++    len = *iindex - index;
++-
+++   d = buf[index];
+++   
++    if (len == 1)
++       r = d;
++    else if (len == 2)
++Index: evas/src/lib/canvas/evas_object_textblock.c
++===================================================================
++--- evas/src/lib/canvas/evas_object_textblock.c	(revision 40583)
+++++ evas/src/lib/canvas/evas_object_textblock.c	(working copy)
++@@ -1534,17 +1534,15 @@
++ static int
++ _layout_text_cutoff_get(Ctxt *c, Evas_Object_Textblock_Format *fmt, Evas_Object_Textblock_Item *it)
++ {
++-   int cx, cy, cw, ch;
++-
++    if (fmt->font.font)
++-     return c->ENFN->font_char_at_coords_get(c->ENDT, fmt->font.font, it->text,
+++     return c->ENFN->font_last_up_to_pos(c->ENDT, fmt->font.font, it->text,
++ 					     c->w - 
++ 					     c->o->style_pad.l - 
++ 					     c->o->style_pad.r - 
++ 					     c->marginl - 
++ 					     c->marginr -
++ 					     c->x,
++-					     0, &cx, &cy, &cw, &ch);
+++					     0);
++    return -1;
++ }
++ 
++@@ -1584,7 +1582,6 @@
++ 	if (_is_white(chr)) break;
++ 	tp = p;
++      }
++-   p = tp;
++    if (p < 0) p = 0;
++    if ((p >= 0) && (_is_white(chr)))
++      evas_common_font_utf8_get_next((unsigned char *)(str), &p);
++@@ -1852,11 +1849,14 @@
++ 	      c->marginl - c->marginr)))
++ 	  {
++ 	     wrap = _layout_text_cutoff_get(c, fmt, it);
++-             if (wrap == 0) wrap = 1;
+++	     /* next line is instead of that awful wrap = 1*/
+++             if (wrap == 0)
+++	     	evas_common_font_utf8_get_next((unsigned char *)str, &wrap);
++ 	     if (wrap > 0)
++ 	       {
+++
++ 		  if (fmt->wrap_word)
++-		    {
+++		    {		       
++ 		       index = wrap;
++ 		       ch = evas_common_font_utf8_get_next((unsigned char *)str, &index);
++ 		       if (!_is_white(ch))
++@@ -1870,7 +1870,7 @@
++ 			      {
++ 				 _layout_item_text_cutoff(c, it, wrap);
++ 				 twrap = wrap;
++-				 ch = evas_common_font_utf8_get_next((unsigned char *)str, &twrap);
+++				 //ch = evas_common_font_utf8_get_next((unsigned char *)str, &twrap);
++ 				 str = str + twrap;
++ 			      }
++ 			    /* intersects a word */
 +Index: evas/src/lib/canvas/evas_object_text.c
 +===================================================================
 +--- evas/src/lib/canvas/evas_object_text.c	(revision 40583)
@@ -1060,13 +1054,13 @@ index 0000000..a35a264
 + };
 ++
 diff --git a/recipes/efl1/evas_svn.bb b/recipes/efl1/evas_svn.bb
-index 582e279..cc4ec4f 100644
+index 582e279..e390971 100644
 --- a/recipes/efl1/evas_svn.bb
 +++ b/recipes/efl1/evas_svn.bb
 @@ -1,5 +1,7 @@
  require evas.inc
 -PR = "r2"
-+PR = "r2.3"
++PR = "r2.4"
 +
 +SRC_URI_append = " file://rtl_cursor.patch;patch=0 "
  
