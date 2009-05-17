@@ -17,7 +17,7 @@ SRCREV_pn-libfso-glib = "${AUTOREV}"
 SRCREV_pn-fso-specs = "${AUTOREV}"
 SRC_URI_pn-vala-native = "${FREESMARTPHONE_GIT}/vala-lang;protocol=git;branch=pending-upstream-move"
 SRCREV_pn-vala-native = "${AUTOREV}"
-PV_pn-vala-native = "0.7.1-fso1-gitr${SRCREV}"
+PV_pn-vala-native = "0.7.2-fso1-gitr${SRCREV}"
 
 # SHR stuff
 SRCREV_pn-shr-settings = "${AUTOREV}"
