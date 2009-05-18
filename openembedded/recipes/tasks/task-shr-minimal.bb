@@ -129,6 +129,7 @@ RDEPENDS_${PN}-apps = "\
 
 RDEPENDS_${PN}-gtk = "\
   openmoko-icon-theme-standard2 \
+  shr-theme-gtk-e17lookalike \
   gpe-filemanager \
   vala-terminal \
   tangogps \
