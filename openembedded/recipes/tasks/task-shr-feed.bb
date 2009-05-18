@@ -60,4 +60,5 @@ RDEPENDS_${PN} += "\
 		emacs \
 		mcabber \
 		gdb \
+                oh-puzzles \
 "
