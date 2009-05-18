@@ -22,6 +22,7 @@ RDEPENDS_${PN}-apps += "\
    task-shr-minimal-apps \
 	mofi \
 	midori \
+	intone \
 "
 
 RDEPENDS_${PN}-games += "\
