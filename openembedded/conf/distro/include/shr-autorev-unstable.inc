@@ -43,7 +43,7 @@ PREFERRED_VERSION_calc = "0.0.1"
 SRCREV_pn-shr-config = "9b59390d265805b68ea10136fa03fa67713f1275"
 
 EFL_SRCREV = "40567"
-SRCREV_pn-python-elementary = "40567"
+SRCREV_pn-python-elementary = "40756"
 
 # KERNEL
 SRCREV_pn-linux-openmoko-2.6.28 = "${AUTOREV}"
