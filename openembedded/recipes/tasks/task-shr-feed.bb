@@ -16,7 +16,6 @@ RDEPENDS_${PN} += "\
 		navit \
 		pythm \
 		fbreader \
-		dillo \
 		omoney \
 		enotes \
 		epdfview \
