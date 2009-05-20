@@ -6,7 +6,7 @@ DEPENDS = "python-cython-native python-pyrex-native"
 LICENSE = "GPL"
 SRCREV_FORMAT = "gitrFSO_REV-SHR_REV"
 PV = "0.8.5.1+${SRCREV}"
-PR = "r5"
+PR = "r6"
 
 SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master;name=FSO_REV \
            git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master;name=SHR_REV"
@@ -25,11 +25,14 @@ do_install_append() {
 	install -d ${D}${sysconfdir}/freesmartphone/oevents/
 	install -d ${D}${sysconfdir}/freesmartphone/ogsmd/
 	install -d ${D}${sysconfdir}/freesmartphone/persist/
+        install -d ${D}${sysconfdir}/freesmartphone/opim/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/schema/phone.yaml ${D}${sysconfdir}/freesmartphone/opreferences/schema/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/schema/profiles.yaml ${D}${sysconfdir}/freesmartphone/opreferences/schema/
 	install -m 0644 ${S}/etc/freesmartphone/opreferences/schema/rules.yaml ${D}${sysconfdir}/freesmartphone/opreferences/schema/
 	install -m 0644 ${S}/etc/freesmartphone/persist/README ${D}${sysconfdir}/freesmartphone/persist/
 	install -m 0644 ${S}/etc/freesmartphone/ogsmd/networks.tab ${D}${sysconfdir}/freesmartphone/ogsmd/
+        install -m 0644 ${S}/etc/freesmartphone/ogsmd/cell.db ${D}${sysconfdir}/freesmartphone/ogsmd/
+        install -m 0644 ${S}/etc/freesmartphone/ogsmd/la.db ${D}${sysconfdir}/freesmartphone/ogsmd/
 
 	#Check for machine specific conf.
         CONF_PATH_MACHINE="${CONF_PATH}"
