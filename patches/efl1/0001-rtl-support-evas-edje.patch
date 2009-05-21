@@ -15,10 +15,10 @@ index 0000000..4b3a7da
 --- /dev/null
 +++ b/recipes/efl1/evas/rtl_cursor.patch
 @@ -0,0 +1,1069 @@
-+Index: src/lib/engines/common/evas_font_main.c
++Index: evas/src/lib/engines/common/evas_font_main.c
 +===================================================================
-+--- src/lib/engines/common/evas_font_main.c	(revision 1)
-++++ src/lib/engines/common/evas_font_main.c	(working copy)
++--- evas/src/lib/engines/common/evas_font_main.c	(revision 1)
+++++ evas/src/lib/engines/common/evas_font_main.c	(working copy)
 +@@ -196,12 +196,13 @@
 + 
 +    if (index <= 0)
@@ -35,10 +35,10 @@ index 0000000..4b3a7da
 +    if (len == 1)
 +       r = d;
 +    else if (len == 2)
-+Index: src/lib/engines/common/evas_font_draw.c
++Index: evas/src/lib/engines/common/evas_font_draw.c
 +===================================================================
-+--- src/lib/engines/common/evas_font_draw.c	(revision 1)
-++++ src/lib/engines/common/evas_font_draw.c	(working copy)
++--- evas/src/lib/engines/common/evas_font_draw.c	(revision 1)
+++++ evas/src/lib/engines/common/evas_font_draw.c	(working copy)
 +@@ -2,11 +2,6 @@
 +  * vim:ts=8:sw=3:sts=8:noexpandtab:cino=>5n-3f0^-2{2
 +  */
@@ -114,10 +114,10 @@ index 0000000..4b3a7da
 + #endif
 + }
 + 
-+Index: src/lib/engines/common/evas_intl/evas_intl_arabic.c
++Index: evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c
 +===================================================================
-+--- src/lib/engines/common/evas_intl/evas_intl_arabic.c	(revision 1)
-++++ src/lib/engines/common/evas_intl/evas_intl_arabic.c	(working copy)
++--- evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c	(revision 1)
+++++ evas/src/lib/engines/common/evas_intl/evas_intl_arabic.c	(working copy)
 +@@ -1,7 +1,3 @@
 +-/* Authors:
 +- *	Tom Hacohen (tom@stsob.com)
@@ -135,10 +135,10 @@ index 0000000..4b3a7da
 + 
 +    len = _evas_intl_arabic_text_to_isolated(text);
 +    /*FIXME: make it skip vowels */
-+Index: src/lib/engines/common/evas_intl/evas_intl_arabic.h
++Index: evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h
 +===================================================================
-+--- src/lib/engines/common/evas_intl/evas_intl_arabic.h	(revision 1)
-++++ src/lib/engines/common/evas_intl/evas_intl_arabic.h	(working copy)
++--- evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h	(revision 1)
+++++ evas/src/lib/engines/common/evas_intl/evas_intl_arabic.h	(working copy)
 +@@ -1,7 +1,9 @@
 + #ifndef _EVAS_INTL_ARABIC
 + #define _EVAS_INTL_ARABIC
@@ -150,10 +150,10 @@ index 0000000..4b3a7da
 ++evas_intl_arabic_to_context(EvasIntlChar *text);
 + 
 + #endif
-+Index: src/lib/engines/common/evas_intl_utils.c
++Index: evas/src/lib/engines/common/evas_intl_utils.c
 +===================================================================
-+--- src/lib/engines/common/evas_intl_utils.c	(revision 1)
-++++ src/lib/engines/common/evas_intl_utils.c	(working copy)
++--- evas/src/lib/engines/common/evas_intl_utils.c	(revision 1)
+++++ evas/src/lib/engines/common/evas_intl_utils.c	(working copy)
 +@@ -1,23 +1,27 @@
 +-/* Authors:
 +- *	Tom Hacohen (tom@stsob.com)
@@ -304,10 +304,10 @@ index 0000000..4b3a7da
 + {
 +    if(embedded_level_list || i < 0)
 +      return 0;
-+Index: src/lib/engines/common/evas_intl_utils.h
++Index: evas/src/lib/engines/common/evas_intl_utils.h
 +===================================================================
-+--- src/lib/engines/common/evas_intl_utils.h	(revision 1)
-++++ src/lib/engines/common/evas_intl_utils.h	(working copy)
++--- evas/src/lib/engines/common/evas_intl_utils.h	(revision 1)
+++++ evas/src/lib/engines/common/evas_intl_utils.h	(working copy)
 +@@ -4,25 +4,44 @@
 + #include "config.h"
 + 
@@ -357,10 +357,10 @@ index 0000000..4b3a7da
 + #endif
 + 
 + #endif
-+Index: src/lib/engines/common/evas_font_query.c
++Index: evas/src/lib/engines/common/evas_font_query.c
 +===================================================================
-+--- src/lib/engines/common/evas_font_query.c	(revision 1)
-++++ src/lib/engines/common/evas_font_query.c	(working copy)
++--- evas/src/lib/engines/common/evas_font_query.c	(revision 1)
+++++ evas/src/lib/engines/common/evas_font_query.c	(working copy)
 +@@ -1,5 +1,7 @@
 + #include "evas_common.h"
 + 
@@ -847,10 +847,10 @@ index 0000000..4b3a7da
 ++
 ++#endif
 +\ No newline at end of file
-+Index: src/lib/canvas/evas_object_textblock.c
++Index: evas/src/lib/canvas/evas_object_textblock.c
 +===================================================================
-+--- src/lib/canvas/evas_object_textblock.c	(revision 1)
-++++ src/lib/canvas/evas_object_textblock.c	(working copy)
++--- evas/src/lib/canvas/evas_object_textblock.c	(revision 1)
+++++ evas/src/lib/canvas/evas_object_textblock.c	(working copy)
 +@@ -1534,17 +1534,15 @@
 + static int
 + _layout_text_cutoff_get(Ctxt *c, Evas_Object_Textblock_Format *fmt, Evas_Object_Textblock_Item *it)
@@ -908,10 +908,10 @@ index 0000000..4b3a7da
 + 				 str = str + twrap;
 + 			      }
 + 			    /* intersects a word */
-+Index: src/lib/canvas/evas_object_text.c
++Index: evas/src/lib/canvas/evas_object_text.c
 +===================================================================
-+--- src/lib/canvas/evas_object_text.c	(revision 1)
-++++ src/lib/canvas/evas_object_text.c	(working copy)
++--- evas/src/lib/canvas/evas_object_text.c	(revision 1)
+++++ evas/src/lib/canvas/evas_object_text.c	(working copy)
 +@@ -614,13 +614,47 @@
 +    return ret;
 + }
@@ -960,10 +960,10 @@ index 0000000..4b3a7da
 + evas_object_text_char_coords_get(const Evas_Object *obj, Evas_Coord x, Evas_Coord y, Evas_Coord *cx, Evas_Coord *cy, Evas_Coord *cw, Evas_Coord *ch)
 + {
 +    Evas_Object_Text *o;
-+Index: src/lib/include/evas_private.h
++Index: evas/src/lib/include/evas_private.h
 +===================================================================
-+--- src/lib/include/evas_private.h	(revision 1)
-++++ src/lib/include/evas_private.h	(working copy)
++--- evas/src/lib/include/evas_private.h	(revision 1)
+++++ evas/src/lib/include/evas_private.h	(working copy)
 +@@ -684,6 +684,7 @@
 + 
 +    void (*image_scale_hint_set)            (void *data, void *image, int hint);
@@ -972,10 +972,10 @@ index 0000000..4b3a7da
 + };
 + 
 + struct _Evas_Image_Load_Func
-+Index: src/lib/Evas.h
++Index: evas/src/lib/Evas.h
 +===================================================================
-+--- src/lib/Evas.h	(revision 1)
-++++ src/lib/Evas.h	(working copy)
++--- evas/src/lib/Evas.h	(revision 1)
+++++ evas/src/lib/Evas.h	(working copy)
 +@@ -648,6 +648,7 @@
 +    EAPI Evas_Coord        evas_object_text_inset_get        (const Evas_Object *obj) EINA_WARN_UNUSED_RESULT EINA_ARG_NONNULL(1) EINA_PURE;
 +    EAPI int               evas_object_text_char_pos_get     (const Evas_Object *obj, int pos, Evas_Coord *cx, Evas_Coord *cy, Evas_Coord *cw, Evas_Coord *ch) EINA_ARG_NONNULL(1);
@@ -984,10 +984,10 @@ index 0000000..4b3a7da
 +    EAPI Evas_Text_Style_Type evas_object_text_style_get     (const Evas_Object *obj) EINA_WARN_UNUSED_RESULT EINA_ARG_NONNULL(1) EINA_PURE;
 +    EAPI void              evas_object_text_style_set        (Evas_Object *obj, Evas_Text_Style_Type type) EINA_ARG_NONNULL(1);
 +    EAPI void              evas_object_text_shadow_color_set (Evas_Object *obj, int r, int g, int b, int a) EINA_ARG_NONNULL(1);
-+Index: src/modules/engines/software_generic/evas_engine.c
++Index: evas/src/modules/engines/software_generic/evas_engine.c
 +===================================================================
-+--- src/modules/engines/software_generic/evas_engine.c	(revision 1)
-++++ src/modules/engines/software_generic/evas_engine.c	(working copy)
++--- evas/src/modules/engines/software_generic/evas_engine.c	(revision 1)
+++++ evas/src/modules/engines/software_generic/evas_engine.c	(working copy)
 +@@ -917,6 +917,12 @@
 +    return evas_common_font_query_text_at_pos(font, text, x, y, cx, cy, cw, ch);
 + }
@@ -1014,10 +1014,10 @@ index 0000000..4b3a7da
 + };
 + 
 + /*
-+Index: src/modules/engines/cairo_x11/evas_engine.c
++Index: evas/src/modules/engines/cairo_x11/evas_engine.c
 +===================================================================
-+--- src/modules/engines/cairo_x11/evas_engine.c	(revision 1)
-++++ src/modules/engines/cairo_x11/evas_engine.c	(working copy)
++--- evas/src/modules/engines/cairo_x11/evas_engine.c	(revision 1)
+++++ evas/src/modules/engines/cairo_x11/evas_engine.c	(working copy)
 +@@ -121,6 +121,8 @@
 + static void eng_font_hinting_set(void *data, void *font, int hinting);
 + static int eng_font_hinting_can_hint(void *data, int hinting);
@@ -1056,10 +1056,10 @@ index 0000000..4b3a7da
 +      "none"
 + };
 ++
-+Index: src/modules/engines/software_16/evas_engine.c
++Index: evas/src/modules/engines/software_16/evas_engine.c
 +===================================================================
-+--- src/modules/engines/software_16/evas_engine.c	(revision 3)
-++++ src/modules/engines/software_16/evas_engine.c	(working copy)
++--- evas/src/modules/engines/software_16/evas_engine.c	(revision 3)
+++++ evas/src/modules/engines/software_16/evas_engine.c	(working copy)
 +@@ -772,6 +772,12 @@
 +    return evas_common_font_query_text_at_pos(font, text, x, y, cx, cy, cw, ch);
 + }
