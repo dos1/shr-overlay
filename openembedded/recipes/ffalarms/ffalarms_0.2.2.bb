@@ -6,13 +6,11 @@ MAINTAINER = "Lukasz Pankowski <lukpank@o2.pl>"
 SECTION = "x11/applications"
 PRIORITY = "optional"
 DEPENDS = "edje-native python-native"
-PV = "0.2.1"
-PR = "r0"
 
 # Pure Python plus Edje interface
 PACKAGE_ARCH = "all"
 
-SRC_URI = "http://projects.openmoko.org/frs/download.php/743/ffalarms-${PV}.tar.gz"
+SRC_URI = "http://projects.openmoko.org/frs/download.php/832/ffalarms-0.2.2.tar.gz"
 
 inherit distutils
 
