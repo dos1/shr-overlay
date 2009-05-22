@@ -80,8 +80,8 @@ index 6a8b843..f9b0cb3 100644
  infrastructure for basic TCP/IP based networking."
  SECTION = "base"
  LICENSE = "GPL"
--PR = "r33"
-+PR = "r33.1"
+-PR = "r34"
++PR = "r34.1"
  
  inherit update-rc.d
  
