@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen"
 SECTION = "x11/data"
 LICENSE = "MIT BSD"
 PV = "1.2-gitr${SRCPV}"
-PR = "r1"
+PR = "r2"
 RDEPENDS += "virtual/shr-splash-theme"
 
 inherit update-rc.d
@@ -20,7 +20,7 @@ do_install() {
     install -d ${D}${datadir}/shr-splash/themes
     install -d ${D}${sysconfdir}/init.d
 
-    install -m 0755 ${S}/shr-splash.sh        ${D}${sysconfdir}/init.d
+    install -m 0755 ${S}/shr-splash.sh        ${D}${sysconfdir}/init.d/shr-splash.sh
 
 }
 
