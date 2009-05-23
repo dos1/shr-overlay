@@ -1,0 +1,30 @@
+From 6590413998dbc13a50bbb2949084d6bb9a96d1d8 Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Sat, 23 May 2009 12:17:56 +0200
+Subject: [PATCH] libsdl-mixer build fix
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ recipes/libsdl/libsdl-mixer_1.2.6.bb |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/libsdl/libsdl-mixer_1.2.6.bb b/recipes/libsdl/libsdl-mixer_1.2.6.bb
+index 0c29a3c..535934c 100644
+--- a/recipes/libsdl/libsdl-mixer_1.2.6.bb
++++ b/recipes/libsdl/libsdl-mixer_1.2.6.bb
+@@ -16,6 +16,12 @@ EXTRA_OECONF = "--disable-music-mp3"
+ # although we build smpeg... need to find out how
+ # to deal with optional dependencies
+ 
++do_configure_prepend() {
++	sed -i '/libtool.m4/q' ${S}/acinclude.m4
++	autoreconf -i -f
++}
++
++
+ do_stage() {
+ 	oe_libinstall -so libSDL_mixer ${STAGING_LIBDIR}
+ 	ln -sf libSDL_mixer.so ${STAGING_LIBDIR}/libSDL_mixer-1.2.so
+-- 
+1.6.0.6
+
